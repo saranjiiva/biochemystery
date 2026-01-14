@@ -13,104 +13,250 @@
   button { padding: 10px 15px; margin: 5px; cursor: pointer; border-radius: 5px; border: none; background:#0077cc; color:white;}
   button:hover { background:#005fa3; }
   .hidden { display:none; }
+  input[type=checkbox]{margin:5px;}
 </style>
 </head>
 <body>
 
 <h1>Jaundice ER – Save the Patient</h1>
 
-<div class="patient-box">
+<div class="patient-box" id="patientBox">
   <h2>Patient Arrival</h2>
-  <p><strong>Age/Gender:</strong> 10-year-old boy</p>
-  <p><strong>Symptoms:</strong> Recurrent bone pain, fatigue, yellow eyes</p>
-  <p><strong>Exam:</strong> Pallor, splenomegaly</p>
+  <p id="patientInfo"></p>
 </div>
 
-<div class="options-box">
+<div class="options-box" id="investigationBox">
   <h2>Select Investigations</h2>
-  <input type="checkbox" id="cbc"> CBC<br>
-  <input type="checkbox" id="retic"> Reticulocyte count<br>
-  <input type="checkbox" id="smear"> Peripheral smear<br>
-  <input type="checkbox" id="bilirubin"> Total bilirubin<br>
-  <input type="checkbox" id="ldh"> LDH<br>
-  <input type="checkbox" id="ast"> AST/ALT<br>
-  <br>
+  <div id="investigationsList"></div>
   <button onclick="checkInvestigations()">Submit Investigations</button>
 </div>
 
 <div class="message-box hidden" id="messageBox"></div>
 <div class="results-box hidden" id="resultsBox"></div>
-<div class="options-box hidden" id="diagnosisBox">
-  <h2>Select Diagnosis</h2>
-  <button onclick="selectDiagnosis('Viral hepatitis')">Viral hepatitis</button>
-  <button onclick="selectDiagnosis('Sickle cell disease')">Sickle cell disease</button>
-  <button onclick="selectDiagnosis('Pancreatic cancer')">Pancreatic cancer</button>
-  <button onclick="selectDiagnosis('Gallstone')">Gallstone</button>
-</div>
-<div class="options-box hidden" id="treatmentBox">
-  <h2>Select Treatment</h2>
-  <button onclick="selectTreatment('Hydroxyurea')">Hydroxyurea</button>
-  <button onclick="selectTreatment('ERCP')">ERCP</button>
-  <button onclick="selectTreatment('Antivirals')">Antivirals</button>
-  <button onclick="selectTreatment('Chemotherapy')">Chemotherapy</button>
-</div>
-
+<div class="options-box hidden" id="diagnosisBox"></div>
+<div class="options-box hidden" id="treatmentBox"></div>
 <div class="message-box hidden" id="finalMessage"></div>
 
 <script>
-function checkInvestigations() {
-    const cbc = document.getElementById('cbc').checked;
-    const retic = document.getElementById('retic').checked;
-    const smear = document.getElementById('smear').checked;
-    const bilirubin = document.getElementById('bilirubin').checked;
-    const ldh = document.getElementById('ldh').checked;
-    const ast = document.getElementById('ast').checked;
+// --- 12 patient data ---
+const patients = [
+  {
+    name:"Sickle Cell Disease",
+    age:"10-year-old", gender:"boy",
+    symptoms:"Recurrent bone pain, fatigue, yellow eyes. Pallor, splenomegaly.",
+    correctInvestigations:["CBC","Reticulocyte count","Peripheral smear","Indirect bilirubin","LDH"],
+    investigationResults:`Hemoglobin ↓↓↓<br>Reticulocytes ↑↑<br>Peripheral smear → Sickled cells<br>Indirect bilirubin ↑↑`,
+    diagnoses:["Viral hepatitis","Sickle cell disease","Pancreatic cancer","Gallstone"],
+    correctDiagnosis:"Sickle cell disease",
+    treatments:["Hydroxyurea","ERCP","Antivirals","Chemotherapy"],
+    correctTreatment:"Hydroxyurea",
+    deathCause:"Child died from acute chest syndrome and severe anemia."
+  },
+  {
+    name:"G6PD Deficiency",
+    age:"25-year-old", gender:"man",
+    symptoms:"Sudden jaundice and dark urine after taking an antimalarial drug. Weakness and pallor.",
+    correctInvestigations:["CBC","Peripheral smear","Reticulocyte count","Indirect bilirubin","G6PD assay"],
+    investigationResults:`CBC ↓<br>Peripheral smear → Heinz bodies<br>Reticulocytes ↑<br>Indirect bilirubin ↑↑`,
+    diagnoses:["Viral hepatitis","G6PD deficiency","Pancreatic cancer","Gallstone"],
+    correctDiagnosis:"G6PD deficiency",
+    treatments:["Avoid drugs & foods","Blood transfusion","Hydroxyurea","Antivirals"],
+    correctTreatment:"Avoid drugs & foods",
+    deathCause:"Patient died from acute hemolytic crisis and kidney failure."
+  },
+  {
+    name:"Thalassemia",
+    age:"7-year-old", gender:"child",
+    symptoms:"Chronic pallor, jaundice, enlarged spleen, history of repeated blood transfusions.",
+    correctInvestigations:["CBC","Peripheral smear","Reticulocyte count","Hemoglobin electrophoresis"],
+    investigationResults:`Hemoglobin ↓↓↓<br>Peripheral smear → Target cells<br>Reticulocytes ↑↑`,
+    diagnoses:["Thalassemia","Viral hepatitis","Malaria","Gallstone"],
+    correctDiagnosis:"Thalassemia",
+    treatments:["Blood transfusions","Iron chelation","Bone marrow transplant","Hydroxyurea"],
+    correctTreatment:"Blood transfusions",
+    deathCause:"Patient died from heart failure, liver failure, and endocrine failure due to chronic anemia."
+  },
+  {
+    name:"Malaria",
+    age:"30-year-old", gender:"male",
+    symptoms:"Fever with chills, jaundice, dark urine.",
+    correctInvestigations:["Peripheral smear","Rapid malaria antigen test","CBC","Total bilirubin"],
+    investigationResults:`Peripheral smear → Malarial parasite<br>Rapid malaria test → Positive<br>Hemoglobin ↓<br>Bilirubin ↑`,
+    diagnoses:["Malaria","Viral hepatitis","Sickle cell disease","Pancreatic cancer"],
+    correctDiagnosis:"Malaria",
+    treatments:["Antimalarial drugs","Supportive care","ERCP","Chemotherapy"],
+    correctTreatment:"Antimalarial drugs",
+    deathCause:"Patient died from cerebral malaria, kidney failure, and shock."
+  },
+  {
+    name:"Viral Hepatitis",
+    age:"22-year-old", gender:"woman",
+    symptoms:"Fever, nausea, abdominal pain, dark urine, yellow eyes after street food.",
+    correctInvestigations:["AST","ALT","Total bilirubin","Direct bilirubin","HBsAg","Anti-HCV","IgM HAV","IgM HEV"],
+    investigationResults:`AST ↑↑<br>ALT ↑↑<br>Total bilirubin ↑<br>Direct bilirubin ↑`,
+    diagnoses:["Viral hepatitis","Alcoholic liver disease","NAFLD","Drug-induced liver injury"],
+    correctDiagnosis:"Viral hepatitis",
+    treatments:["Rest","Antivirals","Supportive care","Hydroxyurea"],
+    correctTreatment:"Antivirals",
+    deathCause:"Patient died from acute liver failure."
+  },
+  {
+    name:"Alcoholic Liver Disease",
+    age:"50-year-old", gender:"man",
+    symptoms:"Long-term alcohol intake, jaundice, abdominal distension, easy bruising.",
+    correctInvestigations:["AST","ALT","ALP","GGT","Total bilirubin","PT/INR","Ultrasound abdomen"],
+    investigationResults:`AST ↑↑<br>ALT ↑↑<br>ALP mild ↑<br>GGT ↑↑<br>Total bilirubin ↑<br>PT/INR prolonged`,
+    diagnoses:["Alcoholic liver disease","NAFLD","Viral hepatitis","Pancreatic cancer"],
+    correctDiagnosis:"Alcoholic liver disease",
+    treatments:["Alcohol abstinence","Nutritional support","Corticosteroids","Liver transplant"],
+    correctTreatment:"Alcohol abstinence",
+    deathCause:"Patient died from cirrhosis, variceal bleeding, and hepatic encephalopathy."
+  },
+  {
+    name:"Non-Alcoholic Fatty Liver Disease",
+    age:"45-year-old", gender:"woman",
+    symptoms:"Obese, diabetic, fatigue, mild jaundice.",
+    correctInvestigations:["AST","ALT","Total bilirubin","Ultrasound abdomen","Liver biopsy"],
+    investigationResults:`AST ↑<br>ALT ↑<br>Total bilirubin ↑<br>Ultrasound → fatty liver`,
+    diagnoses:["NAFLD","Viral hepatitis","Alcoholic liver disease","Drug-induced liver injury"],
+    correctDiagnosis:"NAFLD",
+    treatments:["Weight reduction","Exercise","Control diabetes & lipids","Antivirals"],
+    correctTreatment:"Weight reduction",
+    deathCause:"Patient died from cirrhosis or hepatocellular carcinoma."
+  },
+  {
+    name:"Drug-Induced Liver Injury",
+    age:"35-year-old", gender:"female",
+    symptoms:"Itching, dark urine, jaundice after anti-tubercular drugs.",
+    correctInvestigations:["AST","ALT","ALP","Total bilirubin","PT/INR","Liver biopsy"],
+    investigationResults:`AST ↑↑<br>ALT ↑↑<br>ALP mild ↑<br>Bilirubin ↑<br>PT prolonged`,
+    diagnoses:["Drug-induced liver injury","Viral hepatitis","NAFLD","Sickle cell disease"],
+    correctDiagnosis:"Drug-induced liver injury",
+    treatments:["Stop offending drug","Supportive care","Liver transplant","Hydroxyurea"],
+    correctTreatment:"Stop offending drug",
+    deathCause:"Patient died from fulminant hepatic failure."
+  },
+  {
+    name:"Choledocholithiasis",
+    age:"40-year-old", gender:"woman",
+    symptoms:"Right upper abdominal pain, jaundice, pale stools, dark urine.",
+    correctInvestigations:["ALP","GGT","Total bilirubin","Ultrasound abdomen","MRCP"],
+    investigationResults:`ALP ↑↑↑<br>GGT ↑↑↑<br>Total bilirubin ↑↑<br>Ultrasound → dilated bile ducts`,
+    diagnoses:["Choledocholithiasis","Pancreatic cancer","Cholangiocarcinoma","Biliary stricture"],
+    correctDiagnosis:"Choledocholithiasis",
+    treatments:["ERCP","Cholecystectomy","Chemotherapy","Hydroxyurea"],
+    correctTreatment:"ERCP",
+    deathCause:"Patient died from ascending cholangitis and sepsis."
+  },
+  {
+    name:"Pancreatic Cancer",
+    age:"65-year-old", gender:"man",
+    symptoms:"Painless progressive jaundice, weight loss, pale stools.",
+    correctInvestigations:["Total bilirubin","ALP","GGT","Ultrasound abdomen","CT abdomen","CA-19-9"],
+    investigationResults:`Bilirubin ↑↑<br>ALP ↑↑↑<br>GGT ↑↑↑<br>Ultrasound → dilated ducts + mass`,
+    diagnoses:["Pancreatic cancer","Choledocholithiasis","Viral hepatitis","NAFLD"],
+    correctDiagnosis:"Pancreatic cancer",
+    treatments:["Surgery (Whipple)","Chemotherapy","Biliary stenting","Hydroxyurea"],
+    correctTreatment:"Surgery (Whipple)",
+    deathCause:"Patient died from biliary obstruction, malnutrition, and organ failure."
+  },
+  {
+    name:"Cholangiocarcinoma",
+    age:"60-year-old", gender:"male",
+    symptoms:"Progressive jaundice, itching, abdominal discomfort.",
+    correctInvestigations:["Total bilirubin","ALP","GGT","MRCP","CT abdomen","CA-19-9"],
+    investigationResults:`Bilirubin ↑↑<br>ALP ↑↑↑<br>GGT ↑↑↑<br>MRCP → bile duct mass`,
+    diagnoses:["Cholangiocarcinoma","Choledocholithiasis","Pancreatic cancer","NAFLD"],
+    correctDiagnosis:"Cholangiocarcinoma",
+    treatments:["Surgical resection","Chemotherapy","Biliary drainage","Hydroxyurea"],
+    correctTreatment:"Surgical resection",
+    deathCause:"Patient died from cholangitis and liver failure."
+  },
+  {
+    name:"Biliary Stricture",
+    age:"42-year-old", gender:"woman",
+    symptoms:"History of biliary surgery, recurrent jaundice, pruritus.",
+    correctInvestigations:["Total bilirubin","ALP","GGT","MRCP","ERCP"],
+    investigationResults:`Bilirubin ↑↑<br>ALP ↑↑↑<br>GGT ↑↑↑<br>MRCP → bile duct narrowing`,
+    diagnoses:["Biliary stricture","Choledocholithiasis","Cholangiocarcinoma","NAFLD"],
+    correctDiagnosis:"Biliary stricture",
+    treatments:["Endoscopic balloon dilatation","Stent placement","Surgery","ERCP"],
+    correctTreatment:"Endoscopic balloon dilatation",
+    deathCause:"Patient died from secondary biliary cirrhosis and liver failure."
+  }
+];
 
-    const messageBox = document.getElementById('messageBox');
-    const resultsBox = document.getElementById('resultsBox');
+// --- Randomly select patient ---
+let currentPatient = patients[Math.floor(Math.random()*patients.length)];
+document.getElementById('patientInfo').innerHTML = `<strong>${currentPatient.age}, ${currentPatient.gender}</strong><br>${currentPatient.symptoms}`;
 
-    // Correct investigation set
-    if(cbc && retic && smear && bilirubin && ldh && !ast){
-        messageBox.classList.add('hidden');
-        resultsBox.classList.remove('hidden');
-        resultsBox.innerHTML = `<h3>Investigation Results</h3>
-        Hemoglobin ↓↓↓<br>
-        Reticulocytes ↑↑<br>
-        Peripheral smear → Sickled cells<br>
-        Indirect bilirubin ↑↑<br>`;
-        document.getElementById('diagnosisBox').classList.remove('hidden');
-    } else {
-        messageBox.classList.remove('hidden');
-        messageBox.innerHTML = `<strong>Senior Doctor:</strong> This is hemolytic jaundice. Liver enzymes are normal. Check CBC, reticulocyte count, peripheral smear, indirect bilirubin, and LDH.`;
-    }
+// --- Generate investigation checkboxes ---
+const allInvestigations = ["CBC","Reticulocyte count","Peripheral smear","Total bilirubin","Direct bilirubin","Indirect bilirubin","AST","ALT","ALP","GGT","Urine bilirubin","Urine urobilinogen","HBsAg","Anti-HCV","IgM HAV","IgM HEV","G6PD assay","Hb electrophoresis","Malaria smear","Rapid malaria test","Ultrasound abdomen","CT abdomen","MRCP","ERCP","CA-19-9","Liver biopsy"];
+let invHTML = "";
+allInvestigations.forEach(inv=>{
+  invHTML += `<input type="checkbox" id="${inv}" value="${inv}">${inv}<br>`;
+});
+document.getElementById('investigationsList').innerHTML = invHTML;
+
+// --- Check investigations ---
+function checkInvestigations(){
+  let selected = [];
+  allInvestigations.forEach(inv=>{
+    if(document.getElementById(inv).checked){ selected.push(inv);}
+  });
+  const messageBox = document.getElementById('messageBox');
+  const resultsBox = document.getElementById('resultsBox');
+
+  // check if all correct investigations selected & no extras
+  let correct = currentPatient.correctInvestigations.every(i=>selected.includes(i)) && selected.every(i=>currentPatient.correctInvestigations.includes(i));
+
+  if(correct){
+    messageBox.classList.add('hidden');
+    resultsBox.classList.remove('hidden');
+    resultsBox.innerHTML = `<h3>Investigation Results</h3>${currentPatient.investigationResults}`;
+    // show diagnosis options
+    const diagBox = document.getElementById('diagnosisBox');
+    diagBox.innerHTML = `<h2>Select Diagnosis</h2>`;
+    currentPatient.diagnoses.forEach(d=>{
+      diagBox.innerHTML += `<button onclick="selectDiagnosis('${d}')">${d}</button>`;
+    });
+    diagBox.classList.remove('hidden');
+  } else {
+    messageBox.classList.remove('hidden');
+    messageBox.innerHTML = `<strong>Senior Doctor:</strong> This is likely ${currentPatient.name.includes("Malaria")||currentPatient.name.includes("SCD")||currentPatient.name.includes("G6PD")?"hemolytic":currentPatient.name.includes("Pancreatic")||currentPatient.name.includes("Choledocholithiasis")||currentPatient.name.includes("Cholangiocarcinoma")||currentPatient.name.includes("Biliary")?"obstructive":"hepatic"} jaundice. Check appropriate investigations: ${currentPatient.correctInvestigations.join(", ")}`;
+  }
 }
 
+// --- Select diagnosis ---
 function selectDiagnosis(choice){
-    const treatmentBox = document.getElementById('treatmentBox');
-    const finalMessage = document.getElementById('finalMessage');
+  const treatmentBox = document.getElementById('treatmentBox');
+  const finalMessage = document.getElementById('finalMessage');
+  document.getElementById('diagnosisBox').classList.add('hidden');
 
-    if(choice === 'Sickle cell disease'){
-        document.getElementById('diagnosisBox').classList.add('hidden');
-        treatmentBox.classList.remove('hidden');
-    } else {
-        document.getElementById('diagnosisBox').classList.add('hidden');
-        finalMessage.classList.remove('hidden');
-        finalMessage.innerHTML = `<h3>Patient Died</h3>Cause: Acute chest syndrome and severe anemia due to Sickle Cell Disease.`;
-    }
+  if(choice === currentPatient.correctDiagnosis){
+    // show treatment options
+    treatmentBox.innerHTML = `<h2>Select Treatment</h2>`;
+    currentPatient.treatments.forEach(t=>{
+      treatmentBox.innerHTML += `<button onclick="selectTreatment('${t}')">${t}</button>`;
+    });
+    treatmentBox.classList.remove('hidden');
+  } else {
+    finalMessage.classList.remove('hidden');
+    finalMessage.innerHTML = `<h3>Patient Died</h3>Cause: ${currentPatient.deathCause}`;
+  }
 }
 
+// --- Select treatment ---
 function selectTreatment(choice){
-    const finalMessage = document.getElementById('finalMessage');
-
-    if(choice === 'Hydroxyurea'){
-        document.getElementById('treatmentBox').classList.add('hidden');
-        finalMessage.classList.remove('hidden');
-        finalMessage.innerHTML = `<h3>Patient Saved!</h3>Correct treatment administered.`;
-    } else {
-        document.getElementById('treatmentBox').classList.add('hidden');
-        finalMessage.classList.remove('hidden');
-        finalMessage.innerHTML = `<h3>Patient Died</h3>Cause: Improper treatment.`;
-    }
+  const finalMessage = document.getElementById('finalMessage');
+  document.getElementById('treatmentBox').classList.add('hidden');
+  if(choice === currentPatient.correctTreatment){
+    finalMessage.classList.remove('hidden');
+    finalMessage.innerHTML = `<h3>Patient Saved!</h3>Correct treatment administered.`;
+  } else {
+    finalMessage.classList.remove('hidden');
+    finalMessage.innerHTML = `<h3>Patient Died</h3>Cause: Improper treatment.`;
+  }
 }
 </script>
 
