@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jaundice ER – Save the Patient</title>
+<style>
+  body { font-family: Arial, sans-serif; background: #f4f4f9; margin:0; padding:20px; }
+  h1, h2 { text-align:center; }
+  .patient-box, .results-box, .options-box, .message-box { 
+    border: 2px solid #333; padding: 15px; margin: 15px auto; width: 80%; background: #fff; border-radius: 10px;
+  }
+  button { padding: 10px 15px; margin: 5px; cursor: pointer; border-radius: 5px; border: none; background:#0077cc; color:white;}
+  button:hover { background:#005fa3; }
+  .hidden { display:none; }
+</style>
+</head>
+<body>
+
+<h1>Jaundice ER – Save the Patient</h1>
+
+<div class="patient-box">
+  <h2>Patient Arrival</h2>
+  <p><strong>Age/Gender:</strong> 10-year-old boy</p>
+  <p><strong>Symptoms:</strong> Recurrent bone pain, fatigue, yellow eyes</p>
+  <p><strong>Exam:</strong> Pallor, splenomegaly</p>
+</div>
+
+<div class="options-box">
+  <h2>Select Investigations</h2>
+  <input type="checkbox" id="cbc"> CBC<br>
+  <input type="checkbox" id="retic"> Reticulocyte count<br>
+  <input type="checkbox" id="smear"> Peripheral smear<br>
+  <input type="checkbox" id="bilirubin"> Total bilirubin<br>
+  <input type="checkbox" id="ldh"> LDH<br>
+  <input type="checkbox" id="ast"> AST/ALT<br>
+  <br>
+  <button onclick="checkInvestigations()">Submit Investigations</button>
+</div>
+
+<div class="message-box hidden" id="messageBox"></div>
+<div class="results-box hidden" id="resultsBox"></div>
+<div class="options-box hidden" id="diagnosisBox">
+  <h2>Select Diagnosis</h2>
+  <button onclick="selectDiagnosis('Viral hepatitis')">Viral hepatitis</button>
+  <button onclick="selectDiagnosis('Sickle cell disease')">Sickle cell disease</button>
+  <button onclick="selectDiagnosis('Pancreatic cancer')">Pancreatic cancer</button>
+  <button onclick="selectDiagnosis('Gallstone')">Gallstone</button>
+</div>
+<div class="options-box hidden" id="treatmentBox">
+  <h2>Select Treatment</h2>
+  <button onclick="selectTreatment('Hydroxyurea')">Hydroxyurea</button>
+  <button onclick="selectTreatment('ERCP')">ERCP</button>
+  <button onclick="selectTreatment('Antivirals')">Antivirals</button>
+  <button onclick="selectTreatment('Chemotherapy')">Chemotherapy</button>
+</div>
+
+<div class="message-box hidden" id="finalMessage"></div>
+
+<script>
+function checkInvestigations() {
+    const cbc = document.getElementById('cbc').checked;
+    const retic = document.getElementById('retic').checked;
+    const smear = document.getElementById('smear').checked;
+    const bilirubin = document.getElementById('bilirubin').checked;
+    const ldh = document.getElementById('ldh').checked;
+    const ast = document.getElementById('ast').checked;
+
+    const messageBox = document.getElementById('messageBox');
+    const resultsBox = document.getElementById('resultsBox');
+
+    // Correct investigation set
+    if(cbc && retic && smear && bilirubin && ldh && !ast){
+        messageBox.classList.add('hidden');
+        resultsBox.classList.remove('hidden');
+        resultsBox.innerHTML = `<h3>Investigation Results</h3>
+        Hemoglobin ↓↓↓<br>
+        Reticulocytes ↑↑<br>
+        Peripheral smear → Sickled cells<br>
+        Indirect bilirubin ↑↑<br>`;
+        document.getElementById('diagnosisBox').classList.remove('hidden');
+    } else {
+        messageBox.classList.remove('hidden');
+        messageBox.innerHTML = `<strong>Senior Doctor:</strong> This is hemolytic jaundice. Liver enzymes are normal. Check CBC, reticulocyte count, peripheral smear, indirect bilirubin, and LDH.`;
+    }
+}
+
+function selectDiagnosis(choice){
+    const treatmentBox = document.getElementById('treatmentBox');
+    const finalMessage = document.getElementById('finalMessage');
+
+    if(choice === 'Sickle cell disease'){
+        document.getElementById('diagnosisBox').classList.add('hidden');
+        treatmentBox.classList.remove('hidden');
+    } else {
+        document.getElementById('diagnosisBox').classList.add('hidden');
+        finalMessage.classList.remove('hidden');
+        finalMessage.innerHTML = `<h3>Patient Died</h3>Cause: Acute chest syndrome and severe anemia due to Sickle Cell Disease.`;
+    }
+}
+
+function selectTreatment(choice){
+    const finalMessage = document.getElementById('finalMessage');
+
+    if(choice === 'Hydroxyurea'){
+        document.getElementById('treatmentBox').classList.add('hidden');
+        finalMessage.classList.remove('hidden');
+        finalMessage.innerHTML = `<h3>Patient Saved!</h3>Correct treatment administered.`;
+    } else {
+        document.getElementById('treatmentBox').classList.add('hidden');
+        finalMessage.classList.remove('hidden');
+        finalMessage.innerHTML = `<h3>Patient Died</h3>Cause: Improper treatment.`;
+    }
+}
+</script>
+
+</body>
+</html>
