@@ -1,0 +1,56 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-image: url("https://images.unsplash.com/photo-1581091870627-3e1b53b6c41d");
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+}
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.65);
+  height: 100%;
+  color: white;
+  text-align: center;
+  padding-top: 80px;
+}
+
+h1 {
+  font-size: 50px;
+  color: #00ffcc;
+}
+
+h2 {
+  color: #ffcc00;
+}
+
+.tagline {
+  font-size: 20px;
+  margin-top: 40px;
+}
+
+.topics {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.box {
+  width: 200px;
+  padding: 20px;
+  margin: 15px;
+  border-radius: 15px;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  box-shadow: 0px 0px 15px black;
+}
+
+/* Different biochemistry colors */
+.metabolism { background-color: #ff5733; }
+.enzymes { background-color: #33ccff; }
+.genetics { background-color: #9b59b6; }
+.proteins { background-color: #2ecc71; }
+.hormones { background-color: #f39c12; }
+.diagnostics { background-color: #e74c3c; }
