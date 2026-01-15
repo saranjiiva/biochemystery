@@ -2,6 +2,7 @@
 <html>
 <head>
 <title>OT Anatomy Game</title>
+
 <style>
 body {
   text-align: center;
@@ -16,6 +17,7 @@ canvas {
 </head>
 
 <body>
+
 <h1>OT Anatomy Game</h1>
 <h3>Click the correct organ</h3>
 <h2 id="question"></h2>
@@ -54,6 +56,9 @@ function draw(){
   ctx.ellipse(450,350,250,210,0,0,Math.PI*2);
   ctx.fill();
 
+  // Font
+  ctx.font = "18px Arial";
+
   // Organs
   for(let o in organs){
     let p = organs[o];
@@ -79,14 +84,17 @@ canvas.addEventListener("click", function(e){
       } else {
         alert("Wrong! That is " + o);
       }
+
       current = randomOrgan();
       document.getElementById("question").innerText = "Find the: " + current;
       document.getElementById("score").innerText = "Score: " + score;
+      draw();
     }
   }
 });
 
 draw();
 </script>
+
 </body>
 </html>
