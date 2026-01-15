@@ -87,22 +87,79 @@ document.getElementById("question").innerText = "Find the: " + current;
 function randomOrgan(){
   return organList[Math.floor(Math.random()*organList.length)];
 }
-
 function draw(){
   ctx.clearRect(0,0,900,600);
 
-  // Abdomen cavity
-  ctx.fillStyle="#f5a3b8";
+  // ================= BODY WALL =================
+  ctx.fillStyle = "#f7b2b7";
   ctx.beginPath();
-  ctx.ellipse(450,350,260,220,0,0,Math.PI*2);
+  ctx.ellipse(450,340,300,260,0,0,Math.PI*2);
   ctx.fill();
 
-  // Draw organs
-  for(let o in organs){
-    ctx.fillStyle = organs[o].color;
-    organs[o].shape();
-    ctx.fill();
+  // ================= PERITONEAL CAVITY =================
+  ctx.fillStyle = "#ffd1dc";
+  ctx.beginPath();
+  ctx.ellipse(450,360,260,220,0,0,Math.PI*2);
+  ctx.fill();
+
+  // ================= DIAPHRAGM =================
+  ctx.strokeStyle="#cc6666";
+  ctx.lineWidth=6;
+  ctx.beginPath();
+  ctx.arc(450,220,250,Math.PI,0);
+  ctx.stroke();
+
+  // ================= LIVER =================
+  ctx.fillStyle = "#7b2d26";
+  ctx.beginPath();
+  ctx.moveTo(260,240);
+  ctx.bezierCurveTo(350,170, 520,180, 600,250);
+  ctx.bezierCurveTo(580,320, 420,320, 260,300);
+  ctx.closePath();
+  ctx.fill();
+
+  // ================= STOMACH =================
+  ctx.fillStyle="#cc4444";
+  ctx.beginPath();
+  ctx.moveTo(420,260);
+  ctx.bezierCurveTo(500,260, 540,320, 510,380);
+  ctx.bezierCurveTo(480,430, 380,420, 360,350);
+  ctx.bezierCurveTo(340,300, 370,270, 420,260);
+  ctx.closePath();
+  ctx.fill();
+
+  // ================= SPLEEN =================
+  ctx.fillStyle="#f2cc70";
+  ctx.beginPath();
+  ctx.moveTo(580,270);
+  ctx.bezierCurveTo(640,260, 660,310, 640,360);
+  ctx.bezierCurveTo(600,390, 560,350, 560,310);
+  ctx.closePath();
+  ctx.fill();
+
+  // ================= LARGE INTESTINE (FRAME) =================
+  ctx.strokeStyle="#ddd";
+  ctx.lineWidth=14;
+  ctx.beginPath();
+  ctx.rect(300,350,300,180);
+  ctx.stroke();
+
+  // ================= SMALL INTESTINE (COILS) =================
+  ctx.strokeStyle="#ffffff";
+  ctx.lineWidth=5;
+  for(let i=0;i<15;i++){
+    ctx.beginPath();
+    ctx.arc(450,420,40+i*5,0,Math.PI*2);
+    ctx.stroke();
   }
+
+  // ================= LABELS =================
+  ctx.fillStyle="black";
+  ctx.font="18px Arial";
+  ctx.fillText("Liver",350,260);
+  ctx.fillText("Stomach",420,330);
+  ctx.fillText("Spleen",590,320);
+  ctx.fillText("Intestine",420,470);
 }
 
 canvas.addEventListener("click", function(e){
