@@ -4,14 +4,26 @@
 <title>OT Anatomy Game</title>
 
 <style>
-body {
-  text-align: center;
-  background: #e6e6e6;
-  font-family: Arial;
+body{
+  text-align:center;
+  font-family:Arial;
+  background:#f0f0f0;
 }
-canvas {
-  border: 3px solid black;
-  background: #ddd;
+#game-container{
+  position:relative;
+  width:600px;
+  margin:auto;
+}
+#bg{
+  width:600px;
+}
+.organ{
+  position:absolute;
+  border:2px solid transparent;
+  cursor:pointer;
+}
+.organ:hover{
+  border:2px solid red;
 }
 </style>
 </head>
@@ -19,173 +31,42 @@ canvas {
 <body>
 
 <h1>OT Anatomy Game</h1>
-<h3>Click the correct organ</h3>
 <h2 id="question"></h2>
-<h2 id="score">Score: 0</h2>
+<h3 id="score">Score: 0</h3>
 
-<canvas id="game" width="900" height="600"></canvas>
+<div id="game-container">
+  <img id="bg" src="E4DBB4ED-44FD-4A8A-BF95-C4EF15A11699.png">
+
+  <!-- Clickable organ areas -->
+  <div class="organ" id="liver" style="top:90px; left:150px; width:220px; height:120px;"></div>
+  <div class="organ" id="stomach" style="top:150px; left:300px; width:150px; height:120px;"></div>
+  <div class="organ" id="spleen" style="top:150px; left:470px; width:90px; height:100px;"></div>
+  <div class="organ" id="intestine" style="top:260px; left:200px; width:280px; height:200px;"></div>
+</div>
 
 <script>
-const canvas = document.getElementById("game");
-const ctx = canvas.getContext("2d");
+let organs=["liver","stomach","spleen","intestine"];
+let current="";
+let score=0;
 
-let score = 0;
-
-const organs = {
-  Liver: {
-    color: "#8b3e2f",
-    shape: function(){
-      ctx.beginPath();
-      ctx.moveTo(260,220);
-      ctx.bezierCurveTo(300,180, 460,180, 520,230);
-      ctx.bezierCurveTo(560,260, 520,300, 430,310);
-      ctx.bezierCurveTo(350,320, 260,300, 240,260);
-      ctx.closePath();
-    }
-  },
-
-  Stomach: {
-    color: "#cc4444",
-    shape: function(){
-      ctx.beginPath();
-      ctx.moveTo(400,260);
-      ctx.bezierCurveTo(460,250, 520,280, 500,350);
-      ctx.bezierCurveTo(480,400, 380,380, 360,320);
-      ctx.bezierCurveTo(350,290, 370,270, 400,260);
-      ctx.closePath();
-    }
-  },
-
-  Spleen: {
-    color: "#f4d35e",
-    shape: function(){
-      ctx.beginPath();
-      ctx.moveTo(540,260);
-      ctx.bezierCurveTo(580,250, 610,280, 600,320);
-      ctx.bezierCurveTo(580,360, 530,340, 520,300);
-      ctx.closePath();
-    }
-  },
-
-  Intestine: {
-    color: "#eee",
-    shape: function(){
-      ctx.beginPath();
-      ctx.moveTo(320,380);
-      ctx.bezierCurveTo(500,380, 580,420, 500,460);
-      ctx.bezierCurveTo(350,500, 300,440, 320,380);
-      ctx.closePath();
-    }
-  }
-};
-
-let organList = Object.keys(organs);
-let current = randomOrgan();
-
-document.getElementById("question").innerText = "Find the: " + current;
-
-function randomOrgan(){
-  return organList[Math.floor(Math.random()*organList.length)];
+function newQuestion(){
+  current = organs[Math.floor(Math.random()*organs.length)];
+  document.getElementById("question").innerText = "Click the " + current.toUpperCase();
 }
-function draw(){
-  ctx.clearRect(0,0,900,600);
+newQuestion();
 
-  // ================= BODY WALL =================
-  ctx.fillStyle = "#f7b2b7";
-  ctx.beginPath();
-  ctx.ellipse(450,340,300,260,0,0,Math.PI*2);
-  ctx.fill();
-
-  // ================= PERITONEAL CAVITY =================
-  ctx.fillStyle = "#ffd1dc";
-  ctx.beginPath();
-  ctx.ellipse(450,360,260,220,0,0,Math.PI*2);
-  ctx.fill();
-
-  // ================= DIAPHRAGM =================
-  ctx.strokeStyle="#cc6666";
-  ctx.lineWidth=6;
-  ctx.beginPath();
-  ctx.arc(450,220,250,Math.PI,0);
-  ctx.stroke();
-
-  // ================= LIVER =================
-  ctx.fillStyle = "#7b2d26";
-  ctx.beginPath();
-  ctx.moveTo(260,240);
-  ctx.bezierCurveTo(350,170, 520,180, 600,250);
-  ctx.bezierCurveTo(580,320, 420,320, 260,300);
-  ctx.closePath();
-  ctx.fill();
-
-  // ================= STOMACH =================
-  ctx.fillStyle="#cc4444";
-  ctx.beginPath();
-  ctx.moveTo(420,260);
-  ctx.bezierCurveTo(500,260, 540,320, 510,380);
-  ctx.bezierCurveTo(480,430, 380,420, 360,350);
-  ctx.bezierCurveTo(340,300, 370,270, 420,260);
-  ctx.closePath();
-  ctx.fill();
-
-  // ================= SPLEEN =================
-  ctx.fillStyle="#f2cc70";
-  ctx.beginPath();
-  ctx.moveTo(580,270);
-  ctx.bezierCurveTo(640,260, 660,310, 640,360);
-  ctx.bezierCurveTo(600,390, 560,350, 560,310);
-  ctx.closePath();
-  ctx.fill();
-
-  // ================= LARGE INTESTINE (FRAME) =================
-  ctx.strokeStyle="#ddd";
-  ctx.lineWidth=14;
-  ctx.beginPath();
-  ctx.rect(300,350,300,180);
-  ctx.stroke();
-
-  // ================= SMALL INTESTINE (COILS) =================
-  ctx.strokeStyle="#ffffff";
-  ctx.lineWidth=5;
-  for(let i=0;i<15;i++){
-    ctx.beginPath();
-    ctx.arc(450,420,40+i*5,0,Math.PI*2);
-    ctx.stroke();
-  }
-
-  // ================= LABELS =================
-  ctx.fillStyle="black";
-  ctx.font="18px Arial";
-  ctx.fillText("Liver",350,260);
-  ctx.fillText("Stomach",420,330);
-  ctx.fillText("Spleen",590,320);
-  ctx.fillText("Intestine",420,470);
-}
-
-canvas.addEventListener("click", function(e){
-  let rect = canvas.getBoundingClientRect();
-  let x = e.clientX - rect.left;
-  let y = e.clientY - rect.top;
-
-  for(let o in organs){
-    let p = organs[o];
-    if(x>p.x && x<p.x+p.w && y>p.y && y<p.y+p.h){
-      if(o==current){
-        score++;
-        alert("Correct!");
-      } else {
-        alert("Wrong! That is " + o);
-      }
-
-      current = randomOrgan();
-      document.getElementById("question").innerText = "Find the: " + current;
-      document.getElementById("score").innerText = "Score: " + score;
-      draw();
+organs.forEach(o=>{
+  document.getElementById(o).onclick=function(){
+    if(o==current){
+      alert("Correct!");
+      score++;
+    } else {
+      alert("Wrong! That is " + o);
     }
+    document.getElementById("score").innerText="Score: "+score;
+    newQuestion();
   }
 });
-
-draw();
 </script>
 
 </body>
