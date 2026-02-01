@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>📘 Interactive Notes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="notes.css">
+</head>
+<body>
+
+<header>
+  <h1>📘 Biology Notes</h1>
+  <p class="subtitle">Click chapters → topics → words for definitions</p>
+
+  <div class="toolbar">
+    <input type="text" id="searchBox" placeholder="🔍 Search notes...">
+    <button onclick="toggleDark()">🌙 Dark Mode</button>
+    <button onclick="expandAll()">➕ Expand All</button>
+    <button onclick="collapseAll()">➖ Collapse All</button>
+    <button onclick="window.print()">🖨 Print</button>
+  </div>
+</header>
+
+<main id="notesContainer">
+
+<!-- ======================= CHAPTER 1 ======================= -->
+<div class="chapter">
+  <h2 onclick="toggle(this)">Chapter 1: Cell Biology</h2>
+  <div class="content">
+
+    <!-- -------- Topic 1 -------- -->
+    <h3 onclick="toggle(this)">Topic 1: Cell Structure</h3>
+    <div class="content">
+
+      <p>
+        The <span class="word" onclick="define(this)">cell</span> is the basic
+        structural and functional unit of life.
+      </p>
+      <div class="definition">
+        A cell is the smallest living unit capable of performing all vital functions.
+      </div>
+
+      <p>
+        Cells contain specialized structures called
+        <span class="word" onclick="define(this)">organelles</span>.
+      </p>
+      <div class="definition">
+        Organelles are membrane-bound structures within cells that perform specific tasks.
+      </div>
+
+    </div>
+
+    <!-- -------- Topic 2 -------- -->
+    <h3 onclick="toggle(this)">Topic 2: Cell Functions</h3>
+    <div class="content">
+      <p>Cells help in growth, metabolism, and repair of tissues.</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- ======================= CHAPTER 2 ======================= -->
+<div class="chapter">
+  <h2 onclick="toggle(this)">Chapter 2: Enzymes</h2>
+  <div class="content">
+
+    <h3 onclick="toggle(this)">Topic 1: What are Enzymes?</h3>
+    <div class="content">
+      <p>
+        Enzymes are <span class="word" onclick="define(this)">biological catalysts</span>
+        that speed up chemical reactions.
+      </p>
+      <div class="definition">
+        A biological catalyst is a substance that increases reaction rate without being consumed.
+      </div>
+    </div>
+
+    <h3 onclick="toggle(this)">Topic 2: Specificity of Enzymes</h3>
+    <div class="content">
+      <p>
+        Enzymes show <span class="word" onclick="define(this)">substrate specificity</span>.
+      </p>
+      <div class="definition">
+        Substrate specificity means an enzyme acts only on a particular substrate.
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</main>
+
+<footer>
+  © 2026 · Interactive Notes System · GitHub Pages Ready
+</footer>
+
+<script src="notes.js"></script>
+</body>
+</html>
