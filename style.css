@@ -1,56 +1,135 @@
-body {
+/* ===== Reset & Body ===== */
+body, html {
   margin: 0;
-  font-family: Arial, sans-serif;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
   background-image: url("https://images.unsplash.com/photo-1581091870627-3e1b53b6c41d");
   background-size: cover;
   background-position: center;
-  height: 100vh;
+  min-height: 100vh;
+  color: white;
+  overflow-x: hidden;
 }
 
+/* ===== Overlay ===== */
 .overlay {
-  background-color: rgba(0, 0, 0, 0.65);
+  background: rgba(0, 0, 0, 0.7);
   height: 100%;
-  color: white;
+  width: 100%;
   text-align: center;
   padding-top: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
+/* ===== Headings ===== */
 h1 {
-  font-size: 50px;
+  font-size: 60px;
   color: #00ffcc;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 8px black;
 }
 
 h2 {
+  font-size: 32px;
   color: #ffcc00;
+  text-shadow: 2px 2px 6px black;
+  margin-bottom: 20px;
 }
 
 .tagline {
-  font-size: 20px;
-  margin-top: 40px;
+  font-size: 22px;
+  margin-top: 10px;
+  max-width: 700px;
+  text-shadow: 1px 1px 4px black;
 }
 
+/* ===== Topics Section ===== */
 .topics {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   margin-top: 50px;
+  gap: 20px;
+  width: 90%;
+  max-width: 1200px;
 }
 
+/* ===== Topic Boxes ===== */
 .box {
-  width: 200px;
+  width: 220px;
+  height: 150px;
   padding: 20px;
-  margin: 15px;
-  border-radius: 15px;
-  font-size: 20px;
+  border-radius: 20px;
+  font-size: 22px;
   font-weight: bold;
   color: white;
-  box-shadow: 0px 0px 15px black;
+  box-shadow: 0px 5px 20px rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  position: relative;
+  overflow: hidden;
 }
 
-/* Different biochemistry colors */
-.metabolism { background-color: #ff5733; }
-.enzymes { background-color: #33ccff; }
-.genetics { background-color: #9b59b6; }
-.proteins { background-color: #2ecc71; }
-.hormones { background-color: #f39c12; }
-.diagnostics { background-color: #e74c3c; }
+/* ===== Hover Effects ===== */
+.box:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0px 10px 30px rgba(0,0,0,0.9);
+}
+
+/* ===== Gradient Overlay for Text ===== */
+.box::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  opacity: 0.3;
+  transition: opacity 0.3s;
+}
+
+.box:hover::after {
+  opacity: 0.5;
+}
+
+/* ===== Topic Colors ===== */
+.metabolism { background: linear-gradient(135deg, #ff5733, #ff8f66); }
+.enzymes { background: linear-gradient(135deg, #33ccff, #66d9ff); }
+.genetics { background: linear-gradient(135deg, #9b59b6, #b76fc1); }
+.proteins { background: linear-gradient(135deg, #2ecc71, #66ff99); }
+.hormones { background: linear-gradient(135deg, #f39c12, #ffbf66); }
+.diagnostics { background: linear-gradient(135deg, #e74c3c, #ff6b6b); }
+
+/* ===== Additional Info on Hover ===== */
+.box span {
+  position: absolute;
+  bottom: 10px;
+  font-size: 14px;
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.box:hover span {
+  opacity: 1;
+}
+
+/* ===== Responsive ===== */
+@media screen and (max-width: 768px) {
+  h1 { font-size: 40px; }
+  h2 { font-size: 26px; }
+  .tagline { font-size: 18px; }
+  .box { width: 180px; height: 130px; font-size: 18px; }
+}
+
+@media screen and (max-width: 480px) {
+  .topics { flex-direction: column; align-items: center; }
+  .box { width: 80%; height: 120px; }
+}
