@@ -7,7 +7,7 @@ const slides = [
     file: "slides/Chemistry of carbohydrates.pdf",
     category: "biochemistry",
     author: "Dr Durga sowmithri",
-    pages: 42,
+    pages: 109,
     description: "carbohydtrates, types, isomerization"
   },
   {
