@@ -3,12 +3,12 @@
  ****************************************************/
 const slides = [
   {
-    title: "Carbohydrate Metabolism",
-    file: "slides/metabolism.pdf",
+    title: "Carbohydrate chemistry",
+    file: "slides/Chemistry of carbohydrates.pdf",
     category: "biochemistry",
-    author: "Dr Para Saran",
+    author: "Dr Durga sowmithri",
     pages: 42,
-    description: "Detailed pathways of glycolysis, gluconeogenesis, TCA cycle and their regulation."
+    description: "carbohydtrates, types, isomerization"
   },
   {
     title: "Enzyme Kinetics & Inhibition",
