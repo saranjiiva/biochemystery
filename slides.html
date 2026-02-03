@@ -3,17 +3,334 @@
 <head>
   <meta charset="UTF-8" />
   <title>Slides Library</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="slides.css">
+  <style>
+    /* ===========================
+       GLOBAL STYLES
+    ============================ */
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f4f6f8;
+      color: #111827;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button {
+      border: none;
+      background: none;
+      cursor: pointer;
+      font: inherit;
+    }
+
+    /* ===========================
+       HEADER
+    ============================ */
+    header {
+      height: 56px;
+      background: #111827;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+
+    header .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    header .brand i {
+      color: #60a5fa;
+    }
+
+    header .right {
+      font-size: 13px;
+      color: #cbd5f5;
+    }
+
+    /* ===========================
+       MAIN LAYOUT
+    ============================ */
+    .container {
+      display: flex;
+      height: calc(100vh - 56px);
+      overflow: hidden;
+    }
+
+    /* ===========================
+       SIDEBAR
+    ============================ */
+    .sidebar {
+      width: 340px;
+      min-width: 260px;
+      background: white;
+      border-right: 1px solid #e5e7eb;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar-header {
+      padding: 12px;
+      border-bottom: 1px solid #e5e7eb;
+      background: #f9fafb;
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      background: white;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      padding: 6px 10px;
+      gap: 8px;
+    }
+
+    .search-box i {
+      color: #6b7280;
+      font-size: 14px;
+    }
+
+    .search-box input {
+      border: none;
+      outline: none;
+      flex: 1;
+      font-size: 14px;
+    }
+
+    .filter-row {
+      margin-top: 8px;
+      display: flex;
+      gap: 6px;
+    }
+
+    .filter-row select {
+      flex: 1;
+      padding: 6px 8px;
+      border-radius: 6px;
+      border: 1px solid #d1d5db;
+      font-size: 13px;
+      background: white;
+    }
+
+    /* ===========================
+       SLIDE LIST
+    ============================ */
+    .slide-list {
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .slide-item {
+      padding: 14px 16px;
+      border-bottom: 1px solid #f1f5f9;
+      cursor: pointer;
+      transition: background 0.15s ease, border-left 0.15s ease;
+      position: relative;
+    }
+
+    .slide-item:hover {
+      background: #f0f4ff;
+    }
+
+    .slide-item.active {
+      background: #e0e7ff;
+      border-left: 5px solid #2563eb;
+      padding-left: 11px;
+    }
+
+    .slide-title {
+      font-weight: 600;
+      font-size: 15px;
+      margin-bottom: 4px;
+      color: #111827;
+    }
+
+    .slide-meta {
+      font-size: 12.5px;
+      color: #6b7280;
+      line-height: 1.4;
+    }
+
+    .slide-tags {
+      margin-top: 6px;
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      font-size: 11px;
+      background: #eef2ff;
+      color: #4338ca;
+      padding: 2px 7px;
+      border-radius: 999px;
+      font-weight: 500;
+    }
+
+    /* ===========================
+       VIEWER PANEL
+    ============================ */
+    .viewer {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: #0b0f19;
+      color: white;
+    }
+
+    /* ===== Viewer Header ===== */
+    .viewer-header {
+      height: 48px;
+      background: #111827;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 14px;
+      border-bottom: 1px solid #1f2937;
+    }
+
+    .viewer-title {
+      font-size: 14.5px;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 65%;
+    }
+
+    .viewer-subtitle {
+      font-size: 11.5px;
+      color: #9ca3af;
+      margin-left: 8px;
+      font-weight: 400;
+    }
+
+    .viewer-tools {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .viewer-tools button {
+      color: #e5e7eb;
+      padding: 6px 8px;
+      border-radius: 6px;
+      transition: background 0.15s ease;
+      font-size: 14px;
+    }
+
+    .viewer-tools button:hover {
+      background: #1f2937;
+    }
+
+    .viewer-tools button:active {
+      transform: scale(0.95);
+    }
+
+    /* ===== Viewer Body ===== */
+    .viewer-body {
+      flex: 1;
+      background: black;
+      position: relative;
+    }
+
+    .viewer-body iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: black;
+    }
+
+    /* ===== Empty State ===== */
+    .empty-state {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #9ca3af;
+      font-size: 14px;
+      gap: 10px;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .empty-state i {
+      font-size: 40px;
+      opacity: 0.4;
+    }
+
+    /* ===========================
+       FOOTER BAR (OPTIONAL)
+    ============================ */
+    .viewer-footer {
+      height: 34px;
+      background: #0f172a;
+      color: #9ca3af;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 12px;
+      font-size: 12px;
+      border-top: 1px solid #1f2937;
+    }
+
+    .viewer-footer .left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .viewer-footer .right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* ===========================
+       RESPONSIVE DESIGN
+    ============================ */
+    @media (max-width: 900px) {
+      .sidebar {
+        width: 260px;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .sidebar {
+        display: none;
+      }
+
+      .viewer-title {
+        max-width: 55%;
+      }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- ===== HEADER ===== -->
+  <!-- ===========================
+       HEADER
+  ============================ -->
   <header>
     <div class="brand">
       <i class="fa-solid fa-book-open"></i>
@@ -22,12 +339,15 @@
     <div class="right">Dr. Para Saran — Teaching Resources</div>
   </header>
 
-  <!-- ===== MAIN CONTAINER ===== -->
+  <!-- ===========================
+       MAIN CONTAINER
+  ============================ -->
   <div class="container">
 
     <!-- ===== SIDEBAR ===== -->
     <aside class="sidebar">
 
+      <!-- Sidebar Header -->
       <div class="sidebar-header">
         <div class="search-box">
           <i class="fa-solid fa-magnifying-glass"></i>
@@ -44,6 +364,7 @@
         </div>
       </div>
 
+      <!-- Slides List -->
       <div class="slide-list" id="slideList"></div>
 
     </aside>
@@ -51,6 +372,7 @@
     <!-- ===== VIEWER ===== -->
     <main class="viewer">
 
+      <!-- Viewer Header -->
       <div class="viewer-header">
         <div>
           <span class="viewer-title" id="viewerTitle">Select a presentation</span>
@@ -58,10 +380,10 @@
         </div>
 
         <div class="viewer-tools">
-          <button id="prevBtn" title="Previous">
+          <button id="prevBtn" title="Previous slide">
             <i class="fa-solid fa-chevron-left"></i>
           </button>
-          <button id="nextBtn" title="Next">
+          <button id="nextBtn" title="Next slide">
             <i class="fa-solid fa-chevron-right"></i>
           </button>
           <button id="fullscreenBtn" title="Fullscreen">
@@ -73,16 +395,19 @@
         </div>
       </div>
 
+      <!-- Viewer Body -->
       <div class="viewer-body">
         <iframe id="viewerFrame"></iframe>
 
+        <!-- Empty State -->
         <div class="empty-state" id="emptyState">
           <i class="fa-solid fa-file-powerpoint"></i>
           <div><b>No slide selected</b></div>
-          <div>Select a presentation from the left panel</div>
+          <div>Select a presentation from the left panel to view</div>
         </div>
       </div>
 
+      <!-- Optional Footer -->
       <div class="viewer-footer">
         <div class="left" id="footerLeft">Ready</div>
         <div class="right" id="footerRight"></div>
@@ -92,8 +417,259 @@
 
   </div>
 
-  <!-- JavaScript -->
-  <script src="slides.js"></script>
+  <!-- ===========================
+       JAVASCRIPT LOGIC
+  ============================ -->
+  <script>
+    /* =====================================================
+       DATA SOURCE (EDIT THIS TO ADD YOUR SLIDES)
+    ====================================================== */
+    const slides = [
+      {
+        title: "Glycogen Metabolism",
+        topic: "Carbohydrate Metabolism",
+        author: "Dr. Para Saran",
+        pages: 42,
+        file: "slides/glycogen.pdf",
+        tags: ["Biochemistry", "MBBS", "Metabolism"]
+      },
+      {
+        title: "Liver Function Tests",
+        topic: "Clinical Biochemistry",
+        author: "Dr. Para Saran",
+        pages: 36,
+        file: "slides/lft.pdf",
+        tags: ["Diagnostics", "Enzymes", "Clinical"]
+      },
+      {
+        title: "Nucleotide Metabolism",
+        topic: "Molecular Biology",
+        author: "Dr. Para Saran",
+        pages: 58,
+        file: "slides/nucleotide.pdf",
+        tags: ["DNA", "RNA", "Purines", "Pyrimidines"]
+      },
+      {
+        title: "Disorders of Glycogen Metabolism",
+        topic: "Carbohydrate Metabolism",
+        author: "Dr. Para Saran",
+        pages: 48,
+        file: "slides/glycogen_disorders.pdf",
+        tags: ["GSD", "Clinical", "MBBS"]
+      }
+    ];
+
+    /* =====================================================
+       DOM REFERENCES
+    ====================================================== */
+    const slideList = document.getElementById("slideList");
+    const viewerFrame = document.getElementById("viewerFrame");
+    const viewerTitle = document.getElementById("viewerTitle");
+    const viewerSubtitle = document.getElementById("viewerSubtitle");
+    const downloadBtn = document.getElementById("downloadBtn");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const fullscreenBtn = document.getElementById("fullscreenBtn");
+    const emptyState = document.getElementById("emptyState");
+    const footerLeft = document.getElementById("footerLeft");
+    const footerRight = document.getElementById("footerRight");
+
+    const searchInput = document.getElementById("searchInput");
+    const topicFilter = document.getElementById("topicFilter");
+    const authorFilter = document.getElementById("authorFilter");
+
+    let currentIndex = -1;
+    let filteredSlides = [...slides];
+
+    /* =====================================================
+       INITIALIZATION
+    ====================================================== */
+    initFilters();
+    renderSlideList(filteredSlides);
+    updateFooter();
+
+    /* =====================================================
+       FUNCTIONS — FILTERS & SEARCH
+    ====================================================== */
+
+    function initFilters() {
+      const topics = [...new Set(slides.map(s => s.topic))];
+      const authors = [...new Set(slides.map(s => s.author))];
+
+      topics.forEach(topic => {
+        const opt = document.createElement("option");
+        opt.value = topic;
+        opt.textContent = topic;
+        topicFilter.appendChild(opt);
+      });
+
+      authors.forEach(author => {
+        const opt = document.createElement("option");
+        opt.value = author;
+        opt.textContent = author;
+        authorFilter.appendChild(opt);
+      });
+    }
+
+    function applyFilters() {
+      const search = searchInput.value.toLowerCase();
+      const topicVal = topicFilter.value;
+      const authorVal = authorFilter.value;
+
+      filteredSlides = slides.filter(slide => {
+        const matchesSearch =
+          slide.title.toLowerCase().includes(search) ||
+          slide.topic.toLowerCase().includes(search) ||
+          slide.author.toLowerCase().includes(search) ||
+          (slide.tags || []).join(" ").toLowerCase().includes(search);
+
+        const matchesTopic = topicVal === "all" || slide.topic === topicVal;
+        const matchesAuthor = authorVal === "all" || slide.author === authorVal;
+
+        return matchesSearch && matchesTopic && matchesAuthor;
+      });
+
+      renderSlideList(filteredSlides);
+    }
+
+    searchInput.addEventListener("input", applyFilters);
+    topicFilter.addEventListener("change", applyFilters);
+    authorFilter.addEventListener("change", applyFilters);
+
+    /* =====================================================
+       FUNCTIONS — RENDERING SLIDE LIST
+    ====================================================== */
+    function renderSlideList(list) {
+      slideList.innerHTML = "";
+
+      if (list.length === 0) {
+        slideList.innerHTML = `
+          <div style="padding:20px;color:#6b7280;font-size:14px">
+            No slides found.
+          </div>
+        `;
+        return;
+      }
+
+      list.forEach((slide, index) => {
+        const div = document.createElement("div");
+        div.className = "slide-item";
+        div.dataset.index = index;
+
+        div.innerHTML = `
+          <div class="slide-title">${slide.title}</div>
+          <div class="slide-meta">
+            ${slide.topic} • ${slide.author} • ${slide.pages} slides
+          </div>
+          <div class="slide-tags">
+            ${(slide.tags || []).map(tag => `<span class="tag">${tag}</span>`).join("")}
+          </div>
+        `;
+
+        div.addEventListener("click", () => loadSlideByFilteredIndex(index));
+        slideList.appendChild(div);
+      });
+    }
+
+    /* =====================================================
+       FUNCTIONS — LOADING SLIDES
+    ====================================================== */
+    function loadSlideByFilteredIndex(filteredIndex) {
+      const slide = filteredSlides[filteredIndex];
+      const actualIndex = slides.indexOf(slide);
+      loadSlide(actualIndex);
+    }
+
+    function loadSlide(index) {
+      if (index < 0 || index >= slides.length) return;
+
+      currentIndex = index;
+      const slide = slides[index];
+
+      viewerFrame.src = slide.file;
+      viewerTitle.textContent = slide.title;
+      viewerSubtitle.textContent = `${slide.topic} • ${slide.author} • ${slide.pages} slides`;
+      downloadBtn.onclick = () => window.open(slide.file, "_blank");
+
+      emptyState.style.display = "none";
+
+      highlightActiveSlide();
+      updateFooter();
+      updateNavButtons();
+    }
+
+    function highlightActiveSlide() {
+      const items = document.querySelectorAll(".slide-item");
+      items.forEach(item => item.classList.remove("active"));
+
+      // Highlight only if the active slide is in the filtered list
+      const activeSlide = slides[currentIndex];
+      const filteredIndex = filteredSlides.indexOf(activeSlide);
+      if (filteredIndex !== -1) {
+        const activeItem = items[filteredIndex];
+        if (activeItem) activeItem.classList.add("active");
+      }
+    }
+
+    /* =====================================================
+       FUNCTIONS — NAVIGATION
+    ====================================================== */
+    function nextSlide() {
+      if (currentIndex < slides.length - 1) {
+        loadSlide(currentIndex + 1);
+      }
+    }
+
+    function prevSlide() {
+      if (currentIndex > 0) {
+        loadSlide(currentIndex - 1);
+      }
+    }
+
+    nextBtn.addEventListener("click", nextSlide);
+    prevBtn.addEventListener("click", prevSlide);
+
+    document.addEventListener("keydown", e => {
+      if (e.key === "ArrowRight") nextSlide();
+      if (e.key === "ArrowLeft") prevSlide();
+      if (e.key === "f") toggleFullscreen();
+    });
+
+    function updateNavButtons() {
+      prevBtn.style.opacity = currentIndex <= 0 ? 0.4 : 1;
+      nextBtn.style.opacity = currentIndex >= slides.length - 1 ? 0.4 : 1;
+    }
+
+    /* =====================================================
+       FUNCTIONS — FULLSCREEN
+    ====================================================== */
+    function toggleFullscreen() {
+      const elem = document.querySelector(".viewer-body");
+
+      if (!document.fullscreenElement) {
+        elem.requestFullscreen().catch(() => {});
+      } else {
+        document.exitFullscreen();
+      }
+    }
+
+    fullscreenBtn.addEventListener("click", toggleFullscreen);
+
+    /* =====================================================
+       FOOTER / STATUS BAR
+    ====================================================== */
+    function updateFooter() {
+      if (currentIndex === -1) {
+        footerLeft.textContent = "Ready";
+        footerRight.textContent = `${slides.length} presentations`;
+      } else {
+        const slide = slides[currentIndex];
+        footerLeft.textContent = slide.title;
+        footerRight.textContent = `${slides.indexOf(slide) + 1} of ${slides.length}`;
+      }
+    }
+
+  </script>
 
 </body>
 </html>
