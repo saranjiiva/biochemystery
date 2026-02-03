@@ -1,131 +1,245 @@
-const slideGrid = document.getElementById("slideGrid");
-const searchInput = document.getElementById("searchInput");
-const categoryFilter = document.getElementById("categoryFilter");
-
-const viewerTitle = document.getElementById("viewerTitle");
-const viewerControls = document.getElementById("viewerControls");
-const viewerContainer = document.getElementById("viewerContainer");
-const downloadBtn = document.getElementById("downloadBtn");
-
-const prevPageBtn = document.getElementById("prevPage");
-const nextPageBtn = document.getElementById("nextPage");
-const pageIndicator = document.getElementById("pageIndicator");
-
-/* ================= SLIDE DATA ================= */
+/* =====================================================
+   DATA SOURCE — EDIT THIS TO ADD YOUR SLIDES
+===================================================== */
 const slides = [
   {
-    title: "Carbohydrate Metabolism",
-    category: "biochemistry",
-    file: "slides/carb_metabolism.pdf"
-  },
-  {
-    title: "Enzyme Kinetics",
-    category: "biochemistry",
-    file: "slides/enzyme_kinetics.pdf"
+    title: "Glycogen Metabolism",
+    topic: "Carbohydrate Metabolism",
+    author: "Dr. Para Saran",
+    pages: 42,
+    file: "slides/glycogen.pdf",
+    tags: ["Biochemistry", "MBBS", "Metabolism"]
   },
   {
     title: "Liver Function Tests",
-    category: "pathology",
-    file: "slides/lft.pdf"
+    topic: "Clinical Biochemistry",
+    author: "Dr. Para Saran",
+    pages: 36,
+    file: "slides/lft.pdf",
+    tags: ["Diagnostics", "Enzymes", "Clinical"]
   },
   {
-    title: "Pharmacokinetics",
-    category: "pharmacology",
-    file: "slides/pharmacokinetics.pdf"
+    title: "Nucleotide Metabolism",
+    topic: "Molecular Biology",
+    author: "Dr. Para Saran",
+    pages: 58,
+    file: "slides/nucleotide.pdf",
+    tags: ["DNA", "RNA", "Purines", "Pyrimidines"]
+  },
+  {
+    title: "Disorders of Glycogen Metabolism",
+    topic: "Carbohydrate Metabolism",
+    author: "Dr. Para Saran",
+    pages: 48,
+    file: "slides/glycogen_disorders.pdf",
+    tags: ["GSD", "Clinical", "MBBS"]
   }
 ];
 
-/* ================= PDF.JS SETUP ================= */
-const pdfjsLib = window["pdfjs-dist/build/pdf"];
-pdfjsLib.GlobalWorkerOptions.workerSrc =
-  "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+/* =====================================================
+   DOM REFERENCES
+===================================================== */
+const slideList = document.getElementById("slideList");
+const viewerFrame = document.getElementById("viewerFrame");
+const viewerTitle = document.getElementById("viewerTitle");
+const viewerSubtitle = document.getElementById("viewerSubtitle");
+const downloadBtn = document.getElementById("downloadBtn");
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+const fullscreenBtn = document.getElementById("fullscreenBtn");
+const emptyState = document.getElementById("emptyState");
+const footerLeft = document.getElementById("footerLeft");
+const footerRight = document.getElementById("footerRight");
 
-let pdfDoc = null;
-let currentPage = 1;
-let totalPages = 1;
+const searchInput = document.getElementById("searchInput");
+const topicFilter = document.getElementById("topicFilter");
+const authorFilter = document.getElementById("authorFilter");
 
-/* ================= RENDER SLIDE CARDS ================= */
-function renderSlides(list) {
-  slideGrid.innerHTML = "";
+let currentIndex = -1;
+let filteredSlides = [...slides];
 
-  list.forEach(slide => {
-    const card = document.createElement("div");
-    card.className = "slide-card";
-    card.innerHTML = `
-      <div class="slide-thumb">
-        <i class="fa-solid fa-file-pdf"></i>
+/* =====================================================
+   INITIALIZATION
+===================================================== */
+initFilters();
+renderSlideList(filteredSlides);
+updateFooter();
+
+/* =====================================================
+   FILTERS & SEARCH
+===================================================== */
+function initFilters() {
+  const topics = [...new Set(slides.map(s => s.topic))];
+  const authors = [...new Set(slides.map(s => s.author))];
+
+  topics.forEach(topic => {
+    const opt = document.createElement("option");
+    opt.value = topic;
+    opt.textContent = topic;
+    topicFilter.appendChild(opt);
+  });
+
+  authors.forEach(author => {
+    const opt = document.createElement("option");
+    opt.value = author;
+    opt.textContent = author;
+    authorFilter.appendChild(opt);
+  });
+}
+
+function applyFilters() {
+  const search = searchInput.value.toLowerCase();
+  const topicVal = topicFilter.value;
+  const authorVal = authorFilter.value;
+
+  filteredSlides = slides.filter(slide => {
+    const matchesSearch =
+      slide.title.toLowerCase().includes(search) ||
+      slide.topic.toLowerCase().includes(search) ||
+      slide.author.toLowerCase().includes(search) ||
+      (slide.tags || []).join(" ").toLowerCase().includes(search);
+
+    const matchesTopic = topicVal === "all" || slide.topic === topicVal;
+    const matchesAuthor = authorVal === "all" || slide.author === authorVal;
+
+    return matchesSearch && matchesTopic && matchesAuthor;
+  });
+
+  renderSlideList(filteredSlides);
+}
+
+searchInput.addEventListener("input", applyFilters);
+topicFilter.addEventListener("change", applyFilters);
+authorFilter.addEventListener("change", applyFilters);
+
+/* =====================================================
+   RENDER SLIDE LIST
+===================================================== */
+function renderSlideList(list) {
+  slideList.innerHTML = "";
+
+  if (list.length === 0) {
+    slideList.innerHTML = `
+      <div style="padding:20px;color:#6b7280;font-size:14px">
+        No slides found.
       </div>
-      <h3>${slide.title}</h3>
-      <span>${slide.category}</span>
     `;
-    card.onclick = () => openPDF(slide);
-    slideGrid.appendChild(card);
+    return;
+  }
+
+  list.forEach((slide, index) => {
+    const div = document.createElement("div");
+    div.className = "slide-item";
+    div.dataset.index = index;
+
+    div.innerHTML = `
+      <div class="slide-title">${slide.title}</div>
+      <div class="slide-meta">
+        ${slide.topic} • ${slide.author} • ${slide.pages} slides
+      </div>
+      <div class="slide-tags">
+        ${(slide.tags || []).map(tag => `<span class="tag">${tag}</span>`).join("")}
+      </div>
+    `;
+
+    div.addEventListener("click", () => loadSlideByFilteredIndex(index));
+    slideList.appendChild(div);
   });
 }
 
-/* ================= SEARCH & FILTER ================= */
-function filterSlides() {
-  const text = searchInput.value.toLowerCase();
-  const category = categoryFilter.value;
-
-  const filtered = slides.filter(slide => {
-    const matchesText = slide.title.toLowerCase().includes(text);
-    const matchesCategory = category === "all" || slide.category === category;
-    return matchesText && matchesCategory;
-  });
-
-  renderSlides(filtered);
+/* =====================================================
+   LOAD SLIDES
+===================================================== */
+function loadSlideByFilteredIndex(filteredIndex) {
+  const slide = filteredSlides[filteredIndex];
+  const actualIndex = slides.indexOf(slide);
+  loadSlide(actualIndex);
 }
 
-searchInput.addEventListener("input", filterSlides);
-categoryFilter.addEventListener("change", filterSlides);
+function loadSlide(index) {
+  if (index < 0 || index >= slides.length) return;
 
-/* ================= OPEN PDF ================= */
-async function openPDF(slide) {
+  currentIndex = index;
+  const slide = slides[index];
+
+  viewerFrame.src = slide.file;
   viewerTitle.textContent = slide.title;
-  downloadBtn.href = slide.file;
-  downloadBtn.classList.remove("hidden");
+  viewerSubtitle.textContent = `${slide.topic} • ${slide.author} • ${slide.pages} slides`;
+  downloadBtn.onclick = () => window.open(slide.file, "_blank");
 
-  viewerControls.classList.remove("hidden");
+  emptyState.style.display = "none";
 
-  pdfDoc = await pdfjsLib.getDocument(slide.file).promise;
-  totalPages = pdfDoc.numPages;
-  currentPage = 1;
-  renderPage();
+  highlightActiveSlide();
+  updateFooter();
+  updateNavButtons();
 }
 
-/* ================= RENDER PAGE ================= */
-async function renderPage() {
-  const page = await pdfDoc.getPage(currentPage);
-  const viewport = page.getViewport({ scale: 1.2 });
+function highlightActiveSlide() {
+  const items = document.querySelectorAll(".slide-item");
+  items.forEach(item => item.classList.remove("active"));
 
-  viewerContainer.innerHTML = "";
-  const canvas = document.createElement("canvas");
-  const ctx = canvas.getContext("2d");
-
-  canvas.height = viewport.height;
-  canvas.width = viewport.width;
-  viewerContainer.appendChild(canvas);
-
-  await page.render({ canvasContext: ctx, viewport }).promise;
-
-  pageIndicator.textContent = `${currentPage} / ${totalPages}`;
+  const activeSlide = slides[currentIndex];
+  const filteredIndex = filteredSlides.indexOf(activeSlide);
+  if (filteredIndex !== -1) {
+    const activeItem = items[filteredIndex];
+    if (activeItem) activeItem.classList.add("active");
+  }
 }
 
-/* ================= CONTROLS ================= */
-prevPageBtn.onclick = () => {
-  if (currentPage > 1) {
-    currentPage--;
-    renderPage();
+/* =====================================================
+   NAVIGATION
+===================================================== */
+function nextSlide() {
+  if (currentIndex < slides.length - 1) {
+    loadSlide(currentIndex + 1);
   }
-};
+}
 
-nextPageBtn.onclick = () => {
-  if (currentPage < totalPages) {
-    currentPage++;
-    renderPage();
+function prevSlide() {
+  if (currentIndex > 0) {
+    loadSlide(currentIndex - 1);
   }
-};
+}
 
-/* ================= INIT ================= */
-renderSlides(slides);
+nextBtn.addEventListener("click", nextSlide);
+prevBtn.addEventListener("click", prevSlide);
+
+document.addEventListener("keydown", e => {
+  if (e.key === "ArrowRight") nextSlide();
+  if (e.key === "ArrowLeft") prevSlide();
+  if (e.key === "f") toggleFullscreen();
+});
+
+/* =====================================================
+   FULLSCREEN
+===================================================== */
+function toggleFullscreen() {
+  const elem = document.querySelector(".viewer-body");
+
+  if (!document.fullscreenElement) {
+    elem.requestFullscreen().catch(() => {});
+  } else {
+    document.exitFullscreen();
+  }
+}
+
+fullscreenBtn.addEventListener("click", toggleFullscreen);
+
+/* =====================================================
+   FOOTER / STATUS
+===================================================== */
+function updateFooter() {
+  if (currentIndex === -1) {
+    footerLeft.textContent = "Ready";
+    footerRight.textContent = `${slides.length} presentations`;
+  } else {
+    const slide = slides[currentIndex];
+    footerLeft.textContent = slide.title;
+    footerRight.textContent = `${slides.indexOf(slide) + 1} of ${slides.length}`;
+  }
+}
+
+function updateNavButtons() {
+  prevBtn.style.opacity = currentIndex <= 0 ? 0.4 : 1;
+  nextBtn.style.opacity = currentIndex >= slides.length - 1 ? 0.4 : 1;
+}
