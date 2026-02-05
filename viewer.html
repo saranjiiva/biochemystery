@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Slide Viewer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: #0f172a;
+  color: white;
+  overflow: hidden;
+}
+
+/* Layout */
+.app {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 260px;
+  background: #020617;
+  border-right: 1px solid #1e293b;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-header {
+  padding: 16px;
+  font-weight: bold;
+  border-bottom: 1px solid #1e293b;
+  background: #020617;
+}
+
+.slide-list {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.slide-item {
+  padding: 12px 16px;
+  cursor: pointer;
+  border-bottom: 1px solid #020617;
+  font-size: 14px;
+  color: #cbd5f5;
+}
+.slide-item:hover {
+  background: #1e293b;
+}
+.slide-item.active {
+  background: #0ea5e9;
+  color: white;
+  font-weight: bold;
+}
+
+/* Viewer Area */
+.viewer {
+  flex: 1;
+  background: #020617;
+  display: flex;
+  flex-direction: column;
+}
+
+.viewer-toolbar {
+  height: 56px;
+  background: #020617;
+  border-bottom: 1px solid #1e293b;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+}
+
+.viewer-toolbar .left,
+.viewer-toolbar .right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.viewer-toolbar button {
+  background: #1e293b;
+  border: none;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.viewer-toolbar button:hover {
+  background: #334155;
+}
+
+.slide-counter {
+  font-size: 13px;
+  color: #cbd5f5;
+}
+
+/* Slide Frame */
+.viewer-stage {
+  flex: 1;
+  background: #020617;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.slide-frame {
+  width: 1280px;
+  height: 720px;
+  border: 1px solid #1e293b;
+  background: white;
+  box-shadow: 0 0 40px rgba(0,0,0,0.6);
+}
+
+.slide-frame iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: white;
+}
+
+/* Fullscreen tweaks */
+.fullscreen .sidebar {
+  display: none;
+}
+.fullscreen .viewer-toolbar {
+  display: none;
+}
+.fullscreen .viewer-stage {
+  background: black;
+}
+.fullscreen .slide-frame {
+  width: 100vw;
+  height: 100vh;
+  border: none;
+  box-shadow: none;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+  .sidebar {
+    width: 200px;
+  }
+  .slide-frame {
+    width: 90vw;
+    height: calc(90vw * 9 / 16);
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="app" id="app">
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="sidebar-header">📑 Slides</div>
+    <div class="slide-list" id="slideList"></div>
+  </div>
+
+  <!-- Viewer -->
+  <div class="viewer">
+
+    <!-- Toolbar -->
+    <div class="viewer-toolbar">
+      <div class="left">
+        <button onclick="prevSlide()">⬅ Prev</button>
+        <button onclick="nextSlide()">Next ➡</button>
+      </div>
+
+      <div class="center slide-counter" id="counter">1 / 1</div>
+
+      <div class="right">
+        <button onclick="toggleFullscreen()">⛶ Fullscreen</button>
+        <button onclick="exitViewer()">✖ Close</button>
+      </div>
+    </div>
+
+    <!-- Slide Area -->
+    <div class="viewer-stage">
+      <div class="slide-frame">
+        <iframe id="slideFrame"></iframe>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+/* ============================
+   CONFIGURATION AREA
+   ============================ */
+
+/* 
+  Add your slide files here.
+  Each slide is a full HTML file (your code).
+*/
+const slides = [
+  { title: "TCA Cycle – Introduction", file: "slides/slide1.html" },
+  { title: "TCA Cycle – Reactions", file: "slides/slide2.html" },
+  { title: "Energy Yield & Regulation", file: "slides/slide3.html" },
+  { title: "Clinical Correlations", file: "slides/slide4.html" }
+];
+
+/* ============================
+   CORE VIEWER LOGIC
+   ============================ */
+
+let current = 0;
+
+const slideList = document.getElementById("slideList");
+const slideFrame = document.getElementById("slideFrame");
+const counter = document.getElementById("counter");
+const app = document.getElementById("app");
+
+/* Build sidebar */
+slides.forEach((slide, index) => {
+  const div = document.createElement("div");
+  div.className = "slide-item";
+  div.textContent = `${index + 1}. ${slide.title}`;
+  div.onclick = () => loadSlide(index);
+  slideList.appendChild(div);
+});
+
+/* Load slide */
+function loadSlide(index) {
+  current = index;
+  slideFrame.src = slides[index].file;
+  updateUI();
+}
+
+/* Update sidebar + counter */
+function updateUI() {
+  document.querySelectorAll(".slide-item").forEach((item, i) => {
+    item.classList.toggle("active", i === current);
+  });
+  counter.textContent = `${current + 1} / ${slides.length}`;
+}
+
+/* Navigation */
+function nextSlide() {
+  if (current < slides.length - 1) {
+    loadSlide(current + 1);
+  }
+}
+
+function prevSlide() {
+  if (current > 0) {
+    loadSlide(current - 1);
+  }
+}
+
+/* Fullscreen */
+function toggleFullscreen() {
+  app.classList.toggle("fullscreen");
+}
+
+/* Exit */
+function exitViewer() {
+  window.location.href = "index.html";
+}
+
+/* Keyboard support */
+document.addEventListener("keydown", e => {
+  if (e.key === "ArrowRight") nextSlide();
+  if (e.key === "ArrowLeft") prevSlide();
+  if (e.key === "f" || e.key === "F") toggleFullscreen();
+  if (e.key === "Escape") app.classList.remove("fullscreen");
+});
+
+/* Initial load */
+loadSlide(0);
+</script>
+
+</body>
+</html>
