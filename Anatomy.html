@@ -1,36 +1,176 @@
 <!DOCTYPE html>
-<html>
+
+<html lang="en">
 <head>
-  <title>Web FPS Game</title>
-  <style>
-    body { margin: 0; overflow: hidden; font-family: sans-serif; }
-    #gameCanvas { display: none; } /* Hidden until button clicked */
-    button {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      padding: 15px 30px;
-      font-size: 18px;
-      cursor: pointer;
-      z-index: 100;
-    }
-  </style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TCA Cycle Title Slide</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&amp;family=Lato:wght@300;400;700;900&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Lato', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            display: flex;
+            flex-direction: row;
+            background-color: white;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+        h1 {
+            font-family: 'Merriweather', serif;
+        }
+        .mitochondria-bg {
+            position: absolute;
+            right: -150px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 800px;
+            height: 800px;
+            background-color: #f0fcfc;
+            border-radius: 50%;
+            z-index: 0;
+            border: 40px solid #e0f7fa;
+        }
+        .cycle-graphic-container {
+            width: 400px;
+            height: 400px;
+            position: relative;
+        }
+        .cycle-ring {
+            position: absolute;
+            inset: 20px;
+            border: 6px solid #006064;
+            border-radius: 50%;
+        }
+        .cycle-node {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            background-color: white;
+            border: 4px solid #006064;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: #006064;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+        /* Positioning nodes around the circle (radius approx 180px from center) */
+        /* Center is 200, 200 */
+        .node-top { top: 0; left: 50%; transform: translate(-50%, 0); }
+        .node-tr { top: 14.6%; right: 14.6%; transform: translate(50%, -50%); }
+        .node-right { top: 50%; right: 0; transform: translate(0, -50%); }
+        .node-br { bottom: 14.6%; right: 14.6%; transform: translate(50%, 50%); }
+        .node-bottom { bottom: 0; left: 50%; transform: translate(-50%, 0); }
+        .node-bl { bottom: 14.6%; left: 14.6%; transform: translate(-50%, 50%); }
+        .node-left { top: 50%; left: 0; transform: translate(0, -50%); }
+        .node-tl { top: 14.6%; left: 14.6%; transform: translate(-50%, -50%); }
+
+        .label-text {
+            position: absolute;
+            font-family: 'Lato', sans-serif;
+            font-weight: 700;
+            color: #374151;
+            font-size: 14px;
+            background-color: rgba(255,255,255,0.9);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+    </style>
 </head>
 <body>
-
-<button id="startGame">Start the game </button>
-<canvas id="gameCanvas"></canvas>
-
-<script src="js/three.min.js"></script>
-<script src="js/game.js"></script>
-
-<script>
-document.getElementById("startGame").addEventListener("click", () => {
-  document.getElementById("startGame").style.display = "none";
-  document.getElementById("gameCanvas").style.display = "block";
-  initGame(); // Start the game function from game.js
-});
-</script>
-
+<div class="slide-container">
+<!-- Abstract Background Shape -->
+<div class="mitochondria-bg"></div>
+<!-- Left Content Section -->
+<div class="flex-1 flex flex-col justify-center px-20 z-10 relative">
+<div class="mb-8">
+<div class="inline-flex items-center space-x-2 bg-teal-50 text-teal-800 px-4 py-2 rounded-full border border-teal-100 mb-6">
+<i class="fas fa-microscope text-teal-600"></i>
+<p class="text-sm font-bold tracking-wide uppercase">College Biochemistry • BIO 301</p>
+</div>
+<h1 class="text-6xl font-black text-gray-900 leading-tight mb-2">
+                    TCA Cycle
+                </h1>
+<h2 class="text-4xl text-gray-600 font-light italic serif mb-8">
+                    (The Krebs Cycle)
+                </h2>
+<div class="w-24 h-2 bg-teal-600 mb-8 rounded-full"></div>
+<p class="text-xl text-gray-600 leading-relaxed max-w-xl">
+                    A comprehensive overview of the central hub of metabolism: exploring enzymatic reactions, regulation, energetics, and clinical significance.
+                </p>
+</div>
+<div class="grid grid-cols-2 gap-8 mt-4 max-w-lg">
+<div class="border-l-4 border-teal-600 pl-4">
+<p class="text-xs text-gray-400 font-bold uppercase mb-1">Presented By</p>
+<p class="text-lg font-bold text-gray-800">[Your Name]</p>
+<p class="text-sm text-gray-500">Department of Biology</p>
+</div>
+<div class="border-l-4 border-orange-400 pl-4">
+<p class="text-xs text-gray-400 font-bold uppercase mb-1">Focus Areas</p>
+<p class="text-sm font-semibold text-gray-700 leading-snug">
+                        • Reaction Mechanisms<br/>
+                        • ATP Calculation<br/>
+                        • Metabolic Regulation
+                    </p>
+</div>
+</div>
+</div>
+<!-- Right Graphic Section -->
+<div class="w-1/2 flex items-center justify-center relative z-10">
+<div class="cycle-graphic-container">
+<!-- Inner Decorative Elements -->
+<div class="absolute inset-0 flex items-center justify-center z-0">
+<div class="text-center">
+<i class="fas fa-bolt text-5xl text-yellow-400 mb-2 drop-shadow-sm"></i>
+<p class="text-teal-900 font-bold text-lg">ENERGY</p>
+<p class="text-teal-600 text-xs">NADH • FADH<sub>2</sub> • GTP</p>
+</div>
+</div>
+<!-- The Cycle Ring -->
+<div class="cycle-ring"></div>
+<!-- Nodes -->
+<div class="cycle-node node-top" title="Citrate">C6</div>
+<div class="cycle-node node-tr">C6</div>
+<div class="cycle-node node-right" title="Alpha-Ketoglutarate">C5</div>
+<div class="cycle-node node-br">C4</div>
+<div class="cycle-node node-bottom" title="Succinate">C4</div>
+<div class="cycle-node node-bl">C4</div>
+<div class="cycle-node node-left" title="Oxaloacetate">C4</div>
+<div class="cycle-node node-tl">C2</div>
+<!-- Labels -->
+<div class="label-text" style="top: -25px; left: 50%; transform: translateX(-50%);">Citrate</div>
+<div class="label-text" style="top: 50%; right: -50px; transform: translateY(-50%);">α-KG</div>
+<div class="label-text" style="bottom: -25px; left: 50%; transform: translateX(-50%);">Succinate</div>
+<div class="label-text" style="top: 50%; left: -50px; transform: translateY(-50%);">OAA</div>
+<div class="label-text" style="top: 10px; left: 10px; color: #d97706;">Acetyl-CoA</div>
+<!-- Arrow indicating Acetyl-CoA entry -->
+<div class="absolute top-10 left-10 transform -rotate-45">
+<i class="fas fa-long-arrow-alt-down text-3xl text-orange-500"></i>
+</div>
+</div>
+</div>
+<!-- Bottom Footer Strip -->
+<div class="absolute bottom-0 w-full h-12 bg-white border-t border-gray-200 flex items-center justify-between px-8 z-20">
+<div class="flex items-center space-x-6">
+<p class="text-xs text-gray-400 font-semibold tracking-wider">NATURE EDUCATION STYLE SERIES</p>
+</div>
+<div class="flex items-center space-x-2">
+<div class="h-2 w-2 rounded-full bg-teal-500"></div>
+<p class="text-xs text-gray-400">Introduction to Metabolism</p>
+</div>
+</div>
+</div>
 </body>
 </html>
