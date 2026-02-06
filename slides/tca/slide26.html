@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=1280, height=720, initial-scale=1.0" name="viewport"/>
+<title>Anaplerosis Overview</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&amp;family=Lato:wght@300;400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Lato', sans-serif;
+            width: 1280px;
+            height: 720px;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #f8fafc;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+        }
+        .card-shadow {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease-in-out;
+        }
+        .card-shadow:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .bullet-point::before {
+            content: "•";
+            color: currentColor;
+            font-weight: bold;
+            display: inline-block; 
+            width: 1em;
+            margin-left: -1em;
+        }
+    </style>
+</head>
+<body>
+<div class="w-full h-full flex flex-col relative overflow-hidden bg-slate-50">
+<!-- Header -->
+<div class="pt-8 px-12 pb-2 z-20">
+<div class="flex items-center space-x-4">
+<div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-green-600">
+<i class="fas fa-sync-alt text-2xl"></i>
+</div>
+<div>
+<h2 class="text-3xl font-bold text-slate-800 leading-none">Anaplerotic Reactions</h2>
+<p class="text-slate-500 font-medium mt-1">Replenishing TCA Cycle Intermediates</p>
+</div>
+</div>
+<div class="w-full h-px bg-slate-200 mt-6"></div>
+</div>
+<!-- Main Content Grid -->
+<div class="flex-1 px-12 py-6 grid grid-cols-3 gap-8 items-start">
+<!-- Panel 1: Pyruvate Carboxylase -->
+<div class="bg-white h-full rounded-xl card-shadow overflow-hidden border-t-8 border-green-500 flex flex-col">
+<div class="p-6 flex-1">
+<div class="flex justify-between items-start mb-4">
+<div class="w-14 h-14 bg-green-50 rounded-lg flex items-center justify-center">
+<i class="fas fa-leaf text-green-500 text-3xl"></i>
+</div>
+<span class="bg-green-100 text-green-800 text-xs font-bold px-2 py-1 rounded uppercase tracking-wide">Major</span>
+</div>
+<h3 class="text-xl font-bold text-slate-800 mb-1">Pyruvate Carboxylase</h3>
+<p class="text-sm text-green-600 font-bold mb-4">Pyruvate → Oxaloacetate</p>
+<div class="space-y-3">
+<div class="bg-slate-50 p-3 rounded border border-slate-100">
+<p class="text-xs font-bold text-slate-500 uppercase mb-1">Significance</p>
+<p class="text-sm text-slate-700 leading-snug">
+                                Most critical anaplerotic reaction in liver and kidney. Maintains OAA levels for Gluconeogenesis and TCA capacity.
+                            </p>
+</div>
+<div>
+<p class="text-xs font-bold text-slate-500 uppercase mb-1">Requirements</p>
+<ul class="text-sm text-slate-600 space-y-1 pl-4 list-disc marker:text-green-500">
+<li><span class="font-bold text-slate-700">Cofactor:</span> Biotin (Vitamin B7)</li>
+<li><span class="font-bold text-slate-700">Activator:</span> Acetyl-CoA (obligate)</li>
+<li><span class="font-bold text-slate-700">Energy:</span> Requires 1 ATP</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- Panel 2: Amino Acid Transamination -->
+<div class="bg-white h-full rounded-xl card-shadow overflow-hidden border-t-8 border-blue-500 flex flex-col">
+<div class="p-6 flex-1">
+<div class="flex justify-between items-start mb-4">
+<div class="w-14 h-14 bg-blue-50 rounded-lg flex items-center justify-center">
+<i class="fas fa-exchange-alt text-blue-500 text-3xl"></i>
+</div>
+<span class="bg-blue-100 text-blue-800 text-xs font-bold px-2 py-1 rounded uppercase tracking-wide">Protein</span>
+</div>
+<h3 class="text-xl font-bold text-slate-800 mb-1">Transaminations</h3>
+<p class="text-sm text-blue-600 font-bold mb-4">Glutamate ↔ α-Ketoglutarate</p>
+<div class="space-y-3">
+<div class="bg-slate-50 p-3 rounded border border-slate-100">
+<p class="text-xs font-bold text-slate-500 uppercase mb-1">Mechanism</p>
+<p class="text-sm text-slate-700 leading-snug">
+                                Reversible reactions using PLP (B6) to convert amino acids into TCA intermediates (α-KG, OAA).
+                            </p>
+</div>
+<div>
+<p class="text-xs font-bold text-slate-500 uppercase mb-1">Key Reactions</p>
+<ul class="text-sm text-slate-600 space-y-1 pl-4 list-disc marker:text-blue-500">
+<li><span class="font-bold text-slate-700">GDH:</span> Glutamate → α-KG + NH4+</li>
+<li><span class="font-bold text-slate-700">Aspartate:</span> AST converts Asp → OAA</li>
+<li>Links protein catabolism to energy</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- Panel 3: Propionyl-CoA Pathway -->
+<div class="bg-white h-full rounded-xl card-shadow overflow-hidden border-t-8 border-purple-600 flex flex-col">
+<div class="p-6 flex-1">
+<div class="flex justify-between items-start mb-4">
+<div class="w-14 h-14 bg-purple-50 rounded-lg flex items-center justify-center">
+<i class="fas fa-link text-purple-600 text-3xl"></i>
+</div>
+<span class="bg-purple-100 text-purple-800 text-xs font-bold px-2 py-1 rounded uppercase tracking-wide">Lipid/AA</span>
+</div>
+<h3 class="text-xl font-bold text-slate-800 mb-1">Succinyl-CoA Entry</h3>
+<p class="text-sm text-purple-600 font-bold mb-4">Val, Ile, Met, Odd-Chain FAs</p>
+<div class="space-y-3">
+<div class="bg-slate-50 p-3 rounded border border-slate-100">
+<p class="text-xs font-bold text-slate-500 uppercase mb-1">Pathway</p>
+<p class="text-sm text-slate-700 leading-snug">
+                                Propionyl-CoA → Methylmalonyl-CoA → Succinyl-CoA. Enters cycle at 4-carbon stage.
+                            </p>
+</div>
+<div>
+<p class="text-xs font-bold text-slate-500 uppercase mb-1">Clinical Note</p>
+<ul class="text-sm text-slate-600 space-y-1 pl-4 list-disc marker:text-purple-600">
+<li><span class="font-bold text-slate-700">Vit B12:</span> Required for mutase step.</li>
+<li><span class="font-bold text-slate-700">Deficiency:</span> Methylmalonic Acidemia.</li>
+<li>Replenishes Succinyl-CoA pool.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Note -->
+<div class="h-16 bg-slate-100 border-t border-slate-200 px-12 flex items-center text-slate-500 text-sm">
+<i class="fas fa-info-circle mr-3 text-slate-400"></i>
+<p><strong>Definition:</strong> "Anaplerotic" (Greek: to fill up) reactions replenish intermediates drained for biosynthesis (cataplerosis), preventing cycle collapse.</p>
+</div>
+</div>
+</body>
+</html>
