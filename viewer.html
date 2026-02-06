@@ -35,22 +35,6 @@ body {
   padding: 14px 16px;
   font-weight: bold;
   border-bottom: 1px solid #1e293b;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.sidebar-header button {
-  background: #0ea5e9;
-  border: none;
-  color: white;
-  padding: 6px 10px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 12px;
-}
-.sidebar-header button:hover {
-  background: #0284c7;
 }
 
 .deck-list, .slide-list {
@@ -64,9 +48,7 @@ body {
   font-size: 14px;
   color: #cbd5f5;
 }
-.deck-item:hover {
-  background: #1e293b;
-}
+.deck-item:hover { background: #1e293b; }
 .deck-item.active {
   background: #0ea5e9;
   color: white;
@@ -80,9 +62,7 @@ body {
   font-size: 13px;
   color: #94a3b8;
 }
-.slide-item:hover {
-  background: #1e293b;
-}
+.slide-item:hover { background: #1e293b; }
 .slide-item.active {
   background: #334155;
   color: white;
@@ -122,9 +102,7 @@ body {
   cursor: pointer;
   font-size: 14px;
 }
-.viewer-toolbar button:hover {
-  background: #334155;
-}
+.viewer-toolbar button:hover { background: #334155; }
 
 .slide-counter {
   font-size: 13px;
@@ -138,6 +116,7 @@ body {
   align-items: center;
   justify-content: center;
   position: relative;
+  cursor: pointer;
 }
 
 .slide-frame {
@@ -157,7 +136,7 @@ body {
   background: white;
 }
 
-/* Fullscreen */
+/* TRUE FULLSCREEN MODE */
 .fullscreen .sidebar,
 .fullscreen .viewer-toolbar {
   display: none;
@@ -188,36 +167,31 @@ body {
 
   <!-- Sidebar -->
   <div class="sidebar">
-
-    <div class="sidebar-header">
-      📚 Slide Library
-      <button onclick="uploadDeck()">➕ Upload PPT</button>
-      <input type="file" id="pptInput" accept=".ppt,.pptx" hidden>
-    </div>
-
+    <div class="sidebar-header">📚 Slide Library</div>
     <div class="deck-list" id="deckList"></div>
     <div class="slide-list" id="slideList"></div>
-
   </div>
 
   <!-- Viewer -->
   <div class="viewer">
 
+    <!-- Toolbar -->
     <div class="viewer-toolbar">
       <div class="left">
         <button onclick="prevSlide()">⬅ Prev</button>
         <button onclick="nextSlide()">Next ➡</button>
+        <button onclick="enterFullscreen()">⛶ Slideshow</button>
       </div>
 
       <div class="center slide-counter" id="counter">– / –</div>
 
       <div class="right">
-        <button onclick="toggleFullscreen()">⛶ Fullscreen</button>
         <button onclick="exitViewer()">✖ Close</button>
       </div>
     </div>
 
-    <div class="viewer-stage">
+    <!-- Slide Area -->
+    <div class="viewer-stage" id="stage">
       <div class="slide-frame" id="slideFrameContainer"></div>
     </div>
 
@@ -228,8 +202,6 @@ body {
 <script>
 /* ================================
    DATA STRUCTURE
-   Each deck = one PPT
-   Each deck contains slide URLs
 ================================ */
 
 let decks = [
@@ -259,8 +231,8 @@ const deckList = document.getElementById("deckList");
 const slideList = document.getElementById("slideList");
 const counter = document.getElementById("counter");
 const slideFrameContainer = document.getElementById("slideFrameContainer");
-const pptInput = document.getElementById("pptInput");
 const app = document.getElementById("app");
+const stage = document.getElementById("stage");
 
 /* ================================
    BUILD SIDEBAR
@@ -355,15 +327,33 @@ function prevSlide() {
 }
 
 /* ================================
-   FULLSCREEN
+   TRUE FULLSCREEN API
 ================================ */
 
-function toggleFullscreen() {
-  app.classList.toggle("fullscreen");
+function enterFullscreen() {
+  if (app.requestFullscreen) {
+    app.requestFullscreen();
+  } else if (app.webkitRequestFullscreen) {
+    app.webkitRequestFullscreen();
+  } else if (app.msRequestFullscreen) {
+    app.msRequestFullscreen();
+  }
+  app.classList.add("fullscreen");
+}
+
+function exitFullscreen() {
+  if (document.exitFullscreen) {
+    document.exitFullscreen();
+  } else if (document.webkitExitFullscreen) {
+    document.webkitExitFullscreen();
+  } else if (document.msExitFullscreen) {
+    document.msExitFullscreen();
+  }
+  app.classList.remove("fullscreen");
 }
 
 /* ================================
-   EXIT
+   EXIT VIEWER
 ================================ */
 
 function exitViewer() {
@@ -371,35 +361,19 @@ function exitViewer() {
 }
 
 /* ================================
-   KEYBOARD
+   KEYBOARD + CLICK CONTROL
 ================================ */
 
 document.addEventListener("keydown", e => {
-  if (e.key === "ArrowRight") nextSlide();
+  if (e.key === "ArrowRight" || e.key === " " || e.key === "Enter") nextSlide();
   if (e.key === "ArrowLeft") prevSlide();
-  if (e.key === "f" || e.key === "F") toggleFullscreen();
-  if (e.key === "Escape") app.classList.remove("fullscreen");
+  if (e.key === "Escape") exitFullscreen();
+  if (e.key === "f" || e.key === "F") enterFullscreen();
 });
 
-/* ================================
-   PPT UPLOAD HANDLER (FRONTEND)
-================================ */
-
-function uploadDeck() {
-  pptInput.click();
-}
-
-pptInput.addEventListener("change", () => {
-  const file = pptInput.files[0];
-  if (!file) return;
-
-  alert(
-    "Browsers cannot directly read PPT files.\n\n" +
-    "This upload is sent to backend for conversion into slides.\n\n" +
-    "I will give you the converter server next."
-  );
-
-  pptInput.value = "";
+/* Click anywhere on slide → next */
+stage.addEventListener("click", () => {
+  if (document.fullscreenElement) nextSlide();
 });
 
 /* ================================
