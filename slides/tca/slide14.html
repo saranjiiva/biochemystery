@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=1280, height=720, initial-scale=1.0" name="viewport"/>
+<title>Step 3: Isocitrate Dehydrogenase</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&amp;family=Lato:wght@300;400;700&amp;family=Roboto+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Lato', sans-serif;
+            width: 1280px;
+            height: 720px;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #f8fafc;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+        }
+        .molecule-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+        .enzyme-pill {
+            background-color: #e0f2fe; /* Sky-100 */
+            color: #0369a1; /* Sky-700 */
+            border: 1px solid #bae6fd;
+            border-radius: 9999px;
+            padding: 8px 24px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            z-index: 10;
+        }
+        .chemical-formula {
+            font-family: 'Roboto Mono', monospace;
+            color: #475569;
+        }
+        .sidebar {
+            background-color: #f1f5f9;
+            border-left: 1px solid #e2e8f0;
+        }
+        .highlight-atom {
+            color: #ef4444; /* Red-500 */
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<div class="w-full h-full flex overflow-hidden bg-white">
+<!-- Main Content Area (Reaction) -->
+<div class="flex-1 flex flex-col p-10 relative">
+<!-- Header -->
+<div class="mb-8">
+<div class="flex items-center gap-3 mb-2">
+<span class="bg-teal-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">Step 3</span>
+<span class="text-slate-400 text-sm font-semibold uppercase tracking-wide">Oxidative Decarboxylation</span>
+</div>
+<h2 class="text-4xl font-extrabold text-slate-800">Isocitrate Dehydrogenase</h2>
+<div class="w-20 h-1.5 bg-teal-500 rounded mt-3"></div>
+</div>
+<!-- Reaction Diagram Area -->
+<div class="flex-1 flex items-center justify-center relative">
+<!-- Substrate: Isocitrate -->
+<div class="flex flex-col items-center z-10">
+<div class="molecule-card w-56 h-48 flex items-center justify-center p-4 mb-3 border-l-4 border-teal-500">
+<div class="text-center">
+<div class="chemical-formula text-sm leading-relaxed">
+<div class="flex justify-center items-center mb-1">
+<span>CH<sub>2</sub>-COO<sup>-</sup></span>
+</div>
+<div class="flex justify-center items-center font-bold text-slate-800">
+<span>|</span>
+</div>
+<div class="flex justify-center items-center my-1">
+<span>HC-COO<sup>-</sup></span>
+</div>
+<div class="flex justify-center items-center font-bold text-slate-800">
+<span>|</span>
+</div>
+<div class="flex justify-center items-center mt-1">
+<span class="highlight-atom">HO-CH-COO<sup>-</sup></span>
+</div>
+</div>
+</div>
+</div>
+<p class="font-bold text-slate-700 text-xl">Isocitrate</p>
+<p class="text-xs text-slate-500">6 Carbons</p>
+</div>
+<!-- Reaction Arrow & Enzyme -->
+<div class="flex flex-col items-center mx-6 w-56 relative">
+<div class="enzyme-pill mb-2 text-sm whitespace-nowrap">Isocitrate Dehydrogenase</div>
+<div class="w-full h-1 bg-slate-300 relative my-2">
+<div class="absolute right-0 top-1/2 transform -translate-y-1/2 -mt-1.5 border-t-8 border-b-8 border-l-12 border-transparent border-l-slate-300"></div>
+</div>
+<div class="flex justify-center gap-4 mt-2 w-full">
+<!-- Output 1: NADH -->
+<div class="flex flex-col items-center">
+<div class="bg-indigo-50 text-indigo-700 text-xs px-2 py-1 rounded border border-indigo-100 font-bold mb-1">
+                                NAD<sup>+</sup> → <span class="text-indigo-900">NADH</span> + H<sup>+</sup>
+</div>
+</div>
+<!-- Output 2: CO2 -->
+<div class="flex flex-col items-center">
+<div class="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded border border-gray-200 font-bold mb-1">
+<span class="highlight-atom">CO<sub>2</sub></span> Release
+                            </div>
+</div>
+</div>
+</div>
+<!-- Product: Alpha-Ketoglutarate -->
+<div class="flex flex-col items-center z-10">
+<div class="molecule-card w-56 h-48 flex items-center justify-center p-4 mb-3 border-l-4 border-amber-500">
+<div class="text-center">
+<div class="chemical-formula text-sm leading-relaxed">
+<div class="flex justify-center items-center mb-1">
+<span>CH<sub>2</sub>-COO<sup>-</sup></span>
+</div>
+<div class="flex justify-center items-center font-bold text-slate-800">
+<span>|</span>
+</div>
+<div class="flex justify-center items-center my-1">
+<span>CH<sub>2</sub></span>
+</div>
+<div class="flex justify-center items-center font-bold text-slate-800">
+<span>|</span>
+</div>
+<div class="flex justify-center items-center mt-1">
+<span>C=O</span>
+</div>
+<div class="flex justify-center items-center font-bold text-slate-800">
+<span>|</span>
+</div>
+<div class="flex justify-center items-center mt-1">
+<span>COO<sup>-</sup></span>
+</div>
+</div>
+</div>
+</div>
+<p class="font-bold text-amber-700 text-xl">α-Ketoglutarate</p>
+<p class="text-xs text-slate-500">5 Carbons (First Loss of C)</p>
+</div>
+</div>
+<!-- Reaction Features/Notes at bottom of main area -->
+<div class="mt-4 flex gap-6">
+<div class="flex items-center gap-2">
+<i class="fas fa-lock text-slate-400"></i>
+<p class="text-slate-600 text-sm">Irreversible Rate-Limiting Step</p>
+</div>
+<div class="flex items-center gap-2">
+<i class="fas fa-bolt text-yellow-500"></i>
+<p class="text-slate-600 text-sm">Produces First NADH</p>
+</div>
+</div>
+</div>
+<!-- Sidebar: Regulation & Clinical -->
+<div class="w-80 sidebar p-8 flex flex-col justify-between h-full">
+<div>
+<h3 class="text-lg font-bold text-slate-700 mb-6 border-b pb-2 border-slate-300">Regulation Points</h3>
+<!-- Activators -->
+<div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 mb-4">
+<div class="flex items-center mb-3">
+<div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-500 mr-3">
+<i class="fas fa-plus"></i>
+</div>
+<h4 class="font-bold text-slate-800">Activators</h4>
+</div>
+<ul class="space-y-2">
+<li class="flex items-start text-sm text-slate-600">
+<i class="fas fa-check-circle text-xs text-green-500 mt-1.5 mr-2"></i>
+<p><strong>ADP</strong> (Low Energy Charge)</p>
+</li>
+<li class="flex items-start text-sm text-slate-600">
+<i class="fas fa-check-circle text-xs text-green-500 mt-1.5 mr-2"></i>
+<p><strong>Ca<sup>2+</sup></strong> (Muscle Contraction)</p>
+</li>
+</ul>
+</div>
+<!-- Inhibitors -->
+<div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+<div class="flex items-center mb-3">
+<div class="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center text-red-500 mr-3">
+<i class="fas fa-minus"></i>
+</div>
+<h4 class="font-bold text-slate-800">Inhibitors</h4>
+</div>
+<ul class="space-y-2">
+<li class="flex items-start text-sm text-slate-600">
+<i class="fas fa-times-circle text-xs text-red-400 mt-1.5 mr-2"></i>
+<p><strong>ATP</strong> (High Energy)</p>
+</li>
+<li class="flex items-start text-sm text-slate-600">
+<i class="fas fa-times-circle text-xs text-red-400 mt-1.5 mr-2"></i>
+<p><strong>NADH</strong> (High Redox)</p>
+</li>
+</ul>
+</div>
+</div>
+<!-- Clinical Note Card -->
+<div class="bg-blue-50 p-4 rounded-xl border border-blue-100 mb-4">
+<h4 class="font-bold text-blue-800 text-sm mb-1">
+<i class="fas fa-dna mr-1"></i> Clinical Relevance
+                </h4>
+<p class="text-xs text-blue-700 leading-snug">
+                    Mutations in IDH1/IDH2 isoforms are found in <strong>gliomas</strong> and <strong>AML</strong>, leading to production of oncometabolite 2-hydroxyglutarate.
+                </p>
+</div>
+<!-- Page Number / Footer -->
+<div class="text-slate-400 text-xs flex justify-between items-center">
+<p>Medical Biochemistry</p>
+<p>Slide 14</p>
+</div>
+</div>
+</div>
+</body>
+</html>
