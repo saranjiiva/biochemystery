@@ -1,98 +1,137 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=1280, height=720, initial-scale=1.0" name="viewport"/>
-<title>Mitochondrial Localization</title>
-<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&amp;family=Lato:wght@300;400;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280, height=720">
+<title>TCA Cycle – Mitochondrial Localization</title>
+
 <style>
-        body {
-            font-family: 'Lato', sans-serif;
-            width: 1280px;
-            height: 720px;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            background-color: #f8fafc;
-        }
-        h1, h2, h3 {
-            font-family: 'Montserrat', sans-serif;
-        }
-        .image-container {
-            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.15);
-        }
-        .label-tag {
-            background-color: rgba(255, 255, 255, 0.95);
-            padding: 6px 16px;
-            border-radius: 99px;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            color: #334155;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            border-left: 4px solid #0d9488; /* Teal-600 */
-            position: absolute;
-            transform: translate(-50%, -50%);
-            white-space: nowrap;
-        }
-        .label-tag.membrane {
-            border-left-color: #f59e0b; /* Amber-500 */
-        }
-        .label-tag.space {
-            border-left-color: #3b82f6; /* Blue-500 */
-        }
-        .caption-bar {
-            background: linear-gradient(to right, #ffffff, #f1f5f9);
-            border-top: 1px solid #e2e8f0;
-        }
-    </style>
+body{
+  margin:0;
+  width:1280px;
+  height:720px;
+  font-family: Arial, Helvetica, sans-serif;
+  background:#f8fafc;
+  color:#1f2937;
+}
+
+.slide{
+  padding:50px 70px;
+  height:100%;
+  box-sizing:border-box;
+}
+
+h1{
+  font-size:42px;
+  margin-bottom:10px;
+}
+
+.subtitle{
+  font-size:20px;
+  color:#475569;
+  margin-bottom:35px;
+}
+
+.main{
+  display:grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap:50px;
+  align-items:center;
+}
+
+.diagram{
+  background:#ffffff;
+  border:2px solid #e5e7eb;
+  border-radius:18px;
+  height:360px;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.mito{
+  width:90%;
+  height:70%;
+  border:3px solid #334155;
+  border-radius:140px;
+  position:relative;
+  background:#f1f5f9;
+}
+
+.inner{
+  position:absolute;
+  inset:35px;
+  border:3px dashed #64748b;
+  border-radius:120px;
+  background:#ffffff;
+}
+
+.label{
+  position:absolute;
+  background:#ffffff;
+  border:2px solid #2563eb;
+  border-radius:10px;
+  padding:6px 10px;
+  font-size:16px;
+  font-weight:bold;
+  white-space:nowrap;
+}
+
+.matrix{ top:55%; left:60%; }
+.inner-mem{ top:30%; left:30%; border-color:#f59e0b; }
+.outer-mem{ top:10%; left:50%; border-color:#0f766e; }
+.interspace{ top:50%; left:15%; border-color:#7c3aed; }
+
+.content{
+  font-size:20px;
+  line-height:1.7;
+}
+
+.content ul{
+  margin-top:15px;
+  padding-left:22px;
+}
+
+.content li{
+  margin-bottom:10px;
+}
+</style>
 </head>
+
 <body>
-<div class="w-full h-full flex flex-col relative overflow-hidden bg-white">
-<!-- Header -->
-<div class="absolute top-0 left-0 w-full pt-8 px-12 z-20 pointer-events-none">
-<h2 class="text-4xl font-bold text-slate-800 mb-1 drop-shadow-sm bg-white/80 inline-block px-2 rounded">Mitochondrial Localization</h2>
-<div class="w-20 h-1.5 bg-teal-600 rounded mt-2"></div>
-</div>
-<!-- Main Diagram Area -->
-<div class="flex-1 flex items-center justify-center bg-slate-50 relative overflow-hidden p-0">
-<!-- Background Grid Pattern -->
-<div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#cbd5e1 1px, transparent 1px); background-size: 20px 20px;"></div>
-<!-- Central Diagram Image -->
-<div class="relative w-full h-full flex items-center justify-center">
-<img alt="Mitochondrial Structure Diagram" class="max-h-[85%] max-w-[90%] object-contain image-container rounded-lg z-10" src="https://www.genspark.ai/api/files/s/AsZFflu7?cache_control=3600"/>
-<!-- Overlay Labels (Positioned relative to image center approximation) -->
-<!-- Note: Positions are estimated based on typical structure diagrams -->
-<!-- Matrix Label -->
-<div class="label-tag" style="top: 60%; left: 65%;">
-<p>Matrix (TCA Enzymes &amp; PDH)</p>
-</div>
-<!-- Inner Membrane Label -->
-<div class="label-tag membrane" style="top: 45%; left: 35%;">
-<p>Inner Membrane (SDH / Complex II)</p>
-</div>
-<!-- Transporter Label -->
-<div class="label-tag space" style="top: 30%; left: 25%;">
-<p>Pyruvate Carrier (MPC)</p>
-</div>
-</div>
-</div>
-<!-- Bottom Caption Bar -->
-<div class="h-24 w-full caption-bar flex items-center px-12 z-20 shrink-0">
-<div class="flex items-center space-x-6">
-<div class="w-12 h-12 rounded-full bg-teal-100 flex items-center justify-center text-teal-600 shrink-0">
-<i class="fas fa-info-circle text-xl"></i>
-</div>
-<div class="border-l-2 border-slate-300 pl-6">
-<p class="text-slate-700 text-lg font-medium leading-relaxed">
-<span class="font-bold text-teal-700">Key Concept:</span> 
-                        The entire TCA cycle occurs in the mitochondrial <span class="text-slate-900 font-bold">matrix</span>, with the sole exception of <span class="text-amber-600 font-bold">Succinate Dehydrogenase (SDH)</span>, which is embedded in the inner mitochondrial membrane as part of Complex II.
-                    </p>
-</div>
-</div>
-</div>
+<div class="slide">
+
+  <h1>Mitochondrial Localization of TCA Cycle</h1>
+  <div class="subtitle">Site of reactions and enzyme distribution</div>
+
+  <div class="main">
+
+    <!-- Simple Diagram -->
+    <div class="diagram">
+      <div class="mito">
+        <div class="inner"></div>
+
+        <div class="label outer-mem">Outer Membrane</div>
+        <div class="label inner-mem">Inner Membrane</div>
+        <div class="label interspace">Intermembrane Space</div>
+        <div class="label matrix">Matrix</div>
+      </div>
+    </div>
+
+    <!-- Text Content -->
+    <div class="content">
+      <ul>
+        <li>The <b>entire TCA cycle</b> occurs in the <b>mitochondrial matrix</b>.</li>
+        <li><b>Pyruvate dehydrogenase complex (PDH)</b> is also located in the matrix.</li>
+        <li><b>Succinate dehydrogenase</b> is the <b>only enzyme</b> embedded in the <b>inner mitochondrial membrane</b>.</li>
+        <li>SDH also functions as <b>Complex II</b> of the electron transport chain.</li>
+        <li>NADH and FADH₂ produced enter the <b>electron transport chain</b> for ATP synthesis.</li>
+      </ul>
+    </div>
+
+  </div>
+
 </div>
 </body>
 </html>
