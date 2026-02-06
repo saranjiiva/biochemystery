@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=1280, height=720, initial-scale=1.0" name="viewport"/>
+<title>Integrated PDH + TCA Regulation</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Lato:wght@300;400;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Lato', sans-serif;
+            width: 1280px;
+            height: 720px;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #f8fafc;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        /* Node Styles */
+        .enzyme-node {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border: 2px solid #e2e8f0;
+            padding: 16px;
+            width: 260px;
+            position: relative;
+            z-index: 10;
+            transition: transform 0.2s;
+        }
+        .enzyme-node:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .node-header {
+            background-color: #0f172a;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+        }
+
+        /* Effector Tags */
+        .effector {
+            display: flex;
+            align-items: center;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            padding: 4px 8px;
+            border-radius: 6px;
+        }
+        .activator {
+            background-color: #dcfce7; /* Green-100 */
+            color: #166534; /* Green-800 */
+            border-left: 4px solid #22c55e; /* Green-500 */
+        }
+        .inhibitor {
+            background-color: #fee2e2; /* Red-100 */
+            color: #991b1b; /* Red-800 */
+            border-left: 4px solid #ef4444; /* Red-500 */
+        }
+        
+        /* Hormone Tags */
+        .hormone-insulin {
+            background-color: #dbeafe; /* Blue-100 */
+            color: #1e40af; /* Blue-800 */
+            border-left: 4px solid #3b82f6; /* Blue-500 */
+        }
+        .hormone-glucagon {
+            background-color: #ffedd5; /* Orange-100 */
+            color: #9a3412; /* Orange-800 */
+            border-left: 4px solid #f97316; /* Orange-500 */
+        }
+
+        /* Connection Lines */
+        .connector-svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+        
+        .tissue-badge {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            font-weight: 800;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: auto;
+            background: rgba(255,255,255,0.8);
+        }
+    </style>
+</head>
+<body>
+<div class="w-full h-full flex flex-col relative overflow-hidden bg-slate-50">
+<!-- Background Grid -->
+<div class="absolute inset-0 opacity-30" style="background-image: linear-gradient(#e2e8f0 1px, transparent 1px), linear-gradient(90deg, #e2e8f0 1px, transparent 1px); background-size: 40px 40px;"></div>
+<!-- Header -->
+<div class="relative z-20 pt-8 px-12 pb-4 bg-white/80 backdrop-blur-sm border-b border-slate-200">
+<div class="flex items-center justify-between">
+<div>
+<h2 class="text-4xl font-extrabold text-slate-800 tracking-tight">Integrated Regulation: PDH &amp; TCA</h2>
+<div class="flex items-center mt-2">
+<div class="w-16 h-1.5 bg-indigo-600 rounded mr-3"></div>
+<p class="text-slate-500 font-medium">Coordinated Control via Energy Charge, Redox &amp; Hormones</p>
+</div>
+</div>
+<!-- Legend -->
+<div class="flex space-x-6 bg-white px-6 py-3 rounded-xl shadow-sm border border-slate-100">
+<div class="legend-item">
+<i class="fas fa-bolt text-yellow-500 mr-2"></i>
+<span class="font-bold text-slate-700">Energy Charge</span>
+</div>
+<div class="legend-item">
+<i class="fas fa-flask text-purple-500 mr-2"></i>
+<span class="font-bold text-slate-700">Redox</span>
+</div>
+<div class="legend-item">
+<i class="fas fa-syringe text-blue-500 mr-2"></i>
+<span class="font-bold text-slate-700">Hormonal</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Content Area -->
+<div class="flex-1 relative flex items-center justify-center p-8">
+<!-- SVG Connectors (Flow arrows) -->
+<svg class="connector-svg">
+<defs>
+<marker id="arrowhead" markerheight="7" markerwidth="10" orient="auto" refx="9" refy="3.5">
+<polygon fill="#cbd5e1" points="0 0, 10 3.5, 0 7"></polygon>
+</marker>
+</defs>
+<!-- Connect PDH to TCA -->
+<path d="M 370 280 Q 420 280 470 280" fill="none" marker-end="url(#arrowhead)" stroke="#94a3b8" stroke-width="4"></path>
+<!-- Connect TCA Enzymes -->
+<path d="M 730 280 Q 780 280 830 280" fill="none" marker-end="url(#arrowhead)" stroke="#cbd5e1" stroke-dasharray="8,8" stroke-width="3"></path>
+<path d="M 960 380 Q 960 420 960 450" fill="none" marker-end="url(#arrowhead)" stroke="#cbd5e1" stroke-dasharray="8,8" stroke-width="3"></path>
+</svg>
+<div class="grid grid-cols-3 gap-12 items-start w-full max-w-6xl z-10 pl-8">
+<!-- Node 1: PDH Complex (The Gatekeeper) -->
+<div class="enzyme-node border-indigo-200 transform scale-105 shadow-lg">
+<div class="node-header bg-indigo-900 flex justify-between items-center">
+<span>PDH Complex</span>
+<i class="fas fa-door-open text-xs text-indigo-300"></i>
+</div>
+<div class="absolute -top-3 -right-3 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded shadow-sm">
+                        Gatekeeper
+                    </div>
+<div class="space-y-2">
+<!-- Hormonal -->
+<div class="effector hormone-insulin flex justify-between">
+<div class="flex items-center"><i class="fas fa-plus-circle mr-2"></i><span>Insulin</span></div>
+<span class="tissue-badge text-blue-800">Adipose/Liver</span>
+</div>
+<div class="effector hormone-glucagon flex justify-between">
+<div class="flex items-center"><i class="fas fa-minus-circle mr-2"></i><span>Glucagon</span></div>
+<span class="tissue-badge text-orange-800">Liver</span>
+</div>
+<!-- Energy/Redox -->
+<div class="inhibitor">
+<i class="fas fa-minus-circle mr-2"></i>
+<p>NADH, Acetyl-CoA, ATP</p>
+</div>
+<div class="activator">
+<i class="fas fa-plus-circle mr-2"></i>
+<p>Ca²⁺, ADP, Pyruvate</p>
+</div>
+</div>
+<div class="mt-3 pt-2 border-t border-slate-100 text-xs text-slate-500 italic">
+<p>Regulated by Phosphorylation (Kinase/Phosphatase)</p>
+</div>
+</div>
+<!-- Node 2: Isocitrate DH (Rate Limiting) -->
+<div class="enzyme-node" style="margin-top: 40px;">
+<div class="node-header bg-slate-800">
+<p>Isocitrate DH</p>
+</div>
+<div class="space-y-2">
+<!-- Energy Charge -->
+<div class="inhibitor">
+<i class="fas fa-bolt mr-2 text-yellow-600"></i>
+<p>ATP</p>
+</div>
+<div class="activator">
+<i class="fas fa-bolt mr-2 text-green-600"></i>
+<p>ADP</p>
+</div>
+<!-- Redox -->
+<div class="inhibitor">
+<i class="fas fa-flask mr-2 text-purple-600"></i>
+<p>NADH</p>
+</div>
+<!-- Signal -->
+<div class="activator flex justify-between">
+<div class="flex items-center"><i class="fas fa-plus-circle mr-2"></i><span>Ca²⁺</span></div>
+<span class="tissue-badge text-green-800">Muscle</span>
+</div>
+</div>
+</div>
+<!-- Node 3: alpha-KGDH & Citrate Synthase -->
+<div class="flex flex-col gap-6">
+<!-- Citrate Synthase (Top) -->
+<div class="enzyme-node" style="width: 240px;">
+<div class="node-header bg-slate-700 py-1 text-sm">
+<p>Citrate Synthase</p>
+</div>
+<div class="space-y-1">
+<div class="inhibitor text-xs py-1">
+<i class="fas fa-minus-circle mr-1"></i> ATP, NADH, Citrate
+                            </div>
+</div>
+</div>
+<!-- alpha-KGDH (Main) -->
+<div class="enzyme-node border-orange-200">
+<div class="node-header bg-slate-800">
+<p>α-KGDH Complex</p>
+</div>
+<div class="space-y-2">
+<!-- Feedback -->
+<div class="inhibitor">
+<i class="fas fa-minus-circle mr-2"></i>
+<p>Succinyl-CoA</p>
+</div>
+<!-- Redox -->
+<div class="inhibitor">
+<i class="fas fa-flask mr-2 text-purple-600"></i>
+<p>NADH</p>
+</div>
+<!-- Signal -->
+<div class="activator flex justify-between">
+<div class="flex items-center"><i class="fas fa-plus-circle mr-2"></i><span>Ca²⁺</span></div>
+<span class="tissue-badge text-green-800">Muscle</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Info Bar -->
+<div class="h-24 bg-white border-t border-slate-200 px-12 flex items-center justify-between shrink-0">
+<div class="grid grid-cols-2 gap-8 w-full">
+<div class="flex items-start">
+<div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-3 text-blue-600 shrink-0 mt-1">
+<i class="fas fa-utensils"></i>
+</div>
+<div>
+<p class="font-bold text-slate-800 text-sm">Fed State (Insulin)</p>
+<p class="text-xs text-slate-500 leading-snug">Promotes PDH phosphatase activity (in adipose) → Dephosphorylation → <strong>Activates PDH</strong> → Converts Glucose to Fat/Energy.</p>
+</div>
+</div>
+<div class="flex items-start">
+<div class="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center mr-3 text-orange-600 shrink-0 mt-1">
+<i class="fas fa-running"></i>
+</div>
+<div>
+<p class="font-bold text-slate-800 text-sm">Exercise / Fasting</p>
+<p class="text-xs text-slate-500 leading-snug"><strong>Exercise:</strong> Ca²⁺ &amp; ADP activate all 3 steps. <br/><strong>Fasting (Glucagon):</strong> Phosphorylates PDH (Liver) → Inhibits PDH → Saves Pyruvate for Gluconeogenesis.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
