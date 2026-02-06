@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=1280, height=720, initial-scale=1.0" name="viewport"/>
+<title>Amphibolic Nature</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Lato:wght@300;400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Lato', sans-serif;
+            width: 1280px;
+            height: 720px;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #f8fafc;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+        }
+        .split-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+        }
+        .panel {
+            flex: 1;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 40px;
+            transition: all 0.5s ease-out;
+            position: relative;
+        }
+        .catabolic-bg {
+            background-color: #fff7ed; /* Orange-50 */
+            border-right: 1px solid #fed7aa;
+        }
+        .anabolic-bg {
+            background-color: #f0fdf4; /* Green-50 */
+            border-left: 1px solid #bbf7d0;
+        }
+        .center-hub {
+            position: absolute;
+            top: 55%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 180px;
+            height: 180px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 8px solid white;
+        }
+        .hub-ring {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border-radius: 50%;
+            border: 4px dashed #94a3b8;
+            animation: spin 20s linear infinite;
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .connector-line {
+            position: absolute;
+            top: 55%;
+            height: 4px;
+            width: 150px;
+            z-index: 10;
+        }
+        .connector-left {
+            right: 50%;
+            background: linear-gradient(to left, #f97316, transparent);
+            margin-right: 90px;
+        }
+        .connector-right {
+            left: 50%;
+            background: linear-gradient(to right, #10b981, transparent);
+            margin-left: 90px;
+        }
+        .icon-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        .list-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+            padding: 12px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+    </style>
+</head>
+<body>
+<div class="w-full h-full flex flex-col relative overflow-hidden bg-white">
+<!-- Header -->
+<div class="absolute top-0 left-0 w-full pt-8 px-12 z-30">
+<h2 class="text-4xl font-bold text-slate-800 mb-1 drop-shadow-sm bg-white/60 inline-block px-2 rounded">Amphibolic Nature</h2>
+<div class="w-20 h-1.5 bg-slate-400 rounded mt-2"></div>
+<p class="text-slate-500 mt-2 text-lg font-medium">Dual Role: Catabolism &amp; Anabolism</p>
+</div>
+<!-- Main Content Split -->
+<div class="split-container pt-16">
+<!-- Catabolic Side (Left) -->
+<div class="panel catabolic-bg items-end text-right">
+<div class="max-w-md w-full flex flex-col items-end pr-16">
+<div class="icon-circle bg-orange-100 text-orange-600">
+<i class="fas fa-fire text-4xl"></i>
+</div>
+<h3 class="text-3xl font-extrabold text-orange-700 mb-2 uppercase tracking-wide">Catabolic</h3>
+<p class="text-orange-900/60 font-bold mb-6 text-sm uppercase tracking-wider">Energy Generation</p>
+<div class="w-full space-y-3">
+<div class="list-item border-r-4 border-orange-400 justify-end">
+<p class="text-slate-700 font-medium mr-4">Oxidative breakdown of Acetyl-CoA</p>
+<i class="fas fa-bolt text-orange-400"></i>
+</div>
+<div class="list-item border-r-4 border-orange-400 justify-end">
+<p class="text-slate-700 font-medium mr-4">Yields NADH, FADH₂, GTP</p>
+<i class="fas fa-battery-full text-orange-400"></i>
+</div>
+<div class="list-item border-r-4 border-orange-400 justify-end">
+<p class="text-slate-700 font-medium mr-4">Final common pathway (Carbs, Fats, Proteins)</p>
+<i class="fas fa-road text-orange-400"></i>
+</div>
+</div>
+</div>
+</div>
+<!-- Anabolic Side (Right) -->
+<div class="panel anabolic-bg items-start text-left">
+<div class="max-w-md w-full flex flex-col items-start pl-16">
+<div class="icon-circle bg-emerald-100 text-emerald-600">
+<i class="fas fa-seedling text-4xl"></i>
+</div>
+<h3 class="text-3xl font-extrabold text-emerald-700 mb-2 uppercase tracking-wide">Anabolic</h3>
+<p class="text-emerald-900/60 font-bold mb-6 text-sm uppercase tracking-wider">Biosynthetic Hub</p>
+<div class="w-full space-y-3">
+<div class="list-item border-l-4 border-emerald-400">
+<i class="fas fa-cubes text-emerald-400 mr-4"></i>
+<p class="text-slate-700 font-medium">Provides Precursors for Biosynthesis</p>
+</div>
+<div class="list-item border-l-4 border-emerald-400">
+<i class="fas fa-arrow-right text-emerald-400 mr-4"></i>
+<p class="text-slate-700 font-medium">Gluconeogenesis (from Oxaloacetate)</p>
+</div>
+<div class="list-item border-l-4 border-emerald-400">
+<i class="fas fa-tint text-emerald-400 mr-4"></i>
+<p class="text-slate-700 font-medium">Fatty Acid Synthesis (from Citrate)</p>
+</div>
+<div class="list-item border-l-4 border-emerald-400">
+<i class="fas fa-dna text-emerald-400 mr-4"></i>
+<p class="text-slate-700 font-medium">Heme &amp; Amino Acid Synthesis</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Central Connector Hub -->
+<div class="connector-line connector-left"></div>
+<div class="connector-line connector-right"></div>
+<div class="center-hub">
+<div class="hub-ring"></div>
+<div class="text-center z-10">
+<i class="fas fa-sync-alt text-4xl text-slate-700 mb-2"></i>
+<h4 class="text-xl font-black text-slate-800 leading-none">TCA<br/><span class="text-sm font-semibold text-slate-500">CYCLE</span></h4>
+</div>
+<!-- Half colored background for hub -->
+<div class="absolute inset-0 rounded-full overflow-hidden opacity-10 z-0">
+<div class="absolute left-0 top-0 bottom-0 w-1/2 bg-orange-500"></div>
+<div class="absolute right-0 top-0 bottom-0 w-1/2 bg-emerald-500"></div>
+</div>
+</div>
+</div>
+<!-- Bottom Caption -->
+<div class="absolute bottom-0 w-full h-14 bg-white border-t border-slate-200 flex items-center justify-center">
+<p class="text-slate-500 font-medium text-sm">
+<i class="fas fa-info-circle mr-2 text-blue-400"></i>
+            "Amphibolic" (Greek <em>amphi</em> = both) signifies the cycle's involvement in both oxidative degradation and biosynthetic supply.
+        </p>
+</div>
+</div>
+</body>
+</html>
