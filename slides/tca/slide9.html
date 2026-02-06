@@ -1,234 +1,236 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=1280, height=720, initial-scale=1.0" name="viewport"/>
 <title>PDH Regulation Toggle</title>
+
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Lato:wght@300;400;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet"/>
 <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+
 <style>
-        body {
-            font-family: 'Lato', sans-serif;
-            width: 1280px;
-            height: 720px;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            background-color: #f8fafc;
-        }
-        h1, h2, h3 {
-            font-family: 'Montserrat', sans-serif;
-        }
-        /* Toggle Switch Animation Visualization */
-        .toggle-container {
-            position: relative;
-            width: 800px;
-            height: 340px;
-            background: #ffffff;
-            border-radius: 24px;
-            box-shadow: 0 10px 40px -5px rgba(0,0,0,0.1);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 40px;
-            border: 1px solid #e2e8f0;
-        }
-        
-        .central-complex {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            width: 160px;
-            height: 160px;
-            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%); /* Fallback for no gradient rule */
-            background-color: #f1f5f9;
-            border-radius: 50%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            border: 8px solid #cbd5e1;
-            z-index: 10;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
+body {
+  font-family: 'Lato', sans-serif;
+  width:1280px;
+  height:720px;
+  margin:0;
+  overflow:hidden;
+  background:#f8fafc;
+}
+h1,h2,h3 { font-family:'Montserrat', sans-serif; }
 
-        .state-card {
-            width: 280px;
-            height: 240px;
-            border-radius: 16px;
-            padding: 24px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-            transition: all 0.3s ease;
-        }
+/* Main container */
+.toggle-container {
+  position: relative;
+  width: 860px;
+  height: 360px;
+  background: white;
+  border-radius: 26px;
+  box-shadow: 0 12px 40px -6px rgba(0,0,0,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 48px;
+  border: 1px solid #e2e8f0;
+}
 
-        .state-active {
-            background-color: #ecfdf5; /* green-50 */
-            border: 3px solid #10b981; /* green-500 */
-        }
+/* PDH complex */
+.central-complex {
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  width:170px;
+  height:170px;
+  background:#f1f5f9;
+  border-radius:50%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  border:8px solid #cbd5e1;
+  z-index:10;
+  box-shadow:0 6px 10px rgba(0,0,0,0.08);
+  animation: breathe 4s ease-in-out infinite;
+}
 
-        .state-inactive {
-            background-color: #fef2f2; /* red-50 */
-            border: 3px solid #ef4444; /* red-500 */
-        }
+@keyframes breathe {
+  0%,100% { transform:translate(-50%,-50%) scale(1); }
+  50% { transform:translate(-50%,-50%) scale(1.04); }
+}
 
-        .arrow-path {
-            position: absolute;
-            top: 50%;
-            height: 4px;
-            width: 140px;
-            background-color: #cbd5e1;
-            z-index: 1;
-        }
-        
-        .arrow-left {
-            left: 280px;
-        }
-        
-        .arrow-right {
-            right: 280px;
-        }
+/* Phosphate dot */
+.phosphate {
+  position:absolute;
+  top:-10px;
+  right:-10px;
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  background:#ef4444;
+  color:white;
+  font-weight:800;
+  font-size:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:3px solid white;
+  box-shadow:0 4px 8px rgba(0,0,0,0.15);
+  animation: pulseP 2.5s infinite;
+}
 
-        .enzyme-label {
-            position: absolute;
-            top: -50px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #ffffff;
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-weight: 700;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            border: 1px solid #e2e8f0;
-            white-space: nowrap;
-        }
+@keyframes pulseP {
+  0% { transform:scale(1); box-shadow:0 0 0 0 rgba(239,68,68,0.6); }
+  70% { transform:scale(1.1); box-shadow:0 0 0 12px rgba(239,68,68,0); }
+  100% { transform:scale(1); box-shadow:0 0 0 0 rgba(239,68,68,0); }
+}
 
-        .regulator-box {
-            margin-top: 12px;
-            width: 100%;
-            padding: 10px;
-            border-radius: 8px;
-            background: white;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-        
-        .connector-line {
-            width: 2px;
-            height: 40px;
-            background-color: #94a3b8;
-            margin: 0 auto;
-        }
-    </style>
+/* State cards */
+.state-card {
+  width:300px;
+  height:260px;
+  border-radius:18px;
+  padding:26px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  transition:all 0.3s ease;
+  position:relative;
+}
+
+.state-active {
+  background:#ecfdf5;
+  border:3px solid #10b981;
+  animation: glowGreen 3s infinite;
+}
+
+@keyframes glowGreen {
+  0%,100% { box-shadow:0 0 0 0 rgba(16,185,129,0.3); }
+  50% { box-shadow:0 0 25px 6px rgba(16,185,129,0.25); }
+}
+
+.state-inactive {
+  background:#fef2f2;
+  border:3px solid #ef4444;
+  animation: glowRed 3s infinite;
+}
+
+@keyframes glowRed {
+  0%,100% { box-shadow:0 0 0 0 rgba(239,68,68,0.3); }
+  50% { box-shadow:0 0 25px 6px rgba(239,68,68,0.25); }
+}
+</style>
 </head>
+
 <body>
 <div class="w-full h-full flex flex-col relative overflow-hidden bg-white">
+
 <!-- Header -->
-<div class="pt-8 px-12 z-20">
-<h2 class="text-4xl font-bold text-slate-800 mb-2">PDH Regulation</h2>
-<div class="w-24 h-1.5 bg-teal-600 rounded"></div>
-<p class="text-slate-500 mt-2 text-xl font-light">Covalent Modification: Phosphorylation Toggle Mechanism</p>
+<div class="pt-8 px-12">
+  <h2 class="text-4xl font-bold text-slate-800 mb-2">PDH Regulation</h2>
+  <div class="w-28 h-1.5 bg-teal-600 rounded"></div>
+  <p class="text-slate-500 mt-2 text-xl font-light">
+    Covalent Modification — Phosphorylation Toggle
+  </p>
 </div>
-<!-- Main Content -->
-<div class="flex-1 flex flex-col items-center justify-center relative">
-<!-- Toggle Mechanism Visualization -->
-<div class="toggle-container">
-<!-- Left Side: Active State -->
-<div class="state-card state-active">
-<div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-3 text-green-600">
-<i class="fas fa-bolt text-3xl"></i>
-</div>
-<h3 class="text-2xl font-bold text-green-700 mb-1">ACTIVE</h3>
-<p class="text-sm text-green-800 font-semibold mb-2">(Dephosphorylated)</p>
-<div class="w-full border-t border-green-200 my-2"></div>
-<p class="text-xs text-slate-500">Substrate Flux:</p>
-<p class="font-bold text-slate-700">Pyruvate → Acetyl-CoA</p>
-</div>
-<!-- Central Complex Graphic -->
-<div class="central-complex">
-<div class="text-center">
-<span class="block text-4xl font-black text-slate-700 mb-1">PDH</span>
-<span class="block text-xs text-slate-500 uppercase tracking-widest">Complex</span>
-</div>
-<!-- Phosphates graphic (hidden by default, shown based on logic representation) -->
-<div class="absolute -top-3 -right-3 w-8 h-8 bg-red-500 rounded-full flex items-center justify-center text-white font-bold text-xs shadow-md border-2 border-white">P</div>
-</div>
-<!-- Right Side: Inactive State -->
-<div class="state-card state-inactive">
-<div class="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center mb-3 text-red-600">
-<i class="fas fa-ban text-3xl"></i>
-</div>
-<h3 class="text-2xl font-bold text-red-700 mb-1">INACTIVE</h3>
-<p class="text-sm text-red-800 font-semibold mb-2">(Phosphorylated)</p>
-<div class="w-full border-t border-red-200 my-2"></div>
-<p class="text-xs text-slate-500">Result:</p>
-<p class="font-bold text-slate-700">Accumulates Pyruvate / Lactate</p>
-</div>
-<!-- Connecting Paths -->
-<div class="absolute top-1/2 left-1/4 w-1/4 h-1 bg-gray-200 -z-10"></div>
-<div class="absolute top-1/2 right-1/4 w-1/4 h-1 bg-gray-200 -z-10"></div>
-</div>
-<!-- Enzyme Controllers (Top and Bottom) -->
-<div class="absolute w-full max-w-4xl h-[500px] pointer-events-none">
-<!-- Top Controller: PDH Kinase (Inactivator) -->
-<div class="absolute top-0 right-[15%] flex flex-col items-center">
-<div class="bg-white border-2 border-red-400 p-4 rounded-xl shadow-lg w-64 text-center relative z-20">
-<h4 class="font-bold text-red-600 text-lg">PDH Kinase</h4>
-<p class="text-xs text-slate-500 mb-2">Adds Phosphate (Inactivates)</p>
-<div class="flex flex-col gap-2 mt-2">
-<div class="bg-green-50 text-green-800 text-xs px-2 py-1 rounded flex justify-between items-center border border-green-200">
-<span><i class="fas fa-plus-circle mr-1"></i> Activated by:</span>
-<span class="font-bold">ATP, NADH, Acetyl-CoA</span>
-</div>
-<div class="bg-red-50 text-red-800 text-xs px-2 py-1 rounded flex justify-between items-center border border-red-200">
-<span><i class="fas fa-minus-circle mr-1"></i> Inhibited by:</span>
-<span class="font-bold">Pyruvate, ADP</span>
-</div>
-</div>
-</div>
-<div class="h-16 w-0.5 border-l-2 border-dashed border-red-300 relative">
-<i class="fas fa-arrow-down absolute -bottom-3 -left-1.5 text-red-400"></i>
-</div>
-</div>
-<!-- Bottom Controller: PDH Phosphatase (Activator) -->
-<div class="absolute bottom-0 left-[15%] flex flex-col-reverse items-center">
-<div class="bg-white border-2 border-green-400 p-4 rounded-xl shadow-lg w-64 text-center relative z-20">
-<h4 class="font-bold text-green-600 text-lg">PDH Phosphatase</h4>
-<p class="text-xs text-slate-500 mb-2">Removes Phosphate (Activates)</p>
-<div class="flex flex-col gap-2 mt-2">
-<div class="bg-green-50 text-green-800 text-xs px-2 py-1 rounded flex justify-between items-center border border-green-200">
-<span><i class="fas fa-plus-circle mr-1"></i> Activated by:</span>
-<span class="font-bold">Ca²⁺ (Muscle), Insulin</span>
-</div>
-</div>
-</div>
-<div class="h-16 w-0.5 border-l-2 border-dashed border-green-300 relative">
-<i class="fas fa-arrow-up absolute -top-3 -left-1.5 text-green-400"></i>
-</div>
-</div>
-</div>
-</div>
-<!-- Bottom Legend/Note -->
-<div class="h-20 bg-slate-50 border-t border-slate-200 flex items-center px-12 space-x-8">
-<div class="flex items-center space-x-2">
-<div class="w-3 h-3 rounded-full bg-green-500"></div>
-<p class="text-sm text-slate-600 font-medium">High Energy Demand (Exercise)</p>
-</div>
-<div class="flex items-center space-x-2">
-<div class="w-3 h-3 rounded-full bg-red-500"></div>
-<p class="text-sm text-slate-600 font-medium">High Energy State (Rest)</p>
-</div>
-<div class="flex-1 text-right text-slate-400 text-sm">
-<i class="fas fa-exclamation-triangle mr-2 text-amber-500"></i>
-            PDH Kinase inhibitors (e.g., dichloroacetate) are studied for lactic acidosis treatment.
+
+<!-- Main -->
+<div class="flex-1 flex items-center justify-center relative">
+
+  <div class="toggle-container">
+
+    <!-- ACTIVE -->
+    <div class="state-card state-active">
+      <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-3 text-green-600">
+        <i class="fas fa-bolt text-3xl"></i>
+      </div>
+      <h3 class="text-2xl font-bold text-green-700 mb-1">ACTIVE</h3>
+      <p class="text-sm text-green-800 font-semibold mb-2">(Dephosphorylated)</p>
+      <div class="w-full border-t border-green-200 my-2"></div>
+      <p class="text-xs text-slate-500">Effect:</p>
+      <p class="font-bold text-slate-700">↑ Acetyl-CoA → ↑ TCA flux</p>
+    </div>
+
+    <!-- PDH Complex -->
+    <div class="central-complex">
+      <span class="block text-4xl font-black text-slate-700 mb-1">PDH</span>
+      <span class="block text-xs text-slate-500 uppercase tracking-widest">Complex</span>
+      <div class="phosphate">P</div>
+    </div>
+
+    <!-- INACTIVE -->
+    <div class="state-card state-inactive">
+      <div class="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center mb-3 text-red-600">
+        <i class="fas fa-ban text-3xl"></i>
+      </div>
+      <h3 class="text-2xl font-bold text-red-700 mb-1">INACTIVE</h3>
+      <p class="text-sm text-red-800 font-semibold mb-2">(Phosphorylated)</p>
+      <div class="w-full border-t border-red-200 my-2"></div>
+      <p class="text-xs text-slate-500">Effect:</p>
+      <p class="font-bold text-slate-700">↑ Pyruvate → ↑ Lactate</p>
+    </div>
+
+  </div>
+
+  <!-- Top: PDH Kinase -->
+  <div class="absolute top-8 right-[18%] flex flex-col items-center">
+    <div class="bg-white border-2 border-red-400 p-4 rounded-xl shadow-lg w-64 text-center">
+      <h4 class="font-bold text-red-600 text-lg">PDH Kinase</h4>
+      <p class="text-xs text-slate-500 mb-2">Adds Phosphate → Inactivates</p>
+      <div class="flex flex-col gap-2 mt-2">
+        <div class="bg-green-50 text-green-800 text-xs px-2 py-1 rounded flex justify-between items-center border border-green-200">
+          <span><i class="fas fa-plus-circle mr-1"></i> Activated by:</span>
+          <span class="font-bold">ATP, NADH, Acetyl-CoA</span>
         </div>
+        <div class="bg-red-50 text-red-800 text-xs px-2 py-1 rounded flex justify-between items-center border border-red-200">
+          <span><i class="fas fa-minus-circle mr-1"></i> Inhibited by:</span>
+          <span class="font-bold">Pyruvate, ADP</span>
+        </div>
+      </div>
+    </div>
+    <div class="h-14 w-0.5 border-l-2 border-dashed border-red-300 relative">
+      <i class="fas fa-arrow-down absolute -bottom-3 -left-1.5 text-red-400"></i>
+    </div>
+  </div>
+
+  <!-- Bottom: PDH Phosphatase -->
+  <div class="absolute bottom-8 left-[18%] flex flex-col-reverse items-center">
+    <div class="bg-white border-2 border-green-400 p-4 rounded-xl shadow-lg w-64 text-center">
+      <h4 class="font-bold text-green-600 text-lg">PDH Phosphatase</h4>
+      <p class="text-xs text-slate-500 mb-2">Removes Phosphate → Activates</p>
+      <div class="flex flex-col gap-2 mt-2">
+        <div class="bg-green-50 text-green-800 text-xs px-2 py-1 rounded flex justify-between items-center border border-green-200">
+          <span><i class="fas fa-plus-circle mr-1"></i> Activated by:</span>
+          <span class="font-bold">Ca²⁺ (Muscle), Insulin</span>
+        </div>
+      </div>
+    </div>
+    <div class="h-14 w-0.5 border-l-2 border-dashed border-green-300 relative">
+      <i class="fas fa-arrow-up absolute -top-3 -left-1.5 text-green-400"></i>
+    </div>
+  </div>
+
 </div>
+
+<!-- Footer -->
+<div class="h-20 bg-slate-50 border-t border-slate-200 flex items-center px-12 space-x-8">
+  <div class="flex items-center space-x-2">
+    <div class="w-3 h-3 rounded-full bg-green-500"></div>
+    <p class="text-sm text-slate-600 font-medium">High Energy Demand (Exercise)</p>
+  </div>
+  <div class="flex items-center space-x-2">
+    <div class="w-3 h-3 rounded-full bg-red-500"></div>
+    <p class="text-sm text-slate-600 font-medium">High Energy State (Fed / Rest)</p>
+  </div>
+  <div class="flex-1 text-right text-slate-400 text-sm">
+    <i class="fas fa-exclamation-triangle mr-2 text-amber-500"></i>
+    Dichloroacetate inhibits PDH kinase → used experimentally for lactic acidosis.
+  </div>
+</div>
+
 </div>
 </body>
 </html>
