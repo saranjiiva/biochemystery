@@ -1,167 +1,265 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=1280, height=720, initial-scale=1.0" name="viewport"/>
-<title>Pyruvate Carboxylase &amp; Biotin</title>
+<title>Pyruvate Carboxylase & Biotin</title>
+
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&amp;family=Lato:wght@300;400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
 <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+
 <style>
-        body {
-            font-family: 'Lato', sans-serif;
-            width: 1280px;
-            height: 720px;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            background-color: #f8fafc;
-        }
-        h1, h2, h3 {
-            font-family: 'Montserrat', sans-serif;
-        }
-        .reaction-card {
-            background: white;
-            border-radius: 1rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            transition: transform 0.3s ease;
-        }
-        .structure-container {
-            position: relative;
-            overflow: hidden;
-            border-radius: 1rem;
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.05);
-            background-color: white;
-            border: 1px solid #e2e8f0;
-        }
-        .arrow-step {
-            position: relative;
-            padding-left: 20px;
-        }
-        .arrow-step::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 8px;
-            width: 10px;
-            height: 10px;
-            background-color: #0d9488;
-            border-radius: 50%;
-        }
-        .arrow-step::after {
-            content: '';
-            position: absolute;
-            left: 4px;
-            top: 20px;
-            bottom: -15px;
-            width: 2px;
-            background-color: #cbd5e1;
-        }
-        .arrow-step:last-child::after {
-            display: none;
-        }
-    </style>
+body {
+  font-family: 'Lato', sans-serif;
+  width: 1280px;
+  height: 720px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #f8fafc;
+}
+h1, h2, h3 {
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Cards */
+.reaction-card {
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 10px 25px -10px rgba(0,0,0,0.15);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.reaction-card:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 16px 40px -12px rgba(0,0,0,0.2);
+}
+
+/* Structure container */
+.structure-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  background: white;
+  border: 1px solid #e2e8f0;
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.05);
+}
+
+/* Step arrows */
+.arrow-step {
+  position: relative;
+  padding-left: 22px;
+  animation: fadeUp 0.7s ease forwards;
+  opacity: 0;
+}
+.arrow-step:nth-child(1) { animation-delay: 0.2s; }
+.arrow-step:nth-child(2) { animation-delay: 0.4s; }
+.arrow-step:nth-child(3) { animation-delay: 0.6s; }
+
+.arrow-step::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 10px;
+  height: 10px;
+  background-color: #0d9488;
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 rgba(13,148,136,0.6);
+  animation: pulse 2s infinite;
+}
+.arrow-step::after {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 20px;
+  bottom: -15px;
+  width: 2px;
+  background-color: #cbd5e1;
+}
+.arrow-step:last-child::after {
+  display: none;
+}
+
+/* Biotin swinging arm animation */
+.bioton-arm {
+  position: absolute;
+  bottom: 120px;
+  right: 140px;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: #ede9fe;
+  border: 3px dashed #7c3aed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #6d28d9;
+  animation: swing 3s ease-in-out infinite;
+  box-shadow: 0 0 0 0 rgba(124,58,237,0.4);
+}
+
+@keyframes swing {
+  0% { transform: rotate(-12deg) translateX(-10px); }
+  50% { transform: rotate(12deg) translateX(10px); }
+  100% { transform: rotate(-12deg) translateX(-10px); }
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(13,148,136,0.6); }
+  70% { box-shadow: 0 0 0 10px rgba(13,148,136,0); }
+  100% { box-shadow: 0 0 0 0 rgba(13,148,136,0); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Reaction equation animation */
+.reaction-eq span {
+  display: inline-block;
+  animation: glow 2s infinite alternate;
+}
+.reaction-eq span:nth-child(1) { animation-delay: 0s; }
+.reaction-eq span:nth-child(2) { animation-delay: 0.4s; }
+.reaction-eq span:nth-child(3) { animation-delay: 0.8s; }
+.reaction-eq span:nth-child(4) { animation-delay: 1.2s; }
+
+@keyframes glow {
+  from { color: #475569; }
+  to { color: #0d9488; }
+}
+</style>
 </head>
+
 <body>
 <div class="w-full h-full flex flex-col relative overflow-hidden bg-slate-50">
-<!-- Header Section -->
+
+<!-- Header -->
 <div class="pt-8 px-12 pb-4 z-20 bg-white border-b border-slate-200 shadow-sm">
-<div class="flex justify-between items-end">
-<div>
-<h2 class="text-4xl font-bold text-slate-800 mb-1">Pyruvate Carboxylase</h2>
-<div class="flex items-center text-teal-600 font-semibold text-lg">
-<i class="fas fa-sync-alt mr-2"></i>
-<span>Primary Anaplerotic Reaction (Replenishing TCA)</span>
+  <div class="flex justify-between items-end">
+    <div>
+      <h2 class="text-4xl font-bold text-slate-800 mb-1">Pyruvate Carboxylase</h2>
+      <div class="flex items-center text-teal-600 font-semibold text-lg">
+        <i class="fas fa-sync-alt mr-2"></i>
+        <span>Primary Anaplerotic Reaction (Replenishes TCA)</span>
+      </div>
+    </div>
+    <div class="text-right">
+      <span class="inline-block px-4 py-1 bg-purple-100 text-purple-800 rounded-full font-bold text-sm mb-1">
+        Cofactor Required
+      </span>
+      <p class="text-2xl font-bold text-purple-700">Biotin (Vitamin B7)</p>
+    </div>
+  </div>
 </div>
-</div>
-<div class="text-right">
-<span class="inline-block px-4 py-1 bg-purple-100 text-purple-800 rounded-full font-bold text-sm mb-1">Cofactor Required</span>
-<p class="text-2xl font-bold text-purple-700">Biotin (Vitamin B7)</p>
-</div>
-</div>
-</div>
-<!-- Main Content Split -->
+
+<!-- Main Content -->
 <div class="flex-1 flex p-8 gap-8 overflow-hidden">
-<!-- Left Panel: Mechanism & Concept -->
+
+<!-- Left Panel -->
 <div class="w-5/12 flex flex-col space-y-6 justify-center">
-<!-- Reaction Card -->
-<div class="reaction-card p-6 border-l-8 border-teal-500">
-<h3 class="text-xl font-bold text-slate-700 mb-4">Reaction: Carboxylation</h3>
-<div class="flex items-center justify-between mb-4">
-<div class="text-center">
-<span class="block text-sm font-bold text-slate-500 uppercase">Pyruvate</span>
-<span class="text-lg font-bold text-slate-800">3 Carbon</span>
+
+  <!-- Reaction Card -->
+  <div class="reaction-card p-6 border-l-8 border-teal-500">
+    <h3 class="text-xl font-bold text-slate-700 mb-4">Overall Reaction</h3>
+
+    <div class="reaction-eq flex items-center justify-between mb-4 text-lg font-bold">
+      <span>Pyruvate</span>
+      <span class="text-amber-600">+ ATP + CO₂</span>
+      <span>→</span>
+      <span>Oxaloacetate</span>
+    </div>
+
+    <div class="bg-amber-50 rounded p-3 text-sm text-amber-800 border border-amber-200">
+      <p class="flex items-center">
+        <i class="fas fa-exclamation-circle mr-2"></i>
+        <strong>Regulation:</strong> Obligately activated by <em>Acetyl-CoA</em> → signals need for OAA.
+      </p>
+    </div>
+  </div>
+
+  <!-- Mechanism Steps -->
+  <div class="pl-4">
+    <div class="arrow-step mb-4">
+      <h4 class="font-bold text-slate-800">1. Biotin Carboxylation</h4>
+      <p class="text-slate-600 text-sm">
+        ATP activates bicarbonate → CO₂ binds to biotin forming <strong>N-carboxybiotin</strong>.
+      </p>
+    </div>
+
+    <div class="arrow-step mb-4">
+      <h4 class="font-bold text-slate-800">2. Swinging Arm Mechanism</h4>
+      <p class="text-slate-600 text-sm">
+        Biotin covalently attached to lysine swings between two active sites.
+      </p>
+    </div>
+
+    <div class="arrow-step">
+      <h4 class="font-bold text-slate-800">3. Transcarboxylation</h4>
+      <p class="text-slate-600 text-sm">
+        CO₂ transferred from biotin to pyruvate → forms <strong>oxaloacetate</strong>.
+      </p>
+    </div>
+  </div>
 </div>
-<div class="flex flex-col items-center px-2">
-<span class="text-xs text-amber-600 font-bold mb-1">+ ATP + CO₂</span>
-<i class="fas fa-arrow-right text-slate-300 text-xl"></i>
-<span class="text-xs text-slate-400 mt-1">Irreversible</span>
-</div>
-<div class="text-center">
-<span class="block text-sm font-bold text-slate-500 uppercase">Oxaloacetate</span>
-<span class="text-lg font-bold text-slate-800">4 Carbon</span>
-</div>
-</div>
-<div class="bg-amber-50 rounded p-3 text-sm text-amber-800 border border-amber-200">
-<p class="flex items-center"><i class="fas fa-exclamation-circle mr-2"></i> <strong>Regulation:</strong> Obligately activated by <em>Acetyl-CoA</em>. High Acetyl-CoA signals need for OAA.</p>
-</div>
-</div>
-<!-- Mechanism Steps -->
-<div class="pl-4">
-<div class="arrow-step mb-4">
-<h4 class="font-bold text-slate-800">1. Biotin Carboxylation</h4>
-<p class="text-slate-600 text-sm">ATP-dependent formation of N-carboxybiotin intermediate.</p>
-</div>
-<div class="arrow-step mb-4">
-<h4 class="font-bold text-slate-800">2. Swinging Arm Transfer</h4>
-<p class="text-slate-600 text-sm">Biotin arm swings the activated CO₂ from one active site to the other.</p>
-</div>
-<div class="arrow-step">
-<h4 class="font-bold text-slate-800">3. Transcarboxylation</h4>
-<p class="text-slate-600 text-sm">CO₂ is transferred to pyruvate to form Oxaloacetate.</p>
-</div>
-</div>
-</div>
-<!-- Right Panel: Structure -->
+
+<!-- Right Panel -->
 <div class="w-7/12 flex flex-col">
-<div class="flex-1 structure-container flex items-center justify-center p-4 bg-white">
-<!-- Placeholder for OAA structure from generated images -->
-<img alt="TCA Intermediates - Focus on OAA" class="w-full h-full object-contain" src="https://www.genspark.ai/api/files/s/r4LVVusZ?cache_control=3600"/>
-<!-- Highlight Overlay for OAA (Simulated focus area on the image) -->
-<div class="absolute top-10 right-10 bg-white/95 px-4 py-3 rounded-lg shadow-lg border border-teal-200 max-w-xs">
-<h4 class="font-bold text-teal-700 mb-1">Oxaloacetate (OAA)</h4>
-<p class="text-xs text-slate-600">The 4-carbon product essential for:</p>
-<ul class="text-xs text-slate-600 list-disc list-inside mt-1">
-<li>Entering TCA cycle (combining with Acetyl-CoA)</li>
-<li>Gluconeogenesis precursor</li>
-</ul>
+  <div class="flex-1 structure-container flex items-center justify-center p-4 bg-white relative">
+
+    <!-- Main image -->
+    <img alt="TCA Intermediates - Focus on OAA"
+         class="w-full h-full object-contain"
+         src="https://www.genspark.ai/api/files/s/r4LVVusZ?cache_control=3600"/>
+
+    <!-- OAA Highlight -->
+    <div class="absolute top-8 right-8 bg-white/95 px-4 py-3 rounded-lg shadow-lg border border-teal-200 max-w-xs">
+      <h4 class="font-bold text-teal-700 mb-1">Oxaloacetate (OAA)</h4>
+      <ul class="text-xs text-slate-600 list-disc list-inside mt-1">
+        <li>Condenses with Acetyl-CoA → citrate</li>
+        <li>Key substrate for gluconeogenesis</li>
+      </ul>
+    </div>
+
+    <!-- Animated Biotin -->
+    <div class="bioton-arm">
+      Biotin<br/>CO₂
+    </div>
+
+    <!-- Biotin info -->
+    <div class="absolute bottom-6 left-6 bg-purple-50 px-4 py-3 rounded-lg shadow-md border border-purple-200 max-w-xs">
+      <div class="flex items-start">
+        <div class="bg-purple-100 p-2 rounded-full mr-3 text-purple-600">
+          <i class="fas fa-link"></i>
+        </div>
+        <div>
+          <h4 class="font-bold text-purple-800 text-sm">Biotin Function</h4>
+          <p class="text-xs text-purple-700 mt-1">
+            Prosthetic group bound to lysine → acts as a <strong>mobile CO₂ carrier</strong>.
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </div>
-<!-- Biotin Visual Note -->
-<div class="absolute bottom-6 left-6 bg-purple-50 px-4 py-3 rounded-lg shadow-md border border-purple-200">
-<div class="flex items-start">
-<div class="bg-purple-100 p-2 rounded-full mr-3 text-purple-600">
-<i class="fas fa-link"></i>
 </div>
-<div>
-<h4 class="font-bold text-purple-800 text-sm">Biotin Mechanism</h4>
-<p class="text-xs text-purple-700 mt-1">Acts as a CO₂ carrier attached to a lysine residue (prosthetic group).</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<!-- Footer Caption -->
+
+<!-- Footer -->
 <div class="h-16 bg-white border-t border-slate-200 flex items-center px-12">
-<div class="flex items-center text-slate-600">
-<i class="fas fa-user-md text-red-500 mr-3 text-xl"></i>
-<p class="font-medium">
-<span class="font-bold text-slate-800">Clinical Relevance:</span> 
-                    Multiple Carboxylase Deficiency (biotin metabolic defect) or excessive raw egg white consumption (Avidin) prevents this step, causing <span class="text-red-600 font-bold">lactic acidosis</span> and alopecia.
-                </p>
+  <div class="flex items-center text-slate-600">
+    <i class="fas fa-user-md text-red-500 mr-3 text-xl"></i>
+    <p class="font-medium">
+      <span class="font-bold text-slate-800">Clinical Relevance:</span>
+      Biotin deficiency (raw egg white → avidin) or multiple carboxylase deficiency →
+      <span class="text-red-600 font-bold">lactic acidosis, alopecia, dermatitis</span>.
+    </p>
+  </div>
 </div>
-</div>
+
 </div>
 </body>
 </html>
