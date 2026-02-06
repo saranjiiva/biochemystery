@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=1280, height=720, initial-scale=1.0" name="viewport"/>
+<title>Allosteric Regulation Map</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Lato:wght@300;400;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Lato', sans-serif;
+            width: 1280px;
+            height: 720px;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #f8fafc;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        /* Node Styles */
+        .enzyme-node {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border: 2px solid #e2e8f0;
+            padding: 16px;
+            width: 240px;
+            position: relative;
+            z-index: 10;
+            transition: transform 0.2s;
+        }
+        .enzyme-node:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .node-header {
+            background-color: #0f172a;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+        }
+
+        /* Effector Tags */
+        .effector {
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            padding: 4px 8px;
+            border-radius: 6px;
+        }
+        .activator {
+            background-color: #dcfce7; /* Green-100 */
+            color: #166534; /* Green-800 */
+            border-left: 4px solid #22c55e; /* Green-500 */
+        }
+        .inhibitor {
+            background-color: #fee2e2; /* Red-100 */
+            color: #991b1b; /* Red-800 */
+            border-left: 4px solid #ef4444; /* Red-500 */
+        }
+        
+        /* Connection Lines */
+        .connector-svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+    </style>
+</head>
+<body>
+<div class="w-full h-full flex flex-col relative overflow-hidden bg-slate-50">
+<!-- Background Grid -->
+<div class="absolute inset-0 opacity-30" style="background-image: linear-gradient(#e2e8f0 1px, transparent 1px), linear-gradient(90deg, #e2e8f0 1px, transparent 1px); background-size: 40px 40px;"></div>
+<!-- Header -->
+<div class="relative z-20 pt-8 px-12 pb-4 bg-white/80 backdrop-blur-sm border-b border-slate-200">
+<div class="flex items-center justify-between">
+<div>
+<h2 class="text-4xl font-extrabold text-slate-800 tracking-tight">Allosteric Regulation Map</h2>
+<div class="flex items-center mt-2">
+<div class="w-16 h-1.5 bg-teal-600 rounded mr-3"></div>
+<p class="text-slate-500 font-medium">Energy Charge &amp; Substrate Availability Control Flux</p>
+</div>
+</div>
+<!-- Legend -->
+<div class="flex space-x-6 bg-white px-6 py-3 rounded-xl shadow-sm border border-slate-100">
+<div class="legend-item">
+<i class="fas fa-plus-circle text-green-500 mr-2 text-lg"></i>
+<span class="font-bold text-slate-700">Activator</span>
+</div>
+<div class="legend-item">
+<i class="fas fa-minus-circle text-red-500 mr-2 text-lg"></i>
+<span class="font-bold text-slate-700">Inhibitor</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Content Area -->
+<div class="flex-1 relative flex items-center justify-center p-8">
+<!-- SVG Connectors (Flow arrows) -->
+<svg class="connector-svg">
+<defs>
+<marker id="arrowhead" markerheight="7" markerwidth="10" orient="auto" refx="9" refy="3.5">
+<polygon fill="#cbd5e1" points="0 0, 10 3.5, 0 7"></polygon>
+</marker>
+</defs>
+<!-- Path from CS to IDH -->
+<path d="M 380 250 Q 500 250 640 250" fill="none" marker-end="url(#arrowhead)" stroke="#cbd5e1" stroke-dasharray="8,8" stroke-width="4"></path>
+<!-- Path from IDH to a-KGDH -->
+<path d="M 880 250 Q 950 250 1020 320 Q 1050 350 1020 380 Q 950 450 880 450" fill="none" marker-end="url(#arrowhead)" stroke="#cbd5e1" stroke-dasharray="8,8" stroke-width="4"></path>
+</svg>
+<div class="grid grid-cols-3 gap-16 items-start w-full max-w-6xl z-10">
+<!-- Enzyme 1: Citrate Synthase -->
+<div class="enzyme-node" style="margin-top: 40px;">
+<div class="node-header bg-slate-800">
+<p>Citrate Synthase</p>
+</div>
+<div class="space-y-2">
+<!-- Inhibitors -->
+<div class="inhibitor">
+<i class="fas fa-minus-circle mr-2"></i>
+<p>ATP</p>
+</div>
+<div class="inhibitor">
+<i class="fas fa-minus-circle mr-2"></i>
+<p>NADH</p>
+</div>
+<div class="inhibitor">
+<i class="fas fa-minus-circle mr-2"></i>
+<p>Succinyl-CoA</p>
+</div>
+<div class="inhibitor">
+<i class="fas fa-minus-circle mr-2"></i>
+<p>Citrate (Product)</p>
+</div>
+<!-- Activators -->
+<div class="activator mt-4">
+<i class="fas fa-plus-circle mr-2"></i>
+<p>ADP</p>
+</div>
+</div>
+<div class="absolute -bottom-10 left-1/2 transform -translate-x-1/2 text-xs text-slate-400 font-bold uppercase tracking-wider">
+<p>Entry Step</p>
+</div>
+</div>
+<!-- Enzyme 2: Isocitrate Dehydrogenase -->
+<div class="enzyme-node transform scale-110 shadow-xl border-blue-200">
+<div class="node-header bg-blue-900">
+<p>Isocitrate DH</p>
+</div>
+<div class="bg-blue-50 text-blue-800 text-xs font-bold px-2 py-1 rounded mb-3 text-center">
+<p>Rate Limiting Step</p>
+</div>
+<div class="space-y-2">
+<!-- Inhibitors -->
+<div class="inhibitor">
+<i class="fas fa-minus-circle mr-2"></i>
+<p>ATP</p>
+</div>
+<div class="inhibitor">
+<i class="fas fa-minus-circle mr-2"></i>
+<p>NADH</p>
+</div>
+<!-- Activators -->
+<div class="activator border-l-4 border-green-600 bg-green-50 text-green-900">
+<i class="fas fa-plus-circle mr-2"></i>
+<p class="font-bold">ADP</p>
+</div>
+<div class="activator">
+<i class="fas fa-plus-circle mr-2"></i>
+<p>Ca²⁺ (Muscle)</p>
+</div>
+</div>
+</div>
+<!-- Enzyme 3: alpha-Ketoglutarate DH -->
+<div class="enzyme-node" style="margin-top: 120px;">
+<div class="node-header bg-slate-800">
+<p>α-KGDH Complex</p>
+</div>
+<div class="space-y-2">
+<!-- Inhibitors -->
+<div class="inhibitor">
+<i class="fas fa-minus-circle mr-2"></i>
+<p>ATP</p>
+</div>
+<div class="inhibitor">
+<i class="fas fa-minus-circle mr-2"></i>
+<p>NADH</p>
+</div>
+<div class="inhibitor">
+<i class="fas fa-minus-circle mr-2"></i>
+<p>Succinyl-CoA</p>
+</div>
+<!-- Activators -->
+<div class="activator mt-4">
+<i class="fas fa-plus-circle mr-2"></i>
+<p>Ca²⁺ (Muscle)</p>
+</div>
+</div>
+<div class="absolute -bottom-10 left-1/2 transform -translate-x-1/2 text-xs text-slate-400 font-bold uppercase tracking-wider w-full text-center">
+<p>Similar to PDH</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Info Bar -->
+<div class="h-20 bg-white border-t border-slate-200 px-12 flex items-center justify-between shrink-0">
+<div class="flex items-center text-slate-600">
+<div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center mr-4 text-slate-500">
+<i class="fas fa-lightbulb"></i>
+</div>
+<p class="text-sm font-medium max-w-2xl">
+<span class="font-bold text-slate-800">NADH/NAD⁺ Ratio:</span> High levels of NADH indicate high energy charge, inhibiting all three key enzymes to slow down the cycle.
+                </p>
+</div>
+<div class="flex space-x-8 text-sm font-bold text-slate-400">
+<div class="flex items-center">
+<div class="w-3 h-3 rounded-full bg-green-500 mr-2"></div>
+<p>Low Energy Signal</p>
+</div>
+<div class="flex items-center">
+<div class="w-3 h-3 rounded-full bg-red-500 mr-2"></div>
+<p>High Energy Signal</p>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
