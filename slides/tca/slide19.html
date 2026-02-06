@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=1280, height=720, initial-scale=1.0" name="viewport"/>
+<title>Step 8: Malate Dehydrogenase</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&amp;family=Lato:wght@300;400;700&amp;family=Roboto+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Lato', sans-serif;
+            width: 1280px;
+            height: 720px;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #f8fafc;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+        }
+        .molecule-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+        .enzyme-pill {
+            background-color: #e0f2fe; /* Sky-100 */
+            color: #0369a1; /* Sky-700 */
+            border: 1px solid #bae6fd;
+            border-radius: 9999px;
+            padding: 8px 24px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            z-index: 10;
+        }
+        .chemical-formula {
+            font-family: 'Roboto Mono', monospace;
+            color: #475569;
+        }
+        .sidebar {
+            background-color: #f1f5f9;
+            border-left: 1px solid #e2e8f0;
+        }
+        .highlight-atom {
+            color: #ef4444; /* Red-500 */
+            font-weight: bold;
+        }
+        .coenzyme-badge {
+            font-family: 'Roboto Mono', monospace;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+    </style>
+</head>
+<body>
+<div class="w-full h-full flex overflow-hidden bg-white">
+<!-- Main Content Area (Reaction) -->
+<div class="flex-1 flex flex-col p-10 relative">
+<!-- Header -->
+<div class="mb-8">
+<div class="flex items-center gap-3 mb-2">
+<span class="bg-teal-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">Step 8</span>
+<span class="text-slate-400 text-sm font-semibold uppercase tracking-wide">Oxidation &amp; Regeneration</span>
+</div>
+<h2 class="text-4xl font-extrabold text-slate-800">Malate Dehydrogenase</h2>
+<div class="w-20 h-1.5 bg-teal-500 rounded mt-3"></div>
+</div>
+<!-- Reaction Diagram Area -->
+<div class="flex-1 flex items-center justify-center relative">
+<!-- Substrate: L-Malate -->
+<div class="flex flex-col items-center z-10" style="transform: translateY(0px);">
+<div class="molecule-card w-56 h-48 flex items-center justify-center p-4 mb-3 border-l-4 border-slate-400">
+<div class="text-center chemical-formula text-sm leading-relaxed">
+<div class="flex justify-center items-center mb-1">
+<span><sup>-</sup>OOC-CH<sub>2</sub></span>
+</div>
+<div class="flex justify-center items-center font-bold text-slate-800">
+<span>|</span>
+</div>
+<div class="flex justify-center items-center my-1">
+<span>HO-CH-COO<sup>-</sup></span>
+</div>
+</div>
+</div>
+<p class="font-bold text-slate-700 text-xl">L-Malate</p>
+<p class="text-xs text-slate-500">4 Carbons</p>
+</div>
+<!-- Reaction Arrow & Enzyme -->
+<div class="flex flex-col items-center mx-8 w-56 relative">
+<div class="enzyme-pill mb-2 whitespace-nowrap text-sm">Malate Dehydrogenase</div>
+<div class="w-full h-1 bg-slate-300 relative my-2">
+<!-- Arrowhead Right -->
+<div class="absolute right-0 top-1/2 transform -translate-y-1/2 -mt-1.5 border-t-8 border-b-8 border-l-12 border-transparent border-l-slate-300"></div>
+<!-- Arrowhead Left (Reversible) -->
+<div class="absolute left-0 top-1/2 transform -translate-y-1/2 -mt-1.5 border-t-8 border-b-8 border-r-12 border-transparent border-r-slate-300"></div>
+</div>
+<div class="flex justify-center w-full gap-4 mt-2">
+<!-- Input Cofactor -->
+<div class="flex flex-col items-center">
+<div class="coenzyme-badge bg-white text-slate-600 border border-slate-300 text-xs px-2 py-1 rounded-md shadow-sm mb-1">
+                            NAD<sup>+</sup>
+</div>
+<div class="h-4 border-l border-slate-300"></div>
+<i class="fas fa-arrow-down text-slate-300 text-xs"></i>
+</div>
+<!-- Output Cofactor -->
+<div class="flex flex-col items-center">
+<i class="fas fa-arrow-up text-amber-300 text-xs"></i>
+<div class="h-4 border-l border-amber-300"></div>
+<div class="coenzyme-badge bg-amber-100 text-amber-700 border border-amber-200 text-xs px-2 py-1 rounded-md shadow-sm mt-1">
+                            NADH + H<sup>+</sup>
+</div>
+</div>
+</div>
+</div>
+<!-- Product: Oxaloacetate -->
+<div class="flex flex-col items-center z-10">
+<div class="molecule-card w-56 h-48 flex items-center justify-center p-4 mb-3 border-l-4 border-blue-400 bg-blue-50/30">
+<div class="text-center chemical-formula text-sm leading-relaxed">
+<div class="flex justify-center items-center mb-1">
+<span><sup>-</sup>OOC-CH<sub>2</sub></span>
+</div>
+<div class="flex justify-center items-center font-bold text-slate-800">
+<span>|</span>
+</div>
+<div class="flex justify-center items-center my-1">
+<span class="highlight-atom">O=C</span>-COO<sup>-</sup>
+</div>
+</div>
+</div>
+<p class="font-bold text-blue-700 text-xl">Oxaloacetate</p>
+<p class="text-xs text-slate-500">4 Carbons (Keto Acid)</p>
+</div>
+</div>
+<!-- Reaction Features/Notes at bottom of main area -->
+<div class="mt-4 flex gap-6">
+<div class="flex items-center gap-2">
+<i class="fas fa-exclamation-triangle text-amber-500"></i>
+<p class="text-slate-600 text-sm">Highly Unfavorable (ΔG°' = +29.7 kJ/mol)</p>
+</div>
+<div class="flex items-center gap-2">
+<i class="fas fa-bolt text-amber-500"></i>
+<p class="text-slate-600 text-sm">Generates 3rd NADH</p>
+</div>
+</div>
+</div>
+<!-- Sidebar: Clinical & Regulation -->
+<div class="w-80 sidebar p-8 flex flex-col justify-between h-full">
+<div>
+<h3 class="text-lg font-bold text-slate-700 mb-6 border-b pb-2 border-slate-300">Key Concepts</h3>
+<!-- Thermodynamics Card -->
+<div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 mb-6">
+<div class="flex items-center mb-3">
+<div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-500 mr-3">
+<i class="fas fa-balance-scale"></i>
+</div>
+<h4 class="font-bold text-slate-800">Thermodynamics</h4>
+</div>
+<p class="text-sm text-slate-600 leading-relaxed mb-2">
+                    The reaction is strongly <strong>endergonic</strong> (positive ΔG).
+                </p>
+<p class="text-sm text-slate-600 leading-relaxed">
+                    It proceeds forward only because the product <strong>Oxaloacetate</strong> is immediately consumed by the highly exergonic <em>Citrate Synthase</em> reaction (Step 1), keeping [OAA] extremely low.
+                </p>
+</div>
+<!-- Function Card -->
+<div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+<div class="flex items-center mb-3">
+<div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-500 mr-3">
+<i class="fas fa-sync-alt"></i>
+</div>
+<h4 class="font-bold text-slate-800">Regeneration</h4>
+</div>
+<p class="text-sm text-slate-600 leading-snug">
+                    Regenerates oxaloacetate to allow the cycle to restart. This step completes the oxidation of the carbon skeleton derived from acetyl-CoA.
+                </p>
+</div>
+</div>
+<!-- Page Number / Footer -->
+<div class="text-slate-400 text-xs flex justify-between items-center">
+<p>Medical Biochemistry</p>
+<p>Slide 19</p>
+</div>
+</div>
+</div>
+</body>
+</html>
