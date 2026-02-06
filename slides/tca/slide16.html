@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=1280, height=720, initial-scale=1.0" name="viewport"/>
+<title>Step 5: Succinyl-CoA Synthetase</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&amp;family=Lato:wght@300;400;700&amp;family=Roboto+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Lato', sans-serif;
+            width: 1280px;
+            height: 720px;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #f8fafc;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+        }
+        .molecule-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+        .enzyme-pill {
+            background-color: #e0f2fe; /* Sky-100 */
+            color: #0369a1; /* Sky-700 */
+            border: 1px solid #bae6fd;
+            border-radius: 9999px;
+            padding: 8px 24px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            z-index: 10;
+        }
+        .chemical-formula {
+            font-family: 'Roboto Mono', monospace;
+            color: #475569;
+        }
+        .sidebar {
+            background-color: #f1f5f9;
+            border-left: 1px solid #e2e8f0;
+        }
+        .highlight-energy {
+            color: #d97706; /* Amber-600 */
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<div class="w-full h-full flex overflow-hidden bg-white">
+<!-- Main Content Area (Reaction) -->
+<div class="flex-1 flex flex-col p-10 relative">
+<!-- Header -->
+<div class="mb-8">
+<div class="flex items-center gap-3 mb-2">
+<span class="bg-indigo-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">Step 5</span>
+<span class="text-slate-400 text-sm font-semibold uppercase tracking-wide">Substrate-Level Phosphorylation</span>
+</div>
+<h2 class="text-4xl font-extrabold text-slate-800">Succinyl-CoA Synthetase</h2>
+<div class="w-20 h-1.5 bg-indigo-500 rounded mt-3"></div>
+</div>
+<!-- Reaction Diagram Area -->
+<div class="flex-1 flex items-center justify-center relative">
+<!-- Substrate: Succinyl-CoA -->
+<div class="flex flex-col items-center z-10" style="transform: translateY(-20px);">
+<div class="molecule-card w-52 h-44 flex items-center justify-center p-4 mb-3 border-l-4 border-indigo-400">
+<div class="text-center">
+<div class="chemical-formula text-sm leading-relaxed">
+<p class="mb-1">COO<sup>-</sup></p>
+<p class="mb-1">|</p>
+<p class="mb-1">CH<sub>2</sub></p>
+<p class="mb-1">|</p>
+<p class="mb-1">CH<sub>2</sub></p>
+<p class="mb-1">|</p>
+<p class="font-bold text-slate-800">C=O</p>
+<p class="text-xs text-red-500 font-bold">~ S-CoA</p>
+</div>
+</div>
+</div>
+<p class="font-bold text-slate-700">Succinyl-CoA</p>
+<p class="text-xs text-slate-500">High Energy Thioester</p>
+</div>
+<!-- Reaction Arrow & Enzyme -->
+<div class="flex flex-col items-center mx-6 w-64 relative">
+<div class="enzyme-pill mb-2 whitespace-nowrap text-sm">Succinyl-CoA Synthetase</div>
+<div class="w-full h-1 bg-slate-300 relative my-4">
+<div class="absolute right-0 top-1/2 transform -translate-y-1/2 -mt-1.5 border-t-8 border-b-8 border-l-12 border-transparent border-l-slate-300"></div>
+</div>
+<!-- Coupled Reaction -->
+<div class="flex flex-col items-center mt-1 w-full relative h-16">
+<!-- Inputs -->
+<div class="absolute left-0 top-0 text-xs text-slate-500 text-center transform -translate-x-4">
+<p class="font-bold text-slate-600">GDP + P<sub>i</sub></p>
+</div>
+<!-- Curved Arrow -->
+<svg class="absolute w-full h-12 top-2" style="fill:none; stroke:#cbd5e1; stroke-width:2;">
+<path d="M 10,0 Q 32,35 64,35 Q 96,35 118,0"></path>
+<path d="M 118,0 L 114,8 M 118,0 L 122,8" style="stroke-linejoin:round; stroke-linecap:round;"></path>
+</svg>
+<!-- Outputs -->
+<div class="absolute right-0 top-0 text-xs text-amber-600 text-center transform translate-x-4">
+<p class="font-bold text-lg">GTP</p>
+<p class="text-[10px] text-slate-400">(or ATP)</p>
+</div>
+<!-- CoA Release -->
+<div class="absolute bottom-[-30px] text-center w-full">
+<span class="bg-red-50 text-red-600 text-xs px-2 py-1 rounded border border-red-100 inline-block">
+<i class="fas fa-sign-out-alt mr-1"></i> CoA-SH
+                        </span>
+</div>
+</div>
+</div>
+<!-- Product: Succinate -->
+<div class="flex flex-col items-center z-10" style="transform: translateY(-20px);">
+<div class="molecule-card w-48 h-44 flex items-center justify-center p-4 mb-3 border-l-4 border-green-500 bg-green-50/30">
+<div class="text-center">
+<div class="chemical-formula text-sm leading-relaxed">
+<p class="mb-1">COO<sup>-</sup></p>
+<p class="mb-1">|</p>
+<p class="mb-1">CH<sub>2</sub></p>
+<p class="mb-1">|</p>
+<p class="mb-1">CH<sub>2</sub></p>
+<p class="mb-1">|</p>
+<p class="mb-1">COO<sup>-</sup></p>
+</div>
+</div>
+</div>
+<p class="font-bold text-green-700 text-xl">Succinate</p>
+<p class="text-xs text-slate-500">Symmetric Molecule</p>
+</div>
+</div>
+<!-- Reaction Features/Notes at bottom of main area -->
+<div class="mt-2 flex gap-6 bg-slate-50 p-4 rounded-lg border border-slate-100">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center text-amber-600">
+<i class="fas fa-bolt"></i>
+</div>
+<div>
+<p class="text-slate-800 font-bold text-sm">Energy Coupling</p>
+<p class="text-slate-500 text-xs">Thioester bond energy drives GTP formation</p>
+</div>
+</div>
+<div class="flex items-center gap-3 border-l pl-6 border-slate-200">
+<div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
+<i class="fas fa-sync-alt"></i>
+</div>
+<div>
+<p class="text-slate-800 font-bold text-sm">Nucleoside Diphosphate Kinase</p>
+<p class="text-slate-500 text-xs">GTP + ADP ⇄ GDP + ATP</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Sidebar: Clinical & Mechanism -->
+<div class="w-80 sidebar p-8 flex flex-col justify-between h-full">
+<div>
+<h3 class="text-lg font-bold text-slate-700 mb-6 border-b pb-2 border-slate-300">Reaction Mechanism</h3>
+<!-- Mechanism Note -->
+<div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 mb-6">
+<div class="flex items-center mb-3">
+<div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-500 mr-3">
+<i class="fas fa-cogs"></i>
+</div>
+<h4 class="font-bold text-slate-800">Phosphohistidine</h4>
+</div>
+<p class="text-sm text-slate-600 mb-2 leading-snug">
+                    The enzyme uses a <span class="font-bold text-indigo-600">histidine residue</span> to transiently hold the phosphate group.
+                </p>
+<ol class="text-xs text-slate-500 space-y-1 list-decimal list-inside pl-1">
+<li>Phosphate displaces CoA</li>
+<li>Succinyl-phosphate formed</li>
+<li>His residue accepts phosphate</li>
+<li>Phosphate transferred to GDP</li>
+</ol>
+</div>
+<!-- Isoforms Card -->
+<div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+<div class="flex items-center mb-3">
+<div class="w-8 h-8 rounded-full bg-teal-100 flex items-center justify-center text-teal-500 mr-3">
+<i class="fas fa-dna"></i>
+</div>
+<h4 class="font-bold text-slate-800">Tissue Isoforms</h4>
+</div>
+<ul class="space-y-2">
+<li class="flex items-start text-sm text-slate-600">
+<i class="fas fa-circle text-xs text-teal-400 mt-1.5 mr-2"></i>
+<div>
+<span class="font-bold">GTP-specific:</span>
+<p class="text-xs">Liver, Kidney (Anabolic)</p>
+</div>
+</li>
+<li class="flex items-start text-sm text-slate-600">
+<i class="fas fa-circle text-xs text-teal-400 mt-1.5 mr-2"></i>
+<div>
+<span class="font-bold">ATP-specific:</span>
+<p class="text-xs">Brain, Heart, Muscle (Energy)</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<!-- Page Number / Footer -->
+<div class="text-slate-400 text-xs flex justify-between items-center">
+<p>Medical Biochemistry</p>
+<p>Slide 16</p>
+</div>
+</div>
+</div>
+</body>
+</html>
