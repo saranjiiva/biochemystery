@@ -38,6 +38,7 @@ h1{
   gap:50px;
 }
 
+/* LEFT PANEL */
 .box{
   background:white;
   border:2px solid #e5e7eb;
@@ -81,6 +82,15 @@ li{
   font-size:17px;
 }
 
+/* RIGHT PANEL */
+.visual-box{
+  background:white;
+  border:2px solid #e5e7eb;
+  border-radius:16px;
+  padding:24px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.05);
+}
+
 .diagram{
   border:2px dashed #64748b;
   border-radius:16px;
@@ -88,20 +98,132 @@ li{
   display:flex;
   align-items:center;
   justify-content:center;
-  margin-bottom:20px;
-  font-size:20px;
-  font-weight:bold;
-  color:#334155;
+  position:relative;
+  overflow:hidden;
   background:#ffffff;
 }
 
-.footer{
-  margin-top:20px;
+/* Molecules */
+.pyruvate{
+  position:absolute;
+  left:30px;
+  top:50%;
+  transform:translateY(-50%);
+  background:#dbeafe;
+  border:2px solid #2563eb;
+  border-radius:50%;
+  width:90px;
+  height:90px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:bold;
+  animation: movePyruvate 4s infinite ease-in-out;
+}
+
+.e1{
+  position:absolute;
+  left:200px;
+  top:50%;
+  transform:translateY(-50%);
+  background:#ecfeff;
+  border:3px solid #0d9488;
+  border-radius:18px;
+  width:180px;
+  height:100px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:bold;
+  box-shadow:0 0 0 rgba(13,148,136,0.6);
+  animation: enzymeGlow 3s infinite ease-in-out;
+}
+
+.tpp{
+  position:absolute;
+  top:30px;
+  left:240px;
   background:#fff7ed;
-  border-left:6px solid #f59e0b;
-  padding:14px 18px;
-  border-radius:10px;
+  border:2px solid #f59e0b;
+  border-radius:12px;
+  padding:6px 12px;
+  font-size:14px;
+  font-weight:bold;
+  animation: tppPulse 3s infinite ease-in-out;
+}
+
+.co2{
+  position:absolute;
+  right:40px;
+  top:40%;
+  background:#fee2e2;
+  border:2px solid #dc2626;
+  border-radius:50%;
+  width:60px;
+  height:60px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:bold;
+  opacity:0;
+  animation: releaseCO2 4s infinite ease-in-out;
+}
+
+.product{
+  position:absolute;
+  right:40px;
+  bottom:35%;
+  background:#dcfce7;
+  border:2px solid #16a34a;
+  border-radius:12px;
+  padding:10px 14px;
+  font-size:14px;
+  font-weight:bold;
+  opacity:0;
+  animation: productAppear 4s infinite ease-in-out;
+}
+
+/* Labels */
+.caption{
+  margin-top:14px;
   font-size:18px;
+  background:#f1f5f9;
+  padding:10px 14px;
+  border-radius:10px;
+  text-align:center;
+  font-weight:bold;
+}
+
+/* Animations */
+@keyframes movePyruvate{
+  0%{left:30px;}
+  40%{left:200px;}
+  60%{left:200px;}
+  100%{left:30px;}
+}
+
+@keyframes enzymeGlow{
+  0%,100%{box-shadow:0 0 0 rgba(13,148,136,0.5);}
+  50%{box-shadow:0 0 25px rgba(13,148,136,0.7);}
+}
+
+@keyframes tppPulse{
+  0%,100%{transform:scale(1);}
+  50%{transform:scale(1.15);}
+}
+
+@keyframes releaseCO2{
+  0%{opacity:0; transform:translate(0,0) scale(0.5);}
+  40%{opacity:0;}
+  60%{opacity:1; transform:translate(40px,-30px) scale(1);}
+  100%{opacity:0; transform:translate(70px,-60px) scale(1.2);}
+}
+
+@keyframes productAppear{
+  0%{opacity:0;}
+  55%{opacity:0;}
+  70%{opacity:1;}
+  100%{opacity:1;}
 }
 </style>
 </head>
@@ -132,4 +254,25 @@ li{
       </div>
     </div>
 
-    <!-- RIGHT PAN
+    <!-- RIGHT PANEL -->
+    <div class="visual-box">
+      <h2>Mechanism (Visual)</h2>
+
+      <div class="diagram">
+        <div class="pyruvate">Pyruvate</div>
+        <div class="e1">E1 Enzyme</div>
+        <div class="tpp">TPP</div>
+        <div class="co2">CO₂</div>
+        <div class="product">Hydroxyethyl-TPP</div>
+      </div>
+
+      <div class="caption">
+        Pyruvate enters → binds E1-TPP → CO₂ released → Hydroxyethyl-TPP formed
+      </div>
+    </div>
+
+  </div>
+
+</div>
+</body>
+</html>
