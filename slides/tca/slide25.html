@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=1280, height=720, initial-scale=1.0" name="viewport"/>
+<title>Amino Acid Entry Points</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&amp;family=Lato:wght@300;400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+<style>
+        body {
+            font-family: 'Lato', sans-serif;
+            width: 1280px;
+            height: 720px;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #f8fafc;
+        }
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+        }
+        .network-container {
+            background-color: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e2e8f0;
+        }
+        .caption-bar {
+            background-color: #f1f5f9;
+            border-top: 1px solid #cbd5e1;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-left: 1.5rem;
+            font-size: 0.875rem;
+            color: #64748b;
+        }
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+<div class="w-full h-full flex flex-col relative overflow-hidden bg-slate-50">
+<!-- Header -->
+<div class="pt-6 px-12 z-20 shrink-0">
+<h2 class="text-4xl font-bold text-slate-800 mb-1">Amino Acid Entry Points</h2>
+<div class="w-24 h-1.5 bg-indigo-600 rounded mt-2"></div>
+<p class="text-slate-500 mt-2 text-lg">Catabolic pathways funneling carbon skeletons into the TCA cycle</p>
+</div>
+<!-- Main Diagram Area -->
+<div class="flex-1 px-12 py-4 min-h-0 flex flex-col">
+<!-- Legend -->
+<div class="flex justify-end mb-2">
+<div class="legend-item"><div class="legend-dot bg-green-100 border-2 border-green-500"></div><p>Glucogenic</p></div>
+<div class="legend-item"><div class="legend-dot bg-orange-100 border-2 border-orange-500"></div><p>Ketogenic</p></div>
+<div class="legend-item"><div class="legend-dot bg-purple-100 border-2 border-purple-500"></div><p>Both (Mixed)</p></div>
+<div class="legend-item"><div class="legend-dot bg-slate-200 border-2 border-slate-600"></div><p>TCA Intermediate</p></div>
+</div>
+<!-- Network Chart Container -->
+<div class="w-full flex-1 network-container p-4" id="aaEntryChart"></div>
+</div>
+<!-- Bottom Caption Bar -->
+<div class="h-20 w-full caption-bar flex items-center px-12 z-20 shrink-0">
+<div class="flex items-center space-x-6">
+<div class="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 shrink-0">
+<i class="fas fa-funnel-dollar text-lg"></i>
+</div>
+<div class="border-l-2 border-slate-300 pl-6">
+<p class="text-slate-700 font-medium leading-relaxed">
+<span class="font-bold text-indigo-700">Metabolic Logic:</span>
+<span class="text-green-600 font-bold">Glucogenic</span> AAs feed intermediates that can form glucose (via OAA). 
+                        <span class="text-orange-500 font-bold">Ketogenic</span> AAs (Leu, Lys) feed Acetyl-CoA/Acetoacetate.
+                        This distinction determines fuel use in starvation.
+                    </p>
+</div>
+</div>
+</div>
+</div>
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var chartDom = document.getElementById('aaEntryChart');
+            var myChart = echarts.init(chartDom);
+            var option;
+
+            // Styles
+            const tcaStyle = { color: '#f1f5f9', borderColor: '#475569', borderWidth: 2, borderType: 'dashed' };
+            const tcaLabel = { fontSize: 13, fontWeight: 'bold', color: '#334155' };
+            
+            const glucoStyle = { color: '#dcfce7', borderColor: '#22c55e', borderWidth: 2, borderRadius: 4 }; // Green
+            const ketoStyle = { color: '#ffedd5', borderColor: '#f97316', borderWidth: 2, borderRadius: 4 }; // Orange
+            const mixedStyle = { color: '#f3e8ff', borderColor: '#a855f7', borderWidth: 2, borderRadius: 4 }; // Purple
+            
+            const aaLabel = { fontSize: 11, fontWeight: 'bold', color: '#1e293b' };
+
+            var data = [
+                // --- TCA Backbone & Entry Hubs ---
+                { name: 'Pyruvate', x: 600, y: 100, symbolSize: 80, itemStyle: { color: '#e0f2fe', borderColor: '#0284c7', borderWidth: 3 }, label: tcaLabel },
+                { name: 'Acetyl-CoA', x: 600, y: 250, symbolSize: 80, itemStyle: { color: '#ffedd5', borderColor: '#ea580c', borderWidth: 3 }, label: tcaLabel },
+                { name: 'Oxaloacetate', x: 300, y: 300, symbolSize: 70, itemStyle: tcaStyle, label: tcaLabel },
+                { name: 'α-Ketoglutarate', x: 900, y: 300, symbolSize: 70, itemStyle: tcaStyle, label: tcaLabel },
+                { name: 'Succinyl-CoA', x: 800, y: 500, symbolSize: 70, itemStyle: tcaStyle, label: tcaLabel },
+                { name: 'Fumarate', x: 400, y: 500, symbolSize: 70, itemStyle: tcaStyle, label: tcaLabel },
+
+                // --- Amino Acid Groups ---
+                
+                // Group 1: To Pyruvate (Glucogenic/Mixed)
+                { name: 'Ala', x: 450, y: 50, symbol: 'rect', symbolSize: [40, 25], itemStyle: glucoStyle, label: aaLabel },
+                { name: 'Cys', x: 500, y: 50, symbol: 'rect', symbolSize: [40, 25], itemStyle: glucoStyle, label: aaLabel },
+                { name: 'Gly', x: 550, y: 50, symbol: 'rect', symbolSize: [40, 25], itemStyle: glucoStyle, label: aaLabel },
+                { name: 'Ser', x: 600, y: 30, symbol: 'rect', symbolSize: [40, 25], itemStyle: glucoStyle, label: aaLabel },
+                { name: 'Thr', x: 650, y: 50, symbol: 'rect', symbolSize: [40, 25], itemStyle: mixedStyle, label: aaLabel }, // Thr is mixed
+                { name: 'Trp (side)', x: 700, y: 50, name: 'Trp', symbol: 'rect', symbolSize: [40, 25], itemStyle: mixedStyle, label: aaLabel }, // Trp is mixed
+
+                // Group 2: To Acetyl-CoA (Ketogenic/Mixed)
+                { name: 'Leu', x: 480, y: 200, symbol: 'rect', symbolSize: [40, 25], itemStyle: ketoStyle, label: aaLabel },
+                { name: 'Lys', x: 480, y: 240, symbol: 'rect', symbolSize: [40, 25], itemStyle: ketoStyle, label: aaLabel },
+                { name: 'Phe (Ac)', x: 720, y: 200, name: 'Phe', symbol: 'rect', symbolSize: [40, 25], itemStyle: mixedStyle, label: aaLabel },
+                { name: 'Tyr (Ac)', x: 720, y: 240, name: 'Tyr', symbol: 'rect', symbolSize: [40, 25], itemStyle: mixedStyle, label: aaLabel },
+                { name: 'Ile (Ac)', x: 720, y: 280, name: 'Ile', symbol: 'rect', symbolSize: [40, 25], itemStyle: mixedStyle, label: aaLabel },
+
+                // Group 3: To Oxaloacetate (Glucogenic)
+                { name: 'Asp', x: 150, y: 280, symbol: 'rect', symbolSize: [40, 25], itemStyle: glucoStyle, label: aaLabel },
+                { name: 'Asn', x: 150, y: 320, symbol: 'rect', symbolSize: [40, 25], itemStyle: glucoStyle, label: aaLabel },
+
+                // Group 4: To α-Ketoglutarate (Glucogenic via Glutamate)
+                { name: 'Glu', x: 1050, y: 300, symbol: 'rect', symbolSize: [45, 30], itemStyle: glucoStyle, label: aaLabel },
+                { name: 'Gln', x: 1150, y: 260, symbol: 'rect', symbolSize: [40, 25], itemStyle: glucoStyle, label: aaLabel },
+                { name: 'Pro', x: 1150, y: 300, symbol: 'rect', symbolSize: [40, 25], itemStyle: glucoStyle, label: aaLabel },
+                { name: 'Arg', x: 1150, y: 340, symbol: 'rect', symbolSize: [40, 25], itemStyle: glucoStyle, label: aaLabel },
+                { name: 'His', x: 1150, y: 380, symbol: 'rect', symbolSize: [40, 25], itemStyle: glucoStyle, label: aaLabel },
+
+                // Group 5: To Succinyl-CoA (Glucogenic/Mixed)
+                { name: 'Met', x: 950, y: 480, symbol: 'rect', symbolSize: [40, 25], itemStyle: glucoStyle, label: aaLabel },
+                { name: 'Val', x: 950, y: 520, symbol: 'rect', symbolSize: [40, 25], itemStyle: glucoStyle, label: aaLabel },
+                { name: 'Ile (Su)', x: 950, y: 560, name: 'Ile', symbol: 'rect', symbolSize: [40, 25], itemStyle: mixedStyle, label: aaLabel },
+                
+                // Group 6: To Fumarate (Mixed)
+                { name: 'Phe (Fu)', x: 250, y: 480, name: 'Phe', symbol: 'rect', symbolSize: [40, 25], itemStyle: mixedStyle, label: aaLabel },
+                { name: 'Tyr (Fu)', x: 250, y: 520, name: 'Tyr', symbol: 'rect', symbolSize: [40, 25], itemStyle: mixedStyle, label: aaLabel }
+            ];
+
+            var links = [
+                // TCA Cycle connections (Simplified circle)
+                { source: 'Pyruvate', target: 'Acetyl-CoA', lineStyle: { width: 3, color: '#94a3b8' } },
+                { source: 'Pyruvate', target: 'Oxaloacetate', lineStyle: { width: 3, color: '#94a3b8', type: 'dashed' }, label: {show: true, formatter: 'PC'} }, // Pyruvate Carboxylase
+                { source: 'Oxaloacetate', target: 'Acetyl-CoA', lineStyle: { opacity: 0 } }, // Just for layout, invisible
+                { source: 'Acetyl-CoA', target: 'α-Ketoglutarate', lineStyle: { curveness: 0.2, color: '#cbd5e1' } },
+                { source: 'α-Ketoglutarate', target: 'Succinyl-CoA', lineStyle: { curveness: 0.2, color: '#cbd5e1' } },
+                { source: 'Succinyl-CoA', target: 'Fumarate', lineStyle: { curveness: 0.2, color: '#cbd5e1' } },
+                { source: 'Fumarate', target: 'Oxaloacetate', lineStyle: { curveness: 0.2, color: '#cbd5e1' } },
+
+                // Amino Acid Connections
+                // To Pyruvate
+                { source: 'Ala', target: 'Pyruvate' }, { source: 'Cys', target: 'Pyruvate' }, { source: 'Gly', target: 'Pyruvate' },
+                { source: 'Ser', target: 'Pyruvate' }, { source: 'Thr', target: 'Pyruvate' }, { source: 'Trp (side)', target: 'Pyruvate' },
+
+                // To Acetyl-CoA
+                { source: 'Leu', target: 'Acetyl-CoA' }, { source: 'Lys', target: 'Acetyl-CoA' },
+                { source: 'Phe (Ac)', target: 'Acetyl-CoA' }, { source: 'Tyr (Ac)', target: 'Acetyl-CoA' }, { source: 'Ile (Ac)', target: 'Acetyl-CoA' },
+
+                // To OAA
+                { source: 'Asp', target: 'Oxaloacetate' }, { source: 'Asn', target: 'Oxaloacetate' },
+
+                // To α-KG
+                { source: 'Glu', target: 'α-Ketoglutarate', lineStyle: {width: 3} },
+                { source: 'Gln', target: 'Glu' }, { source: 'Pro', target: 'Glu' }, { source: 'Arg', target: 'Glu' }, { source: 'His', target: 'Glu' },
+
+                // To Succinyl-CoA
+                { source: 'Met', target: 'Succinyl-CoA' }, { source: 'Val', target: 'Succinyl-CoA' }, { source: 'Ile (Su)', target: 'Succinyl-CoA' },
+
+                // To Fumarate
+                { source: 'Phe (Fu)', target: 'Fumarate' }, { source: 'Tyr (Fu)', target: 'Fumarate' }
+            ];
+
+            option = {
+                tooltip: { formatter: '{b}' },
+                animationDurationUpdate: 1500,
+                animationEasingUpdate: 'quinticInOut',
+                series: [
+                    {
+                        type: 'graph',
+                        layout: 'none',
+                        symbolSize: 50,
+                        roam: false,
+                        label: { show: true },
+                        edgeSymbol: ['none', 'arrow'],
+                        edgeSymbolSize: [4, 8],
+                        data: data,
+                        links: links,
+                        lineStyle: {
+                            opacity: 0.7,
+                            width: 1.5,
+                            curveness: 0,
+                            color: '#64748b'
+                        }
+                    }
+                ]
+            };
+
+            myChart.setOption(option);
+        });
+    </script>
+</body>
+</html>
