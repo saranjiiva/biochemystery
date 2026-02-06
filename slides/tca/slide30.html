@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=1280, height=720, initial-scale=1.0" name="viewport"/>
+<title>Toxins &amp; System Blocks</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&amp;family=Lato:wght@300;400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Lato', sans-serif;
+            width: 1280px;
+            height: 720px;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #f8fafc;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+        }
+        .card-shadow {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease-in-out;
+        }
+        .card-shadow:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+<div class="w-full h-full flex flex-col relative overflow-hidden bg-slate-50">
+<!-- Header -->
+<div class="pt-8 px-12 pb-2 z-20">
+<div class="flex items-center space-x-4">
+<div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600">
+<i class="fas fa-biohazard text-2xl"></i>
+</div>
+<div>
+<h2 class="text-3xl font-bold text-slate-800 leading-none">Toxins &amp; System Blocks</h2>
+<p class="text-slate-500 font-medium mt-1">External Agents Disrupting TCA Flux</p>
+</div>
+</div>
+<div class="w-full h-px bg-slate-200 mt-6"></div>
+</div>
+<!-- Main Content Grid -->
+<div class="flex-1 px-12 py-6 grid grid-cols-3 gap-8 items-start">
+<!-- Panel 1: Arsenite -->
+<div class="bg-white h-full rounded-xl card-shadow overflow-hidden border-t-8 border-purple-600 flex flex-col">
+<div class="p-6 flex-1">
+<div class="flex justify-between items-start mb-4">
+<div class="w-14 h-14 bg-purple-50 rounded-lg flex items-center justify-center">
+<i class="fas fa-skull text-purple-600 text-3xl"></i>
+</div>
+<span class="bg-purple-100 text-purple-800 text-xs font-bold px-2 py-1 rounded uppercase tracking-wide">Heavy Metal</span>
+</div>
+<h3 class="text-xl font-bold text-slate-800 mb-1">Arsenite</h3>
+<p class="text-sm text-purple-600 font-bold mb-4">Direct Enzyme Inhibitor</p>
+<div class="space-y-3">
+<div class="bg-slate-50 p-3 rounded border border-slate-100">
+<p class="text-xs font-bold text-slate-500 uppercase mb-1">Mechanism</p>
+<p class="text-sm text-slate-700 leading-snug">
+                                Binds irreversibly to sulfhydryl (-SH) groups of <strong>Lipoic Acid</strong>, disabling the E2 subunits.
+                            </p>
+</div>
+<div>
+<p class="text-xs font-bold text-slate-500 uppercase mb-1">Affected Enzymes</p>
+<ul class="text-sm text-slate-600 space-y-1 pl-4 list-disc marker:text-purple-600">
+<li><strong>PDH Complex:</strong> Pyruvate accumulation.</li>
+<li><strong>α-Ketoglutarate DH:</strong> Cycle block at step 4.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- Panel 2: Cyanide -->
+<div class="bg-white h-full rounded-xl card-shadow overflow-hidden border-t-8 border-blue-500 flex flex-col">
+<div class="p-6 flex-1">
+<div class="flex justify-between items-start mb-4">
+<div class="w-14 h-14 bg-blue-50 rounded-lg flex items-center justify-center">
+<i class="fas fa-bolt text-blue-500 text-3xl"></i>
+</div>
+<span class="bg-blue-100 text-blue-800 text-xs font-bold px-2 py-1 rounded uppercase tracking-wide">ETC Blocker</span>
+</div>
+<h3 class="text-xl font-bold text-slate-800 mb-1">Cyanide</h3>
+<p class="text-sm text-blue-600 font-bold mb-4">Respiratory Chain Arrest</p>
+<div class="space-y-3">
+<div class="bg-slate-50 p-3 rounded border border-slate-100">
+<p class="text-xs font-bold text-slate-500 uppercase mb-1">Mechanism</p>
+<p class="text-sm text-slate-700 leading-snug">
+                                Inhibits <strong>Complex IV</strong> (Cytochrome c oxidase) in ETC. Prevents O<sub>2</sub> reduction.
+                            </p>
+</div>
+<div>
+<p class="text-xs font-bold text-slate-500 uppercase mb-1">Effect on TCA</p>
+<ul class="text-sm text-slate-600 space-y-1 pl-4 list-disc marker:text-blue-500">
+<li>Massive accumulation of NADH &amp; FADH<sub>2</sub>.</li>
+<li>Lack of oxidized NAD<sup>+</sup>/FAD stops TCA dehydrogenases via <strong>product inhibition</strong>.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- Panel 3: Alcohol -->
+<div class="bg-white h-full rounded-xl card-shadow overflow-hidden border-t-8 border-amber-500 flex flex-col">
+<div class="p-6 flex-1">
+<div class="flex justify-between items-start mb-4">
+<div class="w-14 h-14 bg-amber-50 rounded-lg flex items-center justify-center">
+<i class="fas fa-wine-bottle text-amber-500 text-3xl"></i>
+</div>
+<span class="bg-amber-100 text-amber-800 text-xs font-bold px-2 py-1 rounded uppercase tracking-wide">Metabolic</span>
+</div>
+<h3 class="text-xl font-bold text-slate-800 mb-1">Ethanol Excess</h3>
+<p class="text-sm text-amber-600 font-bold mb-4">Redox State Disruption</p>
+<div class="space-y-3">
+<div class="bg-slate-50 p-3 rounded border border-slate-100">
+<p class="text-xs font-bold text-slate-500 uppercase mb-1">Mechanism</p>
+<p class="text-sm text-slate-700 leading-snug">
+                                Ethanol metabolism generates massive amounts of <strong>NADH</strong> in the liver (High NADH/NAD<sup>+</sup> ratio).
+                            </p>
+</div>
+<div>
+<p class="text-xs font-bold text-slate-500 uppercase mb-1">Consequences</p>
+<ul class="text-sm text-slate-600 space-y-1 pl-4 list-disc marker:text-amber-500">
+<li>Inhibits <strong>Isocitrate DH</strong> &amp; <strong>α-KGDH</strong>.</li>
+<li>Shunts Acetyl-CoA to Ketogenesis (Ketoacidosis) instead of TCA.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Note -->
+<div class="h-16 bg-slate-100 border-t border-slate-200 px-12 flex items-center text-slate-500 text-sm">
+<i class="fas fa-exclamation-triangle mr-3 text-slate-400"></i>
+<p><strong>Clinical Insight:</strong> The TCA cycle requires both functional enzymes (blocked by Arsenite) and a supply of oxidized cofactors from the ETC (blocked by Cyanide/Hypoxia).</p>
+</div>
+</div>
+</body>
+</html>
