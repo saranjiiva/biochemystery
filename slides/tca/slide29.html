@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=1280, height=720, initial-scale=1.0" name="viewport"/>
+<title>TCA Cycle Inhibitors</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&amp;family=Lato:wght@300;400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Lato', sans-serif;
+            width: 1280px;
+            height: 720px;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #f8fafc;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+        }
+        .card-shadow {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease-in-out;
+        }
+        .card-shadow:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .bullet-point::before {
+            content: "•";
+            color: currentColor; /* Inherits text color */
+            font-weight: bold;
+            display: inline-block; 
+            width: 1em;
+            margin-left: -1em;
+        }
+    </style>
+</head>
+<body>
+<div class="w-full h-full flex flex-col relative overflow-hidden bg-slate-50">
+<!-- Header -->
+<div class="pt-8 px-12 pb-2 z-20">
+<div class="flex items-center space-x-4">
+<div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center text-red-600">
+<i class="fas fa-ban text-2xl"></i>
+</div>
+<div>
+<h2 class="text-3xl font-bold text-slate-800 leading-none">TCA Cycle Inhibitors</h2>
+<p class="text-slate-500 font-medium mt-1">Specific Enzyme Blockades &amp; Mechanisms</p>
+</div>
+</div>
+<div class="w-full h-px bg-slate-200 mt-6"></div>
+</div>
+<!-- Main Content Grid -->
+<div class="flex-1 px-12 py-8 grid grid-cols-2 gap-12 items-start">
+<!-- Panel 1: Malonate -->
+<div class="bg-white h-full rounded-xl card-shadow overflow-hidden border-t-8 border-rose-500 flex flex-col">
+<div class="p-8 flex-1">
+<div class="flex justify-between items-start mb-6">
+<div class="w-16 h-16 bg-rose-50 rounded-xl flex items-center justify-center">
+<i class="fas fa-traffic-light text-rose-500 text-3xl"></i>
+</div>
+<span class="bg-rose-100 text-rose-800 text-sm font-bold px-3 py-1 rounded uppercase tracking-wide">Competitive</span>
+</div>
+<h3 class="text-2xl font-bold text-slate-800 mb-1">Malonate</h3>
+<p class="text-base text-rose-600 font-bold mb-6">Inhibits Succinate Dehydrogenase (Complex II)</p>
+<div class="space-y-5">
+<div class="bg-slate-50 p-4 rounded-lg border border-slate-100">
+<p class="text-xs font-bold text-slate-500 uppercase mb-2">Mechanism</p>
+<p class="text-base text-slate-700 leading-relaxed">
+                                Structural analog of Succinate. It binds to the active site of SDH but cannot undergo dehydrogenation (lacks the CH2-CH2 bond needed for oxidation to fumarate).
+                            </p>
+</div>
+<div>
+<p class="text-xs font-bold text-slate-500 uppercase mb-2">Kinetic Impact</p>
+<ul class="text-base text-slate-600 space-y-2 pl-4 list-disc marker:text-rose-500">
+<li><span class="font-bold text-slate-700">Competes with Succinate:</span> Can be overcome by increasing substrate concentration.</li>
+<li><span class="font-bold text-slate-700">Km Increases:</span> Lower affinity for substrate.</li>
+<li><span class="font-bold text-slate-700">Vmax Unchanged:</span> Enzyme capacity remains same.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- Panel 2: Fluoroacetate -->
+<div class="bg-white h-full rounded-xl card-shadow overflow-hidden border-t-8 border-indigo-600 flex flex-col">
+<div class="p-8 flex-1">
+<div class="flex justify-between items-start mb-6">
+<div class="w-16 h-16 bg-indigo-50 rounded-xl flex items-center justify-center">
+<i class="fas fa-skull-crossbones text-indigo-600 text-3xl"></i>
+</div>
+<span class="bg-indigo-100 text-indigo-800 text-sm font-bold px-3 py-1 rounded uppercase tracking-wide">Suicide Substrate</span>
+</div>
+<h3 class="text-2xl font-bold text-slate-800 mb-1">Fluoroacetate</h3>
+<p class="text-base text-indigo-600 font-bold mb-6">Inhibits Aconitase ("Trojan Horse")</p>
+<div class="space-y-5">
+<div class="bg-slate-50 p-4 rounded-lg border border-slate-100">
+<p class="text-xs font-bold text-slate-500 uppercase mb-2">Mechanism</p>
+<p class="text-base text-slate-700 leading-relaxed">
+                                Not toxic itself. Converted to <strong>Fluoroacetyl-CoA</strong>, then condensed with Oxaloacetate to form <strong>Fluorocitrate</strong>. This analog binds irreversibly to Aconitase, halting the cycle.
+                            </p>
+</div>
+<div>
+<p class="text-xs font-bold text-slate-500 uppercase mb-2">Clinical/Tox Relevance</p>
+<ul class="text-base text-slate-600 space-y-2 pl-4 list-disc marker:text-indigo-600">
+<li><span class="font-bold text-slate-700">Rat Poison (1080):</span> Historically used as a rodenticide.</li>
+<li><span class="font-bold text-slate-700">Metabolic Block:</span> Causes massive accumulation of Citrate.</li>
+<li><span class="font-bold text-slate-700">Result:</span> Energy failure and death (no antidote, supportive care only).</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Note -->
+<div class="h-16 bg-slate-100 border-t border-slate-200 px-12 flex items-center text-slate-500 text-sm">
+<i class="fas fa-info-circle mr-3 text-slate-400"></i>
+<p><strong>Note:</strong> Inhibitors help elucidate metabolic pathways. Malonate was key for Krebs to deduce the cyclic nature of the pathway (succinate accumulation).</p>
+</div>
+</div>
+</body>
+</html>
