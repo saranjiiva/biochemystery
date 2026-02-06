@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=1280, height=720, initial-scale=1.0" name="viewport"/>
+<title>TCA Cycle Overview</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&amp;family=Lato:wght@300;400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Lato', sans-serif;
+            width: 1280px;
+            height: 720px;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #f8fafc;
+        }
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+        }
+        .image-container {
+            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.15);
+        }
+        .label-tag {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 8px 18px;
+            border-radius: 99px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: #334155;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-left: 5px solid #0d9488; /* Teal-600 */
+            position: absolute;
+            transform: translate(-50%, -50%);
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
+        .label-tag.nadh {
+            border-left-color: #3b82f6; /* Blue-500 */
+        }
+        .label-tag.fadh {
+            border-left-color: #f59e0b; /* Amber-500 */
+        }
+        .label-tag.gtp {
+            border-left-color: #8b5cf6; /* Purple-500 */
+        }
+        .caption-bar {
+            background-color: #ffffff;
+            border-top: 1px solid #e2e8f0;
+        }
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+<div class="w-full h-full flex flex-col relative overflow-hidden bg-white">
+<!-- Header -->
+<div class="absolute top-0 left-0 w-full pt-8 px-12 z-20 pointer-events-none">
+<h2 class="text-4xl font-bold text-slate-800 mb-1 drop-shadow-sm bg-white/90 inline-block px-2 rounded">TCA Cycle Overview</h2>
+<div class="w-20 h-1.5 bg-teal-600 rounded mt-2"></div>
+</div>
+<!-- Main Diagram Area -->
+<div class="flex-1 flex items-center justify-center bg-slate-50 relative overflow-hidden p-0">
+<!-- Background Grid Pattern -->
+<div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#cbd5e1 1px, transparent 1px); background-size: 20px 20px;"></div>
+<!-- Central Diagram Image -->
+<div class="relative w-full h-full flex items-center justify-center">
+<img alt="TCA Cycle Intermediates and Structures" class="max-h-[82%] max-w-[90%] object-contain image-container rounded-lg z-10" src="https://www.genspark.ai/api/files/s/r4LVVusZ?cache_control=3600"/>
+<!-- Overlay Labels - Positioned to simulate clock-face locations of reactions -->
+<!-- NADH Output 1 (Isocitrate DH) - Approx 3 o'clock -->
+<div class="label-tag nadh" style="top: 38%; left: 82%;">
+<div class="dot bg-blue-500"></div>
+<p>NADH + CO₂</p>
+</div>
+<!-- NADH Output 2 (Alpha-KGDH) - Approx 5 o'clock -->
+<div class="label-tag nadh" style="top: 65%; left: 78%;">
+<div class="dot bg-blue-500"></div>
+<p>NADH + CO₂</p>
+</div>
+<!-- GTP Output (Succinyl-CoA Synthetase) - Approx 6/7 o'clock -->
+<div class="label-tag gtp" style="top: 82%; left: 50%;">
+<div class="dot bg-purple-500"></div>
+<p>1 GTP (ATP)</p>
+</div>
+<!-- FADH2 Output (Succinate DH) - Approx 8/9 o'clock -->
+<div class="label-tag fadh" style="top: 60%; left: 22%;">
+<div class="dot bg-amber-500"></div>
+<p>1 FADH₂</p>
+</div>
+<!-- NADH Output 3 (Malate DH) - Approx 11 o'clock -->
+<div class="label-tag nadh" style="top: 25%; left: 25%;">
+<div class="dot bg-blue-500"></div>
+<p>NADH</p>
+</div>
+</div>
+</div>
+<!-- Bottom Caption Bar -->
+<div class="h-24 w-full caption-bar flex items-center px-12 z-20 shrink-0">
+<div class="flex items-center space-x-6">
+<div class="w-12 h-12 rounded-full bg-teal-100 flex items-center justify-center text-teal-600 shrink-0">
+<i class="fas fa-sync-alt text-xl"></i>
+</div>
+<div class="border-l-2 border-slate-300 pl-6 flex-1">
+<p class="text-slate-700 text-lg font-medium leading-relaxed">
+<span class="font-bold text-teal-700">Net Yield Per Turn:</span> 
+                        Oxidation of 1 Acetyl-CoA generates <span class="text-blue-600 font-bold">3 NADH</span>, <span class="text-amber-600 font-bold">1 FADH₂</span>, and <span class="text-purple-600 font-bold">1 GTP</span> via substrate-level phosphorylation. Two carbons enter as acetyl-CoA and two leave as CO₂.
+                    </p>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
