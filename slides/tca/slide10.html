@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=1280, height=720, initial-scale=1.0" name="viewport"/>
+<title>Clinical Correlations: PDH Complex</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&amp;family=Lato:wght@300;400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Lato', sans-serif;
+            width: 1280px;
+            height: 720px;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #f8fafc;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+        }
+        .card-shadow {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease-in-out;
+        }
+        .card-shadow:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .bullet-point::before {
+            content: "•";
+            color: currentColor; /* Inherits text color */
+            font-weight: bold;
+            display: inline-block; 
+            width: 1em;
+            margin-left: -1em;
+        }
+    </style>
+</head>
+<body>
+<div class="w-full h-full flex flex-col relative overflow-hidden bg-slate-50">
+<!-- Header -->
+<div class="pt-8 px-12 pb-2 z-20">
+<div class="flex items-center space-x-4">
+<div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center text-red-600">
+<i class="fas fa-heartbeat text-2xl"></i>
+</div>
+<div>
+<h2 class="text-3xl font-bold text-slate-800 leading-none">Clinical Correlations</h2>
+<p class="text-slate-500 font-medium mt-1">Pathology of the PDH Complex</p>
+</div>
+</div>
+<div class="w-full h-px bg-slate-200 mt-6"></div>
+</div>
+<!-- Main Content Grid -->
+<div class="flex-1 px-12 py-6 grid grid-cols-3 gap-8 items-start">
+<!-- Panel 1: Thiamine Deficiency -->
+<div class="bg-white h-full rounded-xl card-shadow overflow-hidden border-t-8 border-amber-500 flex flex-col">
+<div class="p-6 flex-1">
+<div class="flex justify-between items-start mb-4">
+<div class="w-14 h-14 bg-amber-50 rounded-lg flex items-center justify-center">
+<i class="fas fa-brain text-amber-500 text-3xl"></i>
+</div>
+<span class="bg-amber-100 text-amber-800 text-xs font-bold px-2 py-1 rounded uppercase tracking-wide">Cofactor</span>
+</div>
+<h3 class="text-xl font-bold text-slate-800 mb-1">Thiamine (B1) Deficiency</h3>
+<p class="text-sm text-amber-600 font-bold mb-4">Affects E1 (TPP)</p>
+<div class="space-y-3">
+<div class="bg-slate-50 p-3 rounded border border-slate-100">
+<p class="text-xs font-bold text-slate-500 uppercase mb-1">Mechanism</p>
+<p class="text-sm text-slate-700 leading-snug">
+                                Lack of TPP impairs PDH &amp; α-KGDH. Aerobic tissues (brain/heart) fail to produce ATP.
+                            </p>
+</div>
+<div>
+<p class="text-xs font-bold text-slate-500 uppercase mb-1">Clinical Presentations</p>
+<ul class="text-sm text-slate-600 space-y-1 pl-4 list-disc marker:text-amber-500">
+<li><span class="font-bold text-slate-700">Beriberi:</span> Dry (neuro) or Wet (cardiac failure).</li>
+<li><span class="font-bold text-slate-700">Wernicke-Korsakoff:</span> Ataxia, ophthalmoplegia, memory loss (common in alcoholics).</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- Panel 2: PDH Deficiency -->
+<div class="bg-white h-full rounded-xl card-shadow overflow-hidden border-t-8 border-rose-500 flex flex-col">
+<div class="p-6 flex-1">
+<div class="flex justify-between items-start mb-4">
+<div class="w-14 h-14 bg-rose-50 rounded-lg flex items-center justify-center">
+<i class="fas fa-dna text-rose-500 text-3xl"></i>
+</div>
+<span class="bg-rose-100 text-rose-800 text-xs font-bold px-2 py-1 rounded uppercase tracking-wide">Genetic</span>
+</div>
+<h3 class="text-xl font-bold text-slate-800 mb-1">PDH Complex Deficiency</h3>
+<p class="text-sm text-rose-600 font-bold mb-4">Mostly X-linked (E1α)</p>
+<div class="space-y-3">
+<div class="bg-slate-50 p-3 rounded border border-slate-100">
+<p class="text-xs font-bold text-slate-500 uppercase mb-1">Mechanism</p>
+<p class="text-sm text-slate-700 leading-snug">
+                                Pyruvate cannot enter TCA cycle. Shunted to Lactate via LDH. Causes severe lactic acidosis.
+                            </p>
+</div>
+<div>
+<p class="text-xs font-bold text-slate-500 uppercase mb-1">Management</p>
+<ul class="text-sm text-slate-600 space-y-1 pl-4 list-disc marker:text-rose-500">
+<li><span class="font-bold text-slate-700">Ketogenic Diet:</span> High fat, low carb.</li>
+<li>Generates Acetyl-CoA from fatty acids (bypassing PDH) and ketone bodies for brain fuel.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- Panel 3: Arsenic Poisoning -->
+<div class="bg-white h-full rounded-xl card-shadow overflow-hidden border-t-8 border-purple-600 flex flex-col">
+<div class="p-6 flex-1">
+<div class="flex justify-between items-start mb-4">
+<div class="w-14 h-14 bg-purple-50 rounded-lg flex items-center justify-center">
+<i class="fas fa-skull-crossbones text-purple-600 text-3xl"></i>
+</div>
+<span class="bg-purple-100 text-purple-800 text-xs font-bold px-2 py-1 rounded uppercase tracking-wide">Toxin</span>
+</div>
+<h3 class="text-xl font-bold text-slate-800 mb-1">Arsenic Poisoning</h3>
+<p class="text-sm text-purple-600 font-bold mb-4">Inhibits Lipoic Acid (E2)</p>
+<div class="space-y-3">
+<div class="bg-slate-50 p-3 rounded border border-slate-100">
+<p class="text-xs font-bold text-slate-500 uppercase mb-1">Mechanism</p>
+<p class="text-sm text-slate-700 leading-snug">
+                                Arsenite binds to thiol (-SH) groups of lipoic acid, locking E2 in inactive state. Stops PDH &amp; α-KGDH.
+                            </p>
+</div>
+<div>
+<p class="text-xs font-bold text-slate-500 uppercase mb-1">Clinical Features</p>
+<ul class="text-sm text-slate-600 space-y-1 pl-4 list-disc marker:text-purple-600">
+<li>Vomiting, rice-water stools, garlic breath.</li>
+<li>QT prolongation.</li>
+<li>Similar energy deficit to thiamine deficiency but with GI toxicity.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Note -->
+<div class="h-16 bg-slate-100 border-t border-slate-200 px-12 flex items-center text-slate-500 text-sm">
+<i class="fas fa-exclamation-circle mr-3 text-slate-400"></i>
+<p><strong>Common Theme:</strong> Any disruption of the PDH complex prevents aerobic glucose oxidation, leading to energy failure (ATP↓) and Lactic Acidosis.</p>
+</div>
+</div>
+</body>
+</html>
