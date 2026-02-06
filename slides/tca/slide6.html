@@ -38,6 +38,7 @@ h1{
   gap:50px;
 }
 
+/* LEFT PANEL */
 .box{
   background:white;
   border:2px solid #e5e7eb;
@@ -81,18 +82,150 @@ li{
   font-size:17px;
 }
 
+/* RIGHT PANEL */
+.visual-box{
+  background:white;
+  border:2px solid #e5e7eb;
+  border-radius:16px;
+  padding:24px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.05);
+}
+
 .diagram{
   border:2px dashed #64748b;
   border-radius:16px;
-  height:240px;
+  height:260px;
+  position:relative;
+  overflow:hidden;
+  background:#ffffff;
+  margin-bottom:18px;
+}
+
+/* Elements */
+.e2{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  background:#eef2ff;
+  border:3px solid #6366f1;
+  border-radius:18px;
+  width:200px;
+  height:110px;
   display:flex;
   align-items:center;
   justify-content:center;
-  margin-bottom:18px;
-  font-size:20px;
   font-weight:bold;
-  color:#334155;
-  background:#ffffff;
+  font-size:18px;
+  box-shadow:0 0 0 rgba(99,102,241,0.5);
+  animation: enzymeGlow 3s infinite ease-in-out;
+}
+
+.arm{
+  position:absolute;
+  width:140px;
+  height:4px;
+  background:#f59e0b;
+  top:50%;
+  left:50%;
+  transform-origin:left center;
+  transform:rotate(-30deg);
+  animation: swingArm 4s infinite ease-in-out;
+}
+
+.lipo{
+  position:absolute;
+  width:50px;
+  height:50px;
+  background:#fff7ed;
+  border:2px solid #f59e0b;
+  border-radius:50%;
+  top:-23px;
+  right:-25px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:12px;
+  font-weight:bold;
+}
+
+.acetyl{
+  position:absolute;
+  width:36px;
+  height:36px;
+  background:#dcfce7;
+  border:2px solid #16a34a;
+  border-radius:50%;
+  top:7px;
+  right:7px;
+  font-size:10px;
+  font-weight:bold;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  animation: acetylMove 4s infinite ease-in-out;
+}
+
+.coa{
+  position:absolute;
+  right:40px;
+  bottom:40px;
+  background:#ecfeff;
+  border:2px solid #0d9488;
+  border-radius:12px;
+  padding:8px 12px;
+  font-weight:bold;
+  font-size:14px;
+}
+
+.acetylcoa{
+  position:absolute;
+  right:40px;
+  top:40px;
+  background:#dcfce7;
+  border:2px solid #16a34a;
+  border-radius:12px;
+  padding:8px 12px;
+  font-weight:bold;
+  font-size:14px;
+  opacity:0;
+  animation: acetylCoAAppear 4s infinite ease-in-out;
+}
+
+/* Animations */
+@keyframes enzymeGlow{
+  0%,100%{box-shadow:0 0 0 rgba(99,102,241,0.5);}
+  50%{box-shadow:0 0 25px rgba(99,102,241,0.7);}
+}
+
+@keyframes swingArm{
+  0%{transform:rotate(-30deg);}
+  40%{transform:rotate(25deg);}
+  60%{transform:rotate(25deg);}
+  100%{transform:rotate(-30deg);}
+}
+
+@keyframes acetylMove{
+  0%{opacity:1;}
+  45%{opacity:1;}
+  55%{opacity:0;}
+  100%{opacity:0;}
+}
+
+@keyframes acetylCoAAppear{
+  0%{opacity:0;}
+  55%{opacity:0;}
+  70%{opacity:1;}
+  100%{opacity:1;}
+}
+
+.caption{
+  font-size:18px;
+  background:#f1f5f9;
+  padding:10px 14px;
+  border-radius:10px;
+  text-align:center;
+  font-weight:bold;
 }
 
 .footer{
@@ -133,18 +266,25 @@ li{
     </div>
 
     <!-- RIGHT PANEL -->
-    <div class="box">
-      <h2>Mechanism (Steps)</h2>
-
-      <ul>
-        <li><b>Acetyl transfer:</b> Acetyl group moves from hydroxyethyl-TPP to oxidized lipoamide.</li>
-        <li><b>Reduction:</b> Lipoamide disulfide bond is reduced.</li>
-        <li><b>Transthiolesterification:</b> Acetyl group is transferred from lipoamide to CoA.</li>
-        <li><b>Product formed:</b> Acetyl-CoA enters the TCA cycle.</li>
-      </ul>
+    <div class="visual-box">
+      <h2>Mechanism (Animated)</h2>
 
       <div class="diagram">
-        Lipoamide swinging arm transfers acetyl group
+        <div class="e2">E2 Enzyme</div>
+
+        <div class="arm">
+          <div class="lipo">
+            Lipo
+            <div class="acetyl">Ac</div>
+          </div>
+        </div>
+
+        <div class="coa">CoA</div>
+        <div class="acetylcoa">Acetyl-CoA</div>
+      </div>
+
+      <div class="caption">
+        Lipoamide swings → accepts acetyl → transfers to CoA → Acetyl-CoA formed
       </div>
 
       <div class="footer">
