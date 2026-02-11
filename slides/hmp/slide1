@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>HMP Introduction</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Segoe UI", Arial, sans-serif;
+    overflow: hidden;
+}
+
+.slide {
+    text-align: center;
+    color: white;
+}
+
+/* HMP Title */
+.title {
+    font-size: 70px;
+    font-weight: bold;
+    letter-spacing: 4px;
+    opacity: 0;
+    animation: fadeZoom 2s ease forwards;
+}
+
+/* Full Form */
+.subtitle {
+    font-size: 34px;
+    margin-top: 15px;
+    opacity: 0;
+    animation: slideUp 2s ease forwards;
+    animation-delay: 1.5s;
+}
+
+/* Name */
+.name {
+    font-size: 30px;
+    margin-top: 35px;
+    font-weight: bold;
+    opacity: 0;
+    animation: fadeIn 2s ease forwards;
+    animation-delay: 3s;
+}
+
+/* Designation */
+.designation {
+    font-size: 22px;
+    margin-top: 10px;
+    opacity: 0;
+    animation: fadeIn 2s ease forwards;
+    animation-delay: 4s;
+}
+
+/* Animations */
+
+@keyframes fadeZoom {
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(60px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Glowing Effect */
+.glow {
+    text-shadow: 0 0 10px #fff,
+                 0 0 20px #00ffff,
+                 0 0 30px #00ffff;
+}
+</style>
+</head>
+
+<body>
+
+<div class="slide">
+
+    <div class="title glow">
+        HMP
+    </div>
+
+    <div class="subtitle">
+        Hexose Monophosphate Pathway
+    </div>
+
+    <div class="name">
+        Dr. G. Dhinesh, MD
+    </div>
+
+    <div class="designation">
+        Senior Resident<br>
+        Department of Biochemistry<br>
+        SMCH
+    </div>
+
+</div>
+
+</body>
+</html>
