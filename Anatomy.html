@@ -1,384 +1,189 @@
 <!DOCTYPE html>
-
-<html lang="en">
+<html>
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>TCA Cycle Title Slide</title>
-<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
-<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&amp;family=Lato:wght@300;400;700;900&amp;display=swap" rel="stylesheet"/>
+<title>Hanging vs Strangulation</title>
 <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Lato', sans-serif;
-            background-color: #f8f9fa;
-        }
-        .slide-container {
-            width: 1280px;
-            height: 720px;
-            display: flex;
-            flex-direction: row;
-            background-color: white;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid #e0e0e0;
-        }
-        h1 {
-            font-family: 'Merriweather', serif;
-        }
-        .mitochondria-bg {
-            position: absolute;
-            right: -150px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 800px;
-            height: 800px;
-            background-color: #f0fcfc;
-            border-radius: 50%;
-            z-index: 0;
-            border: 40px solid #e0f7fa;
-        }
-        .cycle-graphic-container {
-            width: 400px;
-            height: 400px;
-            position: relative;
-        }
-        .cycle-ring {
-            position: absolute;
-            inset: 20px;
-            border: 6px solid #006064;
-            border-radius: 50%;
-        }
-        .cycle-node {
-            position: absolute;
-            width: 32px;
-            height: 32px;
-            background-color: white;
-            border: 4px solid #006064;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 10px;
-            color: #006064;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            z-index: 10;
-        }
-        /* Positioning nodes around the circle (radius approx 180px from center) */
-        /* Center is 200, 200 */
-        .node-top { top: 0; left: 50%; transform: translate(-50%, 0); }
-        .node-tr { top: 14.6%; right: 14.6%; transform: translate(50%, -50%); }
-        .node-right { top: 50%; right: 0; transform: translate(0, -50%); }
-        .node-br { bottom: 14.6%; right: 14.6%; transform: translate(50%, 50%); }
-        .node-bottom { bottom: 0; left: 50%; transform: translate(-50%, 0); }
-        .node-bl { bottom: 14.6%; left: 14.6%; transform: translate(-50%, 50%); }
-        .node-left { top: 50%; left: 0; transform: translate(0, -50%); }
-        .node-tl { top: 14.6%; left: 14.6%; transform: translate(-50%, -50%); }
 
-        .label-text {
-            position: absolute;
-            font-family: 'Lato', sans-serif;
-            font-weight: 700;
-            color: #374151;
-            font-size: 14px;
-            background-color: rgba(255,255,255,0.9);
-            padding: 2px 6px;
-            border-radius: 4px;
-        }
-    </style>
-</head>
-<body>
-<div class="slide-container">
-<!-- Abstract Background Shape -->
-<div class="mitochondria-bg"></div>
-<!-- Left Content Section -->
-<div class="flex-1 flex flex-col justify-center px-20 z-10 relative">
-<div class="mb-8">
-<div class="inline-flex items-center space-x-2 bg-teal-50 text-teal-800 px-4 py-2 rounded-full border border-teal-100 mb-6">
-<i class="fas fa-microscope text-teal-600"></i>
-<p class="text-sm font-bold tracking-wide uppercase">College Biochemistry • BIO 301</p>
-</div>
-<h1 class="text-6xl font-black text-gray-900 leading-tight mb-2">
-                    TCA Cycle
-                </h1>
-<h2 class="text-4xl text-gray-600 font-light italic serif mb-8">
-                    (The Krebs Cycle)
-                </h2>
-<div class="w-24 h-2 bg-teal-600 mb-8 rounded-full"></div>
-<p class="text-xl text-gray-600 leading-relaxed max-w-xl">
-                    A comprehensive overview of the central hub of metabolism: exploring enzymatic reactions, regulation, energetics, and clinical significance.
-                </p>
-</div>
-<div class="grid grid-cols-2 gap-8 mt-4 max-w-lg">
-<div class="border-l-4 border-teal-600 pl-4">
-<p class="text-xs text-gray-400 font-bold uppercase mb-1">Presented By</p>
-<p class="text-lg font-bold text-gray-800">[Your Name]</p>
-<p class="text-sm text-gray-500">Department of Biology</p>
-</div>
-<div class="border-l-4 border-orange-400 pl-4">
-<p class="text-xs text-gray-400 font-bold uppercase mb-1">Focus Areas</p>
-<p class="text-sm font-semibold text-gray-700 leading-snug">
-                        • Reaction Mechanisms<br/>
-                        • ATP Calculation<br/>
-                        • Metabolic Regulation
-                    </p>
-</div>
-</div>
-</div>
-<!-- Right Graphic Section -->
-<div class="w-1/2 flex items-center justify-center relative z-10">
-<div class="cycle-graphic-container">
-<!-- Inner Decorative Elements -->
-<div class="absolute inset-0 flex items-center justify-center z-0">
-<div class="text-center">
-<i class="fas fa-bolt text-5xl text-yellow-400 mb-2 drop-shadow-sm"></i>
-<p class="text-teal-900 font-bold text-lg">ENERGY</p>
-<p class="text-teal-600 text-xs">NADH • FADH<sub>2</sub> • GTP</p>
-</div>
-</div>
-<!-- The Cycle Ring -->
-<div class="cycle-ring"></div>
-<!-- Nodes -->
-<div class="cycle-node node-top" title="Citrate">C6</div>
-<div class="cycle-node node-tr">C6</div>
-<div class="cycle-node node-right" title="Alpha-Ketoglutarate">C5</div>
-<div class="cycle-node node-br">C4</div>
-<div class="cycle-node node-bottom" title="Succinate">C4</div>
-<div class="cycle-node node-bl">C4</div>
-<div class="cycle-node node-left" title="Oxaloacetate">C4</div>
-<div class="cycle-node node-tl">C2</div>
-<!-- Labels -->
-<div class="label-text" style="top: -25px; left: 50%; transform: translateX(-50%);">Citrate</div>
-<div class="label-text" style="top: 50%; right: -50px; transform: translateY(-50%);">α-KG</div>
-<div class="label-text" style="bottom: -25px; left: 50%; transform: translateX(-50%);">Succinate</div>
-<div class="label-text" style="top: 50%; left: -50px; transform: translateY(-50%);">OAA</div>
-<div class="label-text" style="top: 10px; left: 10px; color: #d97706;">Acetyl-CoA</div>
-<!-- Arrow indicating Acetyl-CoA entry -->
-<div class="absolute top-10 left-10 transform -rotate-45">
-<i class="fas fa-long-arrow-alt-down text-3xl text-orange-500"></i>
-</div>
-</div>
-</div>
-<!-- Bottom Footer Strip -->
-<div class="absolute bottom-0 w-full h-12 bg-white border-t border-gray-200 flex items-center justify-between px-8 z-20">
-<div class="flex items-center space-x-6">
-<p class="text-xs text-gray-400 font-semibold tracking-wider">NATURE EDUCATION STYLE SERIES</p>
-</div>
-<div class="flex items-center space-x-2">
-<div class="h-2 w-2 rounded-full bg-teal-500"></div>
-<p class="text-xs text-gray-400">Introduction to Metabolism</p>
-</div>
-</div>
-</div>
-</body>
-</html>
-<!DOCTYPE html>
+body{
+    margin:0;
+    background:#0f172a;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
 
-<html lang="en">
-<head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Historical Background</title>
-<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
-<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&amp;family=Lato:wght@300;400;700;900&amp;display=swap" rel="stylesheet"/>
-<style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Lato', sans-serif;
-            background-color: #f8f9fa;
-        }
-        .slide-container {
-            width: 1280px;
-            height: 720px;
-            display: flex;
-            flex-direction: column;
-            background-color: white;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid #e0e0e0;
-        }
-        h1, h2, h3 {
-            font-family: 'Merriweather', serif;
-        }
-        .header-stripe {
-            background-color: #006064;
-            height: 8px;
-            width: 100%;
-        }
-        .content-area {
-            display: flex;
-            flex: 1;
-            padding: 40px 60px;
-            gap: 60px;
-        }
-        .left-col {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        .right-col {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            background-color: #f0fcfc;
-            border-radius: 12px;
-            padding: 30px;
-            position: relative;
-        }
-        .timeline-item {
-            position: relative;
-            padding-left: 40px;
-            margin-bottom: 25px;
-        }
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 6px;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background-color: #00838f;
-            border: 3px solid #e0f7fa;
-            z-index: 10;
-        }
-        .timeline-line {
-            position: absolute;
-            left: 7px;
-            top: 6px;
-            bottom: -20px;
-            width: 2px;
-            background-color: #b2ebf2;
-            z-index: 0;
-        }
-        .timeline-item:last-child .timeline-line {
-            display: none;
-        }
-        .portrait-placeholder {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            background-color: #e0e0e0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 4px solid white;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            margin: 0 auto 20px auto;
-        }
-        .quote-box {
-            border-left: 4px solid #f59e0b;
-            padding-left: 16px;
-            font-style: italic;
-            color: #555;
-            margin-top: 20px;
-        }
-    </style>
+.slide{
+    width:1920px;
+    height:1080px;
+    background:linear-gradient(135deg,#0f172a,#1e293b);
+    color:white;
+    padding:60px;
+    box-sizing:border-box;
+    position:relative;
+}
+
+.title{
+    text-align:center;
+    font-size:60px;
+    font-weight:bold;
+    color:#38bdf8;
+}
+
+.subtitle{
+    text-align:center;
+    font-size:28px;
+    margin-bottom:40px;
+    color:#cbd5e1;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns: 1fr 2fr;
+    gap:40px;
+    margin-top:20px;
+}
+
+.section{
+    background:#1e293b;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 0 20px rgba(0,0,0,0.4);
+}
+
+.section h2{
+    font-size:30px;
+    margin-bottom:15px;
+    color:#38bdf8;
+}
+
+.section p, .section li{
+    font-size:22px;
+    line-height:1.6;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:20px;
+}
+
+th{
+    background:#38bdf8;
+    color:black;
+    padding:10px;
+}
+
+td{
+    border:1px solid #334155;
+    padding:10px;
+    text-align:center;
+}
+
+.footer{
+    position:absolute;
+    bottom:30px;
+    right:60px;
+    font-size:18px;
+    color:#94a3b8;
+}
+
+</style>
 </head>
+
 <body>
-<div class="slide-container">
-<!-- Top decorative stripe -->
-<div class="header-stripe"></div>
-<!-- Header Section -->
-<div class="px-16 pt-10 pb-4">
-<div class="flex items-center space-x-3 mb-2">
-<span class="bg-teal-100 text-teal-800 text-xs font-bold px-2 py-1 rounded uppercase tracking-wider">Background</span>
-<span class="text-gray-400 text-sm">|</span>
-<span class="text-gray-500 text-sm font-medium">History of Biochemistry</span>
+
+<div class="slide">
+
+<div class="title">Hanging vs Strangulation</div>
+<div class="subtitle">A Forensic Differentiation</div>
+
+<div class="grid">
+
+<div class="section">
+<h2>Definitions</h2>
+<p><b>Hanging:</b> Constriction of neck by ligature where body weight acts as constricting force.</p>
+<p><b>Strangulation:</b> Constriction of neck by external force without suspension of body.</p>
+
+<h2>Mechanism of Death</h2>
+<ul>
+<li>Asphyxia</li>
+<li>Cerebral ischemia</li>
+<li>Vagal inhibition</li>
+<li>Cervical spine injury (judicial hanging)</li>
+</ul>
+
+<h2>Medicolegal Importance</h2>
+<ul>
+<li>Differentiates suicide vs homicide</li>
+<li>Guides autopsy findings</li>
+<li>Assists crime scene reconstruction</li>
+</ul>
 </div>
-<h1 class="text-4xl font-bold text-gray-900">Historical Background: The Krebs Cycle</h1>
+
+<div class="section">
+<h2>Key Forensic Differences</h2>
+
+<table>
+<tr>
+<th>Feature</th>
+<th>Hanging</th>
+<th>Strangulation</th>
+</tr>
+
+<tr>
+<td>Ligature Mark</td>
+<td>Oblique, upward, incomplete</td>
+<td>Horizontal, transverse, complete</td>
+</tr>
+
+<tr>
+<td>Level</td>
+<td>Above thyroid cartilage</td>
+<td>Below thyroid cartilage</td>
+</tr>
+
+<tr>
+<td>Saliva Dribbling</td>
+<td>Present</td>
+<td>Absent</td>
+</tr>
+
+<tr>
+<td>Face</td>
+<td>Pale</td>
+<td>Congested</td>
+</tr>
+
+<tr>
+<td>Hyoid Fracture</td>
+<td>Rare</td>
+<td>Common</td>
+</tr>
+
+<tr>
+<td>External Injuries</td>
+<td>Minimal</td>
+<td>Often present</td>
+</tr>
+
+<tr>
+<td>Manner</td>
+<td>Usually Suicidal</td>
+<td>Usually Homicidal</td>
+</tr>
+
+</table>
 </div>
-<!-- Main Content -->
-<div class="content-area">
-<!-- Left Column: Text Content -->
-<div class="left-col">
-<div class="mb-8">
-<h2 class="text-2xl font-bold text-teal-800 mb-4">Discovery of the Cycle (1937)</h2>
-<p class="text-gray-700 text-lg leading-relaxed mb-4">
-                        Sir Hans Adolf Krebs proposed the "Citric Acid Cycle" in 1937. He demonstrated that the oxidation of carbohydrates involves a cyclic pathway rather than a linear one, a revolutionary concept at the time.
-                    </p>
-<p class="text-gray-700 text-lg leading-relaxed">
-                        Initially rejected by the journal <em>Nature</em>, his paper described how pyruvate is oxidized in pigeon breast muscle. This work unified earlier findings on succinate, fumarate, and malate oxidation.
-                    </p>
+
 </div>
-<div class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
-<h3 class="text-lg font-bold text-gray-800 mb-2 flex items-center">
-<i class="fas fa-medal text-yellow-500 mr-2"></i> Nobel Prize in Physiology or Medicine (1953)
-                    </h3>
-<p class="text-gray-600 text-base">
-                        Awarded jointly to Hans Krebs "for his discovery of the citric acid cycle" and Fritz Lipmann "for his discovery of co-enzyme A and its importance for intermediary metabolism."
-                    </p>
+
+<div class="footer">
+MBBS | Department of Forensic Medicine
 </div>
-<div class="quote-box">
-<p class="text-lg">"I have tried to show that the intermediate stages of the breakdown of carbohydrate... form a cycle."</p>
-<p class="text-sm font-bold text-gray-800 mt-2">— Hans Krebs (1937)</p>
+
 </div>
-</div>
-<!-- Right Column: Visual Diagram / Timeline -->
-<div class="right-col">
-<div class="absolute top-4 right-4 text-teal-200 text-6xl opacity-20">
-<i class="fas fa-history"></i>
-</div>
-<h3 class="text-xl font-bold text-teal-900 mb-6 border-b border-teal-200 pb-2">Timeline of Discovery</h3>
-<div class="flex-1 overflow-y-auto pr-2">
-<div class="timeline-item">
-<div class="timeline-line"></div>
-<p class="text-sm font-bold text-teal-700">1910s - 1920s</p>
-<p class="font-bold text-gray-800">Early Foundations</p>
-<p class="text-sm text-gray-600 mt-1">Thunberg, Batelli, and Stern identify individual reactions (succinate → fumarate → malate).</p>
-</div>
-<div class="timeline-item">
-<div class="timeline-line"></div>
-<p class="text-sm font-bold text-teal-700">1935 - 1937</p>
-<p class="font-bold text-gray-800">Szent-Györgyi's Contribution</p>
-<p class="text-sm text-gray-600 mt-1">Albert Szent-Györgyi demonstrates that dicarboxylic acids (succinate, fumarate, malate, OAA) stimulate respiration catalytically.</p>
-</div>
-<div class="timeline-item">
-<div class="timeline-line"></div>
-<p class="text-sm font-bold text-teal-700">1937</p>
-<p class="font-bold text-gray-800">The "Tri-Carboxylic Acid" Cycle</p>
-<p class="text-sm text-gray-600 mt-1">Hans Krebs publishes the full cyclic mechanism in <em>Enzymologia</em> after Nature rejection. He links pyruvate oxidation to the regeneration of oxaloacetate.</p>
-</div>
-<div class="timeline-item">
-<div class="timeline-line"></div>
-<p class="text-sm font-bold text-teal-700">1945 - 1950</p>
-<p class="font-bold text-gray-800">Acetate Activation</p>
-<p class="text-sm text-gray-600 mt-1">Fritz Lipmann discovers Coenzyme A, clarifying how acetate enters the cycle as Acetyl-CoA.</p>
-</div>
-</div>
-<!-- Portrait representation at bottom -->
-<div class="mt-4 flex items-center justify-center space-x-4 pt-4 border-t border-teal-200">
-<div class="text-center">
-<div class="w-16 h-16 bg-gray-300 rounded-full mx-auto mb-1 flex items-center justify-center border-2 border-white shadow-md">
-<i class="fas fa-user text-gray-500 text-2xl"></i>
-</div>
-<p class="text-xs font-bold text-gray-700">Hans Krebs</p>
-</div>
-<div class="text-center">
-<div class="w-16 h-16 bg-gray-300 rounded-full mx-auto mb-1 flex items-center justify-center border-2 border-white shadow-md">
-<i class="fas fa-user text-gray-500 text-2xl"></i>
-</div>
-<p class="text-xs font-bold text-gray-700">Fritz Lipmann</p>
-</div>
-<div class="text-center">
-<div class="w-16 h-16 bg-gray-300 rounded-full mx-auto mb-1 flex items-center justify-center border-2 border-white shadow-md">
-<i class="fas fa-user text-gray-500 text-2xl"></i>
-</div>
-<p class="text-xs font-bold text-gray-700">A. Szent-Györgyi</p>
-</div>
-</div>
-</div>
-</div>
-<!-- Footer -->
-<div class="absolute bottom-0 w-full h-10 bg-white border-t border-gray-200 flex items-center justify-between px-16 z-20">
-<p class="text-xs text-gray-400">TCA Cycle (Krebs Cycle) - Biochemistry</p>
-<p class="text-xs text-gray-400">2</p>
-</div>
-</div>
+
 </body>
 </html>
