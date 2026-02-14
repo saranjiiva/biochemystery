@@ -1,208 +1,115 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<title>Slides Library Viewer</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Medical Slide Dashboard</title>
 
 <style>
-* { box-sizing: border-box; }
-
 body {
   margin: 0;
-  font-family: "Segoe UI", Arial, sans-serif;
-  background: #0f172a;
-  color: white;
-  overflow: hidden;
-}
-
-.app {
+  font-family: Arial, sans-serif;
   display: flex;
   height: 100vh;
-  width: 100vw;
 }
 
 /* Sidebar */
 .sidebar {
-  width: 280px;
-  background: #020617;
-  border-right: 1px solid #1e293b;
-  display: flex;
-  flex-direction: column;
-}
-
-.sidebar-header {
-  padding: 14px 16px;
-  font-weight: bold;
-  border-bottom: 1px solid #1e293b;
-}
-
-.deck-list, .slide-list {
+  width: 320px;
+  background: #0f172a;
+  color: white;
   overflow-y: auto;
 }
 
-.deck-item {
-  padding: 12px 16px;
-  cursor: pointer;
-  border-bottom: 1px solid #020617;
-  font-size: 14px;
-  color: #cbd5f5;
+.sidebar-header {
+  padding: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  background: #020617;
+  text-align: center;
 }
-.deck-item:hover { background: #1e293b; }
+
+.deck-item {
+  padding: 18px 20px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 600;
+  background: #0f172a;
+  margin: 8px;
+  border-radius: 10px;
+  transition: 0.2s ease;
+}
+
+.deck-item:hover {
+  background: #1e293b;
+  transform: translateX(5px);
+}
+
 .deck-item.active {
   background: #0ea5e9;
   color: white;
-  font-weight: bold;
 }
 
-.slide-item {
-  padding: 10px 20px;
-  cursor: pointer;
-  border-bottom: 1px solid #020617;
-  font-size: 13px;
-  color: #94a3b8;
-}
-.slide-item:hover { background: #1e293b; }
-.slide-item.active {
-  background: #334155;
-  color: white;
-}
-
-/* Viewer */
-.viewer {
+/* Main Content */
+.main {
   flex: 1;
-  background: #020617;
   display: flex;
   flex-direction: column;
 }
 
-.viewer-toolbar {
-  height: 56px;
-  background: #020617;
-  border-bottom: 1px solid #1e293b;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 16px;
-}
-
-.viewer-toolbar .left,
-.viewer-toolbar .right {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.viewer-toolbar button {
-  background: #1e293b;
+.viewer {
+  flex: 1;
   border: none;
-  color: white;
-  padding: 8px 14px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 14px;
+  width: 100%;
 }
-.viewer-toolbar button:hover { background: #334155; }
+
+/* Controls */
+.controls {
+  background: #f1f5f9;
+  padding: 12px;
+  text-align: center;
+  border-top: 1px solid #cbd5e1;
+}
+
+button {
+  padding: 8px 16px;
+  margin: 0 5px;
+  border: none;
+  background: #0ea5e9;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #0284c7;
+}
 
 .slide-counter {
-  font-size: 13px;
-  color: #cbd5f5;
-}
-
-.viewer-stage {
-  flex: 1;
-  background: #020617;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  cursor: pointer;
-}
-
-.slide-frame {
-  width: 1280px;
-  height: 720px;
-  border: 1px solid #1e293b;
-  background: white;
-  box-shadow: 0 0 40px rgba(0,0,0,0.6);
-}
-
-.slide-frame iframe,
-.slide-frame img {
-  width: 100%;
-  height: 100%;
-  border: none;
-  object-fit: contain;
-  background: white;
-}
-
-/* TRUE FULLSCREEN MODE */
-.fullscreen .sidebar,
-.fullscreen .viewer-toolbar {
-  display: none;
-}
-.fullscreen .viewer-stage {
-  background: black;
-}
-.fullscreen .slide-frame {
-  width: 100vw;
-  height: 100vh;
-  border: none;
-  box-shadow: none;
-}
-
-/* Mobile */
-@media (max-width: 900px) {
-  .sidebar { width: 220px; }
-  .slide-frame {
-    width: 90vw;
-    height: calc(90vw * 9 / 16);
-  }
+  margin-left: 15px;
+  font-weight: bold;
 }
 </style>
 </head>
+
 <body>
 
-<div class="app" id="app">
+<div class="sidebar">
+  <div class="sidebar-header">Medical Slide Decks</div>
+  <div id="deckList"></div>
+</div>
 
-  <!-- Sidebar -->
-  <div class="sidebar">
-    <div class="sidebar-header">📚 Slide Library</div>
-    <div class="deck-list" id="deckList"></div>
-    <div class="slide-list" id="slideList"></div>
+<div class="main">
+  <iframe id="slideFrame" class="viewer"></iframe>
+
+  <div class="controls">
+    <button onclick="prevSlide()">Previous</button>
+    <button onclick="nextSlide()">Next</button>
+    <span class="slide-counter" id="counter"></span>
   </div>
-
-  <!-- Viewer -->
-  <div class="viewer">
-
-    <!-- Toolbar -->
-    <div class="viewer-toolbar">
-      <div class="left">
-        <button onclick="prevSlide()">⬅ Prev</button>
-        <button onclick="nextSlide()">Next ➡</button>
-        <button onclick="enterFullscreen()">⛶ Slideshow</button>
-      </div>
-
-      <div class="center slide-counter" id="counter">– / –</div>
-
-      <div class="right">
-        <button onclick="exitViewer()">✖ Close</button>
-      </div>
-    </div>
-
-    <!-- Slide Area -->
-    <div class="viewer-stage" id="stage">
-      <div class="slide-frame" id="slideFrameContainer"></div>
-    </div>
-
-  </div>
-
 </div>
 
 <script>
-/* ================================
-   DATA STRUCTURE
-================================ */
 
 let decks = [
   {
@@ -253,9 +160,9 @@ let decks = [
       "slides/hmp/slide3.html",
       "slides/hmp/slide4.html"
     ]
-  }
-   {
-    title: "Forensic kima",
+  },
+  {
+    title: "Forensic Kima",
     slides: [
       "slides/fm/slide1.html",
       "slides/fm/slide2.html",
@@ -265,164 +172,66 @@ let decks = [
   }
 ];
 
-let currentDeck = 0;
-let currentSlide = 0;
-
-const deckList = document.getElementById("deckList");
-const slideList = document.getElementById("slideList");
-const counter = document.getElementById("counter");
-const slideFrameContainer = document.getElementById("slideFrameContainer");
-const app = document.getElementById("app");
-const stage = document.getElementById("stage");
-
-/* ================================
-   BUILD SIDEBAR
-================================ */
+let currentDeckIndex = 0;
+let currentSlideIndex = 0;
 
 function buildDeckList() {
+  let deckList = document.getElementById("deckList");
   deckList.innerHTML = "";
-  decks.forEach((deck, i) => {
-    const div = document.createElement("div");
+
+  decks.forEach((deck, index) => {
+    let div = document.createElement("div");
     div.className = "deck-item";
-    div.textContent = deck.title;
-    div.onclick = () => loadDeck(i);
+    div.innerText = deck.title;
+    div.onclick = () => loadDeck(index);
     deckList.appendChild(div);
   });
+
+  highlightActiveDeck();
 }
 
-function buildSlideList() {
-  slideList.innerHTML = "";
-  const slides = decks[currentDeck].slides;
-
-  slides.forEach((_, i) => {
-    const div = document.createElement("div");
-    div.className = "slide-item";
-    div.textContent = `Slide ${i + 1}`;
-    div.onclick = () => loadSlide(i);
-    slideList.appendChild(div);
+function highlightActiveDeck() {
+  let items = document.querySelectorAll(".deck-item");
+  items.forEach((item, index) => {
+    item.classList.toggle("active", index === currentDeckIndex);
   });
 }
-
-/* ================================
-   LOADERS
-================================ */
 
 function loadDeck(index) {
-  currentDeck = index;
-  currentSlide = 0;
-  buildSlideList();
-  loadSlide(0);
-  updateDeckUI();
+  currentDeckIndex = index;
+  currentSlideIndex = 0;
+  highlightActiveDeck();
+  loadSlide();
 }
 
-function loadSlide(index) {
-  currentSlide = index;
-  const url = decks[currentDeck].slides[index];
+function loadSlide() {
+  let deck = decks[currentDeckIndex];
+  let slideFrame = document.getElementById("slideFrame");
+  slideFrame.src = deck.slides[currentSlideIndex];
 
-  slideFrameContainer.innerHTML = "";
-
-  if (url.endsWith(".html")) {
-    const iframe = document.createElement("iframe");
-    iframe.src = url;
-    slideFrameContainer.appendChild(iframe);
-  } else {
-    const img = document.createElement("img");
-    img.src = url;
-    slideFrameContainer.appendChild(img);
-  }
-
-  updateUI();
+  document.getElementById("counter").innerText =
+    `Slide ${currentSlideIndex + 1} of ${deck.slides.length}`;
 }
-
-/* ================================
-   UI UPDATE
-================================ */
-
-function updateUI() {
-  document.querySelectorAll(".slide-item").forEach((el, i) => {
-    el.classList.toggle("active", i === currentSlide);
-  });
-  counter.textContent = `${currentSlide + 1} / ${decks[currentDeck].slides.length}`;
-}
-
-function updateDeckUI() {
-  document.querySelectorAll(".deck-item").forEach((el, i) => {
-    el.classList.toggle("active", i === currentDeck);
-  });
-}
-
-/* ================================
-   NAVIGATION
-================================ */
 
 function nextSlide() {
-  if (currentSlide < decks[currentDeck].slides.length - 1) {
-    loadSlide(currentSlide + 1);
+  let deck = decks[currentDeckIndex];
+  if (currentSlideIndex < deck.slides.length - 1) {
+    currentSlideIndex++;
+    loadSlide();
   }
 }
 
 function prevSlide() {
-  if (currentSlide > 0) {
-    loadSlide(currentSlide - 1);
+  if (currentSlideIndex > 0) {
+    currentSlideIndex--;
+    loadSlide();
   }
 }
 
-/* ================================
-   TRUE FULLSCREEN API
-================================ */
-
-function enterFullscreen() {
-  if (app.requestFullscreen) {
-    app.requestFullscreen();
-  } else if (app.webkitRequestFullscreen) {
-    app.webkitRequestFullscreen();
-  } else if (app.msRequestFullscreen) {
-    app.msRequestFullscreen();
-  }
-  app.classList.add("fullscreen");
-}
-
-function exitFullscreen() {
-  if (document.exitFullscreen) {
-    document.exitFullscreen();
-  } else if (document.webkitExitFullscreen) {
-    document.webkitExitFullscreen();
-  } else if (document.msExitFullscreen) {
-    document.msExitFullscreen();
-  }
-  app.classList.remove("fullscreen");
-}
-
-/* ================================
-   EXIT VIEWER
-================================ */
-
-function exitViewer() {
-  window.location.href = "index.html";
-}
-
-/* ================================
-   KEYBOARD + CLICK CONTROL
-================================ */
-
-document.addEventListener("keydown", e => {
-  if (e.key === "ArrowRight" || e.key === " " || e.key === "Enter") nextSlide();
-  if (e.key === "ArrowLeft") prevSlide();
-  if (e.key === "Escape") exitFullscreen();
-  if (e.key === "f" || e.key === "F") enterFullscreen();
-});
-
-/* Click anywhere on slide → next */
-stage.addEventListener("click", () => {
-  if (document.fullscreenElement) nextSlide();
-});
-
-/* ================================
-   INIT
-================================ */
-
+/* Initialize */
 buildDeckList();
-loadDeck(0);
+loadSlide();
+
 </script>
 
 </body>
