@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Organophosphorus Poisoning – From Exposure to Autopsy</title>
+<title>Alcohol Intoxication & Drunken Driving</title>
 
 <style>
 body{
@@ -15,115 +15,274 @@ body{
   font-family:'Segoe UI', Arial, sans-serif;
 }
 
-/* FULL SIZE BORDER ADDED */
+/* OUTER FRAME FOR SPACE ON ALL SIDES */
+.frame{
+  padding:40px;          /* space around poster */
+  background:#e5e7eb;
+}
+
 .slide{
   width:1920px;
   height:1080px;
   background:white;
-  padding:35px;
+  padding:50px;
   box-sizing:border-box;
   position:relative;
-  overflow:hidden;
-  border:16px solid #7c2d12;          /* Strong forensic outer border */
-  box-shadow:0 0 0 6px #fdba74 inset; /* Inner highlight border */
+  border:14px solid #7c2d12;   /* FULL BORDER */
+  border-radius:25px;          /* Smooth corners */
 }
 
+/* TITLE */
 .title{
   text-align:center;
-  font-size:46px;
+  font-size:50px;
   font-weight:bold;
   color:#7c2d12;
 }
 
 .subtitle{
   text-align:center;
-  font-size:20px;
-  margin-bottom:15px;
+  font-size:22px;
+  margin-bottom:25px;
   color:#374151;
 }
 
+/* GRID LAYOUT */
 .grid{
   display:grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap:20px;
+  grid-template-columns: 1fr 1fr;
+  gap:30px;
 }
 
+/* CARDS */
 .card{
   background:#f9fafb;
-  padding:15px;
-  border-radius:12px;
-  box-shadow:0 4px 10px rgba(0,0,0,0.1);
-  font-size:14px;
+  padding:22px;
+  border-radius:15px;
+  box-shadow:0 5px 14px rgba(0,0,0,0.08);
 }
 
 .card h2{
-  margin:0 0 8px 0;
+  margin-top:0;
   color:#b91c1c;
-  font-size:18px;
+  font-size:24px;
 }
 
 ul{
-  margin:5px 0;
-  padding-left:18px;
+  margin-top:8px;
+  font-size:16px;
+  line-height:1.6;
 }
 
+p{
+  font-size:16px;
+  line-height:1.6;
+}
+
+/* TABLE */
 table{
   width:100%;
   border-collapse:collapse;
-  font-size:13px;
+  font-size:16px;
 }
 
 th{
   background:#0ea5e9;
   color:white;
-  padding:5px;
+  padding:8px;
 }
 
 td{
   border:1px solid #d1d5db;
-  padding:5px;
+  padding:8px;
   text-align:center;
 }
 
+/* FLOWCHART */
 .flow{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  margin-top:8px;
+  margin-top:15px;
 }
 
 .box{
   background:#dbeafe;
-  padding:8px;
-  border-radius:8px;
-  font-size:12px;
+  padding:12px;
+  border-radius:12px;
+  font-size:15px;
   font-weight:bold;
-  width:150px;
+  width:190px;
   text-align:center;
 }
 
 .arrow{
-  font-size:20px;
+  font-size:28px;
   font-weight:bold;
   color:#2563eb;
 }
 
+/* FOOTER */
 .footer{
   position:absolute;
-  bottom:15px;
-  right:30px;
-  font-size:14px;
+  bottom:25px;
+  right:50px;
+  font-size:16px;
   color:#6b7280;
 }
+
 </style>
 </head>
 
 <body>
 
+<div class="frame">
+
 <div class="slide">
 
-<!-- YOUR ENTIRE ORIGINAL CONTENT REMAINS SAME BELOW -->
+<div class="title">Alcohol Intoxication & Drunken Driving</div>
+<div class="subtitle">Forensic, Clinical & Medicolegal Perspective</div>
 
+<div class="grid">
+
+<!-- LEFT COLUMN -->
+
+<div class="card">
+<h2>Mechanism of Alcohol Intoxication</h2>
+
+<p><b>Primary Action:</b> CNS Depressant</p>
+
+<ul>
+<li>Enhances GABA activity → Sedation</li>
+<li>Inhibits NMDA receptors → Cognitive impairment</li>
+<li>Decreases cortical inhibition → Disinhibition</li>
+<li>Depresses respiratory center (high levels)</li>
+</ul>
+
+<p><b>Metabolism:</b></p>
+<ul>
+<li>Liver (Alcohol Dehydrogenase)</li>
+<li>Zero-order kinetics (~15 mg/dL/hour)</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>Clinical Stages (Based on BAC)</h2>
+
+<table>
+<tr>
+<th>BAC (mg/dL)</th>
+<th>Clinical Features</th>
+</tr>
+
+<tr>
+<td>20–50</td>
+<td>Mild euphoria, impaired judgment</td>
+</tr>
+
+<tr>
+<td>50–100</td>
+<td>Poor coordination, delayed reaction</td>
+</tr>
+
+<tr>
+<td>100–200</td>
+<td>Ataxia, slurred speech</td>
+</tr>
+
+<tr>
+<td>200–300</td>
+<td>Confusion, stupor</td>
+</tr>
+
+<tr>
+<td>>300</td>
+<td>Coma, respiratory depression</td>
+</tr>
+
+</table>
+</div>
+
+<!-- RIGHT COLUMN -->
+
+<div class="card">
+<h2>Drunken Driving (Medicolegal Aspects)</h2>
+
+<p><b>Legal Blood Alcohol Limit:</b></p>
+
+<ul>
+<li>Most countries: 0.05% – 0.08% (50–80 mg/dL)</li>
+<li>Impairment begins below legal limit</li>
+</ul>
+
+<p><b>Evidence Collection:</b></p>
+<ul>
+<li>Breathalyzer test</li>
+<li>Blood alcohol estimation</li>
+<li>Urine sample</li>
+<li>Clinical examination</li>
+</ul>
+
+<p><b>Common Driving Impairments:</b></p>
+<ul>
+<li>Delayed reaction time</li>
+<li>Poor judgment</li>
+<li>Visual impairment</li>
+<li>Risk-taking behavior</li>
+</ul>
+
+</div>
+
+<div class="card">
+<h2>Autopsy Findings in Alcohol-Related Death</h2>
+
+<b>External:</b>
+<ul>
+<li>Odor of alcohol</li>
+<li>Injuries from road traffic accident</li>
+</ul>
+
+<b>Internal:</b>
+<ul>
+<li>Congested organs</li>
+<li>Fatty liver (chronic cases)</li>
+<li>Gastric mucosal congestion</li>
+<li>Pulmonary edema</li>
+</ul>
+
+<b>Cause of Death:</b>
+<ul>
+<li>Respiratory depression</li>
+<li>Head injury (RTA)</li>
+<li>Aspiration of vomitus</li>
+</ul>
+
+</div>
+
+</div>
+
+<div class="card" style="margin-top:30px;">
+<h2>Flowchart: Alcohol to Fatal Accident</h2>
+
+<div class="flow">
+<div class="box">Alcohol Consumption</div>
+<div class="arrow">→</div>
+<div class="box">Rising BAC</div>
+<div class="arrow">→</div>
+<div class="box">Impaired Judgment & Reflexes</div>
+<div class="arrow">→</div>
+<div class="box">Road Traffic Accident</div>
+<div class="arrow">→</div>
+<div class="box">Injury / Death</div>
+</div>
+
+</div>
+
+<div class="footer">
+Department of Forensic Medicine | MBBS Poster Presentation
+</div>
+
+</div>
 </div>
 
 </body>
