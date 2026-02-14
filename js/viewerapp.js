@@ -1,87 +1,112 @@
 const decks = [
   {
     title: "TCA Cycle",
-    slides: Array.from({length:35}, (_,i)=>`slides/tca/slide${i+1}.html`)
+    slides: Array.from({length: 10}, (_,i)=>`slides/tca/slide${i+1}.html`)
   },
   {
-    title: "HMP",
-    slides: [
-      "slides/hmp/slide1.html",
-      "slides/hmp/slide2.html",
-      "slides/hmp/slide3.html",
-      "slides/hmp/slide4.html"
-    ]
+    title: "HMP Pathway",
+    slides: Array.from({length: 5}, (_,i)=>`slides/hmp/slide${i+1}.html`)
   }
 ];
 
 let currentDeckIndex = 0;
 let currentSlideIndex = 0;
 
-const sidebar = document.getElementById("sidebar");
+const deckContainer = document.getElementById("deckContainer");
 const slideFrame = document.getElementById("slideFrame");
 const counter = document.getElementById("counter");
 const topbar = document.getElementById("topbar");
 const mainContent = document.getElementById("mainContent");
 
 function init() {
-  buildDeckList();
+  buildSidebar();
   loadDeck(0);
 }
 
-function buildDeckList() {
-  const deckList = document.getElementById("deckList");
-  deckList.innerHTML = "";
+function buildSidebar() {
+  deckContainer.innerHTML = "";
 
-  decks.forEach((deck, index) => {
-    const div = document.createElement("div");
-    div.className = "deck-item";
-    div.innerText = deck.title;
-    div.onclick = () => loadDeck(index);
-    deckList.appendChild(div);
+  decks.forEach((deck, deckIndex) => {
+
+    const deckDiv = document.createElement("div");
+    deckDiv.className = "deck";
+
+    const titleDiv = document.createElement("div");
+    titleDiv.className = "deck-title";
+    titleDiv.innerHTML = `${deck.title} <span>▼</span>`;
+    titleDiv.onclick = () => toggleDeck(deckIndex);
+
+    const slideList = document.createElement("div");
+    slideList.className = "slide-list";
+    slideList.id = `slideList-${deckIndex}`;
+
+    deck.slides.forEach((_, slideIndex) => {
+      const slideTile = document.createElement("div");
+      slideTile.className = "slide-tile";
+      slideTile.innerText = `Slide ${slideIndex + 1}`;
+      slideTile.onclick = () => {
+        currentDeckIndex = deckIndex;
+        currentSlideIndex = slideIndex;
+        loadSlide();
+        highlightActive();
+      };
+      slideList.appendChild(slideTile);
+    });
+
+    deckDiv.appendChild(titleDiv);
+    deckDiv.appendChild(slideList);
+    deckContainer.appendChild(deckDiv);
   });
+}
+
+function toggleDeck(index) {
+  const slideList = document.getElementById(`slideList-${index}`);
+  slideList.classList.toggle("expanded");
 }
 
 function loadDeck(index) {
   currentDeckIndex = index;
   currentSlideIndex = 0;
   topbar.innerText = decks[index].title;
-  highlightActive();
   loadSlide();
-}
-
-function highlightActive() {
-  document.querySelectorAll(".deck-item").forEach((item, i) => {
-    item.classList.toggle("active", i === currentDeckIndex);
-  });
+  highlightActive();
 }
 
 function loadSlide() {
-  slideFrame.classList.add("fade");
-
-  setTimeout(() => {
-    slideFrame.src = decks[currentDeckIndex].slides[currentSlideIndex];
-    counter.innerText = `Slide ${currentSlideIndex+1} of ${decks[currentDeckIndex].slides.length}`;
-    slideFrame.classList.remove("fade");
-  }, 200);
+  slideFrame.src = decks[currentDeckIndex].slides[currentSlideIndex];
+  counter.innerText =
+    `Slide ${currentSlideIndex + 1} of ${decks[currentDeckIndex].slides.length}`;
 }
 
-function nextSlide() {
-  if (currentSlideIndex < decks[currentDeckIndex].slides.length - 1) {
-    currentSlideIndex++;
-    loadSlide();
-  }
-}
+function highlightActive() {
+  document.querySelectorAll(".slide-tile").forEach(tile => tile.classList.remove("active"));
 
-function prevSlide() {
-  if (currentSlideIndex > 0) {
-    currentSlideIndex--;
-    loadSlide();
-  }
+  const slideLists = document.querySelectorAll(".slide-list");
+  slideLists.forEach(list => list.classList.remove("expanded"));
+
+  const activeList = document.getElementById(`slideList-${currentDeckIndex}`);
+  activeList.classList.add("expanded");
+
+  const activeTile = activeList.children[currentSlideIndex];
+  if (activeTile) activeTile.classList.add("active");
 }
 
 /* Controls */
-document.getElementById("nextBtn").onclick = nextSlide;
-document.getElementById("prevBtn").onclick = prevSlide;
+document.getElementById("nextBtn").onclick = () => {
+  if (currentSlideIndex < decks[currentDeckIndex].slides.length - 1) {
+    currentSlideIndex++;
+    loadSlide();
+    highlightActive();
+  }
+};
+
+document.getElementById("prevBtn").onclick = () => {
+  if (currentSlideIndex > 0) {
+    currentSlideIndex--;
+    loadSlide();
+    highlightActive();
+  }
+};
 
 document.getElementById("fullscreenBtn").onclick = () => {
   if (!document.fullscreenElement) {
@@ -95,25 +120,13 @@ document.getElementById("fullscreenBtn").onclick = () => {
 
 /* Keyboard Navigation */
 document.addEventListener("keydown", e => {
-  if (e.key === "ArrowRight") nextSlide();
-  if (e.key === "ArrowLeft") prevSlide();
+  if (e.key === "ArrowRight") document.getElementById("nextBtn").click();
+  if (e.key === "ArrowLeft") document.getElementById("prevBtn").click();
 });
 
-/* Swipe Navigation */
-let startX = 0;
-slideFrame.addEventListener("touchstart", e => {
-  startX = e.changedTouches[0].screenX;
-});
-
-slideFrame.addEventListener("touchend", e => {
-  let diff = e.changedTouches[0].screenX - startX;
-  if (diff < -50) nextSlide();
-  if (diff > 50) prevSlide();
-});
-
-/* Sidebar Toggle */
+/* Sidebar Toggle (Mobile) */
 document.getElementById("menuToggle").onclick = () => {
-  sidebar.classList.toggle("hidden");
+  document.getElementById("sidebar").classList.toggle("hidden");
 };
 
 init();
