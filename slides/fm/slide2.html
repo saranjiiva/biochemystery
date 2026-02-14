@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Forensic Odontology – Medicolegal Applications</title>
+
+<style>
+body{
+    margin:0;
+    background:#eef2f7;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    font-family:'Segoe UI', Arial, sans-serif;
+}
+
+.slide{
+    width:1920px;
+    height:1080px;
+    background:white;
+    padding:35px;
+    box-sizing:border-box;
+    overflow:hidden;
+}
+
+.title{
+    text-align:center;
+    font-size:48px;
+    font-weight:bold;
+    color:#1e3a8a;
+}
+
+.subtitle{
+    text-align:center;
+    font-size:20px;
+    margin-bottom:15px;
+    color:#374151;
+}
+
+/* Layout */
+.layout{
+    display:grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap:20px;
+}
+
+/* Card Styling */
+.card{
+    background:#f8fafc;
+    padding:18px;
+    border-radius:12px;
+    box-shadow:0 3px 8px rgba(0,0,0,0.08);
+}
+
+.card h2{
+    font-size:20px;
+    color:#b91c1c;
+    margin-bottom:8px;
+}
+
+.card p, .card li{
+    font-size:14px;
+    line-height:1.5;
+}
+
+/* Table Styling */
+table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:13px;
+}
+
+th{
+    background:#2563eb;
+    color:white;
+    padding:6px;
+}
+
+td{
+    border:1px solid #d1d5db;
+    padding:6px;
+    text-align:center;
+}
+
+/* Flowchart */
+.flow{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:10px;
+}
+
+.box{
+    background:#dbeafe;
+    padding:8px;
+    border-radius:8px;
+    font-size:12px;
+    font-weight:bold;
+    text-align:center;
+    width:160px;
+}
+
+.arrow{
+    font-size:20px;
+    font-weight:bold;
+    color:#2563eb;
+}
+
+/* Footer */
+.footer{
+    position:absolute;
+    bottom:15px;
+    right:35px;
+    font-size:13px;
+    color:#6b7280;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="slide">
+
+<div class="title">Forensic Odontology</div>
+<div class="subtitle">Role of Teeth in Medicolegal Identification</div>
+
+<div class="layout">
+
+<!-- LEFT PANEL -->
+<div>
+
+<div class="card">
+<h2>1. Definition</h2>
+<p>Forensic odontology is the application of dental science to legal investigations, primarily for identification of human remains and bite mark analysis.</p>
+</div>
+
+<div class="card">
+<h2>2. Dental Anatomy (Forensic Importance)</h2>
+
+<svg width="100%" height="220" viewBox="0 0 400 200">
+
+<!-- Tooth Crown -->
+<path d="M150 40 Q200 10 250 40 L230 120 Q200 150 170 120 Z" fill="#fde68a" stroke="black"/>
+<text x="270" y="50" font-size="10">Crown</text>
+
+<!-- Enamel -->
+<path d="M160 45 Q200 25 240 45 L225 105 Q200 130 175 105 Z" fill="#fef3c7" stroke="black"/>
+<text x="270" y="70" font-size="10">Enamel</text>
+
+<!-- Dentin -->
+<ellipse cx="200" cy="85" rx="25" ry="20" fill="#fca5a5" stroke="black"/>
+<text x="270" y="90" font-size="10">Dentin</text>
+
+<!-- Pulp -->
+<circle cx="200" cy="85" r="10" fill="red"/>
+<text x="270" y="110" font-size="10">Pulp (DNA Source)</text>
+
+</svg>
+
+<ul>
+<li>Enamel – hardest tissue (resists fire & decomposition)</li>
+<li>Pulp – rich source of DNA</li>
+<li>Teeth survive extreme conditions</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>3. Age Estimation</h2>
+<ul>
+<li>Tooth eruption pattern (children)</li>
+<li>Attrition & wear</li>
+<li>Secondary dentin deposition</li>
+<li>Cementum annulations</li>
+<li>Gustafson’s method</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>4. DNA Analysis from Teeth</h2>
+<ul>
+<li>Pulp tissue extraction</li>
+<li>Mitochondrial DNA analysis</li>
+<li>Useful in burnt or decomposed bodies</li>
+<li>Mass disaster identification</li>
+</ul>
+</div>
+
+</div>
+
+<!-- RIGHT PANEL -->
+<div>
+
+<div class="card">
+<h2>5. Bite Mark Analysis</h2>
+
+<svg width="100%" height="180" viewBox="0 0 400 160">
+<ellipse cx="200" cy="80" rx="120" ry="50" fill="#fecaca" stroke="black"/>
+<circle cx="140" cy="80" r="15" fill="white" stroke="black"/>
+<circle cx="170" cy="80" r="15" fill="white" stroke="black"/>
+<circle cx="230" cy="80" r="15" fill="white" stroke="black"/>
+<circle cx="260" cy="80" r="15" fill="white" stroke="black"/>
+<text x="110" y="140" font-size="12">Pattern comparison with suspect dentition</text>
+</svg>
+
+<ul>
+<li>Photographic documentation</li>
+<li>Impression analysis</li>
+<li>Inter-canine distance measurement</li>
+<li>Comparison with dental casts</li>
+</ul>
+
+</div>
+
+<div class="card">
+<h2>6. Applications in Identification</h2>
+<table>
+<tr>
+<th>Application</th>
+<th>Use</th>
+</tr>
+<tr>
+<td>Mass Disasters</td>
+<td>Comparison with dental records</td>
+</tr>
+<tr>
+<td>Burn Victims</td>
+<td>Teeth resist high temperatures</td>
+</tr>
+<tr>
+<td>Unknown Bodies</td>
+<td>Age & identity estimation</td>
+</tr>
+<tr>
+<td>Child Abuse</td>
+<td>Bite mark evaluation</td>
+</tr>
+</table>
+</div>
+
+<div class="card">
+<h2>7. Forensic Workflow</h2>
+
+<div class="flow">
+<div class="box">Recovery of Remains</div>
+<div class="arrow">→</div>
+<div class="box">Dental Examination</div>
+<div class="arrow">→</div>
+<div class="box">Record Comparison</div>
+<div class="arrow">→</div>
+<div class="box">Identification</div>
+</div>
+
+</div>
+
+<div class="card">
+<h2>8. Medicolegal Importance</h2>
+<ul>
+<li>Reliable identification method</li>
+<li>Highly durable biological evidence</li>
+<li>Accepted in court testimony</li>
+<li>Supports DNA and fingerprint analysis</li>
+</ul>
+</div>
+
+</div>
+
+</div>
+
+<div class="footer">
+Department of Forensic Medicine | MBBS Academic Poster
+</div>
+
+</div>
+
+</body>
+</html>
