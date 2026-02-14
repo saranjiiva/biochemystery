@@ -1,103 +1,102 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Hanging vs Strangulation</title>
-<style>
+<title>Hanging vs Strangulation – Forensic Differentiation</title>
 
+<style>
 body{
     margin:0;
-    font-family: 'Segoe UI', Arial, sans-serif;
     background:#e5e7eb;
     display:flex;
     justify-content:center;
     align-items:center;
     height:100vh;
+    font-family:'Segoe UI', Arial, sans-serif;
 }
 
 .slide{
     width:1920px;
     height:1080px;
     background:white;
-    padding:50px;
+    padding:40px;
     box-sizing:border-box;
     position:relative;
 }
 
-/* Title */
 .title{
     text-align:center;
-    font-size:60px;
+    font-size:54px;
     font-weight:bold;
     color:#1e3a8a;
 }
 
 .subtitle{
     text-align:center;
-    font-size:28px;
-    margin-bottom:30px;
+    font-size:24px;
+    margin-bottom:20px;
     color:#374151;
 }
 
-/* Layout */
-.content{
+.layout{
     display:grid;
-    grid-template-columns: 1fr 2fr;
-    gap:40px;
+    grid-template-columns: 1.2fr 1.8fr;
+    gap:30px;
 }
 
-/* Cards */
+/* Card styling */
 .card{
-    background:#f3f4f6;
-    padding:25px;
+    background:#f9fafb;
+    padding:20px;
     border-radius:15px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
 }
 
 .card h2{
-    font-size:28px;
-    margin-bottom:15px;
     color:#b91c1c;
-}
-
-.card p, .card li{
-    font-size:20px;
-    line-height:1.6;
+    margin-bottom:10px;
 }
 
 /* Table */
 table{
     width:100%;
     border-collapse:collapse;
-    font-size:18px;
-    margin-top:15px;
+    font-size:16px;
 }
 
 th{
     background:#2563eb;
     color:white;
-    padding:10px;
+    padding:8px;
 }
 
 td{
     border:1px solid #d1d5db;
-    padding:10px;
+    padding:8px;
     text-align:center;
 }
 
-/* Image Section */
-.images{
+/* Flowchart */
+.flow{
     display:flex;
-    justify-content:space-around;
-    margin-top:25px;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:15px;
 }
 
-.image-box{
-    text-align:center;
-}
-
-.image-box p{
+.box{
+    background:#dbeafe;
+    padding:10px 15px;
+    border-radius:10px;
     font-weight:bold;
-    margin-top:10px;
+    font-size:14px;
+    text-align:center;
+    width:200px;
+}
+
+.arrow{
+    font-size:30px;
+    font-weight:bold;
+    color:#2563eb;
 }
 
 /* Footer */
@@ -105,7 +104,7 @@ td{
     position:absolute;
     bottom:20px;
     right:40px;
-    font-size:18px;
+    font-size:16px;
     color:#6b7280;
 }
 
@@ -117,52 +116,85 @@ td{
 <div class="slide">
 
 <div class="title">Hanging vs Strangulation</div>
-<div class="subtitle">Forensic Differentiation – MBBS</div>
+<div class="subtitle">Forensic Differentiation – Medicolegal Perspective</div>
 
-<div class="content">
+<div class="layout">
 
-<!-- Left Column -->
+<!-- LEFT SIDE -->
+<div>
+
 <div class="card">
-<h2>Definitions</h2>
-<p><b>Hanging:</b> Constriction of neck by ligature where body weight acts as constricting force.</p>
-<p><b>Strangulation:</b> Constriction of neck by external force without suspension.</p>
+<h2>Neck Anatomy (Forensic Relevance)</h2>
 
-<h2>Mechanism of Death</h2>
+<!-- Realistic Anatomical SVG -->
+<svg width="100%" height="300" viewBox="0 0 400 300">
+
+<!-- Skull base -->
+<ellipse cx="200" cy="50" rx="70" ry="40" fill="#fde68a" stroke="black"/>
+
+<!-- Neck outline -->
+<rect x="170" y="90" width="60" height="140" fill="#fde68a" stroke="black"/>
+
+<!-- Thyroid cartilage -->
+<polygon points="170,120 230,120 210,140 190,140" fill="#fca5a5" stroke="black"/>
+<text x="240" y="135" font-size="12">Thyroid Cartilage</text>
+
+<!-- Hyoid bone -->
+<line x1="175" y1="110" x2="225" y2="110" stroke="black" stroke-width="4"/>
+<text x="240" y="115" font-size="12">Hyoid Bone</text>
+
+<!-- Trachea -->
+<line x1="200" y1="140" x2="200" y2="230" stroke="gray" stroke-width="6"/>
+<text x="240" y="190" font-size="12">Trachea</text>
+
+</svg>
+
+<p><b>Common Injury Sites:</b></p>
 <ul>
-<li>Asphyxia</li>
-<li>Cerebral ischemia</li>
-<li>Vagal inhibition</li>
-<li>Cervical spine injury (judicial hanging)</li>
+<li>Hyoid fracture (common in strangulation)</li>
+<li>Thyroid cartilage damage</li>
+<li>Neck muscle hemorrhage</li>
 </ul>
-
-<div class="images">
-
-<div class="image-box">
-<!-- Simple Hanging SVG -->
-<svg width="150" height="200">
-<line x1="75" y1="10" x2="75" y2="60" stroke="brown" stroke-width="5"/>
-<circle cx="75" cy="85" r="25" stroke="black" fill="#fde68a"/>
-<line x1="75" y1="110" x2="75" y2="170" stroke="black" stroke-width="5"/>
-</svg>
-<p>Hanging</p>
 </div>
 
-<div class="image-box">
-<!-- Simple Strangulation SVG -->
-<svg width="150" height="200">
-<circle cx="75" cy="85" r="25" stroke="black" fill="#fde68a"/>
-<line x1="40" y1="85" x2="110" y2="85" stroke="red" stroke-width="8"/>
-<line x1="75" y1="110" x2="75" y2="170" stroke="black" stroke-width="5"/>
-</svg>
-<p>Strangulation</p>
-</div>
-
-</div>
-</div>
-
-<!-- Right Column -->
 <div class="card">
-<h2>Key Forensic Differences</h2>
+<h2>Autopsy Internal Findings</h2>
+<table>
+<tr>
+<th>Finding</th>
+<th>Hanging</th>
+<th>Strangulation</th>
+</tr>
+<tr>
+<td>Neck muscle hemorrhage</td>
+<td>Mild / absent</td>
+<td>Marked</td>
+</tr>
+<tr>
+<td>Hyoid fracture</td>
+<td>Rare</td>
+<td>Common</td>
+</tr>
+<tr>
+<td>Carotid intimal tear</td>
+<td>Rare</td>
+<td>May be present</td>
+</tr>
+<tr>
+<td>Congestion of organs</td>
+<td>Mild</td>
+<td>Severe</td>
+</tr>
+</table>
+</div>
+
+</div>
+
+<!-- RIGHT SIDE -->
+<div>
+
+<div class="card">
+<h2>External Forensic Differences</h2>
 
 <table>
 <tr>
@@ -173,7 +205,7 @@ td{
 
 <tr>
 <td>Ligature Mark</td>
-<td>Oblique, upward</td>
+<td>Oblique</td>
 <td>Horizontal</td>
 </tr>
 
@@ -184,21 +216,15 @@ td{
 </tr>
 
 <tr>
+<td>Face</td>
+<td>Pale</td>
+<td>Congested</td>
+</tr>
+
+<tr>
 <td>Saliva Dribbling</td>
 <td>Present</td>
 <td>Absent</td>
-</tr>
-
-<tr>
-<td>Face</td>
-<td>Pale</td>
-<td>Congested, cyanosed</td>
-</tr>
-
-<tr>
-<td>Hyoid Fracture</td>
-<td>Rare</td>
-<td>Common</td>
 </tr>
 
 <tr>
@@ -209,18 +235,42 @@ td{
 
 <tr>
 <td>Manner</td>
-<td>Usually suicidal</td>
-<td>Usually homicidal</td>
+<td>Usually Suicidal</td>
+<td>Usually Homicidal</td>
 </tr>
 
 </table>
+</div>
+
+<div class="card">
+<h2>Flowchart Comparison</h2>
+
+<div class="flow">
+<div class="box">Ligature Mark Oblique?</div>
+<div class="arrow">→</div>
+<div class="box">Above Thyroid?</div>
+<div class="arrow">→</div>
+<div class="box">Likely Hanging</div>
+</div>
+
+<br>
+
+<div class="flow">
+<div class="box">Ligature Horizontal?</div>
+<div class="arrow">→</div>
+<div class="box">Neck Bruising Present?</div>
+<div class="arrow">→</div>
+<div class="box">Likely Strangulation</div>
+</div>
+
+</div>
 
 </div>
 
 </div>
 
 <div class="footer">
-Department of Forensic Medicine | Your Name | MBBS
+Department of Forensic Medicine | MBBS Poster Presentation
 </div>
 
 </div>
