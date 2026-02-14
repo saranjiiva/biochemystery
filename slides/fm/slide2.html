@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Forensic Odontology – Medicolegal Applications</title>
+<title>Mercy Killing – International vs Indian Law</title>
 
 <style>
 body{
@@ -14,20 +14,17 @@ body{
     font-family:'Segoe UI', Arial, sans-serif;
 }
 
-/* FULL SIZE BORDER ADDED */
 .slide{
     width:1920px;
     height:1080px;
     background:white;
-    padding:35px;
+    padding:60px;
     box-sizing:border-box;
-    overflow:hidden;
-    border:14px solid #1e3a8a;           /* Outer strong border */
-    box-shadow:0 0 0 6px #93c5fd inset;  /* Inner decorative border */
+    border:12px solid #1e3a8a;
+    border-radius:20px;
     position:relative;
 }
 
-/* Title */
 .title{
     text-align:center;
     font-size:48px;
@@ -37,86 +34,115 @@ body{
 
 .subtitle{
     text-align:center;
-    font-size:20px;
-    margin-bottom:15px;
+    font-size:22px;
+    margin-bottom:25px;
     color:#374151;
 }
 
-/* Layout */
 .layout{
     display:grid;
-    grid-template-columns: 1fr 1.5fr;
-    gap:20px;
+    grid-template-columns: 1fr 1.3fr;
+    gap:30px;
 }
 
-/* Card Styling */
 .card{
     background:#f8fafc;
-    padding:18px;
-    border-radius:12px;
-    box-shadow:0 3px 8px rgba(0,0,0,0.08);
+    padding:20px;
+    border-radius:14px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.08);
+    margin-bottom:20px;
 }
 
 .card h2{
-    font-size:20px;
+    font-size:22px;
     color:#b91c1c;
-    margin-bottom:8px;
+    margin-bottom:10px;
 }
 
 .card p, .card li{
-    font-size:14px;
-    line-height:1.5;
+    font-size:15px;
+    line-height:1.6;
 }
 
-/* Table Styling */
+/* Timeline Styling */
+.timeline{
+    position:relative;
+    margin-left:20px;
+    padding-left:20px;
+    border-left:4px solid #2563eb;
+}
+
+.timeline-item{
+    margin-bottom:20px;
+    position:relative;
+}
+
+.timeline-item::before{
+    content:"";
+    position:absolute;
+    left:-12px;
+    top:4px;
+    width:16px;
+    height:16px;
+    background:#2563eb;
+    border-radius:50%;
+}
+
+.year{
+    font-weight:bold;
+    color:#1e3a8a;
+}
+
+/* Table */
 table{
     width:100%;
     border-collapse:collapse;
-    font-size:13px;
+    font-size:14px;
 }
 
 th{
     background:#2563eb;
     color:white;
-    padding:6px;
+    padding:8px;
 }
 
 td{
     border:1px solid #d1d5db;
-    padding:6px;
+    padding:8px;
     text-align:center;
 }
 
 /* Flowchart */
-.flow{
+.flowchart{
     display:flex;
     justify-content:space-between;
     align-items:center;
     margin-top:10px;
+    flex-wrap:wrap;
 }
 
-.box{
+.step{
     background:#dbeafe;
-    padding:8px;
-    border-radius:8px;
-    font-size:12px;
+    padding:12px;
+    border-radius:10px;
+    font-size:13px;
     font-weight:bold;
     text-align:center;
-    width:160px;
+    width:180px;
+    margin:5px;
 }
 
 .arrow{
-    font-size:20px;
+    font-size:24px;
     font-weight:bold;
     color:#2563eb;
 }
 
-/* Footer */
 .footer{
     position:absolute;
-    bottom:15px;
-    right:35px;
-    font-size:13px;
+    bottom:20px;
+    right:50px;
+    font-size:14px;
     color:#6b7280;
 }
 
@@ -127,10 +153,154 @@ td{
 
 <div class="slide">
 
-<div class="title">Forensic Odontology</div>
-<div class="subtitle">Role of Teeth in Medicolegal Identification</div>
+<div class="title">Mercy Killing (Euthanasia)</div>
+<div class="subtitle">International Law Comparison with Indian Legal Position</div>
 
-<!-- Your entire existing poster content remains EXACTLY the same below -->
+<div class="layout">
+
+<!-- LEFT PANEL -->
+<div>
+
+<div class="card">
+<h2>1. Definition</h2>
+<p><b>Euthanasia:</b> Intentional termination of life to relieve suffering in terminal illness.</p>
+<ul>
+<li><b>Active:</b> Direct act causing death (illegal in India)</li>
+<li><b>Passive:</b> Withdrawal of life support (legal in India)</li>
+<li><b>PAS:</b> Physician provides means, patient self-administers</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>2. Methods Followed in India</h2>
+<ul>
+<li>Withdrawal of ventilator</li>
+<li>Stopping artificial nutrition</li>
+<li>DNR (Do Not Resuscitate)</li>
+<li>Palliative sedation</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>3. Timeline – Mercy Killing Law in India</h2>
+
+<div class="timeline">
+
+<div class="timeline-item">
+<span class="year">1860</span> – IPC Sections 302 & 306 criminalize homicide & abetment of suicide.
+</div>
+
+<div class="timeline-item">
+<span class="year">1994</span> – P. Rathinam Case: Attempt to recognize right to die.
+</div>
+
+<div class="timeline-item">
+<span class="year">1996</span> – Gian Kaur Case: Right to die not part of Article 21.
+</div>
+
+<div class="timeline-item">
+<span class="year">2011</span> – Aruna Shanbaug Case: Passive euthanasia allowed under strict guidelines.
+</div>
+
+<div class="timeline-item">
+<span class="year">2018</span> – Common Cause Case: Living Will legalized; Passive euthanasia recognized.
+</div>
+
+<div class="timeline-item">
+<span class="year">2023</span> – Supreme Court simplifies Living Will procedure.
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- RIGHT PANEL -->
+<div>
+
+<div class="card">
+<h2>4. International Law Comparison</h2>
+
+<table>
+<tr>
+<th>Country</th>
+<th>Active</th>
+<th>PAS</th>
+<th>Year</th>
+</tr>
+<tr>
+<td>Netherlands</td>
+<td>Legal</td>
+<td>Legal</td>
+<td>2002</td>
+</tr>
+<tr>
+<td>Belgium</td>
+<td>Legal</td>
+<td>Legal</td>
+<td>2002</td>
+</tr>
+<tr>
+<td>Canada</td>
+<td>Legal</td>
+<td>Legal</td>
+<td>2016</td>
+</tr>
+<tr>
+<td>USA (some states)</td>
+<td>Illegal</td>
+<td>Legal</td>
+<td>1997+</td>
+</tr>
+<tr>
+<td>India</td>
+<td>Illegal</td>
+<td>Illegal</td>
+<td>Passive only (2018)</td>
+</tr>
+</table>
+
+</div>
+
+<div class="card">
+<h2>5. Indian Passive Euthanasia Approval Flow</h2>
+
+<div class="flowchart">
+
+<div class="step">Terminal / Irreversible Condition</div>
+<div class="arrow">→</div>
+<div class="step">Patient Living Will OR Family Request</div>
+<div class="arrow">→</div>
+<div class="step">Hospital Medical Board Review</div>
+<div class="arrow">→</div>
+<div class="step">Second Independent Medical Board</div>
+<div class="arrow">→</div>
+<div class="step">Judicial Magistrate Intimation</div>
+<div class="arrow">→</div>
+<div class="step">Withdrawal of Life Support</div>
+
+</div>
+
+</div>
+
+<div class="card">
+<h2>6. Current Legal Position in India</h2>
+<ul>
+<li>Passive euthanasia legal (2018 SC judgment)</li>
+<li>Living Will legally valid</li>
+<li>Active euthanasia punishable under IPC 302</li>
+<li>Abetment of suicide punishable under IPC 306</li>
+</ul>
+</div>
+
+</div>
+
+</div>
+
+<div class="footer">
+Department of Forensic Medicine | MBBS Academic Poster
+</div>
 
 </div>
 
