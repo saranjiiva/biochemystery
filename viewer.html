@@ -2,8 +2,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
-<!-- ✅ Mobile Viewport -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Medical Slide Dashboard</title>
@@ -19,11 +17,17 @@ body {
 
 /* Sidebar */
 .sidebar {
-  width: 320px;
+  width: 300px;
   background: #0f172a;
   color: white;
   overflow-y: auto;
   transition: 0.3s;
+}
+
+.sidebar.hidden {
+  transform: translateX(-100%);
+  position: absolute;
+  z-index: 1000;
 }
 
 .sidebar-header {
@@ -35,18 +39,17 @@ body {
 }
 
 .deck-item {
-  padding: 18px 20px;
+  padding: 16px;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 600;
   margin: 8px;
-  border-radius: 10px;
+  border-radius: 8px;
   transition: 0.2s ease;
 }
 
 .deck-item:hover {
   background: #1e293b;
-  transform: translateX(5px);
 }
 
 .deck-item.active {
@@ -59,6 +62,7 @@ body {
   flex: 1;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .viewer {
@@ -70,19 +74,24 @@ body {
 /* Controls */
 .controls {
   background: #f1f5f9;
-  padding: 12px;
+  padding: 10px;
   text-align: center;
   border-top: 1px solid #cbd5e1;
+  transition: 0.3s;
+}
+
+.controls.hidden {
+  display: none;
 }
 
 button {
-  padding: 8px 16px;
+  padding: 10px 16px;
   margin: 5px;
   border: none;
   background: #0ea5e9;
   color: white;
   font-weight: bold;
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
 }
 
@@ -95,19 +104,48 @@ button:hover {
   font-weight: bold;
 }
 
-/* ✅ Mobile Layout */
+/* Mobile Menu Button */
+.menu-toggle {
+  display: none;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 1100;
+  background: #0ea5e9;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+}
+
+/* 📱 Mobile Optimized */
 @media (max-width: 768px) {
+
   body {
     flex-direction: column;
   }
 
   .sidebar {
-    width: 100%;
-    height: 200px;
+    position: absolute;
+    height: 100%;
+    z-index: 1000;
   }
 
   .main {
-    height: calc(100vh - 200px);
+    height: 100vh;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .controls {
+    padding: 8px;
+  }
+
+  button {
+    padding: 12px 18px;
+    font-size: 16px;
   }
 }
 </style>
@@ -115,7 +153,9 @@ button:hover {
 
 <body>
 
-<div class="sidebar" id="sidebar">
+<button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+
+<div class="sidebar hidden" id="sidebar">
   <div class="sidebar-header">Medical Slide Decks</div>
   <div id="deckList"></div>
 </div>
@@ -123,7 +163,7 @@ button:hover {
 <div class="main" id="mainContent">
   <iframe id="slideFrame" class="viewer"></iframe>
 
-  <div class="controls">
+  <div class="controls" id="controls">
     <button onclick="prevSlide()">Previous</button>
     <button onclick="nextSlide()">Next</button>
     <button onclick="toggleFullscreen()">Fullscreen</button>
@@ -169,7 +209,10 @@ function buildDeckList() {
     let div = document.createElement("div");
     div.className = "deck-item";
     div.innerText = deck.title;
-    div.onclick = () => loadDeck(index);
+    div.onclick = () => {
+      loadDeck(index);
+      if (window.innerWidth <= 768) toggleSidebar();
+    };
     deckList.appendChild(div);
   });
 
@@ -192,8 +235,7 @@ function loadDeck(index) {
 
 function loadSlide() {
   let deck = decks[currentDeckIndex];
-  let slideFrame = document.getElementById("slideFrame");
-  slideFrame.src = deck.slides[currentSlideIndex];
+  document.getElementById("slideFrame").src = deck.slides[currentSlideIndex];
 
   document.getElementById("counter").innerText =
     `Slide ${currentSlideIndex + 1} of ${deck.slides.length}`;
@@ -214,28 +256,45 @@ function prevSlide() {
   }
 }
 
-/* ✅ Keyboard Navigation */
+/* Keyboard */
 document.addEventListener("keydown", function(event) {
   if (event.key === "ArrowRight") nextSlide();
   if (event.key === "ArrowLeft") prevSlide();
 });
 
-/* ✅ Fullscreen Function */
+/* Fullscreen */
 function toggleFullscreen() {
   let elem = document.getElementById("mainContent");
+  let controls = document.getElementById("controls");
 
   if (!document.fullscreenElement) {
-    elem.requestFullscreen().catch(err => {
-      alert(`Error attempting fullscreen: ${err.message}`);
-    });
+    elem.requestFullscreen();
+    controls.classList.add("hidden");
   } else {
     document.exitFullscreen();
+    controls.classList.remove("hidden");
   }
 }
 
-/* ESC automatically exits fullscreen (native browser behavior) */
+/* Swipe Support (Mobile) */
+let startX = 0;
 
-/* Initialize */
+document.getElementById("slideFrame").addEventListener("touchstart", e => {
+  startX = e.changedTouches[0].screenX;
+});
+
+document.getElementById("slideFrame").addEventListener("touchend", e => {
+  let endX = e.changedTouches[0].screenX;
+  if (endX < startX - 50) nextSlide();
+  if (endX > startX + 50) prevSlide();
+});
+
+/* Sidebar Toggle */
+function toggleSidebar() {
+  document.getElementById("sidebar").classList.toggle("hidden");
+}
+
+/* Init */
 buildDeckList();
 loadSlide();
 
