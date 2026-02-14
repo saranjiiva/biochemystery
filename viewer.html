@@ -54,7 +54,6 @@ body {
 
 .deck-item.active {
   background: #0ea5e9;
-  color: white;
 }
 
 /* Main */
@@ -65,6 +64,17 @@ body {
   position: relative;
 }
 
+/* ✅ Top Title Bar (Visible only in normal mode) */
+.topbar {
+  background: #0ea5e9;
+  color: white;
+  padding: 12px;
+  font-weight: bold;
+  font-size: 18px;
+  text-align: center;
+}
+
+/* Viewer */
 .viewer {
   flex: 1;
   border: none;
@@ -77,10 +87,11 @@ body {
   padding: 10px;
   text-align: center;
   border-top: 1px solid #cbd5e1;
-  transition: 0.3s;
 }
 
-.controls.hidden {
+.controls.hidden,
+.topbar.hidden,
+.sidebar.fullscreen-hide {
   display: none;
 }
 
@@ -108,10 +119,10 @@ button:hover {
 .menu-toggle {
   display: none;
   position: absolute;
-  top: 10px;
-  left: 10px;
+  top: 12px;
+  left: 12px;
   z-index: 1100;
-  background: #0ea5e9;
+  background: #0f172a;
   color: white;
   border: none;
   padding: 8px 12px;
@@ -131,16 +142,13 @@ button:hover {
     z-index: 1000;
   }
 
-  .main {
-    height: 100vh;
-  }
-
   .menu-toggle {
     display: block;
   }
 
-  .controls {
-    padding: 8px;
+  .topbar {
+    padding-left: 50px;
+    font-size: 16px;
   }
 
   button {
@@ -161,6 +169,10 @@ button:hover {
 </div>
 
 <div class="main" id="mainContent">
+
+  <!-- ✅ Title Bar -->
+  <div class="topbar" id="topbar">TCA Cycle</div>
+
   <iframe id="slideFrame" class="viewer"></iframe>
 
   <div class="controls" id="controls">
@@ -229,6 +241,7 @@ function highlightActiveDeck() {
 function loadDeck(index) {
   currentDeckIndex = index;
   currentSlideIndex = 0;
+  document.getElementById("topbar").innerText = decks[index].title;
   highlightActiveDeck();
   loadSlide();
 }
@@ -266,17 +279,23 @@ document.addEventListener("keydown", function(event) {
 function toggleFullscreen() {
   let elem = document.getElementById("mainContent");
   let controls = document.getElementById("controls");
+  let topbar = document.getElementById("topbar");
+  let sidebar = document.getElementById("sidebar");
 
   if (!document.fullscreenElement) {
     elem.requestFullscreen();
     controls.classList.add("hidden");
+    topbar.classList.add("hidden");
+    sidebar.classList.add("fullscreen-hide");
   } else {
     document.exitFullscreen();
     controls.classList.remove("hidden");
+    topbar.classList.remove("hidden");
+    sidebar.classList.remove("fullscreen-hide");
   }
 }
 
-/* Swipe Support (Mobile) */
+/* Swipe Support */
 let startX = 0;
 
 document.getElementById("slideFrame").addEventListener("touchstart", e => {
