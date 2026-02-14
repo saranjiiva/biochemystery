@@ -1,88 +1,131 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Hanging vs Strangulation – Forensic Differentiation</title>
+<title>Hanging vs Strangulation</title>
 <style>
+
 body{
     margin:0;
-    font-family: Arial, Helvetica, sans-serif;
-    background: #f4f6f9;
+    background:#0f172a;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
 }
-.poster{
-    width:1200px;
-    height:1700px;
-    margin:auto;
-    background:white;
-    padding:40px;
-    box-shadow:0 0 20px rgba(0,0,0,0.2);
+
+.slide{
+    width:1920px;
+    height:1080px;
+    background:linear-gradient(135deg,#0f172a,#1e293b);
+    color:white;
+    padding:60px;
+    box-sizing:border-box;
+    position:relative;
 }
+
 .title{
     text-align:center;
-    font-size:48px;
+    font-size:60px;
     font-weight:bold;
-    color:#0b3d91;
-    margin-bottom:10px;
+    color:#38bdf8;
 }
+
 .subtitle{
     text-align:center;
-    font-size:24px;
-    margin-bottom:40px;
-}
-.section{
-    margin-bottom:40px;
-}
-.section h2{
-    background:#0b3d91;
-    color:white;
-    padding:10px;
     font-size:28px;
+    margin-bottom:40px;
+    color:#cbd5e1;
 }
-.section p, li{
+
+.grid{
+    display:grid;
+    grid-template-columns: 1fr 2fr;
+    gap:40px;
+    margin-top:20px;
+}
+
+.section{
+    background:#1e293b;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 0 20px rgba(0,0,0,0.4);
+}
+
+.section h2{
+    font-size:30px;
+    margin-bottom:15px;
+    color:#38bdf8;
+}
+
+.section p, .section li{
     font-size:22px;
     line-height:1.6;
 }
-.table{
+
+table{
     width:100%;
     border-collapse:collapse;
-    margin-top:20px;
-}
-.table th{
-    background:#0b3d91;
-    color:white;
-    font-size:22px;
-    padding:12px;
-}
-.table td{
-    border:1px solid #ccc;
-    padding:12px;
     font-size:20px;
 }
-.footer{
+
+th{
+    background:#38bdf8;
+    color:black;
+    padding:10px;
+}
+
+td{
+    border:1px solid #334155;
+    padding:10px;
     text-align:center;
-    margin-top:30px;
-    font-size:20px;
-    color:gray;
 }
+
+.footer{
+    position:absolute;
+    bottom:30px;
+    right:60px;
+    font-size:18px;
+    color:#94a3b8;
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="poster">
+<div class="slide">
 
 <div class="title">Hanging vs Strangulation</div>
 <div class="subtitle">A Forensic Differentiation</div>
 
+<div class="grid">
+
 <div class="section">
-<h2>Definition</h2>
+<h2>Definitions</h2>
 <p><b>Hanging:</b> Constriction of neck by ligature where body weight acts as constricting force.</p>
 <p><b>Strangulation:</b> Constriction of neck by external force without suspension of body.</p>
+
+<h2>Mechanism of Death</h2>
+<ul>
+<li>Asphyxia</li>
+<li>Cerebral ischemia</li>
+<li>Vagal inhibition</li>
+<li>Cervical spine injury (judicial hanging)</li>
+</ul>
+
+<h2>Medicolegal Importance</h2>
+<ul>
+<li>Differentiates suicide vs homicide</li>
+<li>Guides autopsy findings</li>
+<li>Assists crime scene reconstruction</li>
+</ul>
 </div>
 
 <div class="section">
-<h2>Key Differences</h2>
+<h2>Key Forensic Differences</h2>
 
-<table class="table">
+<table>
 <tr>
 <th>Feature</th>
 <th>Hanging</th>
@@ -96,26 +139,26 @@ body{
 </tr>
 
 <tr>
-<td>Level of Mark</td>
+<td>Level</td>
 <td>Above thyroid cartilage</td>
 <td>Below thyroid cartilage</td>
 </tr>
 
 <tr>
 <td>Saliva Dribbling</td>
-<td>Present (common)</td>
-<td>Usually absent</td>
+<td>Present</td>
+<td>Absent</td>
 </tr>
 
 <tr>
 <td>Face</td>
 <td>Pale</td>
-<td>Congested, cyanosed</td>
+<td>Congested</td>
 </tr>
 
 <tr>
-<td>Fracture of Hyoid</td>
-<td>Rare (except elderly)</td>
+<td>Hyoid Fracture</td>
+<td>Rare</td>
 <td>Common</td>
 </tr>
 
@@ -126,35 +169,18 @@ body{
 </tr>
 
 <tr>
-<td>Manner of Death</td>
-<td>Usually suicidal</td>
-<td>Usually homicidal</td>
+<td>Manner</td>
+<td>Usually Suicidal</td>
+<td>Usually Homicidal</td>
 </tr>
 
 </table>
 </div>
 
-<div class="section">
-<h2>Mechanism of Death</h2>
-<ul>
-<li>Asphyxia</li>
-<li>Cerebral ischemia</li>
-<li>Vagal inhibition</li>
-<li>Fracture-dislocation of cervical vertebra (judicial hanging)</li>
-</ul>
-</div>
-
-<div class="section">
-<h2>Medicolegal Importance</h2>
-<ul>
-<li>Helps differentiate suicide vs homicide</li>
-<li>Guides crime scene investigation</li>
-<li>Important in suspicious deaths</li>
-</ul>
 </div>
 
 <div class="footer">
-Prepared by: ____________________ | MBBS | Department of Forensic Medicine
+MBBS | Department of Forensic Medicine
 </div>
 
 </div>
