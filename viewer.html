@@ -1,167 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Medical Slide Dashboard</title>
 
-<style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  display: flex;
-  height: 100vh;
-  overflow: hidden;
-}
-
-/* Sidebar */
-.sidebar {
-  width: 300px;
-  background: #0f172a;
-  color: white;
-  overflow-y: auto;
-  transition: 0.3s;
-}
-
-.sidebar.hidden {
-  transform: translateX(-100%);
-  position: absolute;
-  z-index: 1000;
-}
-
-.sidebar-header {
-  padding: 20px;
-  font-size: 20px;
-  font-weight: bold;
-  background: #020617;
-  text-align: center;
-}
-
-.deck-item {
-  padding: 16px;
-  cursor: pointer;
-  font-size: 17px;
-  font-weight: 600;
-  margin: 8px;
-  border-radius: 8px;
-  transition: 0.2s ease;
-}
-
-.deck-item:hover {
-  background: #1e293b;
-}
-
-.deck-item.active {
-  background: #0ea5e9;
-}
-
-/* Main */
-.main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-}
-
-/* ✅ Top Title Bar (Visible only in normal mode) */
-.topbar {
-  background: #0ea5e9;
-  color: white;
-  padding: 12px;
-  font-weight: bold;
-  font-size: 18px;
-  text-align: center;
-}
-
-/* Viewer */
-.viewer {
-  flex: 1;
-  border: none;
-  width: 100%;
-}
-
-/* Controls */
-.controls {
-  background: #f1f5f9;
-  padding: 10px;
-  text-align: center;
-  border-top: 1px solid #cbd5e1;
-}
-
-.controls.hidden,
-.topbar.hidden,
-.sidebar.fullscreen-hide {
-  display: none;
-}
-
-button {
-  padding: 10px 16px;
-  margin: 5px;
-  border: none;
-  background: #0ea5e9;
-  color: white;
-  font-weight: bold;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-button:hover {
-  background: #0284c7;
-}
-
-.slide-counter {
-  margin-left: 15px;
-  font-weight: bold;
-}
-
-/* Mobile Menu Button */
-.menu-toggle {
-  display: none;
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  z-index: 1100;
-  background: #0f172a;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 5px;
-}
-
-/* 📱 Mobile Optimized */
-@media (max-width: 768px) {
-
-  body {
-    flex-direction: column;
-  }
-
-  .sidebar {
-    position: absolute;
-    height: 100%;
-    z-index: 1000;
-  }
-
-  .menu-toggle {
-    display: block;
-  }
-
-  .topbar {
-    padding-left: 50px;
-    font-size: 16px;
-  }
-
-  button {
-    padding: 12px 18px;
-    font-size: 16px;
-  }
-}
-</style>
+<link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-<button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+<button class="menu-toggle" id="menuToggle">☰</button>
 
 <div class="sidebar hidden" id="sidebar">
   <div class="sidebar-header">Medical Slide Decks</div>
@@ -170,154 +19,21 @@ button:hover {
 
 <div class="main" id="mainContent">
 
-  <!-- ✅ Title Bar -->
-  <div class="topbar" id="topbar">TCA Cycle</div>
+  <div class="topbar" id="topbar">Loading...</div>
 
-  <iframe id="slideFrame" class="viewer"></iframe>
+  <div class="slide-wrapper">
+    <iframe id="slideFrame" class="viewer"></iframe>
+  </div>
 
   <div class="controls" id="controls">
-    <button onclick="prevSlide()">Previous</button>
-    <button onclick="nextSlide()">Next</button>
-    <button onclick="toggleFullscreen()">Fullscreen</button>
+    <button id="prevBtn">Previous</button>
+    <button id="nextBtn">Next</button>
+    <button id="fullscreenBtn">Fullscreen</button>
     <span class="slide-counter" id="counter"></span>
   </div>
+
 </div>
 
-<script>
-
-let decks = [
-  {
-    title: "TCA Cycle",
-    slides: Array.from({length:35}, (_,i)=>`slides/tca/slide${i+1}.html`)
-  },
-  {
-    title: "HMP",
-    slides: [
-      "slides/hmp/slide1.html",
-      "slides/hmp/slide2.html",
-      "slides/hmp/slide3.html",
-      "slides/hmp/slide4.html"
-    ]
-  },
-  {
-    title: "Forensic Kima",
-    slides: [
-      "slides/fm/slide1.html",
-      "slides/fm/slide2.html",
-      "slides/fm/slide3.html",
-      "slides/fm/slide4.html"
-    ]
-  }
-];
-
-let currentDeckIndex = 0;
-let currentSlideIndex = 0;
-
-function buildDeckList() {
-  let deckList = document.getElementById("deckList");
-  deckList.innerHTML = "";
-
-  decks.forEach((deck, index) => {
-    let div = document.createElement("div");
-    div.className = "deck-item";
-    div.innerText = deck.title;
-    div.onclick = () => {
-      loadDeck(index);
-      if (window.innerWidth <= 768) toggleSidebar();
-    };
-    deckList.appendChild(div);
-  });
-
-  highlightActiveDeck();
-}
-
-function highlightActiveDeck() {
-  let items = document.querySelectorAll(".deck-item");
-  items.forEach((item, index) => {
-    item.classList.toggle("active", index === currentDeckIndex);
-  });
-}
-
-function loadDeck(index) {
-  currentDeckIndex = index;
-  currentSlideIndex = 0;
-  document.getElementById("topbar").innerText = decks[index].title;
-  highlightActiveDeck();
-  loadSlide();
-}
-
-function loadSlide() {
-  let deck = decks[currentDeckIndex];
-  document.getElementById("slideFrame").src = deck.slides[currentSlideIndex];
-
-  document.getElementById("counter").innerText =
-    `Slide ${currentSlideIndex + 1} of ${deck.slides.length}`;
-}
-
-function nextSlide() {
-  let deck = decks[currentDeckIndex];
-  if (currentSlideIndex < deck.slides.length - 1) {
-    currentSlideIndex++;
-    loadSlide();
-  }
-}
-
-function prevSlide() {
-  if (currentSlideIndex > 0) {
-    currentSlideIndex--;
-    loadSlide();
-  }
-}
-
-/* Keyboard */
-document.addEventListener("keydown", function(event) {
-  if (event.key === "ArrowRight") nextSlide();
-  if (event.key === "ArrowLeft") prevSlide();
-});
-
-/* Fullscreen */
-function toggleFullscreen() {
-  let elem = document.getElementById("mainContent");
-  let controls = document.getElementById("controls");
-  let topbar = document.getElementById("topbar");
-  let sidebar = document.getElementById("sidebar");
-
-  if (!document.fullscreenElement) {
-    elem.requestFullscreen();
-    controls.classList.add("hidden");
-    topbar.classList.add("hidden");
-    sidebar.classList.add("fullscreen-hide");
-  } else {
-    document.exitFullscreen();
-    controls.classList.remove("hidden");
-    topbar.classList.remove("hidden");
-    sidebar.classList.remove("fullscreen-hide");
-  }
-}
-
-/* Swipe Support */
-let startX = 0;
-
-document.getElementById("slideFrame").addEventListener("touchstart", e => {
-  startX = e.changedTouches[0].screenX;
-});
-
-document.getElementById("slideFrame").addEventListener("touchend", e => {
-  let endX = e.changedTouches[0].screenX;
-  if (endX < startX - 50) nextSlide();
-  if (endX > startX + 50) prevSlide();
-});
-
-/* Sidebar Toggle */
-function toggleSidebar() {
-  document.getElementById("sidebar").classList.toggle("hidden");
-}
-
-/* Init */
-buildDeckList();
-loadSlide();
-
-</script>
-
+<script src="js/app.js"></script>
 </body>
 </html>
