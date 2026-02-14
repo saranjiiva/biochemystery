@@ -6,8 +6,8 @@
 
 body{
     margin:0;
-    background:#0f172a;
     font-family: 'Segoe UI', Arial, sans-serif;
+    background:#e5e7eb;
     display:flex;
     justify-content:center;
     align-items:center;
@@ -17,76 +17,96 @@ body{
 .slide{
     width:1920px;
     height:1080px;
-    background:linear-gradient(135deg,#0f172a,#1e293b);
-    color:white;
-    padding:60px;
+    background:white;
+    padding:50px;
     box-sizing:border-box;
     position:relative;
 }
 
+/* Title */
 .title{
     text-align:center;
     font-size:60px;
     font-weight:bold;
-    color:#38bdf8;
+    color:#1e3a8a;
 }
 
 .subtitle{
     text-align:center;
     font-size:28px;
-    margin-bottom:40px;
-    color:#cbd5e1;
+    margin-bottom:30px;
+    color:#374151;
 }
 
-.grid{
+/* Layout */
+.content{
     display:grid;
     grid-template-columns: 1fr 2fr;
     gap:40px;
-    margin-top:20px;
 }
 
-.section{
-    background:#1e293b;
-    padding:30px;
+/* Cards */
+.card{
+    background:#f3f4f6;
+    padding:25px;
     border-radius:15px;
-    box-shadow:0 0 20px rgba(0,0,0,0.4);
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
 }
 
-.section h2{
-    font-size:30px;
+.card h2{
+    font-size:28px;
     margin-bottom:15px;
-    color:#38bdf8;
+    color:#b91c1c;
 }
 
-.section p, .section li{
-    font-size:22px;
+.card p, .card li{
+    font-size:20px;
     line-height:1.6;
 }
 
+/* Table */
 table{
     width:100%;
     border-collapse:collapse;
-    font-size:20px;
+    font-size:18px;
+    margin-top:15px;
 }
 
 th{
-    background:#38bdf8;
-    color:black;
+    background:#2563eb;
+    color:white;
     padding:10px;
 }
 
 td{
-    border:1px solid #334155;
+    border:1px solid #d1d5db;
     padding:10px;
     text-align:center;
 }
 
+/* Image Section */
+.images{
+    display:flex;
+    justify-content:space-around;
+    margin-top:25px;
+}
+
+.image-box{
+    text-align:center;
+}
+
+.image-box p{
+    font-weight:bold;
+    margin-top:10px;
+}
+
+/* Footer */
 .footer{
     position:absolute;
-    bottom:30px;
-    right:60px;
+    bottom:20px;
+    right:40px;
     font-size:18px;
-    color:#94a3b8;
+    color:#6b7280;
 }
 
 </style>
@@ -97,14 +117,15 @@ td{
 <div class="slide">
 
 <div class="title">Hanging vs Strangulation</div>
-<div class="subtitle">A Forensic Differentiation</div>
+<div class="subtitle">Forensic Differentiation – MBBS</div>
 
-<div class="grid">
+<div class="content">
 
-<div class="section">
+<!-- Left Column -->
+<div class="card">
 <h2>Definitions</h2>
 <p><b>Hanging:</b> Constriction of neck by ligature where body weight acts as constricting force.</p>
-<p><b>Strangulation:</b> Constriction of neck by external force without suspension of body.</p>
+<p><b>Strangulation:</b> Constriction of neck by external force without suspension.</p>
 
 <h2>Mechanism of Death</h2>
 <ul>
@@ -114,15 +135,33 @@ td{
 <li>Cervical spine injury (judicial hanging)</li>
 </ul>
 
-<h2>Medicolegal Importance</h2>
-<ul>
-<li>Differentiates suicide vs homicide</li>
-<li>Guides autopsy findings</li>
-<li>Assists crime scene reconstruction</li>
-</ul>
+<div class="images">
+
+<div class="image-box">
+<!-- Simple Hanging SVG -->
+<svg width="150" height="200">
+<line x1="75" y1="10" x2="75" y2="60" stroke="brown" stroke-width="5"/>
+<circle cx="75" cy="85" r="25" stroke="black" fill="#fde68a"/>
+<line x1="75" y1="110" x2="75" y2="170" stroke="black" stroke-width="5"/>
+</svg>
+<p>Hanging</p>
 </div>
 
-<div class="section">
+<div class="image-box">
+<!-- Simple Strangulation SVG -->
+<svg width="150" height="200">
+<circle cx="75" cy="85" r="25" stroke="black" fill="#fde68a"/>
+<line x1="40" y1="85" x2="110" y2="85" stroke="red" stroke-width="8"/>
+<line x1="75" y1="110" x2="75" y2="170" stroke="black" stroke-width="5"/>
+</svg>
+<p>Strangulation</p>
+</div>
+
+</div>
+</div>
+
+<!-- Right Column -->
+<div class="card">
 <h2>Key Forensic Differences</h2>
 
 <table>
@@ -134,8 +173,8 @@ td{
 
 <tr>
 <td>Ligature Mark</td>
-<td>Oblique, upward, incomplete</td>
-<td>Horizontal, transverse, complete</td>
+<td>Oblique, upward</td>
+<td>Horizontal</td>
 </tr>
 
 <tr>
@@ -153,7 +192,7 @@ td{
 <tr>
 <td>Face</td>
 <td>Pale</td>
-<td>Congested</td>
+<td>Congested, cyanosed</td>
 </tr>
 
 <tr>
@@ -170,17 +209,18 @@ td{
 
 <tr>
 <td>Manner</td>
-<td>Usually Suicidal</td>
-<td>Usually Homicidal</td>
+<td>Usually suicidal</td>
+<td>Usually homicidal</td>
 </tr>
 
 </table>
+
 </div>
 
 </div>
 
 <div class="footer">
-MBBS | Department of Forensic Medicine
+Department of Forensic Medicine | Your Name | MBBS
 </div>
 
 </div>
