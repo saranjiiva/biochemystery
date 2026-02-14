@@ -1,3 +1,7 @@
+/* =========================
+   SLIDE DECK CONFIGURATION
+========================= */
+
 const decks = [
   {
     title: "TCA Cycle",
@@ -6,22 +10,43 @@ const decks = [
   {
     title: "HMP Pathway",
     slides: Array.from({length: 5}, (_,i)=>`slides/hmp/slide${i+1}.html`)
+  },
+  {
+    title: "Forensic Medicine",
+    slides: Array.from({length: 6}, (_,i)=>`slides/fm/slide${i+1}.html`)
   }
 ];
 
+/* =========================
+   STATE VARIABLES
+========================= */
+
 let currentDeckIndex = 0;
 let currentSlideIndex = 0;
+
+/* =========================
+   DOM ELEMENTS
+========================= */
 
 const deckContainer = document.getElementById("deckContainer");
 const slideFrame = document.getElementById("slideFrame");
 const counter = document.getElementById("counter");
 const topbar = document.getElementById("topbar");
 const mainContent = document.getElementById("mainContent");
+const sidebar = document.getElementById("sidebar");
+
+/* =========================
+   INITIALIZE
+========================= */
 
 function init() {
   buildSidebar();
   loadDeck(0);
 }
+
+/* =========================
+   BUILD SIDEBAR
+========================= */
 
 function buildSidebar() {
   deckContainer.innerHTML = "";
@@ -34,6 +59,7 @@ function buildSidebar() {
     const titleDiv = document.createElement("div");
     titleDiv.className = "deck-title";
     titleDiv.innerHTML = `${deck.title} <span>▼</span>`;
+
     titleDiv.onclick = () => toggleDeck(deckIndex);
 
     const slideList = document.createElement("div");
@@ -41,15 +67,18 @@ function buildSidebar() {
     slideList.id = `slideList-${deckIndex}`;
 
     deck.slides.forEach((_, slideIndex) => {
+
       const slideTile = document.createElement("div");
       slideTile.className = "slide-tile";
       slideTile.innerText = `Slide ${slideIndex + 1}`;
+
       slideTile.onclick = () => {
         currentDeckIndex = deckIndex;
         currentSlideIndex = slideIndex;
         loadSlide();
         highlightActive();
       };
+
       slideList.appendChild(slideTile);
     });
 
@@ -59,10 +88,18 @@ function buildSidebar() {
   });
 }
 
+/* =========================
+   TOGGLE DECK EXPANSION
+========================= */
+
 function toggleDeck(index) {
   const slideList = document.getElementById(`slideList-${index}`);
   slideList.classList.toggle("expanded");
 }
+
+/* =========================
+   LOAD DECK
+========================= */
 
 function loadDeck(index) {
   currentDeckIndex = index;
@@ -72,17 +109,34 @@ function loadDeck(index) {
   highlightActive();
 }
 
+/* =========================
+   LOAD SLIDE
+========================= */
+
 function loadSlide() {
-  slideFrame.src = decks[currentDeckIndex].slides[currentSlideIndex];
-  counter.innerText =
-    `Slide ${currentSlideIndex + 1} of ${decks[currentDeckIndex].slides.length}`;
+  slideFrame.style.opacity = 0;
+
+  setTimeout(() => {
+    slideFrame.src = decks[currentDeckIndex].slides[currentSlideIndex];
+    counter.innerText =
+      `Slide ${currentSlideIndex + 1} of ${decks[currentDeckIndex].slides.length}`;
+    slideFrame.style.opacity = 1;
+  }, 150);
 }
 
-function highlightActive() {
-  document.querySelectorAll(".slide-tile").forEach(tile => tile.classList.remove("active"));
+/* =========================
+   HIGHLIGHT ACTIVE SLIDE
+========================= */
 
-  const slideLists = document.querySelectorAll(".slide-list");
-  slideLists.forEach(list => list.classList.remove("expanded"));
+function highlightActive() {
+
+  document.querySelectorAll(".slide-tile").forEach(tile =>
+    tile.classList.remove("active")
+  );
+
+  document.querySelectorAll(".slide-list").forEach(list =>
+    list.classList.remove("expanded")
+  );
 
   const activeList = document.getElementById(`slideList-${currentDeckIndex}`);
   activeList.classList.add("expanded");
@@ -91,7 +145,10 @@ function highlightActive() {
   if (activeTile) activeTile.classList.add("active");
 }
 
-/* Controls */
+/* =========================
+   NEXT / PREVIOUS
+========================= */
+
 document.getElementById("nextBtn").onclick = () => {
   if (currentSlideIndex < decks[currentDeckIndex].slides.length - 1) {
     currentSlideIndex++;
@@ -108,9 +165,13 @@ document.getElementById("prevBtn").onclick = () => {
   }
 };
 
+/* =========================
+   FULLSCREEN MODE
+========================= */
+
 document.getElementById("fullscreenBtn").onclick = () => {
   if (!document.fullscreenElement) {
-    mainContent.requestFullscreen();
+    document.documentElement.requestFullscreen();
     document.body.classList.add("fullscreen");
   } else {
     document.exitFullscreen();
@@ -118,15 +179,45 @@ document.getElementById("fullscreenBtn").onclick = () => {
   }
 };
 
-/* Keyboard Navigation */
+/* =========================
+   KEYBOARD NAVIGATION
+========================= */
+
 document.addEventListener("keydown", e => {
-  if (e.key === "ArrowRight") document.getElementById("nextBtn").click();
-  if (e.key === "ArrowLeft") document.getElementById("prevBtn").click();
+  if (e.key === "ArrowRight") {
+    document.getElementById("nextBtn").click();
+  }
+  if (e.key === "ArrowLeft") {
+    document.getElementById("prevBtn").click();
+  }
 });
 
-/* Sidebar Toggle (Mobile) */
+/* =========================
+   SWIPE SUPPORT (MOBILE)
+========================= */
+
+let startX = 0;
+
+slideFrame.addEventListener("touchstart", e => {
+  startX = e.changedTouches[0].screenX;
+});
+
+slideFrame.addEventListener("touchend", e => {
+  let diff = e.changedTouches[0].screenX - startX;
+  if (diff < -50) document.getElementById("nextBtn").click();
+  if (diff > 50) document.getElementById("prevBtn").click();
+});
+
+/* =========================
+   SIDEBAR TOGGLE (MOBILE)
+========================= */
+
 document.getElementById("menuToggle").onclick = () => {
-  document.getElementById("sidebar").classList.toggle("hidden");
+  sidebar.classList.toggle("active");
 };
+
+/* =========================
+   START
+========================= */
 
 init();
