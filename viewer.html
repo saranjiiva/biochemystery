@@ -2,6 +2,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
+<!-- ✅ Mobile Viewport -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Medical Slide Dashboard</title>
 
 <style>
@@ -10,6 +14,7 @@ body {
   font-family: Arial, sans-serif;
   display: flex;
   height: 100vh;
+  overflow: hidden;
 }
 
 /* Sidebar */
@@ -18,6 +23,7 @@ body {
   background: #0f172a;
   color: white;
   overflow-y: auto;
+  transition: 0.3s;
 }
 
 .sidebar-header {
@@ -33,7 +39,6 @@ body {
   cursor: pointer;
   font-size: 18px;
   font-weight: 600;
-  background: #0f172a;
   margin: 8px;
   border-radius: 10px;
   transition: 0.2s ease;
@@ -49,7 +54,7 @@ body {
   color: white;
 }
 
-/* Main Content */
+/* Main */
 .main {
   flex: 1;
   display: flex;
@@ -72,7 +77,7 @@ body {
 
 button {
   padding: 8px 16px;
-  margin: 0 5px;
+  margin: 5px;
   border: none;
   background: #0ea5e9;
   color: white;
@@ -89,22 +94,39 @@ button:hover {
   margin-left: 15px;
   font-weight: bold;
 }
+
+/* ✅ Mobile Layout */
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: 200px;
+  }
+
+  .main {
+    height: calc(100vh - 200px);
+  }
+}
 </style>
 </head>
 
 <body>
 
-<div class="sidebar">
+<div class="sidebar" id="sidebar">
   <div class="sidebar-header">Medical Slide Decks</div>
   <div id="deckList"></div>
 </div>
 
-<div class="main">
+<div class="main" id="mainContent">
   <iframe id="slideFrame" class="viewer"></iframe>
 
   <div class="controls">
     <button onclick="prevSlide()">Previous</button>
     <button onclick="nextSlide()">Next</button>
+    <button onclick="toggleFullscreen()">Fullscreen</button>
     <span class="slide-counter" id="counter"></span>
   </div>
 </div>
@@ -114,43 +136,7 @@ button:hover {
 let decks = [
   {
     title: "TCA Cycle",
-    slides: [
-      "slides/tca/slide1.html",
-      "slides/tca/slide2.html",
-      "slides/tca/slide3.html",
-      "slides/tca/slide4.html",
-      "slides/tca/slide5.html",
-      "slides/tca/slide6.html",
-      "slides/tca/slide7.html",
-      "slides/tca/slide8.html",
-      "slides/tca/slide9.html",
-      "slides/tca/slide10.html",
-      "slides/tca/slide11.html",
-      "slides/tca/slide12.html",
-      "slides/tca/slide13.html",
-      "slides/tca/slide14.html",
-      "slides/tca/slide15.html",
-      "slides/tca/slide16.html",
-      "slides/tca/slide17.html",
-      "slides/tca/slide18.html",
-      "slides/tca/slide19.html",
-      "slides/tca/slide20.html",
-      "slides/tca/slide21.html",
-      "slides/tca/slide22.html",
-      "slides/tca/slide23.html",
-      "slides/tca/slide24.html",
-      "slides/tca/slide25.html",
-      "slides/tca/slide26.html",
-      "slides/tca/slide27.html",
-      "slides/tca/slide28.html",
-      "slides/tca/slide29.html",
-      "slides/tca/slide30.html",
-      "slides/tca/slide31.html",
-      "slides/tca/slide32.html",
-      "slides/tca/slide33.html",
-      "slides/tca/slide34.html",
-      "slides/tca/slide35.html"
-    ]
+    slides: Array.from({length:35}, (_,i)=>`slides/tca/slide${i+1}.html`)
   },
   {
     title: "HMP",
@@ -227,6 +213,27 @@ function prevSlide() {
     loadSlide();
   }
 }
+
+/* ✅ Keyboard Navigation */
+document.addEventListener("keydown", function(event) {
+  if (event.key === "ArrowRight") nextSlide();
+  if (event.key === "ArrowLeft") prevSlide();
+});
+
+/* ✅ Fullscreen Function */
+function toggleFullscreen() {
+  let elem = document.getElementById("mainContent");
+
+  if (!document.fullscreenElement) {
+    elem.requestFullscreen().catch(err => {
+      alert(`Error attempting fullscreen: ${err.message}`);
+    });
+  } else {
+    document.exitFullscreen();
+  }
+}
+
+/* ESC automatically exits fullscreen (native browser behavior) */
 
 /* Initialize */
 buildDeckList();
