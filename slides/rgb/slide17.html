@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Regulation of Blood Glucose - Slide 17</title>
+
+<style>
+body{
+  margin:0;
+  background:#020617;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  font-family:'Segoe UI', Arial, sans-serif;
+  overflow:hidden;
+}
+
+.slide{
+  width:1920px;
+  height:1080px;
+  background:linear-gradient(135deg,#0f172a,#1e293b);
+  position:relative;
+  color:white;
+  overflow:hidden;
+}
+
+/* ===== Title ===== */
+.title{
+  position:absolute;
+  top:50px;
+  width:100%;
+  text-align:center;
+  font-size:60px;
+  font-weight:700;
+  opacity:0;
+  animation:fadeIn 1.5s forwards;
+}
+
+/* ===== Timeline Line ===== */
+.line{
+  position:absolute;
+  top:540px;
+  left:150px;
+  width:1620px;
+  height:8px;
+  background:#475569;
+  opacity:0;
+  animation:fadeIn 1.5s 1.5s forwards;
+}
+
+/* ===== Stage Boxes ===== */
+.stage{
+  width:420px;
+  height:260px;
+  border-radius:30px;
+  position:absolute;
+  top:320px;
+  padding:25px;
+  box-sizing:border-box;
+  text-align:center;
+  font-size:30px;
+  font-weight:600;
+  opacity:0;
+}
+
+/* Early Fasting */
+.s1{
+  left:150px;
+  background:#2563eb;
+  animation:slideUp 1.5s 2.5s forwards;
+}
+
+/* Prolonged Fasting */
+.s2{
+  left:750px;
+  background:#f97316;
+  animation:slideUp 1.5s 4s forwards;
+}
+
+/* Starvation / DKA */
+.s3{
+  right:150px;
+  background:#ef4444;
+  animation:slideUp 1.5s 5.5s forwards;
+}
+
+/* ===== Time Labels ===== */
+.time{
+  position:absolute;
+  top:600px;
+  font-size:28px;
+  opacity:0;
+}
+
+.t1{ left:260px; animation:fadeIn 1.5s 3s forwards; }
+.t2{ left:860px; animation:fadeIn 1.5s 4.5s forwards; }
+.t3{ right:300px; animation:fadeIn 1.5s 6s forwards; }
+
+/* ===== Final Integration Box ===== */
+.summary{
+  position:absolute;
+  bottom:100px;
+  left:50%;
+  transform:translateX(-50%);
+  width:1200px;
+  height:140px;
+  border-radius:25px;
+  background:#9333ea;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  font-size:34px;
+  font-weight:600;
+  opacity:0;
+  animation:fadeIn 1.5s 7.5s forwards, pulse 2s 9s infinite;
+}
+
+/* ===== Animations ===== */
+@keyframes fadeIn{
+  to{opacity:1;}
+}
+
+@keyframes slideUp{
+  0%{opacity:0; transform:translateY(80px);}
+  100%{opacity:1; transform:translateY(0);}
+}
+
+@keyframes pulse{
+  0%{transform:translateX(-50%) scale(1);}
+  50%{transform:translateX(-50%) scale(1.05);}
+  100%{transform:translateX(-50%) scale(1);}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="slide">
+
+  <div class="title">
+    Metabolic Progression: Fasting → Starvation → DKA
+  </div>
+
+  <div class="line"></div>
+
+  <div class="stage s1">
+    Early Fasting<br><br>
+    ↓ Insulin<br>
+    ↑ Glucagon<br>
+    Glycogenolysis<br>
+    Maintains Blood Glucose
+  </div>
+
+  <div class="stage s2">
+    Prolonged Fasting<br><br>
+    ↑ Gluconeogenesis<br>
+    ↑ Lipolysis<br>
+    Mild Ketone Production<br>
+    Brain adapts to Ketones
+  </div>
+
+  <div class="stage s3">
+    Absolute Insulin Deficiency<br><br>
+    Massive Lipolysis<br>
+    Excess Ketone Bodies<br>
+    Metabolic Acidosis (DKA)
+  </div>
+
+  <div class="time t1">6–24 Hours</div>
+  <div class="time t2">2–3 Days</div>
+  <div class="time t3">Uncontrolled Type 1 DM</div>
+
+  <div class="summary">
+    Physiological Adaptation → Pathological Ketosis When Insulin is Absent
+  </div>
+
+</div>
+
+</body>
+</html>
