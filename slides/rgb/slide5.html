@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Regulation of Blood Glucose - Slide 5</title>
+
+<style>
+body{
+  margin:0;
+  background:#020617;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  font-family:'Segoe UI', Arial, sans-serif;
+  overflow:hidden;
+}
+
+.slide{
+  width:1920px;
+  height:1080px;
+  background:linear-gradient(135deg,#0f172a,#1e293b);
+  position:relative;
+  overflow:hidden;
+  color:white;
+}
+
+/* ===== Title ===== */
+.title{
+  position:absolute;
+  top:60px;
+  width:100%;
+  text-align:center;
+  font-size:70px;
+  font-weight:700;
+  letter-spacing:2px;
+  opacity:0;
+  animation:fadeIn 1.5s forwards;
+}
+
+/* ===== Pancreas ===== */
+.pancreas{
+  position:absolute;
+  top:380px;
+  left:250px;
+  width:350px;
+  height:180px;
+  background:#db2777;
+  border-radius:40px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:45px;
+  text-align:center;
+  opacity:0;
+  animation:slideInLeft 1.5s 1s forwards;
+}
+
+/* ===== Glucagon Circle ===== */
+.glucagon{
+  position:absolute;
+  top:400px;
+  left:650px;
+  width:230px;
+  height:230px;
+  background:#f97316;
+  border-radius:50%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:45px;
+  font-weight:bold;
+  opacity:0;
+  animation:fadeIn 1.5s 2s forwards;
+}
+
+/* ===== Liver Target ===== */
+.liver{
+  position:absolute;
+  top:330px;
+  right:250px;
+  width:380px;
+  height:200px;
+  background:#1e293b;
+  border-radius:25px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:42px;
+  text-align:center;
+  opacity:0;
+  animation:slideInRight 1.5s 3s forwards;
+}
+
+/* ===== Arrow Animation ===== */
+.arrow{
+  position:absolute;
+  height:6px;
+  background:#38bdf8;
+  width:0;
+}
+
+.arrow1{
+  top:500px;
+  left:600px;
+  animation:draw1 1.5s 2s forwards;
+}
+
+.arrow2{
+  top:500px;
+  left:880px;
+  animation:draw2 1.5s 3s forwards;
+}
+
+/* ===== Glucose Release Dots ===== */
+.glucose-dot{
+  position:absolute;
+  width:20px;
+  height:20px;
+  background:#fde047;
+  border-radius:50%;
+  opacity:0;
+}
+
+.dot1{
+  top:430px;
+  right:600px;
+  animation:moveDot 3s 4s infinite linear;
+}
+
+.dot2{
+  top:470px;
+  right:600px;
+  animation:moveDot 3s 4.5s infinite linear;
+}
+
+.dot3{
+  top:510px;
+  right:600px;
+  animation:moveDot 3s 5s infinite linear;
+}
+
+/* ===== Subtext ===== */
+.subtext{
+  position:absolute;
+  bottom:120px;
+  width:100%;
+  text-align:center;
+  font-size:45px;
+  opacity:0;
+  animation:fadeIn 1.5s 5s forwards;
+}
+
+/* ===== Animations ===== */
+@keyframes fadeIn{
+  to{opacity:1;}
+}
+
+@keyframes slideInLeft{
+  0%{opacity:0; transform:translateX(-150px);}
+  100%{opacity:1; transform:translateX(0);}
+}
+
+@keyframes slideInRight{
+  0%{opacity:0; transform:translateX(150px);}
+  100%{opacity:1; transform:translateX(0);}
+}
+
+@keyframes draw1{
+  to{width:250px;}
+}
+
+@keyframes draw2{
+  to{width:300px;}
+}
+
+@keyframes moveDot{
+  0%{opacity:1; right:600px;}
+  100%{opacity:1; right:900px;}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="slide">
+
+  <div class="title">
+    Glucagon – The Fasting Hormone
+  </div>
+
+  <div class="pancreas">
+    Pancreas<br>α-Cells
+  </div>
+
+  <div class="glucagon">
+    Glucagon
+  </div>
+
+  <div class="arrow arrow1"></div>
+  <div class="arrow arrow2"></div>
+
+  <div class="liver">
+    Liver<br>↑ Glycogenolysis<br>↑ Gluconeogenesis
+  </div>
+
+  <div class="glucose-dot dot1"></div>
+  <div class="glucose-dot dot2"></div>
+  <div class="glucose-dot dot3"></div>
+
+  <div class="subtext">
+    Raises Blood Glucose by Hepatic Glucose Release
+  </div>
+
+</div>
+
+</body>
+</html>
