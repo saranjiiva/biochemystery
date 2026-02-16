@@ -13,7 +13,7 @@ const decks = [
   },
      {
     title: "Regulation of blood glucose",
-    slides: Array.from({length: 5}, (_,i)=>`slides/rgb/slide${i+1}.html`)
+    slides: Array.from({length: 20}, (_,i)=>`slides/rgb/slide${i+1}.html`)
   },
   {
     title: "Forensic Medicine",
