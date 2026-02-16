@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Regulation of Blood Glucose - Slide 3</title>
+
+<style>
+body{
+  margin:0;
+  background:#020617;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  font-family:'Segoe UI', Arial, sans-serif;
+  overflow:hidden;
+}
+
+.slide{
+  width:1920px;
+  height:1080px;
+  background:linear-gradient(135deg,#0f172a,#1e293b);
+  position:relative;
+  overflow:hidden;
+  color:white;
+}
+
+/* ===== Title ===== */
+.title{
+  position:absolute;
+  top:70px;
+  width:100%;
+  text-align:center;
+  font-size:70px;
+  font-weight:700;
+  letter-spacing:2px;
+  opacity:0;
+  animation:fadeIn 1.5s forwards;
+}
+
+/* ===== Central Blood Glucose Circle ===== */
+.center-circle{
+  position:absolute;
+  top:350px;
+  left:50%;
+  transform:translateX(-50%);
+  width:350px;
+  height:350px;
+  border-radius:50%;
+  background:radial-gradient(circle,#38bdf8,#0ea5e9);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:55px;
+  font-weight:bold;
+  text-align:center;
+  opacity:0;
+  animation:zoomIn 1.5s 1s forwards;
+}
+
+/* ===== Organ Boxes ===== */
+.organ{
+  position:absolute;
+  width:320px;
+  height:150px;
+  border-radius:20px;
+  background:#1e293b;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  font-size:40px;
+  font-weight:600;
+  opacity:0;
+}
+
+/* Positioning */
+.liver{ top:350px; left:250px; animation:slideLeft 1.5s 2s forwards; }
+.pancreas{ top:250px; right:250px; animation:slideRight 1.5s 2.5s forwards; }
+.muscle{ bottom:250px; left:300px; animation:slideLeft 1.5s 3s forwards; }
+.adipose{ bottom:250px; right:300px; animation:slideRight 1.5s 3.5s forwards; }
+
+/* ===== Connecting Lines ===== */
+.line{
+  position:absolute;
+  height:4px;
+  background:#38bdf8;
+  width:0;
+}
+
+.line1{
+  top:500px;
+  left:600px;
+  animation:drawLine1 1.5s 2s forwards;
+}
+
+.line2{
+  top:420px;
+  right:600px;
+  animation:drawLine2 1.5s 2.5s forwards;
+}
+
+.line3{
+  bottom:380px;
+  left:650px;
+  animation:drawLine3 1.5s 3s forwards;
+}
+
+.line4{
+  bottom:380px;
+  right:650px;
+  animation:drawLine4 1.5s 3.5s forwards;
+}
+
+/* ===== Animations ===== */
+@keyframes fadeIn{
+  to{opacity:1;}
+}
+
+@keyframes zoomIn{
+  0%{opacity:0; transform:translateX(-50%) scale(0.5);}
+  100%{opacity:1; transform:translateX(-50%) scale(1);}
+}
+
+@keyframes slideLeft{
+  0%{opacity:0; transform:translateX(-100px);}
+  100%{opacity:1; transform:translateX(0);}
+}
+
+@keyframes slideRight{
+  0%{opacity:0; transform:translateX(100px);}
+  100%{opacity:1; transform:translateX(0);}
+}
+
+@keyframes drawLine1{
+  to{width:350px;}
+}
+
+@keyframes drawLine2{
+  to{width:350px;}
+}
+
+@keyframes drawLine3{
+  to{width:350px;}
+}
+
+@keyframes drawLine4{
+  to{width:350px;}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="slide">
+
+  <div class="title">
+    Organs Involved in Glucose Regulation
+  </div>
+
+  <div class="center-circle">
+    Blood<br>Glucose
+  </div>
+
+  <!-- Connecting Lines -->
+  <div class="line line1"></div>
+  <div class="line line2"></div>
+  <div class="line line3"></div>
+  <div class="line line4"></div>
+
+  <!-- Organs -->
+  <div class="organ liver">
+    Liver<br>Storage & Release
+  </div>
+
+  <div class="organ pancreas">
+    Pancreas<br>Insulin / Glucagon
+  </div>
+
+  <div class="organ muscle">
+    Skeletal Muscle<br>Glucose Uptake
+  </div>
+
+  <div class="organ adipose">
+    Adipose Tissue<br>Lipogenesis
+  </div>
+
+</div>
+
+</body>
+</html>
