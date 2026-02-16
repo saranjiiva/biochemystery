@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Regulation of Blood Glucose - Slide 2</title>
+
+<style>
+/* ===== 16:9 Projector Layout ===== */
+body{
+  margin:0;
+  background:#0f172a;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  font-family:'Segoe UI', Arial, sans-serif;
+  overflow:hidden;
+}
+
+.slide{
+  width:1920px;
+  height:1080px;
+  background:linear-gradient(135deg,#0f172a,#1e293b);
+  position:relative;
+  overflow:hidden;
+  color:white;
+}
+
+/* ===== Title ===== */
+.title{
+  position:absolute;
+  width:100%;
+  text-align:center;
+  top:80px;
+  font-size:70px;
+  font-weight:700;
+  letter-spacing:2px;
+  opacity:0;
+  animation:fadeIn 1.5s forwards;
+}
+
+@keyframes fadeIn{
+  to{opacity:1;}
+}
+
+/* ===== Glucose Gauge Container ===== */
+.gauge-container{
+  position:absolute;
+  top:250px;
+  left:50%;
+  transform:translateX(-50%);
+  width:900px;
+  height:900px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+/* Outer Circle */
+.gauge{
+  width:700px;
+  height:700px;
+  border-radius:50%;
+  border:15px solid #334155;
+  position:relative;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+/* Inner Circle */
+.gauge-inner{
+  width:550px;
+  height:550px;
+  border-radius:50%;
+  background:radial-gradient(circle,#1e293b,#0f172a);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  flex-direction:column;
+}
+
+/* Normal Range Text */
+.normal{
+  font-size:80px;
+  font-weight:700;
+  color:#38bdf8;
+  opacity:0;
+  animation:rangeAppear 2s 1.5s forwards;
+}
+
+.unit{
+  font-size:40px;
+  margin-top:20px;
+  opacity:0;
+  animation:rangeAppear 2s 2s forwards;
+}
+
+@keyframes rangeAppear{
+  to{opacity:1;}
+}
+
+/* Needle */
+.needle{
+  position:absolute;
+  width:8px;
+  height:320px;
+  background:#f87171;
+  bottom:350px;
+  left:50%;
+  transform-origin:bottom center;
+  transform:translateX(-50%) rotate(-90deg);
+  animation:needleMove 3s 1s forwards ease-in-out;
+}
+
+@keyframes needleMove{
+  to{
+    transform:translateX(-50%) rotate(0deg);
+  }
+}
+
+/* Labels */
+.label-low{
+  position:absolute;
+  left:150px;
+  top:330px;
+  font-size:40px;
+  opacity:0;
+  animation:fadeIn 2s 2.5s forwards;
+}
+
+.label-high{
+  position:absolute;
+  right:150px;
+  top:330px;
+  font-size:40px;
+  opacity:0;
+  animation:fadeIn 2s 2.5s forwards;
+}
+
+.label-normal{
+  position:absolute;
+  bottom:130px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:45px;
+  color:#22c55e;
+  opacity:0;
+  animation:fadeIn 2s 3s forwards;
+}
+
+/* Subtext */
+.subtext{
+  position:absolute;
+  bottom:120px;
+  width:100%;
+  text-align:center;
+  font-size:36px;
+  opacity:0;
+  animation:fadeIn 2s 3.5s forwards;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="slide">
+
+  <div class="title">
+    Why Regulation Matters
+  </div>
+
+  <div class="gauge-container">
+
+    <div class="gauge">
+
+      <div class="needle"></div>
+
+      <div class="gauge-inner">
+        <div class="normal">70 – 110</div>
+        <div class="unit">mg / dL</div>
+      </div>
+
+    </div>
+
+    <div class="label-low">Hypoglycemia</div>
+    <div class="label-high">Hyperglycemia</div>
+    <div class="label-normal">Normal Range</div>
+
+  </div>
+
+  <div class="subtext">
+    Tight Hormonal Control Maintains Homeostasis
+  </div>
+
+</div>
+
+</body>
+</html>
