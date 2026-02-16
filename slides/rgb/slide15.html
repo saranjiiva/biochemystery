@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Regulation of Blood Glucose - Slide 15</title>
+
+<style>
+body{
+  margin:0;
+  background:#020617;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  font-family:'Segoe UI', Arial, sans-serif;
+  overflow:hidden;
+}
+
+.slide{
+  width:1920px;
+  height:1080px;
+  background:linear-gradient(135deg,#0f172a,#1e293b);
+  position:relative;
+  color:white;
+}
+
+/* ===== Title ===== */
+.title{
+  position:absolute;
+  top:60px;
+  width:100%;
+  text-align:center;
+  font-size:60px;
+  font-weight:700;
+  opacity:0;
+  animation:fadeIn 1.5s forwards;
+}
+
+/* ===== Column Style ===== */
+.column{
+  width:700px;
+  height:700px;
+  border-radius:30px;
+  position:absolute;
+  top:220px;
+  padding:40px;
+  box-sizing:border-box;
+  font-size:34px;
+  line-height:1.6;
+  opacity:0;
+}
+
+.dka{
+  left:200px;
+  background:#7c2d12;
+  animation:slideLeft 1.5s 1.5s forwards;
+}
+
+.hhs{
+  right:200px;
+  background:#1e3a8a;
+  animation:slideRight 1.5s 2.5s forwards;
+}
+
+/* ===== Highlight Box ===== */
+.highlight{
+  position:absolute;
+  bottom:100px;
+  left:50%;
+  transform:translateX(-50%);
+  width:1100px;
+  height:140px;
+  border-radius:25px;
+  background:#9333ea;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  font-size:36px;
+  font-weight:600;
+  opacity:0;
+  animation:fadeIn 1.5s 4.5s forwards, pulse 2s 6s infinite;
+}
+
+/* ===== Animations ===== */
+@keyframes fadeIn{
+  to{opacity:1;}
+}
+
+@keyframes slideLeft{
+  0%{opacity:0; transform:translateX(-150px);}
+  100%{opacity:1; transform:translateX(0);}
+}
+
+@keyframes slideRight{
+  0%{opacity:0; transform:translateX(150px);}
+  100%{opacity:1; transform:translateX(0);}
+}
+
+@keyframes pulse{
+  0%{transform:translateX(-50%) scale(1);}
+  50%{transform:translateX(-50%) scale(1.05);}
+  100%{transform:translateX(-50%) scale(1);}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="slide">
+
+  <div class="title">
+    DKA vs HHS – Clinical & Biochemical Comparison
+  </div>
+
+  <div class="column dka">
+    <b>Diabetic Ketoacidosis (DKA)</b><br><br>
+    • Common in Type 1 DM<br>
+    • Absolute Insulin Deficiency<br>
+    • Glucose: 250–600 mg/dL<br>
+    • Ketone Bodies Present<br>
+    • Metabolic Acidosis (↓ pH)<br>
+    • Kussmaul Breathing<br>
+    • Rapid Onset (Hours)
+  </div>
+
+  <div class="column hhs">
+    <b>Hyperosmolar Hyperglycemic State (HHS)</b><br><br>
+    • Common in Type 2 DM<br>
+    • Relative Insulin Deficiency<br>
+    • Glucose: >600 mg/dL<br>
+    • Minimal or No Ketosis<br>
+    • No Significant Acidosis<br>
+    • Severe Dehydration<br>
+    • Gradual Onset (Days)
+  </div>
+
+  <div class="highlight">
+    Key Difference: DKA = Ketosis + Acidosis | HHS = Extreme Hyperglycemia + Dehydration
+  </div>
+
+</div>
+
+</body>
+</html>
