@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Regulation of Blood Glucose - Slide 11</title>
+
+<style>
+body{
+  margin:0;
+  background:#020617;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  font-family:'Segoe UI', Arial, sans-serif;
+  overflow:hidden;
+}
+
+.slide{
+  width:1920px;
+  height:1080px;
+  background:linear-gradient(135deg,#0f172a,#1e293b);
+  position:relative;
+  overflow:hidden;
+  color:white;
+}
+
+/* ===== Title ===== */
+.title{
+  position:absolute;
+  top:60px;
+  width:100%;
+  text-align:center;
+  font-size:64px;
+  font-weight:700;
+  letter-spacing:2px;
+  opacity:0;
+  animation:fadeIn 1.5s forwards;
+}
+
+/* ===== Timeline Line ===== */
+.timeline{
+  position:absolute;
+  top:520px;
+  left:150px;
+  width:0;
+  height:8px;
+  background:#38bdf8;
+  animation:drawLine 2s 1s forwards;
+}
+
+/* ===== Phase Boxes ===== */
+.phase{
+  position:absolute;
+  width:350px;
+  height:200px;
+  border-radius:25px;
+  background:#1e293b;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  font-size:32px;
+  font-weight:600;
+  opacity:0;
+}
+
+/* Phase Positions */
+.p1{ top:350px; left:150px; animation:popIn 1s 2s forwards; }
+.p2{ top:350px; left:600px; animation:popIn 1s 3.5s forwards; }
+.p3{ top:350px; left:1050px; animation:popIn 1s 5s forwards; }
+.p4{ top:350px; left:1500px; animation:popIn 1s 6.5s forwards; }
+
+/* ===== Markers ===== */
+.marker{
+  position:absolute;
+  width:20px;
+  height:20px;
+  background:#fde047;
+  border-radius:50%;
+  opacity:0;
+}
+
+.m1{ top:510px; left:320px; animation:fadeIn 1s 2s forwards; }
+.m2{ top:510px; left:770px; animation:fadeIn 1s 3.5s forwards; }
+.m3{ top:510px; left:1220px; animation:fadeIn 1s 5s forwards; }
+.m4{ top:510px; left:1670px; animation:fadeIn 1s 6.5s forwards; }
+
+/* ===== Subtext ===== */
+.subtext{
+  position:absolute;
+  bottom:120px;
+  width:100%;
+  text-align:center;
+  font-size:40px;
+  opacity:0;
+  animation:fadeIn 1.5s 8s forwards;
+}
+
+/* ===== Animations ===== */
+
+@keyframes fadeIn{
+  to{opacity:1;}
+}
+
+@keyframes drawLine{
+  to{width:1620px;}
+}
+
+@keyframes popIn{
+  0%{opacity:0; transform:scale(0.6);}
+  100%{opacity:1; transform:scale(1);}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="slide">
+
+  <div class="title">
+    Timeline of Fasting & Starvation
+  </div>
+
+  <div class="timeline"></div>
+
+  <!-- Markers -->
+  <div class="marker m1"></div>
+  <div class="marker m2"></div>
+  <div class="marker m3"></div>
+  <div class="marker m4"></div>
+
+  <!-- Phases -->
+  <div class="phase p1">
+    0 – 4 Hours<br>
+    Post-Prandial<br>
+    ↑ Insulin<br>
+    Glycogenesis
+  </div>
+
+  <div class="phase p2">
+    4 – 24 Hours<br>
+    Early Fasting<br>
+    Glycogenolysis
+  </div>
+
+  <div class="phase p3">
+    1 – 3 Days<br>
+    Gluconeogenesis<br>
+    ↑ Protein Breakdown
+  </div>
+
+  <div class="phase p4">
+    > 3 Days<br>
+    Starvation<br>
+    Ketogenesis<br>
+    Brain Adaptation
+  </div>
+
+  <div class="subtext">
+    Progressive Shift from Glucose Use → Fat & Ketone Utilization
+  </div>
+
+</div>
+
+</body>
+</html>
