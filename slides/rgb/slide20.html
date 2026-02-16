@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Regulation of Blood Glucose - Slide 20</title>
+
+<style>
+body{
+  margin:0;
+  background:#020617;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  font-family:'Segoe UI', Arial, sans-serif;
+  overflow:hidden;
+}
+
+.slide{
+  width:1920px;
+  height:1080px;
+  background:linear-gradient(135deg,#0f172a,#111827);
+  position:relative;
+  color:white;
+  overflow:hidden;
+}
+
+/* ===== Title ===== */
+.title{
+  position:absolute;
+  top:60px;
+  width:100%;
+  text-align:center;
+  font-size:64px;
+  font-weight:700;
+  letter-spacing:2px;
+  opacity:0;
+  animation:fadeIn 1.5s forwards;
+}
+
+/* ===== Grid Container ===== */
+.grid{
+  position:absolute;
+  top:220px;
+  left:50%;
+  transform:translateX(-50%);
+  width:1500px;
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap:50px;
+}
+
+/* ===== Recall Boxes ===== */
+.box{
+  height:220px;
+  border-radius:30px;
+  padding:30px;
+  box-sizing:border-box;
+  font-size:34px;
+  font-weight:600;
+  opacity:0;
+}
+
+/* Box Colors + Staggered Animation */
+.b1{ background:#2563eb; animation:fadeUp 1.5s 1.5s forwards; }
+.b2{ background:#f97316; animation:fadeUp 1.5s 2.5s forwards; }
+.b3{ background:#a855f7; animation:fadeUp 1.5s 3.5s forwards; }
+.b4{ background:#ef4444; animation:fadeUp 1.5s 4.5s forwards; }
+
+/* ===== Final Statement ===== */
+.closure{
+  position:absolute;
+  bottom:120px;
+  width:100%;
+  text-align:center;
+  font-size:40px;
+  font-weight:bold;
+  opacity:0;
+  animation:fadeIn 1.5s 6s forwards, pulse 2s 7.5s infinite;
+}
+
+/* ===== Animations ===== */
+@keyframes fadeIn{
+  to{opacity:1;}
+}
+
+@keyframes fadeUp{
+  0%{opacity:0; transform:translateY(60px);}
+  100%{opacity:1; transform:translateY(0);}
+}
+
+@keyframes pulse{
+  0%{opacity:1;}
+  50%{opacity:0.6;}
+  100%{opacity:1;}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="slide">
+
+  <div class="title">
+    Rapid Viva Recall – Blood Glucose Regulation
+  </div>
+
+  <div class="grid">
+
+    <div class="box b1">
+      Insulin = Only Anabolic Hormone<br>
+      ↓ Blood Glucose<br>
+      ↑ Glycogenesis | ↑ Lipogenesis
+    </div>
+
+    <div class="box b2">
+      Counter-Regulatory Hormones<br>
+      Glucagon | Cortisol | GH | Epinephrine<br>
+      ↑ Blood Glucose
+    </div>
+
+    <div class="box b3">
+      Fasting → Glycogenolysis<br>
+      Starvation → Gluconeogenesis + Ketones
+    </div>
+
+    <div class="box b4">
+      DKA = Ketosis + Acidosis<br>
+      HHS = Severe Hyperglycemia + Dehydration
+    </div>
+
+  </div>
+
+  <div class="closure">
+    Homeostasis = Balance Between Anabolism & Catabolism
+  </div>
+
+</div>
+
+</body>
+</html>
