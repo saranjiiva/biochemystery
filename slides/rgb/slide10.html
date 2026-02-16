@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Regulation of Blood Glucose - Slide 10</title>
+
+<style>
+body{
+  margin:0;
+  background:#020617;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  font-family:'Segoe UI', Arial, sans-serif;
+  overflow:hidden;
+}
+
+.slide{
+  width:1920px;
+  height:1080px;
+  background:linear-gradient(135deg,#0f172a,#1e293b);
+  position:relative;
+  overflow:hidden;
+  color:white;
+}
+
+/* ===== Title ===== */
+.title{
+  position:absolute;
+  top:60px;
+  width:100%;
+  text-align:center;
+  font-size:64px;
+  font-weight:700;
+  letter-spacing:2px;
+  opacity:0;
+  animation:fadeIn 1.5s forwards;
+}
+
+/* ===== Stress Trigger ===== */
+.stress{
+  position:absolute;
+  top:200px;
+  left:50%;
+  transform:translateX(-50%);
+  width:420px;
+  height:160px;
+  background:#ef4444;
+  border-radius:25px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:42px;
+  font-weight:700;
+  opacity:0;
+  animation:popIn 1.5s 1s forwards;
+}
+
+/* ===== Hormone Circles ===== */
+.hormone{
+  position:absolute;
+  width:220px;
+  height:220px;
+  border-radius:50%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  font-size:30px;
+  font-weight:600;
+  opacity:0;
+}
+
+/* Positions */
+.epi{ top:420px; left:250px; background:#f97316; animation:slideLeft 1s 2s forwards; }
+.cort{ top:420px; left:650px; background:#a855f7; animation:slideLeft 1s 2.5s forwards; }
+.gh{ top:420px; right:650px; background:#22c55e; animation:slideRight 1s 3s forwards; }
+.gluca{ top:420px; right:250px; background:#0ea5e9; animation:slideRight 1s 3.5s forwards; }
+
+/* ===== Downward Arrows ===== */
+.arrow{
+  position:absolute;
+  width:6px;
+  height:0;
+  background:#38bdf8;
+}
+
+.a1{ top:360px; left:960px; animation:drawDown 1s 1.5s forwards; }
+
+/* ===== Liver Response ===== */
+.liver{
+  position:absolute;
+  bottom:250px;
+  left:50%;
+  transform:translateX(-50%);
+  width:600px;
+  height:220px;
+  background:#1e293b;
+  border-radius:30px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  font-size:42px;
+  font-weight:600;
+  opacity:0;
+  animation:fadeIn 1.5s 4.5s forwards;
+}
+
+/* ===== Glucose Surge Animation ===== */
+.glucose-dot{
+  position:absolute;
+  width:22px;
+  height:22px;
+  background:#fde047;
+  border-radius:50%;
+  opacity:0;
+}
+
+.dot1{ bottom:350px; left:920px; animation:rise 3s 6s infinite linear; }
+.dot2{ bottom:350px; left:960px; animation:rise 3s 6.5s infinite linear; }
+.dot3{ bottom:350px; left:1000px; animation:rise 3s 7s infinite linear; }
+
+/* ===== Subtext ===== */
+.subtext{
+  position:absolute;
+  bottom:120px;
+  width:100%;
+  text-align:center;
+  font-size:42px;
+  opacity:0;
+  animation:fadeIn 1.5s 6s forwards;
+}
+
+/* ===== Animations ===== */
+
+@keyframes fadeIn{
+  to{opacity:1;}
+}
+
+@keyframes popIn{
+  0%{opacity:0; transform:translateX(-50%) scale(0.6);}
+  100%{opacity:1; transform:translateX(-50%) scale(1);}
+}
+
+@keyframes slideLeft{
+  0%{opacity:0; transform:translateX(-120px);}
+  100%{opacity:1; transform:translateX(0);}
+}
+
+@keyframes slideRight{
+  0%{opacity:0; transform:translateX(120px);}
+  100%{opacity:1; transform:translateX(0);}
+}
+
+@keyframes drawDown{
+  to{height:80px;}
+}
+
+@keyframes rise{
+  0%{opacity:1; bottom:350px;}
+  100%{opacity:1; bottom:600px;}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="slide">
+
+  <div class="title">
+    Counter-Regulatory Hormones – Stress Response
+  </div>
+
+  <div class="stress">
+    Stress / Fasting
+  </div>
+
+  <div class="arrow a1"></div>
+
+  <!-- Hormones -->
+  <div class="hormone epi">Epinephrine</div>
+  <div class="hormone cort">Cortisol</div>
+  <div class="hormone gh">Growth Hormone</div>
+  <div class="hormone gluca">Glucagon</div>
+
+  <!-- Liver -->
+  <div class="liver">
+    ↑ Glycogenolysis<br>
+    ↑ Gluconeogenesis<br>
+    ↓ Glucose Utilization
+  </div>
+
+  <!-- Glucose Surge -->
+  <div class="glucose-dot dot1"></div>
+  <div class="glucose-dot dot2"></div>
+  <div class="glucose-dot dot3"></div>
+
+  <div class="subtext">
+    Maintain Blood Glucose During Stress & Hypoglycemia
+  </div>
+
+</div>
+
+</body>
+</html>
