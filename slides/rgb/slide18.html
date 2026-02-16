@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Regulation of Blood Glucose - Slide 18</title>
+
+<style>
+body{
+  margin:0;
+  background:#020617;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  font-family:'Segoe UI', Arial, sans-serif;
+  overflow:hidden;
+}
+
+.slide{
+  width:1920px;
+  height:1080px;
+  background:linear-gradient(135deg,#0f172a,#1e293b);
+  position:relative;
+  color:white;
+  overflow:hidden;
+}
+
+/* ===== Title ===== */
+.title{
+  position:absolute;
+  top:40px;
+  width:100%;
+  text-align:center;
+  font-size:58px;
+  font-weight:700;
+  opacity:0;
+  animation:fadeIn 1.5s forwards;
+}
+
+/* ===== Central Homeostasis Circle ===== */
+.center{
+  position:absolute;
+  top:300px;
+  left:50%;
+  transform:translateX(-50%) scale(0.6);
+  width:380px;
+  height:380px;
+  border-radius:50%;
+  background:#22c55e;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  font-size:40px;
+  font-weight:bold;
+  opacity:0;
+  animation:popIn 1.5s 1.5s forwards;
+}
+
+/* ===== Organ Boxes ===== */
+.box{
+  width:380px;
+  height:200px;
+  border-radius:25px;
+  position:absolute;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  font-size:30px;
+  font-weight:600;
+  opacity:0;
+}
+
+/* Pancreas */
+.pancreas{
+  top:200px;
+  left:200px;
+  background:#2563eb;
+  animation:slideLeft 1.5s 3s forwards;
+}
+
+/* Liver */
+.liver{
+  top:200px;
+  right:200px;
+  background:#f97316;
+  animation:slideRight 1.5s 4s forwards;
+}
+
+/* Muscle */
+.muscle{
+  bottom:250px;
+  left:250px;
+  background:#a855f7;
+  animation:slideUp 1.5s 5s forwards;
+}
+
+/* Adipose */
+.adipose{
+  bottom:250px;
+  right:250px;
+  background:#ef4444;
+  animation:slideUp 1.5s 6s forwards;
+}
+
+/* Brain */
+.brain{
+  bottom:100px;
+  left:50%;
+  transform:translateX(-50%);
+  width:450px;
+  height:140px;
+  background:#eab308;
+  color:black;
+  animation:fadeIn 1.5s 7s forwards;
+}
+
+/* ===== Final Integration Statement ===== */
+.summary{
+  position:absolute;
+  bottom:30px;
+  width:100%;
+  text-align:center;
+  font-size:34px;
+  font-weight:600;
+  opacity:0;
+  animation:fadeIn 1.5s 8s forwards, pulse 2s 9.5s infinite;
+}
+
+/* ===== Animations ===== */
+@keyframes fadeIn{
+  to{opacity:1;}
+}
+
+@keyframes popIn{
+  0%{opacity:0; transform:translateX(-50%) scale(0.6);}
+  100%{opacity:1; transform:translateX(-50%) scale(1);}
+}
+
+@keyframes slideLeft{
+  0%{opacity:0; transform:translateX(-120px);}
+  100%{opacity:1; transform:translateX(0);}
+}
+
+@keyframes slideRight{
+  0%{opacity:0; transform:translateX(120px);}
+  100%{opacity:1; transform:translateX(0);}
+}
+
+@keyframes slideUp{
+  0%{opacity:0; transform:translateY(80px);}
+  100%{opacity:1; transform:translateY(0);}
+}
+
+@keyframes pulse{
+  0%{opacity:1;}
+  50%{opacity:0.6;}
+  100%{opacity:1;}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="slide">
+
+  <div class="title">
+    Grand Integration: Blood Glucose Regulation Network
+  </div>
+
+  <div class="center">
+    Blood Glucose<br>
+    Homeostasis<br>
+    (70–110 mg/dL)
+  </div>
+
+  <div class="box pancreas">
+    Pancreas<br>
+    Insulin ↓ Glucose<br>
+    Glucagon ↑ Glucose
+  </div>
+
+  <div class="box liver">
+    Liver<br>
+    Glycogenesis<br>
+    Glycogenolysis<br>
+    Gluconeogenesis
+  </div>
+
+  <div class="box muscle">
+    Muscle<br>
+    Insulin-dependent<br>
+    Glucose Uptake<br>
+    Glycogen Storage
+  </div>
+
+  <div class="box adipose">
+    Adipose Tissue<br>
+    Lipogenesis<br>
+    Lipolysis<br>
+    FFA Release
+  </div>
+
+  <div class="box brain">
+    Brain<br>
+    Continuous Glucose Requirement<br>
+    Ketone Adaptation in Starvation
+  </div>
+
+  <div class="summary">
+    Coordinated Organ-Hormone Interaction Maintains Survival
+  </div>
+
+</div>
+
+</body>
+</html>
