@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Regulation of Blood Glucose - Slide 14</title>
+
+<style>
+body{
+  margin:0;
+  background:#020617;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  font-family:'Segoe UI', Arial, sans-serif;
+  overflow:hidden;
+}
+
+.slide{
+  width:1920px;
+  height:1080px;
+  background:linear-gradient(135deg,#0f172a,#1e293b);
+  position:relative;
+  color:white;
+  overflow:hidden;
+}
+
+/* ===== Title ===== */
+.title{
+  position:absolute;
+  top:60px;
+  width:100%;
+  text-align:center;
+  font-size:60px;
+  font-weight:700;
+  letter-spacing:2px;
+  opacity:0;
+  animation:fadeIn 1.5s forwards;
+}
+
+/* ===== Central Glucose Circle ===== */
+.glucose{
+  position:absolute;
+  top:280px;
+  left:50%;
+  transform:translateX(-50%) scale(0.6);
+  width:320px;
+  height:320px;
+  border-radius:50%;
+  background:#2563eb;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  font-size:38px;
+  font-weight:bold;
+  opacity:0;
+  animation:popIn 1.5s 1.5s forwards;
+}
+
+/* ===== Hormone Boxes ===== */
+.box{
+  width:420px;
+  height:180px;
+  border-radius:25px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  font-size:30px;
+  font-weight:600;
+  position:absolute;
+  opacity:0;
+}
+
+.b1{
+  top:250px;
+  left:150px;
+  background:#f97316;
+  animation:slideLeft 1.5s 3s forwards;
+}
+
+.b2{
+  top:250px;
+  right:150px;
+  background:#ef4444;
+  animation:slideRight 1.5s 4.5s forwards;
+}
+
+.b3{
+  bottom:280px;
+  left:400px;
+  background:#22c55e;
+  animation:slideUp 1.5s 6s forwards;
+}
+
+.b4{
+  bottom:280px;
+  right:400px;
+  background:#a855f7;
+  animation:slideUp 1.5s 7.5s forwards;
+}
+
+/* ===== Brain Effect Box ===== */
+.brain{
+  position:absolute;
+  bottom:100px;
+  left:50%;
+  transform:translateX(-50%);
+  width:900px;
+  height:140px;
+  border-radius:25px;
+  background:#1e293b;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  font-size:34px;
+  font-weight:600;
+  opacity:0;
+  animation:fadeIn 1.5s 9s forwards, pulse 2s 10.5s infinite;
+}
+
+/* ===== Animations ===== */
+
+@keyframes fadeIn{
+  to{opacity:1;}
+}
+
+@keyframes popIn{
+  0%{opacity:0; transform:translateX(-50%) scale(0.6);}
+  100%{opacity:1; transform:translateX(-50%) scale(1);}
+}
+
+@keyframes slideLeft{
+  0%{opacity:0; transform:translateX(-100px);}
+  100%{opacity:1; transform:translateX(0);}
+}
+
+@keyframes slideRight{
+  0%{opacity:0; transform:translateX(100px);}
+  100%{opacity:1; transform:translateX(0);}
+}
+
+@keyframes slideUp{
+  0%{opacity:0; transform:translateY(80px);}
+  100%{opacity:1; transform:translateY(0);}
+}
+
+@keyframes pulse{
+  0%{transform:translateX(-50%) scale(1);}
+  50%{transform:translateX(-50%) scale(1.05);}
+  100%{transform:translateX(-50%) scale(1);}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="slide">
+
+  <div class="title">
+    Hypoglycemia – Counter-Regulatory Response
+  </div>
+
+  <div class="glucose">
+    ↓ Blood<br>Glucose<br>
+    (&lt;70 mg/dL)
+  </div>
+
+  <div class="box b1">
+    ↑ Glucagon<br>
+    → Hepatic Glycogenolysis
+  </div>
+
+  <div class="box b2">
+    ↑ Epinephrine<br>
+    → Glycogenolysis + Lipolysis
+  </div>
+
+  <div class="box b3">
+    ↑ Cortisol<br>
+    → Gluconeogenesis
+  </div>
+
+  <div class="box b4">
+    ↑ Growth Hormone<br>
+    → ↓ Peripheral Glucose Uptake
+  </div>
+
+  <div class="brain">
+    Neuroglycopenia → Confusion, Seizures, Coma
+  </div>
+
+</div>
+
+</body>
+</html>
