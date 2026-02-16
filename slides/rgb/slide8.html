@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Regulation of Blood Glucose - Slide 8</title>
+
+<style>
+body{
+  margin:0;
+  background:#020617;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  font-family:'Segoe UI', Arial, sans-serif;
+  overflow:hidden;
+}
+
+.slide{
+  width:1920px;
+  height:1080px;
+  background:linear-gradient(135deg,#0f172a,#1e293b);
+  position:relative;
+  overflow:hidden;
+  color:white;
+}
+
+/* ===== Title ===== */
+.title{
+  position:absolute;
+  top:60px;
+  width:100%;
+  text-align:center;
+  font-size:68px;
+  font-weight:700;
+  letter-spacing:2px;
+  opacity:0;
+  animation:fadeIn 1.5s forwards;
+}
+
+/* ===== Glucagon Tag ===== */
+.glucagon-tag{
+  position:absolute;
+  top:180px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:45px;
+  color:#f97316;
+  opacity:0;
+  animation:fadeIn 1.5s 1s forwards;
+}
+
+/* ===== Pathway ===== */
+.pathway{
+  position:absolute;
+  top:380px;
+  left:200px;
+  right:200px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+/* ===== Boxes ===== */
+.box{
+  width:320px;
+  height:160px;
+  border-radius:25px;
+  background:#1e293b;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  font-size:38px;
+  font-weight:600;
+  opacity:0;
+}
+
+/* Sequential Appearance */
+.glycogen{ animation:popIn 1s 1.5s forwards; }
+.g1p{ animation:popIn 1s 2.5s forwards; }
+.g6p{ animation:popIn 1s 3.5s forwards; }
+.glucose{ animation:popIn 1s 4.5s forwards; }
+
+/* ===== Arrows ===== */
+.arrow{
+  width:0;
+  height:6px;
+  background:#38bdf8;
+}
+
+.a1{ animation:draw 1s 2s forwards; }
+.a2{ animation:draw 1s 3s forwards; }
+.a3{ animation:draw 1s 4s forwards; }
+
+/* ===== Enzyme Labels ===== */
+.enzyme{
+  position:absolute;
+  font-size:30px;
+  color:#fde047;
+  opacity:0;
+}
+
+.e1{ top:560px; left:380px; animation:fadeIn 1s 2.5s forwards; }
+.e2{ top:560px; left:840px; animation:fadeIn 1s 3.5s forwards; }
+.e3{ top:560px; right:380px; animation:fadeIn 1s 4.5s forwards; }
+
+/* ===== Glucose Release Particles ===== */
+.glucose-dot{
+  position:absolute;
+  width:20px;
+  height:20px;
+  background:#facc15;
+  border-radius:50%;
+  opacity:0;
+}
+
+.dot1{ top:440px; right:260px; animation:release 3s 6s infinite linear; }
+.dot2{ top:480px; right:260px; animation:release 3s 6.5s infinite linear; }
+.dot3{ top:520px; right:260px; animation:release 3s 7s infinite linear; }
+
+/* ===== Subtext ===== */
+.subtext{
+  position:absolute;
+  bottom:120px;
+  width:100%;
+  text-align:center;
+  font-size:42px;
+  opacity:0;
+  animation:fadeIn 1.5s 6s forwards;
+}
+
+/* ===== Animations ===== */
+
+@keyframes fadeIn{
+  to{opacity:1;}
+}
+
+@keyframes popIn{
+  0%{opacity:0; transform:scale(0.5);}
+  100%{opacity:1; transform:scale(1);}
+}
+
+@keyframes draw{
+  to{width:220px;}
+}
+
+@keyframes release{
+  0%{opacity:1; right:260px;}
+  100%{opacity:1; right:600px;}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="slide">
+
+  <div class="title">
+    Glycogenolysis – Glucose Release
+  </div>
+
+  <div class="glucagon-tag">
+    Stimulated by Glucagon
+  </div>
+
+  <div class="pathway">
+
+    <div class="box glycogen">
+      Glycogen
+    </div>
+
+    <div class="arrow a1"></div>
+
+    <div class="box g1p">
+      Glucose-1-Phosphate
+    </div>
+
+    <div class="arrow a2"></div>
+
+    <div class="box g6p">
+      Glucose-6-Phosphate
+    </div>
+
+    <div class="arrow a3"></div>
+
+    <div class="box glucose">
+      Glucose
+    </div>
+
+  </div>
+
+  <div class="enzyme e1">Glycogen Phosphorylase</div>
+  <div class="enzyme e2">Phosphoglucomutase</div>
+  <div class="enzyme e3">Glucose-6-Phosphatase</div>
+
+  <div class="glucose-dot dot1"></div>
+  <div class="glucose-dot dot2"></div>
+  <div class="glucose-dot dot3"></div>
+
+  <div class="subtext">
+    Liver Releases Glucose During Fasting
+  </div>
+
+</div>
+
+</body>
+</html>
