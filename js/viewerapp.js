@@ -11,6 +11,10 @@ const decks = [
     title: "HMP Pathway",
     slides: Array.from({length: 5}, (_,i)=>`slides/hmp/slide${i+1}.html`)
   },
+     {
+    title: "Regulation of blood glucose",
+    slides: Array.from({length: 5}, (_,i)=>`slides/rgb/slide${i+1}.html`)
+  },
   {
     title: "Forensic Medicine",
     slides: Array.from({length: 6}, (_,i)=>`slides/fm/slide${i+1}.html`)
