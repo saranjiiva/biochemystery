@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Regulation of Blood Glucose - Slide 6</title>
+
+<style>
+body{
+  margin:0;
+  background:#020617;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  font-family:'Segoe UI', Arial, sans-serif;
+  overflow:hidden;
+}
+
+.slide{
+  width:1920px;
+  height:1080px;
+  background:linear-gradient(135deg,#0f172a,#1e293b);
+  position:relative;
+  overflow:hidden;
+  color:white;
+}
+
+/* ===== Title ===== */
+.title{
+  position:absolute;
+  top:60px;
+  width:100%;
+  text-align:center;
+  font-size:68px;
+  font-weight:700;
+  letter-spacing:2px;
+  opacity:0;
+  animation:fadeIn 1.5s forwards;
+}
+
+/* ===== Cell Membrane ===== */
+.membrane{
+  position:absolute;
+  top:350px;
+  left:300px;
+  width:1300px;
+  height:15px;
+  background:#38bdf8;
+  opacity:0;
+  animation:fadeIn 1.5s 1s forwards;
+}
+
+/* ===== Cell Interior ===== */
+.cell{
+  position:absolute;
+  top:365px;
+  left:300px;
+  width:1300px;
+  height:450px;
+  border:3px solid #334155;
+  border-top:none;
+  opacity:0;
+  animation:fadeIn 1.5s 1.2s forwards;
+}
+
+/* ===== Insulin ===== */
+.insulin{
+  position:absolute;
+  top:250px;
+  left:450px;
+  width:200px;
+  height:200px;
+  background:#22c55e;
+  border-radius:50%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:40px;
+  font-weight:bold;
+  opacity:0;
+  animation:fadeIn 1.5s 1.5s forwards;
+}
+
+/* ===== Receptor ===== */
+.receptor{
+  position:absolute;
+  top:330px;
+  left:530px;
+  width:40px;
+  height:80px;
+  background:#f97316;
+  opacity:0;
+  animation:fadeIn 1.5s 2s forwards;
+}
+
+/* ===== GLUT4 Vesicle ===== */
+.vesicle{
+  position:absolute;
+  bottom:200px;
+  left:850px;
+  width:150px;
+  height:150px;
+  background:#a855f7;
+  border-radius:50%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:30px;
+  text-align:center;
+  opacity:0;
+  animation:fadeIn 1.5s 2.5s forwards,
+             moveVesicle 3s 4s forwards ease-in-out;
+}
+
+/* ===== GLUT4 Transporter on Membrane ===== */
+.glut4{
+  position:absolute;
+  top:330px;
+  left:900px;
+  width:50px;
+  height:90px;
+  background:#a855f7;
+  opacity:0;
+  animation:appearGLUT 1.5s 7s forwards;
+}
+
+/* ===== Glucose Outside ===== */
+.glucose{
+  position:absolute;
+  top:420px;
+  right:300px;
+  width:25px;
+  height:25px;
+  background:#fde047;
+  border-radius:50%;
+  opacity:0;
+}
+
+.g1{ animation:moveGlucose 4s 8s infinite linear; }
+.g2{ top:460px; animation:moveGlucose 4s 8.5s infinite linear; }
+.g3{ top:500px; animation:moveGlucose 4s 9s infinite linear; }
+
+/* ===== Subtext ===== */
+.subtext{
+  position:absolute;
+  bottom:120px;
+  width:100%;
+  text-align:center;
+  font-size:45px;
+  opacity:0;
+  animation:fadeIn 1.5s 10s forwards;
+}
+
+/* ===== Animations ===== */
+
+@keyframes fadeIn{
+  to{opacity:1;}
+}
+
+@keyframes moveVesicle{
+  0%{bottom:200px;}
+  100%{bottom:430px;}
+}
+
+@keyframes appearGLUT{
+  to{opacity:1;}
+}
+
+@keyframes moveGlucose{
+  0%{opacity:1; right:300px;}
+  100%{opacity:1; right:700px;}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="slide">
+
+  <div class="title">
+    Insulin Mechanism – GLUT4 Translocation
+  </div>
+
+  <div class="insulin">Insulin</div>
+  <div class="receptor"></div>
+
+  <div class="membrane"></div>
+  <div class="cell"></div>
+
+  <div class="vesicle">
+    GLUT4<br>Vesicle
+  </div>
+
+  <div class="glut4"></div>
+
+  <div class="glucose g1"></div>
+  <div class="glucose g2"></div>
+  <div class="glucose g3"></div>
+
+  <div class="subtext">
+    Increased Glucose Uptake in Muscle & Adipose Tissue
+  </div>
+
+</div>
+
+</body>
+</html>
