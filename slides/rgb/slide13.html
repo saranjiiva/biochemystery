@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Regulation of Blood Glucose - Slide 13</title>
+
+<style>
+body{
+  margin:0;
+  background:#020617;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  font-family:'Segoe UI', Arial, sans-serif;
+  overflow:hidden;
+}
+
+.slide{
+  width:1920px;
+  height:1080px;
+  background:linear-gradient(135deg,#0f172a,#1e293b);
+  position:relative;
+  overflow:hidden;
+  color:white;
+}
+
+/* ===== Title ===== */
+.title{
+  position:absolute;
+  top:50px;
+  width:100%;
+  text-align:center;
+  font-size:60px;
+  font-weight:700;
+  letter-spacing:2px;
+  opacity:0;
+  animation:fadeIn 1.5s forwards;
+}
+
+/* ===== Box Common Style ===== */
+.box{
+  width:420px;
+  height:200px;
+  border-radius:25px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  font-size:32px;
+  font-weight:600;
+  position:absolute;
+  opacity:0;
+}
+
+/* ===== Sequential Boxes ===== */
+
+.b1{
+  top:220px;
+  left:200px;
+  background:#ef4444;
+  animation:fadeSlide 1.5s 1.5s forwards;
+}
+
+.b2{
+  top:220px;
+  left:750px;
+  background:#f97316;
+  animation:fadeSlide 1.5s 3s forwards;
+}
+
+.b3{
+  top:220px;
+  right:200px;
+  background:#eab308;
+  color:black;
+  animation:fadeSlide 1.5s 4.5s forwards;
+}
+
+.b4{
+  bottom:250px;
+  left:500px;
+  background:#22c55e;
+  animation:fadeSlide 1.5s 6s forwards;
+}
+
+.b5{
+  bottom:250px;
+  right:500px;
+  background:#38bdf8;
+  animation:fadeSlide 1.5s 7.5s forwards;
+}
+
+/* ===== Acidosis Pulse Circle ===== */
+.acidosis{
+  position:absolute;
+  bottom:80px;
+  left:50%;
+  transform:translateX(-50%);
+  width:350px;
+  height:120px;
+  border-radius:20px;
+  background:#9333ea;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:34px;
+  font-weight:bold;
+  opacity:0;
+  animation:fadeIn 1.5s 9s forwards, pulse 2s 10.5s infinite;
+}
+
+/* ===== Animations ===== */
+
+@keyframes fadeIn{
+  to{opacity:1;}
+}
+
+@keyframes fadeSlide{
+  0%{opacity:0; transform:translateY(60px);}
+  100%{opacity:1; transform:translateY(0);}
+}
+
+@keyframes pulse{
+  0%{transform:translateX(-50%) scale(1);}
+  50%{transform:translateX(-50%) scale(1.05);}
+  100%{transform:translateX(-50%) scale(1);}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="slide">
+
+  <div class="title">
+    Diabetic Ketoacidosis (DKA) – Biochemical Mechanism
+  </div>
+
+  <div class="box b1">
+    Absolute Insulin Deficiency<br>
+    (Type 1 DM)
+  </div>
+
+  <div class="box b2">
+    ↑ Glucagon, ↑ Catecholamines<br>
+    Counter-regulatory Hormones
+  </div>
+
+  <div class="box b3">
+    ↑ Lipolysis<br>
+    Free Fatty Acids Released
+  </div>
+
+  <div class="box b4">
+    Hepatic β-Oxidation<br>
+    Acetyl-CoA Accumulation
+  </div>
+
+  <div class="box b5">
+    Ketone Body Formation<br>
+    (Acetoacetate, β-Hydroxybutyrate)
+  </div>
+
+  <div class="acidosis">
+    Metabolic Acidosis ↓ pH ↓ HCO₃⁻
+  </div>
+
+</div>
+
+</body>
+</html>
