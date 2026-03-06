@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Medical Lecture Engine</title>
+
+<!-- Main CSS -->
+<link rel="stylesheet" href="css/style.css">
+
+<!-- GSAP Animation Library -->
+<script src="libs/gsap.min.js"></script>
+
+<!-- Three.js for molecule rendering -->
+<script src="libs/three.min.js"></script>
+
+</head>
+
+<body>
+
+<!-- Main Lecture Container -->
+<div id="lecture-container">
+
+    <!-- Slide Area -->
+    <div id="slide-area">
+
+        <!-- Slides load here dynamically -->
+        <div id="slide-content">
+            <h1>Medical Lecture Engine</h1>
+            <p>Welcome to the interactive lecture platform.</p>
+            <p>Use → or ← keys to navigate slides.</p>
+        </div>
+
+        <!-- Drawing Canvas -->
+        <canvas id="drawing-canvas"></canvas>
+
+    </div>
+
+</div>
+
+
+<!-- Control Panel -->
+<div id="control-panel">
+
+<button id="prev-slide">◀ Prev</button>
+
+<button id="draw-toggle">✏ Draw</button>
+
+<button id="ai-generate">🤖 AI Generate</button>
+
+<button id="next-slide">Next ▶</button>
+
+</div>
+
+
+
+<!-- JS Modules -->
+
+<script src="js/engine.js"></script>
+<script src="js/slides.js"></script>
+<script src="js/animation.js"></script>
+<script src="js/drawing.js"></script>
+<script src="js/molecules.js"></script>
+<script src="js/ai-generator.js"></script>
+
+
+</body>
+
+</html>
