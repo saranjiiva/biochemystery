@@ -1,47 +1,215 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Medical Slide Dashboard</title>
+
+<title>Medical Lecture Viewer</title>
 
 <link rel="stylesheet" href="css/viewerstyle.css">
+
 </head>
+
 
 <body>
 
+<!-- ================================================= -->
+<!-- TOP CONTROL BAR -->
+<!-- ================================================= -->
+
+<header class="topbar">
+
 <button class="menu-toggle" id="menuToggle">☰</button>
 
-<!-- Sidebar -->
-<div class="sidebar" id="sidebar">
+<div class="lecture-title">
+Medical Lecture Viewer
+</div>
 
-  <div class="sidebar-header">
-    Medical Slide Decks
-  </div>
+<div class="top-controls">
 
-  <!-- Expandable Deck Container -->
-  <div id="deckContainer"></div>
+<button id="drawToggle">✏ Draw</button>
+
+<button id="laserToggle">🔴 Laser</button>
+
+<button id="presenterMode">Presenter</button>
+
+<button id="fullscreenBtn">Fullscreen</button>
 
 </div>
 
-<!-- Main Content -->
-<div class="main" id="mainContent">
+</header>
 
 
 
-  <div class="slide-wrapper">
-    <iframe id="slideFrame" class="viewer"></iframe>
-  </div>
+<!-- ================================================= -->
+<!-- MAIN LAYOUT -->
+<!-- ================================================= -->
 
-  <div class="controls" id="controls">
-    <button id="prevBtn">Previous</button>
-    <button id="nextBtn">Next</button>
-    <button id="fullscreenBtn">Fullscreen</button>
-    <span class="slide-counter" id="counter"></span>
-  </div>
+<div class="layout">
+
+
+
+
+<!-- ================================================= -->
+<!-- SIDEBAR : SLIDE DECKS + TOPICS -->
+<!-- ================================================= -->
+
+<aside class="sidebar" id="sidebar">
+
+<div class="sidebar-header">
+Slide Decks
+</div>
+
+<!-- Expandable Deck Container -->
+<div id="deckContainer"></div>
+
+<hr>
+
+<div class="sidebar-header">
+Topics
+</div>
+
+<!-- Topic navigation -->
+<div id="topicContainer"></div>
+
+</aside>
+
+
+
+
+
+<!-- ================================================= -->
+<!-- MAIN VIEWER -->
+<!-- ================================================= -->
+
+<main class="main" id="mainContent">
+
+
+
+<!-- ============================================= -->
+<!-- SLIDE STAGE (CINEMATIC DISPLAY) -->
+<!-- ============================================= -->
+
+<div class="slide-stage" id="slideStage">
+
+
+
+<!-- Slide Wrapper -->
+
+<div class="slide-wrapper">
+
+<iframe id="slideFrame" class="viewer"></iframe>
 
 </div>
+
+
+
+<!-- Drawing Canvas -->
+<canvas id="drawingCanvas"></canvas>
+
+
+
+<!-- Laser Pointer Layer -->
+<div id="laserPointer"></div>
+
+
+
+</div>
+
+
+
+<!-- ============================================= -->
+<!-- BOTTOM CONTROLS -->
+<!-- ============================================= -->
+
+<div class="controls" id="controls">
+
+<button id="prevBtn">◀ Previous</button>
+
+<button id="nextBtn">Next ▶</button>
+
+<button id="autoPlay">Auto Play</button>
+
+<button id="resetSlide">Restart Slide</button>
+
+<span class="slide-counter" id="counter"></span>
+
+</div>
+
+
+
+</main>
+
+</div>
+
+
+
+
+<!-- ================================================= -->
+<!-- PRESENTER VIEW PANEL -->
+<!-- ================================================= -->
+
+<div class="presenter-panel" id="presenterPanel">
+
+<div class="presenter-section">
+
+<h3>Current Slide</h3>
+
+<div id="currentSlidePreview"></div>
+
+</div>
+
+<div class="presenter-section">
+
+<h3>Next Slide</h3>
+
+<div id="nextSlidePreview"></div>
+
+</div>
+
+<div class="presenter-section">
+
+<h3>Lecture Notes</h3>
+
+<div id="lectureNotes"></div>
+
+</div>
+
+</div>
+
+
+
+
+<!-- ================================================= -->
+<!-- AI SLIDE GENERATOR PANEL -->
+<!-- ================================================= -->
+
+<div class="ai-panel" id="aiPanel">
+
+<h3>Generate Lecture Slides</h3>
+
+<textarea
+id="aiInput"
+placeholder="Enter topic e.g. Metabolism of Adipose Tissue">
+</textarea>
+
+<button id="generateSlides">
+Generate Slides
+</button>
+
+</div>
+
+
+
+
+<!-- ================================================= -->
+<!-- SCRIPT -->
+<!-- ================================================= -->
 
 <script src="js/viewerapp.js"></script>
+
 </body>
+
 </html>
