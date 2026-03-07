@@ -13,6 +13,7 @@
 </head>
 
 
+
 <body>
 
 <!-- ================================================= -->
@@ -51,7 +52,6 @@ Medical Lecture Viewer
 
 
 
-
 <!-- ================================================= -->
 <!-- SIDEBAR : SLIDE DECKS + TOPICS -->
 <!-- ================================================= -->
@@ -62,7 +62,6 @@ Medical Lecture Viewer
 Slide Decks
 </div>
 
-<!-- Expandable Deck Container -->
 <div id="deckContainer"></div>
 
 <hr>
@@ -71,12 +70,9 @@ Slide Decks
 Topics
 </div>
 
-<!-- Topic navigation -->
 <div id="topicContainer"></div>
 
 </aside>
-
-
 
 
 
@@ -89,29 +85,35 @@ Topics
 
 
 <!-- ============================================= -->
-<!-- SLIDE STAGE (CINEMATIC DISPLAY) -->
+<!-- SLIDE STAGE -->
 <!-- ============================================= -->
 
 <div class="slide-stage" id="slideStage">
 
 
 
-<!-- Slide Wrapper -->
+<!-- SLIDE WRAPPER -->
 
 <div class="slide-wrapper">
 
-<iframe id="slideFrame" class="viewer"></iframe>
+<iframe
+id="slideFrame"
+class="viewer"
+title="Lecture Slide"
+></iframe>
 
 </div>
 
 
 
-<!-- Drawing Canvas -->
+<!-- DRAWING CANVAS -->
+
 <canvas id="drawingCanvas"></canvas>
 
 
 
-<!-- Laser Pointer Layer -->
+<!-- LASER POINTER -->
+
 <div id="laserPointer"></div>
 
 
@@ -121,7 +123,7 @@ Topics
 
 
 <!-- ============================================= -->
-<!-- BOTTOM CONTROLS -->
+<!-- SLIDE CONTROLS -->
 <!-- ============================================= -->
 
 <div class="controls" id="controls">
@@ -132,7 +134,7 @@ Topics
 
 <button id="autoPlay">Auto Play</button>
 
-<button id="resetSlide">Restart Slide</button>
+<button id="resetSlide">Clear Drawing</button>
 
 <span class="slide-counter" id="counter"></span>
 
@@ -143,7 +145,6 @@ Topics
 </main>
 
 </div>
-
 
 
 
@@ -181,7 +182,6 @@ Topics
 
 
 
-
 <!-- ================================================= -->
 <!-- AI SLIDE GENERATOR PANEL -->
 <!-- ================================================= -->
@@ -203,9 +203,8 @@ Generate Slides
 
 
 
-
 <!-- ================================================= -->
-<!-- SCRIPT -->
+<!-- JAVASCRIPT -->
 <!-- ================================================= -->
 
 <script src="js/viewerapp.js"></script>
