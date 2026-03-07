@@ -1,227 +1,264 @@
-/* =========================
-   SLIDE DECK CONFIGURATION
-========================= */
+/* =========================================
+   MEDICAL LECTURE VIEWER ENGINE
+========================================= */
 
-const decks = [
-  {
-    title: "TCA Cycle",
-    slides: Array.from({length: 10}, (_,i)=>`slides/tca/slide${i+1}.html`)
-  },
-  {
-    title: "HMP Pathway",
-    slides: Array.from({length: 5}, (_,i)=>`slides/hmp/slide${i+1}.html`)
-  },
-     {
-    title: "Regulation of blood glucose",
-    slides: Array.from({length: 20}, (_,i)=>`slides/rgb/slide${i+1}.html`)
-  },
-  {
-    title: "Forensic Medicine",
-    slides: Array.from({length: 6}, (_,i)=>`slides/fm/slide${i+1}.html`)
-  }
-];
+let slides = []
+let currentSlide = 0
 
-/* =========================
-   STATE VARIABLES
-========================= */
 
-let currentDeckIndex = 0;
-let currentSlideIndex = 0;
 
-/* =========================
-   DOM ELEMENTS
-========================= */
+/* =========================================
+   LOAD SLIDES
+========================================= */
 
-const deckContainer = document.getElementById("deckContainer");
-const slideFrame = document.getElementById("slideFrame");
-const counter = document.getElementById("counter");
-const topbar = document.getElementById("topbar");
-const mainContent = document.getElementById("mainContent");
-const sidebar = document.getElementById("sidebar");
+function loadSlides(){
 
-/* =========================
-   INITIALIZE
-========================= */
+slides = [
 
-function init() {
-  buildSidebar();
-  loadDeck(0);
+"slides/adipose/slide1.html",
+"slides/adipose/slide2.html",
+"slides/adipose/slide3.html",
+"slides/adipose/slide4.html",
+"slides/adipose/slide5.html"
+
+]
+
+loadSlide(0)
+
+updateCounter()
+
 }
 
-/* =========================
-   BUILD SIDEBAR
-========================= */
 
-function buildSidebar() {
-  deckContainer.innerHTML = "";
 
-  decks.forEach((deck, deckIndex) => {
+/* =========================================
+   LOAD SINGLE SLIDE
+========================================= */
 
-    const deckDiv = document.createElement("div");
-    deckDiv.className = "deck";
+function loadSlide(index){
 
-    const titleDiv = document.createElement("div");
-    titleDiv.className = "deck-title";
-    titleDiv.innerHTML = `${deck.title} <span>▼</span>`;
+const frame = document.getElementById("slideFrame")
 
-    titleDiv.onclick = () => toggleDeck(deckIndex);
+frame.src = slides[index]
 
-    const slideList = document.createElement("div");
-    slideList.className = "slide-list";
-    slideList.id = `slideList-${deckIndex}`;
+updateCounter()
 
-    deck.slides.forEach((_, slideIndex) => {
-
-      const slideTile = document.createElement("div");
-      slideTile.className = "slide-tile";
-      slideTile.innerText = `Slide ${slideIndex + 1}`;
-
-      slideTile.onclick = () => {
-        currentDeckIndex = deckIndex;
-        currentSlideIndex = slideIndex;
-        loadSlide();
-        highlightActive();
-      };
-
-      slideList.appendChild(slideTile);
-    });
-
-    deckDiv.appendChild(titleDiv);
-    deckDiv.appendChild(slideList);
-    deckContainer.appendChild(deckDiv);
-  });
 }
 
-/* =========================
-   TOGGLE DECK EXPANSION
-========================= */
 
-function toggleDeck(index) {
-  const slideList = document.getElementById(`slideList-${index}`);
-  slideList.classList.toggle("expanded");
+
+/* =========================================
+   NEXT SLIDE
+========================================= */
+
+function nextSlide(){
+
+if(currentSlide < slides.length-1){
+
+currentSlide++
+
+loadSlide(currentSlide)
+
 }
 
-/* =========================
-   LOAD DECK
-========================= */
-
-function loadDeck(index) {
-  currentDeckIndex = index;
-  currentSlideIndex = 0;
-  topbar.innerText = decks[index].title;
-  loadSlide();
-  highlightActive();
 }
 
-/* =========================
-   LOAD SLIDE
-========================= */
 
-function loadSlide() {
-  slideFrame.style.opacity = 0;
 
-  setTimeout(() => {
-    slideFrame.src = decks[currentDeckIndex].slides[currentSlideIndex];
-    counter.innerText =
-      `Slide ${currentSlideIndex + 1} of ${decks[currentDeckIndex].slides.length}`;
-    slideFrame.style.opacity = 1;
-  }, 150);
+/* =========================================
+   PREVIOUS SLIDE
+========================================= */
+
+function prevSlide(){
+
+if(currentSlide > 0){
+
+currentSlide--
+
+loadSlide(currentSlide)
+
 }
 
-/* =========================
-   HIGHLIGHT ACTIVE SLIDE
-========================= */
-
-function highlightActive() {
-
-  document.querySelectorAll(".slide-tile").forEach(tile =>
-    tile.classList.remove("active")
-  );
-
-  document.querySelectorAll(".slide-list").forEach(list =>
-    list.classList.remove("expanded")
-  );
-
-  const activeList = document.getElementById(`slideList-${currentDeckIndex}`);
-  activeList.classList.add("expanded");
-
-  const activeTile = activeList.children[currentSlideIndex];
-  if (activeTile) activeTile.classList.add("active");
 }
 
-/* =========================
-   NEXT / PREVIOUS
-========================= */
 
-document.getElementById("nextBtn").onclick = () => {
-  if (currentSlideIndex < decks[currentDeckIndex].slides.length - 1) {
-    currentSlideIndex++;
-    loadSlide();
-    highlightActive();
-  }
-};
 
-document.getElementById("prevBtn").onclick = () => {
-  if (currentSlideIndex > 0) {
-    currentSlideIndex--;
-    loadSlide();
-    highlightActive();
-  }
-};
+/* =========================================
+   SLIDE COUNTER
+========================================= */
 
-/* =========================
+function updateCounter(){
+
+const counter = document.getElementById("counter")
+
+counter.innerText =
+(currentSlide+1) + " / " + slides.length
+
+}
+
+
+
+/* =========================================
+   BUTTON CONTROLS
+========================================= */
+
+document.getElementById("nextBtn")
+.addEventListener("click",nextSlide)
+
+document.getElementById("prevBtn")
+.addEventListener("click",prevSlide)
+
+
+
+/* =========================================
+   CLICK ANYWHERE TO ADVANCE
+========================================= */
+
+document.getElementById("slideStage")
+.addEventListener("click",(e)=>{
+
+if(e.target.id !== "drawingCanvas")
+nextSlide()
+
+})
+
+
+
+/* =========================================
+   KEYBOARD CONTROLS
+========================================= */
+
+document.addEventListener("keydown",(e)=>{
+
+if(e.key === "ArrowRight") nextSlide()
+
+if(e.key === "ArrowLeft") prevSlide()
+
+if(e.key === "f") toggleFullscreen()
+
+})
+
+
+
+/* =========================================
    FULLSCREEN MODE
-========================= */
+========================================= */
 
-document.getElementById("fullscreenBtn").onclick = () => {
-  if (!document.fullscreenElement) {
-    document.documentElement.requestFullscreen();
-    document.body.classList.add("fullscreen");
-  } else {
-    document.exitFullscreen();
-    document.body.classList.remove("fullscreen");
-  }
-};
+function toggleFullscreen(){
 
-/* =========================
-   KEYBOARD NAVIGATION
-========================= */
+if(!document.fullscreenElement){
 
-document.addEventListener("keydown", e => {
-  if (e.key === "ArrowRight") {
-    document.getElementById("nextBtn").click();
-  }
-  if (e.key === "ArrowLeft") {
-    document.getElementById("prevBtn").click();
-  }
-});
+document.documentElement.requestFullscreen()
 
-/* =========================
-   SWIPE SUPPORT (MOBILE)
-========================= */
+}else{
 
-let startX = 0;
+document.exitFullscreen()
 
-slideFrame.addEventListener("touchstart", e => {
-  startX = e.changedTouches[0].screenX;
-});
+}
 
-slideFrame.addEventListener("touchend", e => {
-  let diff = e.changedTouches[0].screenX - startX;
-  if (diff < -50) document.getElementById("nextBtn").click();
-  if (diff > 50) document.getElementById("prevBtn").click();
-});
+}
 
-/* =========================
-   SIDEBAR TOGGLE (MOBILE)
-========================= */
 
-document.getElementById("menuToggle").onclick = () => {
-  sidebar.classList.toggle("active");
-};
 
-/* =========================
-   START
-========================= */
+/* =========================================
+   FULLSCREEN BUTTON
+========================================= */
 
-init();
+document
+.getElementById("fullscreenBtn")
+.addEventListener("click",toggleFullscreen)
+
+
+
+/* =========================================
+   SIDEBAR TOGGLE
+========================================= */
+
+document
+.getElementById("menuToggle")
+.addEventListener("click",()=>{
+
+document
+.getElementById("sidebar")
+.classList.toggle("collapsed")
+
+})
+
+
+
+/* =========================================
+   PRESENTER MODE
+========================================= */
+
+document
+.getElementById("presenterMode")
+.addEventListener("click",()=>{
+
+document
+.getElementById("presenterPanel")
+.classList.toggle("active")
+
+})
+
+
+
+/* =========================================
+   LASER POINTER
+========================================= */
+
+let laserActive = false
+
+const laser = document.getElementById("laserPointer")
+
+document
+.getElementById("laserToggle")
+.addEventListener("click",()=>{
+
+laserActive = !laserActive
+
+laser.style.display =
+laserActive ? "block" : "none"
+
+})
+
+
+
+document
+.getElementById("slideStage")
+.addEventListener("mousemove",(e)=>{
+
+if(!laserActive) return
+
+laser.style.left = e.clientX + "px"
+laser.style.top = e.clientY + "px"
+
+})
+
+
+
+/* =========================================
+   DRAWING MODE
+========================================= */
+
+let drawing = false
+
+document
+.getElementById("drawToggle")
+.addEventListener("click",()=>{
+
+drawing = !drawing
+
+const canvas = document.getElementById("drawingCanvas")
+
+canvas.style.pointerEvents =
+drawing ? "auto" : "none"
+
+})
+
+
+
+/* =========================================
+   START VIEWER
+========================================= */
+
+window.onload = loadSlides
