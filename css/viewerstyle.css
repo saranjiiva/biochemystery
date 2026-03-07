@@ -6,7 +6,7 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family: "Segoe UI", Arial, sans-serif;
+font-family:"Segoe UI",Arial,sans-serif;
 }
 
 body{
@@ -23,30 +23,18 @@ overflow:hidden;
 /* ============================= */
 
 .topbar{
-
 position:fixed;
-
 top:0;
 left:0;
-
 width:100%;
-
 height:55px;
-
 background:#0b1022;
-
 display:flex;
-
 align-items:center;
-
 justify-content:space-between;
-
 padding:0 20px;
-
 border-bottom:1px solid #1e2748;
-
 z-index:1000;
-
 }
 
 .lecture-title{
@@ -56,23 +44,14 @@ color:#7fa6ff;
 }
 
 .top-controls button{
-
 margin-left:10px;
-
 padding:6px 12px;
-
 background:#1b2550;
-
 border:none;
-
 color:white;
-
 border-radius:6px;
-
 cursor:pointer;
-
 transition:0.25s;
-
 }
 
 .top-controls button:hover{
@@ -86,19 +65,12 @@ background:#2c3c8c;
 /* ============================= */
 
 .menu-toggle{
-
 background:#1b2550;
-
 border:none;
-
 color:white;
-
 padding:8px 12px;
-
 border-radius:6px;
-
 cursor:pointer;
-
 }
 
 
@@ -108,13 +80,9 @@ cursor:pointer;
 /* ============================= */
 
 .layout{
-
 display:flex;
-
 height:100vh;
-
 padding-top:55px;
-
 }
 
 
@@ -124,49 +92,36 @@ padding-top:55px;
 /* ============================= */
 
 .sidebar{
-
 width:260px;
-
 background:#0a0f24;
-
 border-right:1px solid #1e2748;
-
 overflow-y:auto;
-
 transition:0.35s;
+}
 
+.sidebar.collapsed{
+width:0;
+overflow:hidden;
 }
 
 .sidebar-header{
-
 padding:18px;
-
 font-size:16px;
-
 font-weight:600;
-
 color:#7fa6ff;
-
 border-bottom:1px solid #1e2748;
-
 }
 
 #deckContainer div,
 #topicContainer div{
-
 padding:12px 18px;
-
 cursor:pointer;
-
 transition:0.25s;
-
 }
 
 #deckContainer div:hover,
 #topicContainer div:hover{
-
 background:#1b2550;
-
 }
 
 
@@ -176,19 +131,12 @@ background:#1b2550;
 /* ============================= */
 
 .main{
-
 flex:1;
-
 display:flex;
-
 flex-direction:column;
-
 align-items:center;
-
 justify-content:center;
-
 position:relative;
-
 }
 
 
@@ -197,14 +145,14 @@ position:relative;
 /* SLIDE STAGE */
 /* ============================= */
 
-.slide-stage {
-position: relative;
-width: 100%;
-height: calc(100vh - 120px);
-background: black;
-display: flex;
-justify-content: center;
-align-items: center;
+.slide-stage{
+position:relative;
+width:100%;
+height:calc(100vh - 120px);
+background:black;
+display:flex;
+justify-content:center;
+align-items:center;
 }
 
 
@@ -214,22 +162,15 @@ align-items: center;
 /* ============================= */
 
 .slide-wrapper{
-
 width:85%;
-
 height:85%;
-
 background:#000;
-
 border-radius:10px;
-
 overflow:hidden;
 
 box-shadow:
-
 0 0 40px rgba(0,0,0,0.7),
 0 0 80px rgba(40,80,200,0.2);
-
 }
 
 
@@ -239,15 +180,10 @@ box-shadow:
 /* ============================= */
 
 .viewer{
-
 width:100%;
-
 height:100%;
-
 border:none;
-
 background:white;
-
 }
 
 
@@ -257,19 +193,12 @@ background:white;
 /* ============================= */
 
 #drawingCanvas{
-
 position:absolute;
-
 top:0;
-
 left:0;
-
 width:100%;
-
 height:100%;
-
 pointer-events:none;
-
 }
 
 
@@ -279,23 +208,14 @@ pointer-events:none;
 /* ============================= */
 
 #laserPointer{
-
 position:absolute;
-
 width:14px;
-
 height:14px;
-
 border-radius:50%;
-
 background:red;
-
 pointer-events:none;
-
 display:none;
-
 box-shadow:0 0 15px red;
-
 }
 
 
@@ -305,65 +225,41 @@ box-shadow:0 0 15px red;
 /* ============================= */
 
 .controls{
-
 position:absolute;
-
 bottom:25px;
-
 left:50%;
-
 transform:translateX(-50%);
-
 display:flex;
-
 gap:15px;
 
 background:rgba(15,20,45,0.9);
-
 padding:12px 20px;
 
 border-radius:10px;
-
 backdrop-filter:blur(10px);
 
 box-shadow:0 0 20px rgba(0,0,0,0.5);
-
 }
 
 .controls button{
-
 padding:8px 16px;
-
 background:#1c2660;
-
 border:none;
-
 border-radius:6px;
-
 color:white;
-
 cursor:pointer;
-
 transition:0.25s;
-
 }
 
 .controls button:hover{
-
 background:#2f43a0;
-
 transform:scale(1.05);
-
 }
 
 .slide-counter{
-
 font-size:14px;
-
 color:#8ca8ff;
-
 margin-left:10px;
-
 }
 
 
@@ -373,49 +269,30 @@ margin-left:10px;
 /* ============================= */
 
 .presenter-panel{
-
 position:fixed;
-
 right:-350px;
-
 top:0;
-
 width:350px;
-
 height:100%;
-
 background:#0a0f24;
-
 border-left:1px solid #1e2748;
-
 padding:20px;
-
 overflow-y:auto;
-
 transition:0.4s;
-
 z-index:1200;
-
 }
 
 .presenter-panel.active{
-
 right:0;
-
 }
 
 .presenter-section{
-
 margin-bottom:25px;
-
 }
 
 .presenter-section h3{
-
 margin-bottom:10px;
-
 color:#7fa6ff;
-
 }
 
 
@@ -425,71 +302,41 @@ color:#7fa6ff;
 /* ============================= */
 
 .ai-panel{
-
 position:fixed;
-
 bottom:-300px;
-
 left:50%;
-
 transform:translateX(-50%);
-
 width:450px;
-
 background:#0b1022;
-
 border:1px solid #1e2748;
-
 border-radius:10px;
-
 padding:20px;
-
 transition:0.35s;
-
 z-index:1100;
-
 }
 
 .ai-panel.active{
-
 bottom:80px;
-
 }
 
 .ai-panel textarea{
-
 width:100%;
-
 height:120px;
-
 margin-bottom:10px;
-
 padding:10px;
-
 background:#020517;
-
 border:1px solid #1e2748;
-
 color:white;
-
 border-radius:6px;
-
 }
 
 .ai-panel button{
-
 padding:8px 14px;
-
 background:#2b3c9e;
-
 border:none;
-
 color:white;
-
 border-radius:6px;
-
 cursor:pointer;
-
 }
 
 
@@ -498,30 +345,60 @@ cursor:pointer;
 /* FULLSCREEN MODE */
 /* ============================= */
 
-/* Hide UI when slide is fullscreen */
+/* Hide UI */
 
 :fullscreen .topbar,
 :fullscreen .sidebar,
 :fullscreen .controls,
 :fullscreen .menu-toggle,
 :fullscreen .ai-panel,
-:fullscreen .presenter-panel {
-    display: none !important;
+:fullscreen .presenter-panel{
+display:none !important;
 }
 
 
-/* Slide occupies entire screen */
+/* Slide stage full screen */
 
-:fullscreen .slide-stage {
-    width: 100vw;
-    height: 100vh;
+:fullscreen #slideStage{
+position:fixed;
+top:0;
+left:0;
+width:100vw;
+height:100vh;
+background:black;
+display:flex;
+align-items:center;
+justify-content:center;
 }
 
-:fullscreen .viewer {
-    width: 100%;
-    height: 100%;
-    border: none;
+
+/* Remove wrapper margin */
+
+:fullscreen .slide-wrapper{
+width:100%;
+height:100%;
+border-radius:0;
+box-shadow:none;
 }
+
+
+/* Slide fills screen */
+
+:fullscreen #slideFrame{
+width:100%;
+height:100%;
+border:none;
+}
+
+
+/* Canvas and laser overlay */
+
+:fullscreen #drawingCanvas,
+:fullscreen #laserPointer{
+width:100%;
+height:100%;
+}
+
 
 
 /* ============================= */
