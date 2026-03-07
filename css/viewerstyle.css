@@ -197,26 +197,14 @@ position:relative;
 /* SLIDE STAGE */
 /* ============================= */
 
-.slide-stage{
-
-position:relative;
-
-width:100%;
-
-height:100%;
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-background:radial-gradient(
-circle at center,
-#0f1635,
-#030617
-);
-
+.slide-stage {
+position: relative;
+width: 100%;
+height: calc(100vh - 120px);
+background: black;
+display: flex;
+justify-content: center;
+align-items: center;
 }
 
 
@@ -510,20 +498,30 @@ cursor:pointer;
 /* FULLSCREEN MODE */
 /* ============================= */
 
-body.fullscreen .sidebar{
+/* Hide UI when slide is fullscreen */
 
-display:none;
-
+:fullscreen .topbar,
+:fullscreen .sidebar,
+:fullscreen .controls,
+:fullscreen .menu-toggle,
+:fullscreen .ai-panel,
+:fullscreen .presenter-panel {
+    display: none !important;
 }
 
-body.fullscreen .slide-wrapper{
 
-width:95%;
+/* Slide occupies entire screen */
 
-height:92%;
-
+:fullscreen .slide-stage {
+    width: 100vw;
+    height: 100vh;
 }
 
+:fullscreen .viewer {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
 
 
 /* ============================= */
