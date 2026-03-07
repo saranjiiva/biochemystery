@@ -15,11 +15,11 @@ function loadSlides(){
 
 slides = [
 
-"slides/adipose/slide1.html",
-"slides/adipose/slide2.html",
-"slides/adipose/slide3.html",
-"slides/adipose/slide4.html",
-"slides/adipose/slide5.html"
+"slides/tca/slide1.html",
+"slides/tca/slide2.html",
+"slides/tca/slide3.html",
+"slides/tca/slide4.html",
+"slides/tca/slide5.html"
 
 ]
 
