@@ -53,7 +53,7 @@ updateCounter()
 
 function nextSlide(){
 
-if(currentSlide < slides.length-1){
+if(currentSlide < slides.length - 1){
 
 currentSlide++
 
@@ -92,7 +92,7 @@ function updateCounter(){
 const counter = document.getElementById("counter")
 
 counter.innerText =
-(currentSlide+1) + " / " + slides.length
+(currentSlide + 1) + " / " + slides.length
 
 }
 
@@ -102,19 +102,22 @@ counter.innerText =
    BUTTON CONTROLS
 ========================================= */
 
-document.getElementById("nextBtn")
-.addEventListener("click",nextSlide)
+document
+.getElementById("nextBtn")
+.addEventListener("click", nextSlide)
 
-document.getElementById("prevBtn")
-.addEventListener("click",prevSlide)
+document
+.getElementById("prevBtn")
+.addEventListener("click", prevSlide)
 
 
 
 /* =========================================
-   CLICK ANYWHERE TO ADVANCE
+   CLICK SLIDE TO ADVANCE
 ========================================= */
 
-document.getElementById("slideStage")
+document
+.getElementById("slideStage")
 .addEventListener("click",(e)=>{
 
 if(e.target.id !== "drawingCanvas")
@@ -136,6 +139,8 @@ if(e.key === "ArrowLeft") prevSlide()
 
 if(e.key === "f") toggleFullscreen()
 
+if(e.key === "Escape") document.exitFullscreen()
+
 })
 
 
@@ -144,28 +149,22 @@ if(e.key === "f") toggleFullscreen()
    FULLSCREEN MODE
 ========================================= */
 
-const fullscreenBtn = document.getElementById("fullscreenBtn");
-const slideStage = document.getElementById("slideStage");
+function toggleFullscreen(){
 
-fullscreenBtn.addEventListener("click", () => {
+const slideStage =
+document.getElementById("slideStage")
 
-if (!document.fullscreenElement) {
+if(!document.fullscreenElement){
 
-slideStage.requestFullscreen();
+slideStage.requestFullscreen()
 
-} else {
+}else{
 
-document.exitFullscreen();
+document.exitFullscreen()
 
 }
 
-});
-
-
-
-/* =========================================
-   FULLSCREEN BUTTON
-========================================= */
+}
 
 document
 .getElementById("fullscreenBtn")
@@ -211,7 +210,8 @@ document
 
 let laserActive = false
 
-const laser = document.getElementById("laserPointer")
+const laser =
+document.getElementById("laserPointer")
 
 document
 .getElementById("laserToggle")
@@ -245,16 +245,106 @@ laser.style.top = e.clientY + "px"
 
 let drawing = false
 
+const canvas =
+document.getElementById("drawingCanvas")
+
+const ctx =
+canvas.getContext("2d")
+
+canvas.width = window.innerWidth
+canvas.height = window.innerHeight
+
 document
 .getElementById("drawToggle")
 .addEventListener("click",()=>{
 
 drawing = !drawing
 
-const canvas = document.getElementById("drawingCanvas")
-
 canvas.style.pointerEvents =
 drawing ? "auto" : "none"
+
+})
+
+
+
+canvas.addEventListener("mousedown",()=>{
+
+if(!drawing) return
+
+ctx.beginPath()
+
+canvas.addEventListener("mousemove",draw)
+
+})
+
+
+
+canvas.addEventListener("mouseup",()=>{
+
+canvas.removeEventListener("mousemove",draw)
+
+})
+
+
+
+function draw(e){
+
+ctx.lineWidth = 3
+ctx.strokeStyle = "red"
+ctx.lineCap = "round"
+
+ctx.lineTo(e.clientX,e.clientY)
+
+ctx.stroke()
+
+ctx.beginPath()
+
+ctx.moveTo(e.clientX,e.clientY)
+
+}
+
+
+
+/* =========================================
+   RESET SLIDE DRAWING
+========================================= */
+
+document
+.getElementById("resetSlide")
+.addEventListener("click",()=>{
+
+ctx.clearRect(0,0,canvas.width,canvas.height)
+
+})
+
+
+
+/* =========================================
+   AUTOPLAY
+========================================= */
+
+let autoPlay = false
+let autoInterval
+
+document
+.getElementById("autoPlay")
+.addEventListener("click",()=>{
+
+autoPlay = !autoPlay
+
+if(autoPlay){
+
+autoInterval = setInterval(()=>{
+
+nextSlide()
+
+},5000)
+
+}else{
+
+clearInterval(autoInterval)
+
+}
 
 })
 
