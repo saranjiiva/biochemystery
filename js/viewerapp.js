@@ -144,19 +144,22 @@ if(e.key === "f") toggleFullscreen()
    FULLSCREEN MODE
 ========================================= */
 
-function toggleFullscreen(){
+const fullscreenBtn = document.getElementById("fullscreenBtn");
+const slideStage = document.getElementById("slideStage");
 
-if(!document.fullscreenElement){
+fullscreenBtn.addEventListener("click", () => {
 
-document.documentElement.requestFullscreen()
+if (!document.fullscreenElement) {
 
-}else{
+slideStage.requestFullscreen();
 
-document.exitFullscreen()
+} else {
+
+document.exitFullscreen();
 
 }
 
-}
+});
 
 
 
