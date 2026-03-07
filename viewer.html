@@ -2,39 +2,30 @@
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Medical Lecture Viewer</title>
 
-<link rel="stylesheet" href="css/viewerstyle.css">
+<link rel="stylesheet" href="viewerstyle.css">
 
 </head>
 
-
-
 <body>
 
-<!-- ================================================= -->
-<!-- TOP CONTROL BAR -->
-<!-- ================================================= -->
+<!-- ============================= -->
+<!-- TOP BAR -->
+<!-- ============================= -->
 
 <header class="topbar">
 
-<button class="menu-toggle" id="menuToggle">☰</button>
+<button id="menuToggle">☰</button>
 
-<div class="lecture-title">
+<div class="title">
 Medical Lecture Viewer
 </div>
 
-<div class="top-controls">
-
-<button id="drawToggle">✏ Draw</button>
-
-<button id="laserToggle">🔴 Laser</button>
-
-<button id="presenterMode">Presenter</button>
+<div class="top-buttons">
 
 <button id="fullscreenBtn">Fullscreen</button>
 
@@ -44,103 +35,71 @@ Medical Lecture Viewer
 
 
 
-<!-- ================================================= -->
+<!-- ============================= -->
 <!-- MAIN LAYOUT -->
-<!-- ================================================= -->
+<!-- ============================= -->
 
 <div class="layout">
 
 
 
-<!-- ================================================= -->
-<!-- SIDEBAR : SLIDE DECKS + TOPICS -->
-<!-- ================================================= -->
+<!-- ============================= -->
+<!-- SIDEBAR -->
+<!-- ============================= -->
 
 <aside class="sidebar" id="sidebar">
 
-<div class="sidebar-header">
-Slide Decks
+<h3>Chapter Topics</h3>
+
+<div class="topic-group">
+
+<div class="topic-header">
+Adipose Tissue
 </div>
 
-<div id="deckContainer"></div>
+<div class="topic-list">
 
-<hr>
+<div onclick="goSlide(0)">Introduction</div>
 
-<div class="sidebar-header">
-Topics
+<div onclick="goSlide(1)">Structure</div>
+
+<div onclick="goSlide(2)">Lipogenesis</div>
+
+<div onclick="goSlide(3)">Lipolysis</div>
+
+<div onclick="goSlide(4)">Clinical Importance</div>
+
 </div>
 
-<div id="topicContainer"></div>
+</div>
 
 </aside>
 
 
 
-<!-- ================================================= -->
-<!-- MAIN VIEWER -->
-<!-- ================================================= -->
+<!-- ============================= -->
+<!-- SLIDE VIEWER -->
+<!-- ============================= -->
 
-<main class="main" id="mainContent">
-
-
-
-<!-- ============================================= -->
-<!-- SLIDE STAGE -->
-<!-- ============================================= -->
+<main class="viewer-area">
 
 <div class="slide-stage" id="slideStage">
 
-
-
-<!-- SLIDE WRAPPER -->
-
-<div class="slide-wrapper">
-
-<iframe
-id="slideFrame"
-class="viewer"
-title="Lecture Slide"
-></iframe>
+<iframe id="slideFrame"></iframe>
 
 </div>
 
 
 
-<!-- DRAWING CANVAS -->
-
-<canvas id="drawingCanvas"></canvas>
-
-
-
-<!-- LASER POINTER -->
-
-<div id="laserPointer"></div>
-
-
-
-</div>
-
-
-
-<!-- ============================================= -->
-<!-- SLIDE CONTROLS -->
-<!-- ============================================= -->
-
-<div class="controls" id="controls">
+<div class="controls">
 
 <button id="prevBtn">◀ Previous</button>
 
 <button id="nextBtn">Next ▶</button>
 
-<button id="autoPlay">Auto Play</button>
-
-<button id="resetSlide">Clear Drawing</button>
-
-<span class="slide-counter" id="counter"></span>
+<span id="counter"></span>
 
 </div>
-
-
 
 </main>
 
@@ -148,66 +107,7 @@ title="Lecture Slide"
 
 
 
-<!-- ================================================= -->
-<!-- PRESENTER VIEW PANEL -->
-<!-- ================================================= -->
-
-<div class="presenter-panel" id="presenterPanel">
-
-<div class="presenter-section">
-
-<h3>Current Slide</h3>
-
-<div id="currentSlidePreview"></div>
-
-</div>
-
-<div class="presenter-section">
-
-<h3>Next Slide</h3>
-
-<div id="nextSlidePreview"></div>
-
-</div>
-
-<div class="presenter-section">
-
-<h3>Lecture Notes</h3>
-
-<div id="lectureNotes"></div>
-
-</div>
-
-</div>
-
-
-
-<!-- ================================================= -->
-<!-- AI SLIDE GENERATOR PANEL -->
-<!-- ================================================= -->
-
-<div class="ai-panel" id="aiPanel">
-
-<h3>Generate Lecture Slides</h3>
-
-<textarea
-id="aiInput"
-placeholder="Enter topic e.g. Metabolism of Adipose Tissue">
-</textarea>
-
-<button id="generateSlides">
-Generate Slides
-</button>
-
-</div>
-
-
-
-<!-- ================================================= -->
-<!-- JAVASCRIPT -->
-<!-- ================================================= -->
-
-<script src="js/viewerapp.js"></script>
+<script src="viewerstyle.js"></script>
 
 </body>
 
