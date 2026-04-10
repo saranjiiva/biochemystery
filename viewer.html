@@ -2,50 +2,79 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+
+  <!-- Mobile Optimization -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Amino Acid Brain Map</title>
+
+  <title>Amino Acid Neural Map</title>
 
   <link rel="stylesheet" href="css/viewerstyle.css">
 </head>
 <body>
 
 <!-- =========================
-     TOP BAR
+     TOP CONTROL BAR
 ========================= -->
 <div id="topbar">
-  <div class="title">🧠 Amino Acid Metabolism Map</div>
+
+  <div class="title">
+    🧠 Amino Acid Neural Map
+  </div>
 
   <div class="controls">
     <button onclick="resetView()">Reset</button>
     <button onclick="toggleTheme()">Theme</button>
   </div>
+
 </div>
 
 <!-- =========================
-     CANVAS WRAPPER (FOR PAN/ZOOM)
+     VIEWPORT (PAN + ZOOM)
 ========================= -->
 <div id="viewport">
 
+  <!-- =========================
+       MAIN CANVAS (LAYERED)
+  ========================= -->
   <div id="canvas">
 
-    <!-- Dynamic nodes go here -->
+    <!-- =========================
+         SVG LAYER (CONNECTIONS)
+         This is KEY for curved links
+    ========================= -->
+    <svg id="link-layer"></svg>
+
+    <!-- =========================
+         NODE LAYER (FRONT)
+    ========================= -->
+    <div id="node-layer"></div>
 
   </div>
 
 </div>
 
 <!-- =========================
-     POPUP BOX
+     POPUP (COLLAPSIBLE)
 ========================= -->
 <div id="popup" class="hidden">
+
   <div id="popup-content"></div>
+
 </div>
 
 <!-- =========================
-     LOADER (optional future)
+     BACKGROUND DECOR (DEPTH EFFECT)
+========================= -->
+<div id="bg-particles"></div>
+
+<!-- =========================
+     OPTIONAL LOADER
 ========================= -->
 <div id="loader" class="hidden">Loading...</div>
 
+<!-- =========================
+     SCRIPT
+========================= -->
 <script src="js/viewerapp.js"></script>
 
 </body>
