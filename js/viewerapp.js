@@ -3,6 +3,9 @@
 ========================= */
 const canvas = document.getElementById("canvas");
 const viewport = document.getElementById("viewport");
+const nodeLayer = document.getElementById("node-layer");
+const svg = document.getElementById("link-layer");
+
 const popup = document.getElementById("popup");
 const popupContent = document.getElementById("popup-content");
 
@@ -18,7 +21,7 @@ let startX, startY;
 let activePopupId = null;
 
 /* =========================
-   DATA MODEL (EXPAND HERE)
+   DATA (EXPANDABLE)
 ========================= */
 const data = [
   {
@@ -29,19 +32,18 @@ const data = [
     details: {
       title: "Alanine → Pyruvate",
       enzyme: "Alanine Transaminase (ALT)",
-      cofactor: "Pyridoxal Phosphate (Vitamin B6)",
-      note: "Key reaction in glucose-alanine cycle"
+      cofactor: "PLP (Vitamin B6)",
+      note: "Important in glucose-alanine cycle"
     }
   }
 ];
 
 /* =========================
    NODE POSITIONS
-   (expandable)
 ========================= */
 const positions = {
-  "Alanine": { x: 200, y: 300 },
-  "Pyruvate": { x: 450, y: 300 }
+  "Alanine": { x: 400, y: 500 },
+  "Pyruvate": { x: 800, y: 500 }
 };
 
 /* =========================
@@ -60,33 +62,51 @@ function createNode(name) {
     e.stopPropagation();
     togglePopup(e, {
       title: name,
-      note: "Amino acid / metabolite"
+      note: "Metabolite / Amino Acid"
     }, name);
   };
 
-  canvas.appendChild(node);
+  nodeLayer.appendChild(node);
 }
 
 /* =========================
-   CREATE LINE
+   CREATE CURVED LINK (SVG)
 ========================= */
-function createLine(x1, y1, x2, y2) {
-  const line = document.createElement("div");
-  line.className = "line";
+function createCurve(p1, p2, link) {
 
-  const length = Math.hypot(x2 - x1, y2 - y1);
-  const angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
+  const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  path.classList.add("link-path");
 
-  line.style.width = length + "px";
-  line.style.left = x1 + "px";
-  line.style.top = y1 + "px";
-  line.style.transform = `rotate(${angle}deg)`;
+  // Control point for curve (gives "neural bend")
+  const dx = (p2.x - p1.x) * 0.5;
+  const curveOffset = 80; // tweak for more curve
 
-  canvas.appendChild(line);
+  const d = `
+    M ${p1.x} ${p1.y}
+    C ${p1.x + dx} ${p1.y - curveOffset},
+      ${p2.x - dx} ${p2.y + curveOffset},
+      ${p2.x} ${p2.y}
+  `;
+
+  path.setAttribute("d", d);
+
+  /* CLICK INTERACTION */
+  path.addEventListener("click", (e) => {
+    e.stopPropagation();
+
+    path.classList.toggle("active");
+
+    togglePopup(e, link.details, link.id);
+  });
+
+  svg.appendChild(path);
+
+  /* LABEL */
+  createLabel(link.label, (p1.x + p2.x)/2, (p1.y + p2.y)/2, link.details, link.id);
 }
 
 /* =========================
-   CREATE LABEL
+   LABEL
 ========================= */
 function createLabel(text, x, y, details, id) {
   const label = document.createElement("div");
@@ -101,11 +121,11 @@ function createLabel(text, x, y, details, id) {
     togglePopup(e, details, id);
   };
 
-  canvas.appendChild(label);
+  nodeLayer.appendChild(label);
 }
 
 /* =========================
-   POPUP TOGGLE
+   POPUP
 ========================= */
 function togglePopup(e, details, id) {
 
@@ -124,8 +144,8 @@ function togglePopup(e, details, id) {
 
   popup.style.left = e.clientX + "px";
   popup.style.top = e.clientY + "px";
-  popup.classList.remove("hidden");
 
+  popup.classList.remove("hidden");
   activePopupId = id;
 }
 
@@ -136,9 +156,10 @@ viewport.addEventListener("click", () => {
 });
 
 /* =========================
-   RENDER MAP
+   RENDER
 ========================= */
 function render() {
+
   const created = new Set();
 
   data.forEach(link => {
@@ -156,22 +177,14 @@ function render() {
     const p1 = positions[link.from];
     const p2 = positions[link.to];
 
-    createLine(p1.x + 50, p1.y + 20, p2.x, p2.y + 20);
-
-    createLabel(
-      link.label,
-      (p1.x + p2.x) / 2,
-      (p1.y + p2.y) / 2 - 25,
-      link.details,
-      link.id
-    );
+    createCurve(p1, p2, link);
   });
 }
 
 render();
 
 /* =========================
-   PAN (DRAG)
+   PAN (MOUSE)
 ========================= */
 viewport.addEventListener("mousedown", (e) => {
   isDragging = true;
@@ -188,16 +201,11 @@ viewport.addEventListener("mousemove", (e) => {
   updateTransform();
 });
 
-viewport.addEventListener("mouseup", () => {
-  isDragging = false;
-});
-
-viewport.addEventListener("mouseleave", () => {
-  isDragging = false;
-});
+viewport.addEventListener("mouseup", () => isDragging = false);
+viewport.addEventListener("mouseleave", () => isDragging = false);
 
 /* =========================
-   TOUCH DRAG (MOBILE)
+   TOUCH PAN
 ========================= */
 viewport.addEventListener("touchstart", (e) => {
   isDragging = true;
@@ -214,9 +222,7 @@ viewport.addEventListener("touchmove", (e) => {
   updateTransform();
 });
 
-viewport.addEventListener("touchend", () => {
-  isDragging = false;
-});
+viewport.addEventListener("touchend", () => isDragging = false);
 
 /* =========================
    ZOOM
@@ -227,7 +233,7 @@ viewport.addEventListener("wheel", (e) => {
   const zoomSpeed = 0.1;
   scale += e.deltaY * -zoomSpeed * 0.01;
 
-  scale = Math.min(Math.max(0.5, scale), 2);
+  scale = Math.min(Math.max(0.4, scale), 2.5);
 
   updateTransform();
 });
