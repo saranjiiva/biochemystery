@@ -1,114 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amino Acid Brain Map</title>
 
-<title>Medical Lecture Viewer</title>
-
-<link rel="stylesheet" href="viewerstyle.css">
-
+  <link rel="stylesheet" href="viewerstyle.css">
 </head>
-
 <body>
 
-<!-- ============================= -->
-<!-- TOP BAR -->
-<!-- ============================= -->
+<!-- =========================
+     TOP BAR
+========================= -->
+<div id="topbar">
+  <div class="title">🧠 Amino Acid Metabolism Map</div>
 
-<header class="topbar">
-
-<button id="menuToggle">☰</button>
-
-<div class="title">
-Medical Lecture Viewer
+  <div class="controls">
+    <button onclick="resetView()">Reset</button>
+    <button onclick="toggleTheme()">Theme</button>
+  </div>
 </div>
 
-<div class="top-buttons">
+<!-- =========================
+     CANVAS WRAPPER (FOR PAN/ZOOM)
+========================= -->
+<div id="viewport">
 
-<button id="fullscreenBtn">Fullscreen</button>
+  <div id="canvas">
 
-</div>
+    <!-- Dynamic nodes go here -->
 
-</header>
-
-
-
-<!-- ============================= -->
-<!-- MAIN LAYOUT -->
-<!-- ============================= -->
-
-<div class="layout">
-
-
-
-<!-- ============================= -->
-<!-- SIDEBAR -->
-<!-- ============================= -->
-
-<aside class="sidebar" id="sidebar">
-
-<h3>Chapter Topics</h3>
-
-<div class="topic-group">
-
-<div class="topic-header">
-Adipose Tissue
-</div>
-
-<div class="topic-list">
-
-<div onclick="goSlide(0)">Introduction</div>
-
-<div onclick="goSlide(1)">Structure</div>
-
-<div onclick="goSlide(2)">Lipogenesis</div>
-
-<div onclick="goSlide(3)">Lipolysis</div>
-
-<div onclick="goSlide(4)">Clinical Importance</div>
+  </div>
 
 </div>
 
+<!-- =========================
+     POPUP BOX
+========================= -->
+<div id="popup" class="hidden">
+  <div id="popup-content"></div>
 </div>
 
-</aside>
+<!-- =========================
+     LOADER (optional future)
+========================= -->
+<div id="loader" class="hidden">Loading...</div>
 
-
-
-<!-- ============================= -->
-<!-- SLIDE VIEWER -->
-<!-- ============================= -->
-
-<main class="viewer-area">
-
-<div class="slide-stage" id="slideStage">
-
-<iframe id="slideFrame"></iframe>
-
-</div>
-
-
-
-<div class="controls">
-
-<button id="prevBtn">◀ Previous</button>
-
-<button id="nextBtn">Next ▶</button>
-
-<span id="counter"></span>
-
-</div>
-
-</main>
-
-</div>
-
-
-
-<script src="viewerstyle.js"></script>
+<script src="viewerapp.js"></script>
 
 </body>
-
 </html>
