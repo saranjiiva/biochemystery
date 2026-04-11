@@ -1,139 +1,277 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Amino Acid Metabolism Map</title>
 <style>
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f2}
-  h1{text-align:center;padding:18px 16px 6px;font-size:18px;font-weight:700;color:#1a1a18}
-  p.sub{text-align:center;font-size:12px;color:#888;margin-bottom:12px}
-  #wrap{
-    width:100%;max-width:1100px;margin:0 auto;
-    height:90vh;min-height:480px;max-height:700px;
-    overflow:hidden;cursor:grab;position:relative;
-    background:#fff;border-radius:12px;
-    border:1px solid #e0ddd6;user-select:none;
-    -webkit-user-select:none;touch-action:none;
-    box-shadow:0 2px 12px rgba(0,0,0,.07)
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
   }
-  #wrap.dragging{cursor:grabbing}
-  #canvas{position:absolute;width:1500px;height:1100px;transform-origin:0 0;will-change:transform}
-  svg#links{position:absolute;top:0;left:0;width:1500px;height:1100px;overflow:visible;pointer-events:none}
- 
-  /* ── Nodes ── */
-  .nd{
-    position:absolute;transform:translate(-50%,-50%);
-    border-radius:9px;font-size:13px;font-weight:600;
-    padding:9px 16px;cursor:pointer;border:2px solid;
-    transition:box-shadow .15s,transform .15s;
-    white-space:nowrap;text-align:center;line-height:1.3;
-    box-shadow:0 1px 4px rgba(0,0,0,.08)
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #f5f5f2;
   }
-  .nd:active{transform:translate(-50%,-50%) scale(0.96)}
-  @media(hover:hover){.nd:hover{transform:translate(-50%,-50%) scale(1.07);box-shadow:0 4px 14px rgba(0,0,0,.13)}}
-  .nd.aa   {background:#eaf6df;border-color:#52a322;color:#2a5e0e}
-  .nd.tca  {background:#deeeff;border-color:#2d7fd8;color:#0a3d78}
-  .nd.aa-ess{background:#fff3da;border-color:#c47d0a;color:#6b4200}
-  .nd.aa-kg {background:#fce8f3;border-color:#c4417a;color:#71163f}
- 
-  /* ── Reaction labels ── */
-  .lbl{
-    position:absolute;font-size:11px;font-weight:600;
-    background:#fff;border:1.5px solid #bbb;border-radius:5px;
-    padding:3px 8px;cursor:pointer;white-space:nowrap;color:#444;
-    transform:translate(-50%,-50%);
-    transition:background .12s,color .12s,border-color .12s;
-    box-shadow:0 1px 3px rgba(0,0,0,.07)
+  h1 {
+    text-align: center;
+    padding: 18px 16px 6px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #1a1a18;
   }
-  .lbl:active,.lbl:focus{background:#e8f0fe;color:#1a56c4;border-color:#1a56c4}
-  @media(hover:hover){.lbl:hover{background:#e8f0fe;color:#1a56c4;border-color:#1a56c4}}
- 
-  /* ── Tooltip ── */
-  #tooltip{
-    position:fixed;z-index:200;background:#fff;
-    border:1.5px solid #d0ccc4;border-radius:11px;
-    padding:14px 17px;max-width:260px;
-    pointer-events:none;opacity:0;
-    transition:opacity .15s;
-    box-shadow:0 6px 24px rgba(0,0,0,.13)
+  p.sub {
+    text-align: center;
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 12px;
   }
-  #tooltip.vis{opacity:1}
-  #tooltip h4{font-size:13px;font-weight:700;color:#1a1a18;margin-bottom:7px;border-bottom:1px solid #eee;padding-bottom:5px}
-  #tooltip p{font-size:12px;color:#555;margin-bottom:3px;line-height:1.5}
- 
-  /* ── Toolbar ── */
-  #toolbar{position:absolute;bottom:14px;right:14px;display:flex;gap:7px;z-index:20}
-  #toolbar button{
-    font-size:13px;font-weight:600;padding:7px 14px;
-    border:1.5px solid #ccc;border-radius:8px;
-    background:#fff;color:#333;cursor:pointer;
-    box-shadow:0 1px 4px rgba(0,0,0,.07)
+  #wrap {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    height: 90vh;
+    min-height: 480px;
+    max-height: 700px;
+    overflow: hidden;
+    cursor: grab;
+    position: relative;
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid #e0ddd6;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: none;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
   }
-  #toolbar button:active{background:#f0f0f0;transform:scale(0.97)}
- 
-  /* ── Legend ── */
-  #legend{
-    position:absolute;top:12px;left:12px;background:#fff;
-    border:1.5px solid #e0ddd6;border-radius:9px;
-    padding:10px 14px;font-size:11px;font-weight:600;
-    z-index:20;line-height:2;
-    box-shadow:0 1px 4px rgba(0,0,0,.06)
+  #wrap.dragging {
+    cursor: grabbing;
   }
-  #legend div{display:flex;align-items:center;gap:6px;color:#333}
-  .dot{display:inline-block;width:11px;height:11px;border-radius:3px;flex-shrink:0}
- 
-  /* ── Hint ── */
-  #hint{
-    position:absolute;top:12px;right:12px;font-size:11px;color:#888;
-    background:#fff;border:1px solid #e0ddd6;padding:5px 10px;
-    border-radius:6px;pointer-events:none;
-    box-shadow:0 1px 3px rgba(0,0,0,.05)
+  #canvas {
+    position: absolute;
+    width: 1500px;
+    height: 1100px;
+    transform-origin: 0 0;
+    will-change: transform;
+  }
+  svg#links {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1500px;
+    height: 1100px;
+    overflow: visible;
+    pointer-events: none;
+  }
+  /* Nodes style */
+  .nd {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    border-radius: 9px;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 9px 16px;
+    cursor: pointer;
+    border: 2px solid;
+    transition: box-shadow 0.15s, transform 0.15s;
+    white-space: nowrap;
+    text-align: center;
+    line-height: 1.3;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  }
+  .nd:active {
+    transform: translate(-50%, -50%) scale(0.96);
+  }
+  @media(hover:hover) {
+    .nd:hover {
+      transform: translate(-50%, -50%) scale(1.07);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.13);
+    }
+  }
+  /* Node classes for different types */
+  .nd.aa {
+    background: #eaf6df;
+    border-color: #52a322;
+    color: #2a5e0e;
+  }
+  .nd.tca {
+    background: #deeeff;
+    border-color: #2d7fd8;
+    color: #0a3d78;
+  }
+  .nd.aa-ess {
+    background: #fff3da;
+    border-color: #c47d0a;
+    color: #6b4200;
+  }
+  .nd.aa-kg {
+    background: #fce8f3;
+    border-color: #c4417a;
+    color: #71163f;
+  }
+
+  /* Reaction labels */
+  .lbl {
+    position: absolute;
+    font-size: 11px;
+    font-weight: 600;
+    background: #fff;
+    border: 1.5px solid #bbb;
+    border-radius: 5px;
+    padding: 3px 8px;
+    cursor: pointer;
+    white-space: nowrap;
+    color: #444;
+    transform: translate(-50%, -50%);
+    transition: background 0.12s, color 0.12s, border-color 0.12s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.07);
+  }
+  .lbl:active, .lbl:focus {
+    background: #e8f0fe;
+    color: #1a56c4;
+    border-color: #1a56c4;
+  }
+  @media(hover:hover) {
+    .lbl:hover {
+      background: #e8f0fe;
+      color: #1a56c4;
+      border-color: #1a56c4;
+    }
+  }
+
+  /* Tooltip styles */
+  #tooltip {
+    position: fixed;
+    z-index: 200;
+    background: #fff;
+    border: 1.5px solid #d0ccc4;
+    border-radius: 11px;
+    padding: 14px 17px;
+    max-width: 260px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.13);
+  }
+  #tooltip.vis {
+    opacity: 1;
+  }
+  #tooltip h4 {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1a1a18;
+    margin-bottom: 7px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+  }
+  #tooltip p {
+    font-size: 12px;
+    color: #555;
+    margin-bottom: 3px;
+    line-height: 1.5;
+  }
+
+  /* Toolbar styles */
+  #toolbar {
+    position: absolute;
+    bottom: 14px;
+    right: 14px;
+    display: flex;
+    gap: 7px;
+    z-index: 20;
+  }
+  #toolbar button {
+    font-size: 13px;
+    font-weight: 600;
+    padding: 7px 14px;
+    border: 1.5px solid #ccc;
+    border-radius: 8px;
+    background: #fff;
+    color: #333;
+    cursor: pointer;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+  }
+  #toolbar button:active {
+    background: #f0f0f0;
+    transform: scale(0.97);
+  }
+
+  /* Legend styles */
+  #legend {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: #fff;
+    border: 1.5px solid #e0ddd6;
+    border-radius: 9px;
+    padding: 10px 14px;
+    font-size: 11px;
+    font-weight: 600;
+    z-index: 20;
+    line-height: 2;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+  #legend div {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #333;
+  }
+  .dot {
+    display: inline-block;
+    width: 11px;
+    height: 11px;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+
+  /* Hint styles */
+  #hint {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-size: 11px;
+    color: #888;
+    background: #fff;
+    border: 1px solid #e0ddd6;
+    padding: 5px 10px;
+    border-radius: 6px;
+    pointer-events: none;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
   }
 </style>
 </head>
 <body>
- 
+
 <h1>Amino Acid Metabolism</h1>
 <p class="sub">Tap or click any node or reaction label for details &nbsp;·&nbsp; Pinch / scroll to zoom &nbsp;·&nbsp; Drag to pan</p>
- 
+
 <div id="wrap">
   <div id="canvas">
     <svg id="links"></svg>
   </div>
- 
+
   <div id="legend">
     <div><span class="dot" style="background:#52a322"></span>Glucogenic AA</div>
     <div><span class="dot" style="background:#c47d0a"></span>Essential / Ketogenic</div>
     <div><span class="dot" style="background:#c4417a"></span>Both / Aromatic</div>
     <div><span class="dot" style="background:#2d7fd8"></span>TCA intermediate</div>
   </div>
- 
-  <div id="hint">Pinch/scroll to zoom · Drag to pan · Tap for details</div>
- 
+
+  <div id="hint">Pinch/scroll to zoom &nbsp;·&nbsp; Drag to pan &nbsp;·&nbsp; Tap for details</div>
+
   <div id="toolbar">
     <button onclick="resetView()">Reset</button>
     <button onclick="zoomBtn(1.25)">＋</button>
     <button onclick="zoomBtn(0.8)">－</button>
   </div>
 </div>
- 
+
 <div id="tooltip"></div>
- 
+
 <script>
-/* =========================================================
-   DATA
-   ========================================================= */
- 
-/**
- * nodes — all metabolic entities
- * cls values:
- *   'aa'      = glucogenic amino acid  (green)
- *   'tca'     = TCA / keto-acid        (blue)
- *   'aa-ess'  = essential / ketogenic  (amber)
- *   'aa-kg'   = both/aromatic          (pink)
- */
+/* ======== Your data ======== */
 const nodes = {
   Alanine: {
     x: 150, y: 150, cls: 'aa',
@@ -299,67 +437,60 @@ const links = [
     detail: 'Threonine → Acetyl-CoA\nType: Ketogenic pathway'
   }
 ];
- 
-/* =========================================================
-   DOM REFS
-   ========================================================= */
-const wrap   = document.getElementById('wrap');
+
+/* ================== DOM references ================== */
+const wrap = document.getElementById('wrap');
 const canvas = document.getElementById('canvas');
-const svgEl  = document.getElementById('links');
-const tt     = document.getElementById('tooltip');
- 
-/* =========================================================
-   TRANSFORM STATE
-   ========================================================= */
+const svgEl = document.getElementById('links');
+const tt = document.getElementById('tooltip');
+
+/* ================== Transform state ================== */
 let scale = 0.68;
-let ox    = 30;
-let oy    = 20;
- 
+let ox = 30;
+let oy = 20;
+
 function applyTransform() {
-  canvas.style.transform = `translate(${ox}px,${oy}px) scale(${scale})`;
+  canvas.style.transform = `translate(${ox}px, ${oy}px) scale(${scale})`;
 }
- 
-/* =========================================================
-   SVG ARROW MARKERS
-   map each line color → a named marker so arrowheads match
-   ========================================================= */
+
+/* ================== Add SVG markers ================== */
 function addMarkers() {
   const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
- 
+
   const markerDefs = [
-    { id: 'arr-def', color: '#999'    },
+    { id: 'arr-def', color: '#999' },
     { id: 'arr-org', color: '#e07b00' },
     { id: 'arr-grn', color: '#2d9e6e' },
     { id: 'arr-pnk', color: '#c4417a' },
     { id: 'arr-blu', color: '#2d7fd8' }
   ];
- 
+
   markerDefs.forEach(({ id, color }) => {
     const marker = document.createElementNS('http://www.w3.org/2000/svg', 'marker');
-    marker.setAttribute('id',           id);
-    marker.setAttribute('viewBox',      '0 0 10 10');
-    marker.setAttribute('refX',         '9');
-    marker.setAttribute('refY',         '5');
-    marker.setAttribute('markerWidth',  '7');
+    marker.setAttribute('id', id);
+    marker.setAttribute('viewBox', '0 0 10 10');
+    marker.setAttribute('refX', '9');
+    marker.setAttribute('refY', '5');
+    marker.setAttribute('markerWidth', '7');
     marker.setAttribute('markerHeight', '7');
-    marker.setAttribute('orient',       'auto-start-reverse');
- 
+    marker.setAttribute('orient', 'auto-start-reverse');
+
     const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-    path.setAttribute('d',               'M1.5 2L8 5L1.5 8');
-    path.setAttribute('fill',            'none');
-    path.setAttribute('stroke',          color);
-    path.setAttribute('stroke-width',    '1.8');
-    path.setAttribute('stroke-linecap',  'round');
+    path.setAttribute('d', 'M1.5 2L8 5L1.5 8');
+    path.setAttribute('fill', 'none');
+    path.setAttribute('stroke', color);
+    path.setAttribute('stroke-width', '1.8');
+    path.setAttribute('stroke-linecap', 'round');
     path.setAttribute('stroke-linejoin', 'round');
- 
+
     marker.appendChild(path);
     defs.appendChild(marker);
   });
- 
+
   svgEl.appendChild(defs);
 }
- 
-/** Return the marker URL for a given stroke color */
+
+/* ================== Marker URL based on color ================== */
 function colorToMarker(c) {
   const map = {
     '#e07b00': 'url(#arr-org)',
@@ -369,249 +500,208 @@ function colorToMarker(c) {
   };
   return map[c] || 'url(#arr-def)';
 }
- 
-/* =========================================================
-   BUILD NODES
-   ========================================================= */
+
+/* ================== Build nodes ================== */
 function buildNodes() {
   Object.entries(nodes).forEach(([name, d]) => {
     const el = document.createElement('div');
     el.className = 'nd ' + d.cls;
     el.style.left = d.x + 'px';
-    el.style.top  = d.y + 'px';
+    el.style.top = d.y + 'px';
     el.textContent = name;
- 
-    // Mouse click
+
     el.addEventListener('click', e => {
       e.stopPropagation();
       showTip(e, name, d.note);
     });
- 
-    // Touch tap (touchend fires after touchmove so we guard with touchMoved)
     el.addEventListener('touchend', e => {
       if (touchMoved) return;
       e.stopPropagation();
       e.preventDefault();
       showTip(e.changedTouches[0], name, d.note);
     }, { passive: false });
- 
+
     canvas.appendChild(el);
   });
 }
- 
-/* =========================================================
-   BUILD LINKS (SVG paths + label divs)
-   ========================================================= */
+
+/* ================== Build links ================== */
 function buildLinks() {
   links.forEach(lk => {
     const p1 = nodes[lk.f];
     const p2 = nodes[lk.t];
     if (!p1 || !p2) return;
- 
-    /* --- SVG path --- */
+
+    // SVG path
     const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-    let d;
- 
-    if (lk.curve !== undefined) {
-      // Quadratic bezier: offset control point perpendicular to the line
-      const cx = (p1.x + p2.x) / 2 + lk.curve;
-      const cy = (p1.y + p2.y) / 2 + lk.curve;
-      d = `M${p1.x},${p1.y} Q${cx},${cy} ${p2.x},${p2.y}`;
-    } else {
-      d = `M${p1.x},${p1.y} L${p2.x},${p2.y}`;
-    }
- 
-    path.setAttribute('d',            d);
-    path.setAttribute('fill',         'none');
-    path.setAttribute('stroke',       lk.color || '#999');
+    const d = `M${p1.x},${p1.y} L${p2.x},${p2.y}`;
+    path.setAttribute('d', d);
+    path.setAttribute('fill', 'none');
+    path.setAttribute('stroke', lk.color || '#999');
     path.setAttribute('stroke-width', '2.5');
-    path.setAttribute('stroke-linecap','round');
-    path.setAttribute('marker-end',   colorToMarker(lk.color));
-    path.setAttribute('opacity',      '0.85');
+    path.setAttribute('stroke-linecap', 'round');
+    path.setAttribute('marker-end', colorToMarker(lk.color));
+    path.setAttribute('opacity', '0.85');
     svgEl.appendChild(path);
- 
-    /* --- Label div (midpoint of path) --- */
-    const mid = (lk.curve !== undefined)
-      ? { x: (p1.x + p2.x) / 2 + lk.curve * 0.5,
-          y: (p1.y + p2.y) / 2 + lk.curve * 0.5 }
-      : { x: (p1.x + p2.x) / 2,
-          y: (p1.y + p2.y) / 2 };
- 
+
+    // Label position (midpoint)
+    const midX = (p1.x + p2.x) / 2;
+    const midY = (p1.y + p2.y) / 2;
+
     const lbl = document.createElement('div');
     lbl.className = 'lbl';
-    lbl.style.left        = mid.x + 'px';
-    lbl.style.top         = (mid.y - 2) + 'px';
+    lbl.style.left = midX + 'px';
+    lbl.style.top = midY + 'px';
     lbl.style.borderColor = lk.color || '#bbb';
-    lbl.style.color       = lk.color || '#444';
-    lbl.textContent       = lk.lbl;
- 
+    lbl.style.color = lk.color || '#444';
+    lbl.textContent = lk.lbl;
+
     lbl.addEventListener('click', e => {
       e.stopPropagation();
       showTip(e, lk.lbl, lk.detail);
     });
- 
     lbl.addEventListener('touchend', e => {
       if (touchMoved) return;
       e.stopPropagation();
       e.preventDefault();
       showTip(e.changedTouches[0], lk.lbl, lk.detail);
     }, { passive: false });
- 
+
     canvas.appendChild(lbl);
   });
 }
- 
-/* =========================================================
-   TOOLTIP
-   ========================================================= */
+
+/* ================== Tooltip ================== */
 let activeTip = null;
- 
 function showTip(e, title, note) {
-  // Toggle off if same item tapped again
   if (activeTip === title) {
     tt.classList.remove('vis');
     activeTip = null;
     return;
   }
   activeTip = title;
- 
+
   const lines = (note || '').split('\n');
   tt.innerHTML =
     `<h4>${title}</h4>` +
     lines.map(l => `<p>${l}</p>`).join('');
- 
-  // Position tooltip — keep it inside the viewport
+
   const cx = e.clientX || e.pageX;
   const cy = e.clientY || e.pageY;
   let lx = cx + 14;
   let ly = cy - 10;
-  if (lx + 270 > window.innerWidth  - 10) lx = cx - 275;
+  if (lx + 270 > window.innerWidth - 10) lx = cx - 275;
   if (ly + 160 > window.innerHeight - 10) ly = cy - 165;
   tt.style.left = Math.max(6, lx) + 'px';
-  tt.style.top  = Math.max(6, ly) + 'px';
+  tt.style.top = Math.max(6, ly) + 'px';
   tt.classList.add('vis');
 }
- 
-// Close tooltip when clicking/tapping blank canvas
+
+// Close tooltip
 wrap.addEventListener('click', () => {
   tt.classList.remove('vis');
   activeTip = null;
 });
- 
-/* =========================================================
-   PAN — MOUSE
-   ========================================================= */
+
+/* ================== Drag + Pan ================== */
 let dragging = false;
 let lastTX, lastTY;
- 
+
 wrap.addEventListener('mousedown', e => {
   dragging = true;
-  lastTX   = e.clientX - ox;
-  lastTY   = e.clientY - oy;
+  lastTX = e.clientX - ox;
+  lastTY = e.clientY - oy;
   wrap.classList.add('dragging');
 });
- 
 document.addEventListener('mousemove', e => {
   if (!dragging) return;
   ox = e.clientX - lastTX;
   oy = e.clientY - lastTY;
   applyTransform();
 });
- 
 document.addEventListener('mouseup', () => {
   dragging = false;
   wrap.classList.remove('dragging');
 });
- 
-/* =========================================================
-   PAN + PINCH-ZOOM — TOUCH
-   ========================================================= */
-let touchMoved    = false;
-let pinching      = false;
+
+// Touch support for pan and zoom
+let touchMoved = false;
+let pinching = false;
 let lastPinchDist = 0;
-let pinchMidX     = 0;
-let pinchMidY     = 0;
- 
+let pinchMidX = 0;
+let pinchMidY = 0;
+
 wrap.addEventListener('touchstart', e => {
   touchMoved = false;
- 
   if (e.touches.length === 2) {
     // Start pinch
     pinching = true;
     const a = e.touches[0], b = e.touches[1];
     lastPinchDist = Math.hypot(b.clientX - a.clientX, b.clientY - a.clientY);
-    pinchMidX     = (a.clientX + b.clientX) / 2;
-    pinchMidY     = (a.clientY + b.clientY) / 2;
+    pinchMidX = (a.clientX + b.clientX) / 2;
+    pinchMidY = (a.clientY + b.clientY) / 2;
   } else if (e.touches.length === 1) {
     // Start pan
     dragging = true;
-    lastTX   = e.touches[0].clientX - ox;
-    lastTY   = e.touches[0].clientY - oy;
+    lastTX = e.touches[0].clientX - ox;
+    lastTY = e.touches[0].clientY - oy;
   }
 }, { passive: true });
- 
+
 wrap.addEventListener('touchmove', e => {
   touchMoved = true;
-  e.preventDefault(); // prevent page scroll while interacting
- 
+  e.preventDefault();
+
   if (e.touches.length === 2 && pinching) {
-    const a    = e.touches[0], b = e.touches[1];
+    const a = e.touches[0], b = e.touches[1];
     const dist = Math.hypot(b.clientX - a.clientX, b.clientY - a.clientY);
     const ratio = dist / lastPinchDist;
-    const rect  = wrap.getBoundingClientRect();
-    const mx    = pinchMidX - rect.left;
-    const my    = pinchMidY - rect.top;
-    const ns    = Math.min(Math.max(0.3, scale * ratio), 3);
- 
-    // Zoom toward pinch midpoint
+    const rect = wrap.getBoundingClientRect();
+    const mx = pinchMidX - rect.left;
+    const my = pinchMidY - rect.top;
+    const ns = Math.min(Math.max(0.3, scale * ratio), 3);
     ox = mx - (mx - ox) * (ns / scale);
     oy = my - (my - oy) * (ns / scale);
     scale = ns;
     lastPinchDist = dist;
     applyTransform();
- 
   } else if (e.touches.length === 1 && dragging && !pinching) {
     ox = e.touches[0].clientX - lastTX;
     oy = e.touches[0].clientY - lastTY;
     applyTransform();
   }
 }, { passive: false });
- 
+
 wrap.addEventListener('touchend', e => {
-  if (e.touches.length < 2) pinching  = false;
+  if (e.touches.length < 2) pinching = false;
   if (e.touches.length === 0) dragging = false;
 }, { passive: true });
- 
-/* =========================================================
-   SCROLL-TO-ZOOM — MOUSE WHEEL
-   ========================================================= */
+
+// Mouse wheel zoom
 wrap.addEventListener('wheel', e => {
   e.preventDefault();
   const rect = wrap.getBoundingClientRect();
-  const mx   = e.clientX - rect.left;
-  const my   = e.clientY - rect.top;
-  const ws   = e.deltaY < 0 ? 1.12 : 0.89;
-  const ns   = Math.min(Math.max(0.3, scale * ws), 3);
- 
-  // Zoom toward cursor
+  const mx = e.clientX - rect.left;
+  const my = e.clientY - rect.top;
+  const ws = e.deltaY < 0 ? 1.12 : 0.89;
+  const ns = Math.min(Math.max(0.3, scale * ws), 3);
   ox = mx - (mx - ox) * (ns / scale);
   oy = my - (my - oy) * (ns / scale);
   scale = ns;
   applyTransform();
 }, { passive: false });
- 
-/* =========================================================
-   TOOLBAR CONTROLS
-   ========================================================= */
+
+// Reset view
 function resetView() {
   scale = 0.68;
-  ox    = 30;
-  oy    = 20;
+  ox = 30;
+  oy = 20;
   applyTransform();
 }
- 
+
+// Zoom buttons
 function zoomBtn(factor) {
-  const cx = wrap.clientWidth  / 2;
+  const cx = wrap.clientWidth / 2;
   const cy = wrap.clientHeight / 2;
   const ns = Math.min(Math.max(0.3, scale * factor), 3);
   ox = cx - (cx - ox) * (ns / scale);
@@ -619,14 +709,13 @@ function zoomBtn(factor) {
   scale = ns;
   applyTransform();
 }
- 
-/* =========================================================
-   INIT
-   ========================================================= */
+
+/* ================== Initialize ================== */
 addMarkers();
 buildNodes();
 buildLinks();
 applyTransform();
+
 </script>
 </body>
 </html>
