@@ -136,81 +136,80 @@
  */
 const nodes = {
   Alanine: {
-    x: 200, y: 200, cls: 'aa',
+    x: 150, y: 150, cls: 'aa',
     note: 'Non-essential, glucogenic amino acid.\nKey role in glucose-alanine cycle.\nMajor nitrogen carrier from muscle → liver.'
   },
   Pyruvate: {
-    x: 450, y: 200, cls: 'tca',
+    x: 500, y: 150, cls: 'tca',
     note: 'Central metabolic intermediate.\nLinks amino acid metabolism with gluconeogenesis and TCA cycle.'
   },
   Glucose: {
-    x: 700, y: 200, cls: 'tca',
+    x: 850, y: 150, cls: 'tca',
     note: 'End product of gluconeogenesis.\nMaintains blood glucose levels.'
   },
   Glutamate: {
-    x: 450, y: 350, cls: 'aa',
+    x: 500, y: 320, cls: 'aa',
     note: 'Central amino group donor.\nFormed via transamination reactions.'
   },
   'α-KG': {
-    x: 700, y: 350, cls: 'tca',
+    x: 850, y: 320, cls: 'tca',
     note: 'α-Ketoglutarate.\nAccepts amino group → glutamate.'
   },
 
   '3-Phosphoglycerate': {
-    x: 200, y: 500, cls: 'tca',
+    x: 150, y: 500, cls: 'tca',
     note: 'Glycolysis intermediate.\nMajor source of serine synthesis.'
   },
   '3-Phosphohydroxypyruvate': {
-    x: 450, y: 500, cls: 'tca',
+    x: 500, y: 500, cls: 'tca',
     note: 'Intermediate in serine biosynthesis.'
   },
   '3-Phosphoserine': {
-    x: 700, y: 500, cls: 'aa',
+    x: 850, y: 500, cls: 'aa',
     note: 'Intermediate before serine formation.'
   },
   Serine: {
-    x: 950, y: 500, cls: 'aa',
+    x: 1200, y: 500, cls: 'aa',
     note: 'Non-essential, glucogenic.\nImportant in one-carbon metabolism.\nPrecursor for glycine, cysteine, sphingolipids.'
   },
   Glycine: {
-    x: 1200, y: 500, cls: 'aa',
+    x: 1200, y: 700, cls: 'aa',
     note: 'Derived from serine.\nImportant in heme and purine synthesis.'
   },
-  Cysteine: {
-    x: 1200, y: 650, cls: 'aa',
-    note: 'Formed from serine via transsulfuration.\nComponent of glutathione.'
-  },
   'O-Acetylserine': {
-    x: 950, y: 650, cls: 'aa',
+    x: 950, y: 700, cls: 'aa',
     note: 'Intermediate in cysteine synthesis.'
   },
+  Cysteine: {
+    x: 1200, y: 880, cls: 'aa',
+    note: 'Formed from serine via transsulfuration.\nComponent of glutathione.'
+  },
   Sphingosine: {
-    x: 950, y: 800, cls: 'tca',
+    x: 950, y: 880, cls: 'tca',
     note: 'Precursor of sphingolipids.'
   },
 
   Threonine: {
-    x: 200, y: 800, cls: 'aa-ess',
+    x: 150, y: 900, cls: 'aa-ess',
     note: 'Essential amino acid.\nBoth glucogenic and ketogenic.\nImportant in protein structure.'
   },
   'α-Ketobutyrate': {
-    x: 450, y: 800, cls: 'tca',
+    x: 500, y: 900, cls: 'tca',
     note: 'Intermediate in threonine catabolism.'
   },
   'Propionyl-CoA': {
-    x: 700, y: 800, cls: 'tca',
+    x: 850, y: 900, cls: 'tca',
     note: 'Converted to succinyl-CoA.\nRequires biotin and B12.'
   },
   'Succinyl-CoA': {
-    x: 950, y: 800, cls: 'tca',
+    x: 1200, y: 1050, cls: 'tca',
     note: 'TCA intermediate.\nEntry point for glucogenic pathway.'
   },
   'Acetyl-CoA': {
-    x: 1200, y: 800, cls: 'tca',
+    x: 1200, y: 900, cls: 'tca',
     note: 'Ketogenic product.\nUsed in energy production and lipid synthesis.'
   }
 };
-
 const links = [
   {
     f: 'Alanine', t: 'Pyruvate',
