@@ -136,150 +136,168 @@
  */
 const nodes = {
   Alanine: {
-    x: 280, y: 280, cls: 'aa',
-    note: 'Glucogenic amino acid.\nKey in glucose-alanine cycle: carries NH₂ from muscle → liver.\nTransaminated by ALT using PLP.'
+    x: 200, y: 200, cls: 'aa',
+    note: 'Non-essential, glucogenic amino acid.\nKey role in glucose-alanine cycle.\nMajor nitrogen carrier from muscle → liver.'
   },
   Pyruvate: {
-    x: 560, y: 280, cls: 'tca',
-    note: 'Central metabolic hub.\nFeeds TCA cycle, gluconeogenesis, or fatty acid synthesis.\nFinal acceptor in glucose-alanine cycle.'
+    x: 450, y: 200, cls: 'tca',
+    note: 'Central metabolic intermediate.\nLinks amino acid metabolism with gluconeogenesis and TCA cycle.'
   },
-  Serine: {
-    x: 280, y: 420, cls: 'aa',
-    note: 'Glucogenic.\nSource of one-carbon units (via folate/THF pathway).\nAlso feeds glycine and cysteine synthesis.'
-  },
-  Glycine: {
-    x: 560, y: 420, cls: 'aa',
-    note: 'Glucogenic.\nUsed in heme synthesis, glutathione, and purine synthesis.\nDerived from serine by SHMT.'
-  },
-  Aspartate: {
-    x: 280, y: 560, cls: 'aa',
-    note: 'Glucogenic.\nFeeds urea cycle and pyrimidine synthesis.\nLinked to OAA via AST (PLP-dependent).'
-  },
-  Oxaloacetate: {
-    x: 560, y: 560, cls: 'tca',
-    note: 'Key TCA intermediate.\nSubstrate for gluconeogenesis.\nAccepts amino group from aspartate via AST.'
+  Glucose: {
+    x: 700, y: 200, cls: 'tca',
+    note: 'End product of gluconeogenesis.\nMaintains blood glucose levels.'
   },
   Glutamate: {
-    x: 280, y: 700, cls: 'aa',
-    note: 'Central amino group donor.\nLinked to α-KG via glutamate dehydrogenase.\nAmino group transferred to many α-keto acids.'
+    x: 450, y: 350, cls: 'aa',
+    note: 'Central amino group donor.\nFormed via transamination reactions.'
   },
   'α-KG': {
-    x: 560, y: 700, cls: 'tca',
-    note: 'α-Ketoglutarate. TCA cycle intermediate.\nAccepts amino groups → glutamate.\nGDH releases free NH₃ for urea cycle.'
+    x: 700, y: 350, cls: 'tca',
+    note: 'α-Ketoglutarate.\nAccepts amino group → glutamate.'
   },
-  Phenylalanine: {
-    x: 840, y: 280, cls: 'aa-ess',
-    note: 'Essential amino acid.\nHydroxylated to tyrosine by Phe hydroxylase + BH4.\nDefect → PKU: ↑ phenylalanine causes intellectual disability.'
+
+  '3-Phosphoglycerate': {
+    x: 200, y: 500, cls: 'tca',
+    note: 'Glycolysis intermediate.\nMajor source of serine synthesis.'
   },
-  Tyrosine: {
-    x: 1100, y: 280, cls: 'aa-kg',
-    note: 'Derived from phenylalanine (non-essential if Phe available).\nPrecursor for dopamine, melanin, thyroid hormones (T3/T4).\nCatabolism → fumarate + acetoacetate.'
+  '3-Phosphohydroxypyruvate': {
+    x: 450, y: 500, cls: 'tca',
+    note: 'Intermediate in serine biosynthesis.'
   },
-  Fumarate: {
-    x: 1100, y: 420, cls: 'tca',
-    note: 'TCA cycle intermediate.\nProduct of tyrosine catabolism and urea cycle.\nDefects in catabolism → alkaptonuria or tyrosinemia.'
+  '3-Phosphoserine': {
+    x: 700, y: 500, cls: 'aa',
+    note: 'Intermediate before serine formation.'
   },
-  Tryptophan: {
-    x: 840, y: 420, cls: 'aa-ess',
-    note: 'Essential amino acid. Only one with indole ring.\nPrecursor of serotonin (5-HT) and niacin (NAD⁺).\nKynurenine pathway yields alanine as byproduct.'
+  Serine: {
+    x: 950, y: 500, cls: 'aa',
+    note: 'Non-essential, glucogenic.\nImportant in one-carbon metabolism.\nPrecursor for glycine, cysteine, sphingolipids.'
   },
-  Methionine: {
-    x: 840, y: 560, cls: 'aa-ess',
-    note: 'Essential. Primary methyl donor as SAM.\nSAM → SAH → Homocysteine → Cysteine.\nCBS defect → homocystinuria (B6-responsive).'
+  Glycine: {
+    x: 1200, y: 500, cls: 'aa',
+    note: 'Derived from serine.\nImportant in heme and purine synthesis.'
   },
   Cysteine: {
-    x: 1100, y: 560, cls: 'aa',
-    note: 'Conditionally essential (requires methionine).\nKey component of glutathione (antioxidant).\nDerived via transsulfuration pathway.'
+    x: 1200, y: 650, cls: 'aa',
+    note: 'Formed from serine via transsulfuration.\nComponent of glutathione.'
   },
-  Leucine: {
-    x: 280, y: 840, cls: 'aa-kg',
-    note: 'Purely ketogenic BCAA.\nMetabolised → acetyl-CoA + acetoacetate only.\nCannot contribute to gluconeogenesis.'
+  'O-Acetylserine': {
+    x: 950, y: 650, cls: 'aa',
+    note: 'Intermediate in cysteine synthesis.'
   },
-  Isoleucine: {
-    x: 560, y: 840, cls: 'aa-kg',
-    note: 'Both glucogenic and ketogenic BCAA.\nYields succinyl-CoA + acetyl-CoA.\nBCKDH complex defect → MSUD.'
+  Sphingosine: {
+    x: 950, y: 800, cls: 'tca',
+    note: 'Precursor of sphingolipids.'
   },
-  Valine: {
-    x: 840, y: 840, cls: 'aa-ess',
-    note: 'Glucogenic BCAA.\nYields succinyl-CoA via propionyl-CoA.\nBCKDH complex defect → MSUD.'
+
+  Threonine: {
+    x: 200, y: 800, cls: 'aa-ess',
+    note: 'Essential amino acid.\nBoth glucogenic and ketogenic.\nImportant in protein structure.'
+  },
+  'α-Ketobutyrate': {
+    x: 450, y: 800, cls: 'tca',
+    note: 'Intermediate in threonine catabolism.'
+  },
+  'Propionyl-CoA': {
+    x: 700, y: 800, cls: 'tca',
+    note: 'Converted to succinyl-CoA.\nRequires biotin and B12.'
   },
   'Succinyl-CoA': {
-    x: 1100, y: 840, cls: 'tca',
-    note: 'TCA cycle intermediate.\nProduct of valine and isoleucine catabolism (glucogenic route).\nAlso from odd-chain fatty acids and propionyl-CoA.'
+    x: 950, y: 800, cls: 'tca',
+    note: 'TCA intermediate.\nEntry point for glucogenic pathway.'
+  },
+  'Acetyl-CoA': {
+    x: 1200, y: 800, cls: 'tca',
+    note: 'Ketogenic product.\nUsed in energy production and lipid synthesis.'
   }
 };
- 
-/**
- * links — reactions between nodes
- * color values:
- *   '#e07b00'  orange  = transamination / classical
- *   '#2d9e6e'  green   = one-carbon / folate / transsulfuration
- *   '#c4417a'  pink    = oxidative deamination
- *   '#2d7fd8'  blue    = hydroxylation
- *   '#888'     gray    = catabolism / degradation
- *
- * curve (optional): number — control-point offset for quadratic bezier
- */
+
 const links = [
   {
     f: 'Alanine', t: 'Pyruvate',
     lbl: 'ALT / PLP', color: '#e07b00',
-    detail: 'Enzyme: ALT (alanine aminotransferase)\nCofactor: PLP (vitamin B6)\nReversible transamination\nCore of glucose-alanine cycle'
+    detail: 'Alanine + α-KG ⇌ Pyruvate + Glutamate\nEnzyme: ALT (GPT)\nCofactor: PLP (Vit B6)\nType: Transamination'
   },
   {
-    f: 'Serine', t: 'Pyruvate',
-    lbl: 'Ser dehydratase', color: '#888',
-    detail: 'Enzyme: Serine dehydratase\nOccurs primarily in liver\nDirect deamination → pyruvate + NH₃'
+    f: 'Alanine', t: 'Glucose',
+    lbl: 'Gluconeogenesis', color: '#888',
+    detail: 'Alanine → Pyruvate → Glucose\nEnzyme: ALT (first step)\nType: Transamination → Gluconeogenesis'
+  },
+  {
+    f: 'Pyruvate', t: 'Alanine',
+    lbl: 'Glucose-Alanine Cycle', color: '#2d9e6e',
+    detail: 'Muscle: Pyruvate → Alanine\nLiver: Alanine → Pyruvate → Glucose\nType: Nitrogen transport + energy metabolism'
+  },
+  {
+    f: 'Glutamate', t: 'α-KG',
+    lbl: 'Transamination', color: '#e07b00',
+    detail: 'Amino group transfer between alanine and α-KG\nCofactor: PLP'
+  },
+
+  {
+    f: '3-Phosphoglycerate', t: '3-Phosphohydroxypyruvate',
+    lbl: 'Dehydrogenase / NAD⁺', color: '#c4417a',
+    detail: 'Enzyme: 3-Phosphoglycerate dehydrogenase\nCofactor: NAD⁺\nType: Oxidation'
+  },
+  {
+    f: '3-Phosphohydroxypyruvate', t: '3-Phosphoserine',
+    lbl: 'Transaminase / PLP', color: '#e07b00',
+    detail: 'Enzyme: Transaminase\nCofactor: PLP\nType: Transamination'
+  },
+  {
+    f: '3-Phosphoserine', t: 'Serine',
+    lbl: 'Phosphatase', color: '#888',
+    detail: 'Enzyme: Phosphoserine phosphatase\nType: Dephosphorylation'
   },
   {
     f: 'Serine', t: 'Glycine',
     lbl: 'SHMT / THF', color: '#2d9e6e',
-    detail: 'Enzyme: Serine hydroxymethyltransferase\nCofactors: Folate (THF) + PLP\nTransfers one-carbon unit to THF\nCritical for nucleotide synthesis'
+    detail: 'Serine ⇌ Glycine\nEnzyme: SHMT\nCofactors: PLP + THF\nType: One-carbon transfer'
   },
   {
-    f: 'Aspartate', t: 'Oxaloacetate',
-    lbl: 'AST / PLP', color: '#e07b00',
-    detail: 'Enzyme: AST (aspartate aminotransferase)\nCofactor: PLP (vitamin B6)\nReversible transamination\nLinks amino acids to TCA cycle'
+    f: 'Serine', t: 'Pyruvate',
+    lbl: 'Dehydratase / PLP', color: '#c4417a',
+    detail: 'Serine → Pyruvate + NH₃\nEnzyme: Serine dehydratase\nCofactor: PLP\nType: Deamination'
   },
   {
-    f: 'Glutamate', t: 'α-KG',
-    lbl: 'GDH / NAD⁺', color: '#c4417a',
-    detail: 'Enzyme: Glutamate dehydrogenase\nCoenzyme: NAD⁺ or NADP⁺\nReleases free NH₃ → urea cycle\n↑ ADP activates; ↑ GTP inhibits'
+    f: 'Serine', t: 'O-Acetylserine',
+    lbl: 'Acetylation', color: '#888',
+    detail: 'Step 1 in cysteine synthesis'
   },
   {
-    f: 'Phenylalanine', t: 'Tyrosine',
-    lbl: 'Phe hydroxylase + BH4', color: '#2d7fd8',
-    detail: 'Enzyme: Phenylalanine hydroxylase\nCofactor: BH4 (tetrahydrobiopterin)\nDefect → PKU\nElevated Phe causes intellectual disability if untreated'
+    f: 'O-Acetylserine', t: 'Cysteine',
+    lbl: 'Transsulfuration / PLP', color: '#2d9e6e',
+    detail: 'Homocysteine + O-acetylserine → Cysteine\nCofactor: PLP\nType: Sulfur transfer'
   },
   {
-    f: 'Tyrosine', t: 'Fumarate',
-    lbl: 'Multi-step catabolism', color: '#888',
-    detail: 'Tyrosine → homogentisate → fumarylacetoacetate\n→ Fumarate + Acetoacetate\nDefects: alkaptonuria (HGO), tyrosinemia type I (FAH)'
+    f: 'Serine', t: 'Sphingosine',
+    lbl: 'SPT / PLP', color: '#2d9e6e',
+    detail: 'Serine + Palmitoyl-CoA → Sphingosine\nEnzyme: Serine palmitoyltransferase\nType: Condensation'
+  },
+
+  {
+    f: 'Threonine', t: 'Glycine',
+    lbl: 'Aldolase / PLP', color: '#e07b00',
+    detail: 'Threonine → Glycine + Acetaldehyde\nEnzyme: Threonine aldolase\nCofactor: PLP\nType: Cleavage'
   },
   {
-    f: 'Tryptophan', t: 'Alanine',
-    lbl: 'Kynurenine pathway', color: '#2d9e6e',
-    detail: 'Tryptophan → kynurenine → alanine\nAlso produces niacin (NAD⁺ precursor)\n60 mg Trp ≈ 1 mg niacin'
+    f: 'Threonine', t: 'α-Ketobutyrate',
+    lbl: 'Dehydratase / PLP', color: '#c4417a',
+    detail: 'Threonine → α-Ketobutyrate + NH₃\nEnzyme: Threonine dehydratase\nCofactor: PLP\nType: Deamination'
   },
   {
-    f: 'Methionine', t: 'Cysteine',
-    lbl: 'Transsulfuration', color: '#c4417a',
-    detail: 'SAM donates methyl group → SAH → Homocysteine\nCBS (+ B6): Homocysteine + Serine → Cystathionine → Cysteine\nCBS defect → homocystinuria'
+    f: 'α-Ketobutyrate', t: 'Propionyl-CoA',
+    lbl: 'Conversion', color: '#888',
+    detail: 'Intermediate conversion step'
   },
   {
-    f: 'Leucine', t: 'α-KG',
-    lbl: 'BCAA transaminase', color: '#888', curve: -120,
-    detail: 'Leucine is purely ketogenic\nBCAA aminotransferase (PLP) → α-keto isocaproate\nThen BCKDH (B1/lipoate/CoA/NAD⁺/FAD)\n→ Acetyl-CoA + acetoacetate only'
+    f: 'Propionyl-CoA', t: 'Succinyl-CoA',
+    lbl: 'Biotin + B12', color: '#2d7fd8',
+    detail: 'Propionyl-CoA → Succinyl-CoA\nEnzymes: Propionyl-CoA carboxylase, Methylmalonyl-CoA mutase\nCofactors: Biotin, Vitamin B12\nType: Carboxylation + rearrangement'
   },
   {
-    f: 'Isoleucine', t: 'Succinyl-CoA',
-    lbl: 'BCKDH complex', color: '#888',
-    detail: 'Isoleucine → succinyl-CoA (glucogenic)\n        + acetyl-CoA (ketogenic)\nBCKDH defect → MSUD'
-  },
-  {
-    f: 'Valine', t: 'Succinyl-CoA',
-    lbl: 'via Propionyl-CoA', color: '#e07b00',
-    detail: 'Valine → α-ketoisovalerate → propionyl-CoA\n→ Succinyl-CoA (via B12)\nBCKDH defect → MSUD'
+    f: 'Threonine', t: 'Acetyl-CoA',
+    lbl: 'Ketogenic path', color: '#888',
+    detail: 'Threonine → Acetyl-CoA\nType: Ketogenic pathway'
   }
 ];
  
