@@ -23,31 +23,8 @@ let activePopupId = null;
 /* =========================
    DATA (EXPANDABLE)
 ========================= */
-const data = [
-  {
-    id: "alanine_rxn",
-    from: "Alanine",
-    to: "Pyruvate",
-    label: "Transamination",
-    details: {
-      title: "Alanine → Pyruvate",
-      enzyme: "Alanine Transaminase (ALT)",
-      cofactor: "PLP (Vitamin B6)",
-      note: "Important in glucose-alanine cycle"
-    }
-  }
-];
-
 /* =========================
-   NODE POSITIONS
-========================= */
-const positions = {
-  "Alanine": { x: 400, y: 500 },
-  "Pyruvate": { x: 800, y: 500 }
-};
-
-/* =========================
-   CREATE NODE
+   NODES (ALL ENTITIES)
 ========================= */
 function createNode(name) {
   const node = document.createElement("div");
@@ -55,56 +32,195 @@ function createNode(name) {
   node.innerText = name;
 
   const pos = positions[name];
+  if (!pos) return;
+
   node.style.left = pos.x + "px";
   node.style.top = pos.y + "px";
 
-  node.onclick = (e) => {
-    e.stopPropagation();
-    togglePopup(e, {
-      title: name,
-      note: "Metabolite / Amino Acid"
-    }, name);
-  };
+  
 
   nodeLayer.appendChild(node);
 }
+const nodes = {
+  "Alanine": { note: "Glucogenic amino acid, involved in glucose-alanine cycle" },
+  "Pyruvate": { note: "Central metabolic intermediate" },
+
+  "Serine": { note: "One-carbon metabolism, precursor of glycine" },
+  "Glycine": { note: "Heme + purine synthesis" },
+
+  "Aspartate": { note: "Urea cycle + pyrimidine synthesis" },
+  "Oxaloacetate": { note: "TCA intermediate" },
+
+  "Glutamate": { note: "Central amino group donor" },
+  "Alpha-Ketoglutarate": { note: "TCA intermediate" },
+
+  "Phenylalanine": { note: "Essential amino acid" },
+  "Tyrosine": { note: "Precursor for dopamine, melanin" },
+
+  "Tryptophan": { note: "Serotonin + niacin precursor" },
+
+  "Methionine": { note: "Methyl donor (SAM)" },
+  "Cysteine": { note: "Glutathione synthesis" },
+
+  "Leucine": { note: "Ketogenic amino acid" },
+  "Isoleucine": { note: "Both glucogenic + ketogenic" },
+  "Valine": { note: "Glucogenic BCAA" },
+   "Fumarate": { note: "TCA cycle intermediate" }
+};
 
 /* =========================
-   CREATE CURVED LINK (SVG)
+   LINKS (REACTIONS)
 ========================= */
-function createCurve(p1, p2, link) {
+const links = [
 
-  const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-  path.classList.add("link-path");
+  {
+    from: "Alanine",
+    to: "Pyruvate",
+    label: "Transamination",
+    details: {
+      title: "Alanine → Pyruvate",
+      enzyme: "ALT",
+      cofactor: "PLP",
+      note: "Glucose-alanine cycle"
+    }
+  },
 
-  // Control point for curve (gives "neural bend")
-  const dx = (p2.x - p1.x) * 0.5;
-  const curveOffset = 80; // tweak for more curve
+  {
+    from: "Serine",
+    to: "Pyruvate",
+    label: "Deamination",
+    details: {
+      title: "Serine → Pyruvate",
+      enzyme: "Serine dehydratase",
+      note: "Occurs in liver"
+    }
+  },
 
-  const d = `
-    M ${p1.x} ${p1.y}
-    C ${p1.x + dx} ${p1.y - curveOffset},
-      ${p2.x - dx} ${p2.y + curveOffset},
-      ${p2.x} ${p2.y}
-  `;
+  {
+    from: "Serine",
+    to: "Glycine",
+    label: "One-carbon transfer",
+    details: {
+      title: "Serine ↔ Glycine",
+      enzyme: "Serine hydroxymethyltransferase",
+      cofactor: "Folate",
+      note: "Important for nucleotide synthesis"
+    }
+  },
 
-  path.setAttribute("d", d);
+  {
+    from: "Aspartate",
+    to: "Oxaloacetate",
+    label: "Transamination",
+    details: {
+      title: "Aspartate → OAA",
+      enzyme: "AST",
+      cofactor: "PLP",
+      note: "Links amino acids to TCA"
+    }
+  },
 
-  /* CLICK INTERACTION */
-  path.addEventListener("click", (e) => {
+  {
+    from: "Glutamate",
+    to: "Alpha-Ketoglutarate",
+    label: "Oxidative deamination",
+    details: {
+      title: "Glutamate → α-KG",
+      enzyme: "Glutamate dehydrogenase",
+      note: "Ammonia release"
+    }
+  },
+
+  {
+    from: "Phenylalanine",
+    to: "Tyrosine",
+    label: "Hydroxylation",
+    details: {
+      title: "Phenylalanine → Tyrosine",
+      enzyme: "Phenylalanine hydroxylase",
+      cofactor: "BH4",
+      note: "Defect → PKU"
+    }
+  },
+
+  {
+    from: "Tyrosine",
+    to: "Fumarate",
+    label: "Degradation",
+    details: {
+      title: "Tyrosine → Fumarate",
+      note: "Links to TCA cycle"
+    }
+  },
+
+  {
+    from: "Tryptophan",
+    to: "Alanine",
+    label: "Degradation",
+    details: {
+      title: "Tryptophan → Alanine",
+      note: "Also forms niacin"
+    }
+  },
+
+  {
+    from: "Methionine",
+    to: "Cysteine",
+    label: "Transsulfuration",
+    details: {
+      title: "Methionine → Cysteine",
+      note: "Defect → Homocystinuria"
+    }
+  }
+
+];
+const positions = {
+  "Alanine": { x: 300, y: 400 },
+  "Pyruvate": { x: 600, y: 400 },
+
+  "Serine": { x: 300, y: 550 },
+  "Glycine": { x: 600, y: 550 },
+
+  "Aspartate": { x: 300, y: 700 },
+  "Oxaloacetate": { x: 600, y: 700 },
+
+  "Glutamate": { x: 300, y: 850 },
+  "Alpha-Ketoglutarate": { x: 600, y: 850 },
+
+  "Phenylalanine": { x: 900, y: 400 },
+  "Tyrosine": { x: 1200, y: 400 },
+
+  "Tryptophan": { x: 900, y: 550 },
+
+  "Methionine": { x: 900, y: 700 },
+  "Cysteine": { x: 1200, y: 700 },
+   "Leucine": { x: 300, y: 1000 },
+"Isoleucine": { x: 600, y: 1000 },
+"Valine": { x: 900, y: 1000 },
+   "Fumarate": { note: "TCA cycle intermediate" }
+};
+function createLine(p1, p2, link) {
+
+  const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+
+  line.setAttribute("x1", p1.x);
+  line.setAttribute("y1", p1.y);
+  line.setAttribute("x2", p2.x);
+  line.setAttribute("y2", p2.y);
+
+  line.classList.add("link-path");
+
+  line.addEventListener("click", (e) => {
     e.stopPropagation();
-
-    path.classList.toggle("active");
-
-    togglePopup(e, link.details, link.id);
+    line.classList.toggle("active");
+    togglePopup(e, link.details, link.from + link.to);
   });
 
-  svg.appendChild(path);
+  svg.appendChild(line);
 
-  /* LABEL */
-  createLabel(link.label, (p1.x + p2.x)/2, (p1.y + p2.y)/2, link.details, link.id);
+  createLabel(link.label, (p1.x + p2.x)/2 + 10,
+(p1.y + p2.y)/2 - 10, link.details, link.from + link.to);
 }
-
 /* =========================
    LABEL
 ========================= */
@@ -142,8 +258,8 @@ function togglePopup(e, details, id) {
     ${details.note ? `<p>${details.note}</p>` : ""}
   `;
 
-  popup.style.left = e.clientX + "px";
-  popup.style.top = e.clientY + "px";
+popup.style.left = Math.min(e.clientX, window.innerWidth - 260) + "px";
+popup.style.top = Math.min(e.clientY, window.innerHeight - 150) + "px";
 
   popup.classList.remove("hidden");
   activePopupId = id;
@@ -160,28 +276,31 @@ viewport.addEventListener("click", () => {
 ========================= */
 function render() {
 
-  const created = new Set();
+  // Create nodes
+  Object.keys(nodes).forEach(name => {
+    createNode(name);
+  });
 
-  data.forEach(link => {
-
-    if (!created.has(link.from)) {
-      createNode(link.from);
-      created.add(link.from);
-    }
-
-    if (!created.has(link.to)) {
-      createNode(link.to);
-      created.add(link.to);
-    }
-
+  // Create links
+  links.forEach(link => {
     const p1 = positions[link.from];
     const p2 = positions[link.to];
 
-    createCurve(p1, p2, link);
+    if (p1 && p2) {
+      createLine(p1, p2, link);
+    }
   });
 }
 
 render();
+node.onclick = (e) => {
+  e.stopPropagation();
+
+  togglePopup(e, {
+    title: name,
+    note: nodes[name].note
+  }, name);
+};
 
 /* =========================
    PAN (MOUSE)
