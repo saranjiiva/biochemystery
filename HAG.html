@@ -346,69 +346,71 @@ const nodes = {
   'Acetyl-CoA': {
     x: 1200, y: 900, cls: 'tca',
     note: 'Ketogenic product.\nUsed in energy production and lipid synthesis.'
-  }/* ================= HISTIDINE ================= */
-Histidine: {
-  x: 1400, y: 120, cls: 'aa',
-  note: 'Semi-essential.\nGlucogenic.\nLinked to folate metabolism.'
-},
-Urocanate: {
-  x: 1650, y: 120, cls: 'tca',
-  note: 'Formed by histidase.'
-},
-Imidazolone: {
-  x: 1850, y: 120, cls: 'tca',
-  note: 'Intermediate in histidine metabolism.'
-},
-FIGLU: {
-  x: 2050, y: 120, cls: 'aa',
-  note: 'Accumulates in folate deficiency.'
-},
+  },
 
-/* ================= LYSINE ================= */
-Lysine: {
-  x: 1400, y: 400, cls: 'aa-ess',
-  note: 'Essential amino acid.\nPurely ketogenic.'
-},
-Saccharopine: {
-  x: 1650, y: 400, cls: 'tca',
-  note: 'Intermediate of lysine metabolism.'
-},
-'α-aminoadipate': {
-  x: 1850, y: 400, cls: 'tca',
-  note: 'Intermediate step.'
-},
-'Acetoacetyl-CoA': {
-  x: 2050, y: 400, cls: 'tca',
-  note: 'Ketone body precursor.'
-},
+  /* ================= HISTIDINE ================= */
+  Histidine: {
+    x: 1400, y: 120, cls: 'aa',
+    note: 'Semi-essential.\nGlucogenic.\nLinked to folate metabolism.'
+  },
+  Urocanate: {
+    x: 1650, y: 120, cls: 'tca',
+    note: 'Formed by histidase.'
+  },
+  Imidazolone: {
+    x: 1850, y: 120, cls: 'tca',
+    note: 'Intermediate in histidine metabolism.'
+  },
+  FIGLU: {
+    x: 2050, y: 120, cls: 'aa',
+    note: 'Accumulates in folate deficiency.'
+  },
 
-/* ================= ARGININE ================= */
-Arginine: {
-  x: 1400, y: 750, cls: 'aa',
-  note: 'Semi-essential.\nKey role in urea cycle.'
-},
-Ornithine: {
-  x: 1650, y: 750, cls: 'aa',
-  note: 'Urea cycle intermediate.'
-},
-Urea: {
-  x: 1650, y: 900, cls: 'tca',
-  note: 'Nitrogen excretion product.'
-},
+  /* ================= LYSINE ================= */
+  Lysine: {
+    x: 1400, y: 400, cls: 'aa-ess',
+    note: 'Essential amino acid.\nPurely ketogenic.'
+  },
+  Saccharopine: {
+    x: 1650, y: 400, cls: 'tca',
+    note: 'Intermediate of lysine metabolism.'
+  },
+  'α-aminoadipate': {
+    x: 1850, y: 400, cls: 'tca',
+    note: 'Intermediate step.'
+  },
+  'Acetoacetyl-CoA': {
+    x: 2050, y: 400, cls: 'tca',
+    note: 'Ketone body precursor.'
+  },
 
-/* ================= SPECIAL PRODUCTS ================= */
-Histamine: {
-  x: 1550, y: 20, cls: 'aa-kg',
-  note: 'From histidine.\nAllergy mediator.'
-},
-Carnitine: {
-  x: 1550, y: 520, cls: 'aa-kg',
-  note: 'From lysine.\nFat transport.'
-},
-'Nitric Oxide': {
-  x: 1550, y: 880, cls: 'aa-kg',
-  note: 'From arginine.\nVasodilator.'
-}
+  /* ================= ARGININE ================= */
+  Arginine: {
+    x: 1400, y: 750, cls: 'aa',
+    note: 'Semi-essential.\nKey role in urea cycle.'
+  },
+  Ornithine: {
+    x: 1650, y: 750, cls: 'aa',
+    note: 'Urea cycle intermediate.'
+  },
+  Urea: {
+    x: 1650, y: 900, cls: 'tca',
+    note: 'Nitrogen excretion product.'
+  },
+
+  /* ================= SPECIAL PRODUCTS ================= */
+  Histamine: {
+    x: 1550, y: 20, cls: 'aa-kg',
+    note: 'From histidine.\nAllergy mediator.'
+  },
+  Carnitine: {
+    x: 1550, y: 520, cls: 'aa-kg',
+    note: 'From lysine.\nFat transport.'
+  },
+  'Nitric Oxide': {
+    x: 1550, y: 880, cls: 'aa-kg',
+    note: 'From arginine.\nVasodilator.'
+  }
 };
 const links = [
   {
@@ -497,89 +499,91 @@ const links = [
     f: 'Threonine', t: 'Acetyl-CoA',
     lbl: 'Ketogenic path', color: '#888',
     detail: 'Threonine → Acetyl-CoA\nType: Ketogenic pathway'
-  }/* ================= HISTIDINE ================= */
-{
-  f: 'Histidine', t: 'Urocanate',
-  lbl: 'Histidase',
-  color: '#c4417a',
-  detail: 'Histidine → Urocanate\nType: Deamination'
-},
-{
-  f: 'Urocanate', t: 'Imidazolone',
-  lbl: 'Urocanase',
-  color: '#888',
-  detail: 'Hydration step'
-},
-{
-  f: 'Imidazolone', t: 'FIGLU',
-  lbl: 'Ring opening',
-  color: '#888',
-  detail: 'Forms FIGLU'
-},
-{
-  f: 'FIGLU', t: 'Glutamate',
-  lbl: 'THF dependent',
-  color: '#2d9e6e',
-  detail: 'Requires THF\nClinical: ↑ in folate deficiency'
-},
-{
-  f: 'Histidine', t: 'Histamine',
-  lbl: 'Decarboxylase / B6',
-  color: '#e07b00',
-  detail: 'Histamine formation'
-},
+  },
 
-/* ================= LYSINE ================= */
-{
-  f: 'Lysine', t: 'Saccharopine',
-  lbl: 'Condensation',
-  color: '#c4417a',
-  detail: 'Uses NADPH'
-},
-{
-  f: 'Saccharopine', t: 'α-aminoadipate',
-  lbl: 'Dehydrogenase',
-  color: '#888',
-  detail: 'Oxidation'
-},
-{
-  f: 'α-aminoadipate', t: 'Acetoacetyl-CoA',
-  lbl: 'Ketogenic',
-  color: '#2d7fd8',
-  detail: 'Forms ketone body precursor'
-},
-{
-  f: 'Lysine', t: 'Carnitine',
-  lbl: 'Carnitine synthesis',
-  color: '#2d9e6e',
-  detail: 'Fatty acid transport role'
-},
+  /* ================= HISTIDINE ================= */
+  {
+    f: 'Histidine', t: 'Urocanate',
+    lbl: 'Histidase',
+    color: '#c4417a',
+    detail: 'Histidine → Urocanate\nType: Deamination'
+  },
+  {
+    f: 'Urocanate', t: 'Imidazolone',
+    lbl: 'Urocanase',
+    color: '#888',
+    detail: 'Hydration step'
+  },
+  {
+    f: 'Imidazolone', t: 'FIGLU',
+    lbl: 'Ring opening',
+    color: '#888',
+    detail: 'Forms FIGLU'
+  },
+  {
+    f: 'FIGLU', t: 'Glutamate',
+    lbl: 'THF dependent',
+    color: '#2d9e6e',
+    detail: 'Requires THF\nClinical: ↑ in folate deficiency'
+  },
+  {
+    f: 'Histidine', t: 'Histamine',
+    lbl: 'Decarboxylase / B6',
+    color: '#e07b00',
+    detail: 'Histamine formation'
+  },
 
-/* ================= ARGININE ================= */
-{
-  f: 'Arginine', t: 'Ornithine',
-  lbl: 'Arginase',
-  color: '#c4417a',
-  detail: 'Produces urea'
-},
-{
-  f: 'Arginine', t: 'Urea',
-  lbl: 'Urea cycle',
-  color: '#2d7fd8',
-  detail: 'Nitrogen excretion'
-},
-{
-  f: 'Ornithine', t: 'Glutamate',
-  lbl: 'Transamination / B6',
-  color: '#e07b00',
-  detail: 'Links to TCA via glutamate'
-},
-{
-  f: 'Arginine', t: 'Nitric Oxide',
-  lbl: 'NOS',
-  color: '#2d9e6e',
-  detail: 'Vasodilation'
-}
+  /* ================= LYSINE ================= */
+  {
+    f: 'Lysine', t: 'Saccharopine',
+    lbl: 'Condensation',
+    color: '#c4417a',
+    detail: 'Uses NADPH'
+  },
+  {
+    f: 'Saccharopine', t: 'α-aminoadipate',
+    lbl: 'Dehydrogenase',
+    color: '#888',
+    detail: 'Oxidation'
+  },
+  {
+    f: 'α-aminoadipate', t: 'Acetoacetyl-CoA',
+    lbl: 'Ketogenic',
+    color: '#2d7fd8',
+    detail: 'Forms ketone body precursor'
+  },
+  {
+    f: 'Lysine', t: 'Carnitine',
+    lbl: 'Carnitine synthesis',
+    color: '#2d9e6e',
+    detail: 'Fatty acid transport role'
+  },
+
+  /* ================= ARGININE ================= */
+  {
+    f: 'Arginine', t: 'Ornithine',
+    lbl: 'Arginase',
+    color: '#c4417a',
+    detail: 'Produces urea'
+  },
+  {
+    f: 'Arginine', t: 'Urea',
+    lbl: 'Urea cycle',
+    color: '#2d7fd8',
+    detail: 'Nitrogen excretion'
+  },
+  {
+    f: 'Ornithine', t: 'Glutamate',
+    lbl: 'Transamination / B6',
+    color: '#e07b00',
+    detail: 'Links to TCA via glutamate'
+  },
+  {
+    f: 'Arginine', t: 'Nitric Oxide',
+    lbl: 'NOS',
+    color: '#2d9e6e',
+    detail: 'Vasodilation'
+  }
 ];
 
 /* ================== DOM references ================== */
@@ -593,11 +597,17 @@ let scale = 0.68;
 let ox = 30;
 let oy = 20;
 
+/* Animation frame for smooth update */
+let animationFrameId;
+
+/* ================== Apply transform ================== */
 function applyTransform() {
-  canvas.style.transform = `translate(${ox}px, ${oy}px) scale(${scale})`;
+  if (canvas) {
+    canvas.style.transform = `translate(${ox}px, ${oy}px) scale(${scale})`;
+  }
 }
 
-/* ================== Add SVG markers ================== */
+/* ======== Add SVG markers ======== */
 function addMarkers() {
   const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
 
@@ -634,7 +644,7 @@ function addMarkers() {
   svgEl.appendChild(defs);
 }
 
-/* ================== Marker URL based on color ================== */
+/* ================== Color to marker URL ================== */
 function colorToMarker(c) {
   const map = {
     '#e07b00': 'url(#arr-org)',
@@ -747,10 +757,40 @@ wrap.addEventListener('click', () => {
   activeTip = null;
 });
 
-/* ================== Drag + Pan ================== */
+/* ================== Drag + Pan + Smooth Animation ================== */
+
 let dragging = false;
 let lastTX, lastTY;
 
+/* Animation loop variables */
+let targetOx = ox;
+let targetOy = oy;
+let targetScale = scale;
+
+function animate() {
+  // Smoothly interpolate towards target
+  const lerpFactor = 0.15;
+  ox += (targetOx - ox) * lerpFactor;
+  oy += (targetOy - oy) * lerpFactor;
+  scale += (targetScale - scale) * lerpFactor;
+  applyTransform();
+  animationFrameId = requestAnimationFrame(animate);
+}
+
+function startAnimation() {
+  if (animationFrameId) cancelAnimationFrame(animationFrameId);
+  animation();
+}
+
+function animation() {
+  ox += (targetOx - ox) * 0.15;
+  oy += (targetOy - oy) * 0.15;
+  scale += (targetScale - scale) * 0.15;
+  applyTransform();
+  animationFrameId = requestAnimationFrame(animation);
+}
+
+/* Mouse down for drag */
 wrap.addEventListener('mousedown', e => {
   dragging = true;
   lastTX = e.clientX - ox;
@@ -759,13 +799,13 @@ wrap.addEventListener('mousedown', e => {
 });
 document.addEventListener('mousemove', e => {
   if (!dragging) return;
-  ox = e.clientX - lastTX;
-  oy = e.clientY - lastTY;
-  applyTransform();
+  targetOx = e.clientX - lastTX;
+  targetOy = e.clientY - lastTY;
 });
 document.addEventListener('mouseup', () => {
   dragging = false;
   wrap.classList.remove('dragging');
+  startAnimation();
 });
 
 // Touch support for pan and zoom
@@ -778,14 +818,12 @@ let pinchMidY = 0;
 wrap.addEventListener('touchstart', e => {
   touchMoved = false;
   if (e.touches.length === 2) {
-    // Start pinch
     pinching = true;
     const a = e.touches[0], b = e.touches[1];
     lastPinchDist = Math.hypot(b.clientX - a.clientX, b.clientY - a.clientY);
     pinchMidX = (a.clientX + b.clientX) / 2;
     pinchMidY = (a.clientY + b.clientY) / 2;
   } else if (e.touches.length === 1) {
-    // Start pan
     dragging = true;
     lastTX = e.touches[0].clientX - ox;
     lastTY = e.touches[0].clientY - oy;
@@ -804,21 +842,21 @@ wrap.addEventListener('touchmove', e => {
     const mx = pinchMidX - rect.left;
     const my = pinchMidY - rect.top;
     const ns = Math.min(Math.max(0.3, scale * ratio), 3);
-    ox = mx - (mx - ox) * (ns / scale);
-    oy = my - (my - oy) * (ns / scale);
-    scale = ns;
+    targetOx = mx - (mx - ox) * (ns / scale);
+    targetOy = my - (my - oy) * (ns / scale);
+    targetScale = ns;
     lastPinchDist = dist;
-    applyTransform();
   } else if (e.touches.length === 1 && dragging && !pinching) {
-    ox = e.touches[0].clientX - lastTX;
-    oy = e.touches[0].clientY - lastTY;
-    applyTransform();
+    targetOx = e.touches[0].clientX - lastTX;
+    targetOy = e.touches[0].clientY - lastTY;
   }
-}, { passive: false });
-
+});
 wrap.addEventListener('touchend', e => {
   if (e.touches.length < 2) pinching = false;
-  if (e.touches.length === 0) dragging = false;
+  if (e.touches.length === 0) {
+    dragging = false;
+    startAnimation();
+  }
 }, { passive: true });
 
 // Mouse wheel zoom
@@ -829,29 +867,27 @@ wrap.addEventListener('wheel', e => {
   const my = e.clientY - rect.top;
   const ws = e.deltaY < 0 ? 1.12 : 0.89;
   const ns = Math.min(Math.max(0.3, scale * ws), 3);
-  ox = mx - (mx - ox) * (ns / scale);
-  oy = my - (my - oy) * (ns / scale);
-  scale = ns;
-  applyTransform();
-}, { passive: false });
-
-// Reset view
+  targetOx = mx - (mx - ox) * (ns / scale);
+  targetOy = my - (my - oy) * (ns / scale);
+  targetScale = ns;
+});
+/* Reset view */
 function resetView() {
-  scale = 0.68;
-  ox = 30;
-  oy = 20;
-  applyTransform();
+  targetScale = 0.68;
+  targetOx = 30;
+  targetOy = 20;
+  startAnimation();
 }
 
-// Zoom buttons
+/* Zoom buttons */
 function zoomBtn(factor) {
   const cx = wrap.clientWidth / 2;
   const cy = wrap.clientHeight / 2;
   const ns = Math.min(Math.max(0.3, scale * factor), 3);
-  ox = cx - (cx - ox) * (ns / scale);
-  oy = cy - (cy - oy) * (ns / scale);
-  scale = ns;
-  applyTransform();
+  targetOx = cx - (cx - ox) * (ns / scale);
+  targetOy = cy - (cy - oy) * (ns / scale);
+  targetScale = ns;
+  startAnimation();
 }
 
 /* ================== Initialize ================== */
@@ -859,6 +895,7 @@ addMarkers();
 buildNodes();
 buildLinks();
 applyTransform();
+startAnimation();
 
 </script>
 </body>
