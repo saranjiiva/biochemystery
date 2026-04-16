@@ -50,8 +50,8 @@
   }
   #canvas {
     position: absolute;
-    width: 1500px;
-    height: 1100px;
+    width: 2400px;
+    height: 1400px;
     transform-origin: 0 0;
     will-change: transform;
   }
@@ -59,8 +59,8 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 1500px;
-    height: 1100px;
+    width: 2400px;
+    height: 1400px;
     overflow: visible;
     pointer-events: none;
   }
@@ -346,7 +346,69 @@ const nodes = {
   'Acetyl-CoA': {
     x: 1200, y: 900, cls: 'tca',
     note: 'Ketogenic product.\nUsed in energy production and lipid synthesis.'
-  }
+  }/* ================= HISTIDINE ================= */
+Histidine: {
+  x: 1400, y: 120, cls: 'aa',
+  note: 'Semi-essential.\nGlucogenic.\nLinked to folate metabolism.'
+},
+Urocanate: {
+  x: 1650, y: 120, cls: 'tca',
+  note: 'Formed by histidase.'
+},
+Imidazolone: {
+  x: 1850, y: 120, cls: 'tca',
+  note: 'Intermediate in histidine metabolism.'
+},
+FIGLU: {
+  x: 2050, y: 120, cls: 'aa',
+  note: 'Accumulates in folate deficiency.'
+},
+
+/* ================= LYSINE ================= */
+Lysine: {
+  x: 1400, y: 400, cls: 'aa-ess',
+  note: 'Essential amino acid.\nPurely ketogenic.'
+},
+Saccharopine: {
+  x: 1650, y: 400, cls: 'tca',
+  note: 'Intermediate of lysine metabolism.'
+},
+'α-aminoadipate': {
+  x: 1850, y: 400, cls: 'tca',
+  note: 'Intermediate step.'
+},
+'Acetoacetyl-CoA': {
+  x: 2050, y: 400, cls: 'tca',
+  note: 'Ketone body precursor.'
+},
+
+/* ================= ARGININE ================= */
+Arginine: {
+  x: 1400, y: 750, cls: 'aa',
+  note: 'Semi-essential.\nKey role in urea cycle.'
+},
+Ornithine: {
+  x: 1650, y: 750, cls: 'aa',
+  note: 'Urea cycle intermediate.'
+},
+Urea: {
+  x: 1650, y: 900, cls: 'tca',
+  note: 'Nitrogen excretion product.'
+},
+
+/* ================= SPECIAL PRODUCTS ================= */
+Histamine: {
+  x: 1550, y: 20, cls: 'aa-kg',
+  note: 'From histidine.\nAllergy mediator.'
+},
+Carnitine: {
+  x: 1550, y: 520, cls: 'aa-kg',
+  note: 'From lysine.\nFat transport.'
+},
+'Nitric Oxide': {
+  x: 1550, y: 880, cls: 'aa-kg',
+  note: 'From arginine.\nVasodilator.'
+}
 };
 const links = [
   {
@@ -435,7 +497,89 @@ const links = [
     f: 'Threonine', t: 'Acetyl-CoA',
     lbl: 'Ketogenic path', color: '#888',
     detail: 'Threonine → Acetyl-CoA\nType: Ketogenic pathway'
-  }
+  }/* ================= HISTIDINE ================= */
+{
+  f: 'Histidine', t: 'Urocanate',
+  lbl: 'Histidase',
+  color: '#c4417a',
+  detail: 'Histidine → Urocanate\nType: Deamination'
+},
+{
+  f: 'Urocanate', t: 'Imidazolone',
+  lbl: 'Urocanase',
+  color: '#888',
+  detail: 'Hydration step'
+},
+{
+  f: 'Imidazolone', t: 'FIGLU',
+  lbl: 'Ring opening',
+  color: '#888',
+  detail: 'Forms FIGLU'
+},
+{
+  f: 'FIGLU', t: 'Glutamate',
+  lbl: 'THF dependent',
+  color: '#2d9e6e',
+  detail: 'Requires THF\nClinical: ↑ in folate deficiency'
+},
+{
+  f: 'Histidine', t: 'Histamine',
+  lbl: 'Decarboxylase / B6',
+  color: '#e07b00',
+  detail: 'Histamine formation'
+},
+
+/* ================= LYSINE ================= */
+{
+  f: 'Lysine', t: 'Saccharopine',
+  lbl: 'Condensation',
+  color: '#c4417a',
+  detail: 'Uses NADPH'
+},
+{
+  f: 'Saccharopine', t: 'α-aminoadipate',
+  lbl: 'Dehydrogenase',
+  color: '#888',
+  detail: 'Oxidation'
+},
+{
+  f: 'α-aminoadipate', t: 'Acetoacetyl-CoA',
+  lbl: 'Ketogenic',
+  color: '#2d7fd8',
+  detail: 'Forms ketone body precursor'
+},
+{
+  f: 'Lysine', t: 'Carnitine',
+  lbl: 'Carnitine synthesis',
+  color: '#2d9e6e',
+  detail: 'Fatty acid transport role'
+},
+
+/* ================= ARGININE ================= */
+{
+  f: 'Arginine', t: 'Ornithine',
+  lbl: 'Arginase',
+  color: '#c4417a',
+  detail: 'Produces urea'
+},
+{
+  f: 'Arginine', t: 'Urea',
+  lbl: 'Urea cycle',
+  color: '#2d7fd8',
+  detail: 'Nitrogen excretion'
+},
+{
+  f: 'Ornithine', t: 'Glutamate',
+  lbl: 'Transamination / B6',
+  color: '#e07b00',
+  detail: 'Links to TCA via glutamate'
+},
+{
+  f: 'Arginine', t: 'Nitric Oxide',
+  lbl: 'NOS',
+  color: '#2d9e6e',
+  detail: 'Vasodilation'
+}
 ];
 
 /* ================== DOM references ================== */
