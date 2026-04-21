@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Metabolism of Proteins and Amino Acids — Mind Map</title>
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  background: #1e1e2f;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 16px;
+  color: #f0f0f0;
+}
+h1 {
+  color: #ffd700;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  opacity: 0.9;
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+#mm-container {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: visible;
+}
+.mm-wrap {
+  position: relative;
+  display: inline-block;
+  min-width: 640px;
+}
+svg.mm {
+  display: block;
+  overflow: visible;
+}
+.node-root rect {
+  fill: #4a90e2;
+  stroke: #333;
+  stroke-width: 1;
+  filter: drop-shadow(0 0 4px rgba(0,0,0,0.5));
+}
+.node-root text {
+  fill: #fff;
+  font-size: 14px;
+  font-weight: 600;
+}
+.node-l1 rect {
+  fill: #007acc;
+  stroke: #005f99;
+  stroke-width: 1;
+}
+.node-l1 text {
+  fill: #e0f7fa;
+  font-size: 13px;
+  font-weight: 600;
+}
+.node-l2 rect {
+  fill: #009688;
+  stroke: #00675b;
+  stroke-width: 1;
+}
+.node-l2 text {
+  fill: #b2dfdb;
+  font-size: 12px;
+  font-weight: 500;
+}
+.node-l3 rect {
+  fill: #33691e;
+  stroke: #1b5e20;
+  stroke-width: 1;
+}
+.node-l3 text {
+  fill: #aed581;
+  font-size: 11px;
+  font-weight: 400;
+}
+.mm-edge {
+  fill: none;
+  stroke: #ffd700;
+  stroke-width: 1.2;
+  opacity: 0.6;
+}
+.mm-edge-l1 {
+  fill: none;
+  stroke: #4dd0e1;
+  stroke-width: 1;
+  opacity: 0.6;
+}
+.mm-edge-l2 {
+  fill: none;
+  stroke: #aed581;
+  stroke-width: 0.9;
+  opacity: 0.6;
+}
+.hint {
+  color: #aaa;
+  font-size: 14px;
+  margin-top: 14px;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+<h1>Metabolism of Proteins and Amino Acids</h1>
+<div id="mm-container"><div class="mm-wrap"><svg class="mm" id="svg-mm"></svg></div></div>
+<p class="hint">Click any node to collapse or expand branches</p>
+
+<script>
+const TREE = {
+  id:'root', label:'Metabolism of\nProteins & Amino Acids', cls:'node-root', w:180, h:50,
+  children:[
+    {id:'aac', label:'Amino Acid\nClassification', cls:'node-l1', w:150, h:40, children:[
+      {id:'ne', label:'Nutritionally\nEssential', cls:'node-l2', w:130, h:36, children:[
+        {id:'ne1', label:'Dietary requirement', cls:'node-l3', w:150, h:28},
+        {id:'ne2', label:'Lengthy biosynthetic pathways', cls:'node-l3', w:200, h:28},
+        {id:'ne3', label:'Examples: Lysine, Tryptophan, Valine', cls:'node-l3', w:220, h:28},
+      ]},
+      {id:'nn', label:'Nutritionally\nNonessential', cls:'node-l2', w:150, h:36, children:[
+        {id:'nn1', label:'Metabolically essential', cls:'node-l3', w:170, h:28},
+        {id:'nn2', label:'Short biosynthetic routes', cls:'node-l3', w:180, h:28},
+        {id:'nn3', label:'Examples: Alanine, Glutamate, Serine', cls:'node-l3', w:220, h:28},
+      ]},
+    ]},
+    {id:'bio', label:'Biosynthesis of\nNonessential Amino Acids', cls:'node-l1', w:200, h:40, children:[
+      {id:'cac', label:'From Citric\nAcid Cycle', cls:'node-l2', w:160, h:36, children:[
+        {id:'cac1', label:'Glutamate from alpha-ketoglutarate', cls:'node-l3', w:220, h:28},
+        {id:'cac2', label:'Aspartate from oxaloacetate', cls:'node-l3', w:180, h:28},
+      ]},
+      {id:'gly', label:'From\nGlycolysis', cls:'node-l2', w:130, h:36, children:[
+        {id:'gly1', label:'Alanine from pyruvate', cls:'node-l3', w:160, h:28},
+        {id:'gly2', label:'Serine from 3-phosphoglycerate', cls:'node-l3', w:200, h:28},
+      ]},
+      {id:'ptm', label:'Posttranslational\nModification', cls:'node-l2', w:180, h:36, children:[
+        {id:'ptm1', label:'Hydroxyproline from proline', cls:'node-l3', w:180, h:28},
+        {id:'ptm2', label:'Hydroxylysine from lysine', cls:'node-l3', w:180, h:28},
+        {id:'ptm3', label:'Requirement: Vitamin C, Iron, Oxygen', cls:'node-l3', w:220, h:28},
+      ]},
+      {id:'ss', label:'Special\nSynthesis', cls:'node-l2', w:130, h:36, children:[
+        {id:'ss1', label:'Tyrosine from Phenylalanine', cls:'node-l3', w:200, h:28},
+        {id:'ss2', label:'Selenocysteine (21st amino acid)', cls:'node-l3', w:220, h:28},
+      ]},
+    ]},
+    {id:'pd', label:'Protein Degradation\n(Turnover)', cls:'node-l1', w:180, h:40, children:[
+      {id:'atpd', label:'ATP-Dependent\nPathway', cls:'node-l2', w:150, h:36, children:[
+        {id:'atpd1', label:'Ubiquitin tagging', cls:'node-l3', w:150, h:28},
+        {id:'atpd2', label:'Proteasome degradation', cls:'node-l3', w:180, h:28},
+        {id:'atpd3', label:'Regulatory proteins', cls:'node-l3', w:160, h:28},
+      ]},
+      {id:'atpi', label:'ATP-Independent\nPathway', cls:'node-l2', w:170, h:36, children:[
+        {id:'atpi1', label:'Lysosomal proteases', cls:'node-l3', w:180, h:28},
+        {id:'atpi2', label:'Extracellular proteins', cls:'node-l3', w:180, h:28},
+      ]},
+    ]},
+    {id:'nc', label:'Nitrogen Catabolism\nand Urea Cycle', cls:'node-l1', w:200, h:40, children:[
+      {id:'kp', label:'Key\nProcesses', cls:'node-l2', w:130, h:36, children:[
+        {id:'kp1', label:'Transamination', cls:'node-l3', w:150, h:28},
+        {id:'kp2', label:'Oxidative deamination', cls:'node-l3', w:180, h:28},
+        {id:'kp3', label:'Ammonia transport via Glutamine', cls:'node-l3', w:220, h:28},
+      ]},
+      {id:'uce', label:'Urea Cycle\nEnzymes', cls:'node-l2', w:150, h:36, children:[
+        {id:'uce1', label:'Carbamoyl phosphate synthetase I', cls:'node-l3', w:220, h:28},
+        {id:'uce2', label:'Ornithine transcarbamoylase', cls:'node-l3', w:200, h:28},
+        {id:'uce3', label:'Argininosuccinate synthetase', cls:'node-l3', w:220, h:28},
+        {id:'uce4', label:'Argininosuccinate lyase', cls:'node-l3', w:200, h:28},
+        {id:'uce5', label:'Arginase', cls:'node-l3', w:140, h:28},
+      ]},
+    ]},
+    {id:'bd', label:'Biomedical Importance\n& Disorders', cls:'node-l1', w:220, h:40, children:[
+      {id:'ndef', label:'Nutritional\nDeficiencies', cls:'node-l2', w:160, h:36, children:[
+        {id:'ndef1', label:'Kwashiorkor (protein poor)', cls:'node-l3', w:200, h:28},
+        {id:'ndef2', label:'Marasmus (caloric/amino acid deficient)', cls:'node-l3', w:260, h:28},
+        {id:'ndef3', label:'Scurvy (Vitamin C deficiency)', cls:'node-l3', w:200, h:28},
+      ]},
+      {id:'md', label:'Metabolic\nDisorders', cls:'node-l2', w:180, h:36, children:[
+        {id:'md1', label:'Hyperammonemia', cls:'node-l3', w:150, h:28},
+        {id:'md2', label:'Phenylketonuria (PKU)', cls:'node-l3', w:180, h:28},
+        {id:'md3', label:'Maple Syrup Urine Disease (MSUD)', cls:'node-l3', w:220, h:28},
+        {id:'md4', label:'Alkaptonuria', cls:'node-l3', w:150, h:28},
+        {id:'md5', label:'Homocystinurias', cls:'node-l3', w:170, h:28},
+      ]},
+    ]},
+  ]
+};
+
+const GAP_Y = 10, GAP_X = 24, MARGIN_X = 20, MARGIN_Y = 20;
+const collapsed = new Set();
+
+function totalHeight(node){
+  if(!node.children || node.children.length === 0 || collapsed.has(node.id)) return node.h;
+  let ch = node.children.reduce((s,c) => s + totalHeight(c), 0) + (node.children.length - 1) * GAP_Y;
+  return Math.max(node.h, ch);
+}
+
+function layout(node, x, cy){
+  node.x = x; node.cy = cy;
+  if(!node.children || node.children.length === 0 || collapsed.has(node.id)) return;
+  const childX = x + node.w + GAP_X;
+  const totalH = node.children.reduce((s,c) => s + totalHeight(c), 0) + (node.children.length - 1) * GAP_Y;
+  let startY = cy - totalH / 2;
+  for(let ch of node.children){
+    const chH = totalHeight(ch);
+    layout(ch, childX, startY + chH / 2);
+    startY += chH + GAP_Y;
+  }
+}
+
+function collectNodes(node, arr = []){
+  arr.push(node);
+  if(node.children && !collapsed.has(node.id)) node.children.forEach(c => collectNodes(c, arr));
+  return arr;
+}
+
+function collectEdges(node, arr = []){
+  if(!node.children || collapsed.has(node.id)) return arr;
+  for(let ch of node.children){
+    arr.push({from: node, to: ch});
+    collectEdges(ch, arr);
+  }
+  return arr;
+}
+
+function edgeCls(ch){
+  if(ch.cls === 'node-l1') return 'mm-edge';
+  if(ch.cls === 'node-l2') return 'mm-edge-l1';
+  return 'mm-edge-l2';
+}
+
+function svgEl(tag, attrs){
+  const el = document.createElementNS('http://www.w3.org/2000/svg', tag);
+  for(let [k, v] of Object.entries(attrs)) el.setAttribute(k, v);
+  return el;
+}
+
+function render(){
+  const svg = document.getElementById('svg-mm');
+  svg.innerHTML = '';
+
+  layout(TREE, MARGIN_X, 0);
+
+  const nodes  = collectNodes(TREE);
+  const minY   = Math.min(...nodes.map(n => n.cy - n.h / 2));
+  const maxY   = Math.max(...nodes.map(n => n.cy + n.h / 2));
+  const maxX   = Math.max(...nodes.map(n => n.x  + n.w));
+
+  const offsetY  = -minY + MARGIN_Y;
+  const totalH   = maxY - minY + MARGIN_Y * 2;
+  const totalW   = maxX + MARGIN_X;
+
+  svg.setAttribute('viewBox', `0 0 ${Math.max(totalW, 640)} ${totalH}`);
+  svg.setAttribute('width',  Math.max(totalW, 640));
+  svg.setAttribute('height', totalH);
+
+  const edgesG = svgEl('g', {});
+  const nodesG = svgEl('g', {});
+  svg.appendChild(edgesG);
+  svg.appendChild(nodesG);
+
+  for(let {from, to} of collectEdges(TREE)){
+    const x1 = from.x + from.w,  y1 = from.cy + offsetY;
+    const x2 = to.x,             y2 = to.cy   + offsetY;
+    const mx = (x1 + x2) / 2;
+    const d  = `M${x1},${y1} C${mx},${y1} ${mx},${y2} ${x2},${y2}`;
+    edgesG.appendChild(svgEl('path', {d, class: edgeCls(to)}));
+  }
+
+  for(let node of nodes){
+    const cx = node.x, cy = node.cy + offsetY;
+    const g  = svgEl('g', {class: 'mm-node-group'});
+    const cg = svgEl('g', {class: node.cls});
+
+    const rect = svgEl('rect',{x: cx, y: cy - node.h / 2, width: node.w, height: node.h, rx: 8, ry:8});
+    cg.appendChild(rect);
+
+    const lines  = node.label.split('\n');
+    const lineH  = 14;
+    const startY = cy - (lines.length - 1) * lineH / 2;
+    lines.forEach((ln, i) => {
+      const t = svgEl('text', {x: cx + node.w / 2, y: startY + i * lineH, 'text-anchor': 'middle', 'dominant-baseline': 'central'});
+      t.textContent = ln;
+      cg.appendChild(t);
+    });
+
+    g.appendChild(cg);
+
+    // Remove toggle button code: no plus/minus buttons
+
+    // Add click event for collapsing/expanding
+    g.addEventListener('click', () => {
+      if(!node.children || node.children.length === 0) return;
+      if(collapsed.has(node.id)){
+        collapsed.delete(node.id);
+      } else {
+        collapsed.add(node.id);
+      }
+      render();
+    });
+
+    nodesG.appendChild(g);
+  }
+}
+
+render();
+</script>
+</body>
+</html>
